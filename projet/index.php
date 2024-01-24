@@ -100,7 +100,7 @@ echo '</div>';
 echo '<div class="container-milieu-bottom">';
 
     // carousel pour les contenus 'concu pour toi'
-    echo '<div class="carousel-container">'; 
+    echo '<div class="carousel-container">';
         echo '<h2 class="titre-carousel">Conçu pour toi</h2>';
         echo '<div class="carousel-wrapper">';
 
@@ -115,11 +115,11 @@ echo '<div class="container-milieu-bottom">';
                     $entry[3] = "images/default.jpg";
                 }
                 echo '<div class="carousel-slide">';
-                // echo '<h2>' . htmlspecialchars($entry[6]) . '</h2>';
                 // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
                 // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
+                echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
                 echo '</div>';
             }
         } else {
@@ -132,7 +132,7 @@ echo '<div class="container-milieu-bottom">';
     echo '</div>';
 
     // carousel pour les contenus 'concu pour toi'
-    echo '<div class="carousel-container">'; 
+    echo '<div class="carousel-container">';
     echo '<h2 class="titre-carousel">Vos mix préférés</h2>';
         echo '<div class="carousel-wrapper">';
 
@@ -147,11 +147,11 @@ echo '<div class="container-milieu-bottom">';
                     $entry[3] = "images/default.jpg";
                 }
                 echo '<div class="carousel-slide">';
-                // echo '<h2>' . htmlspecialchars($entry[6]) . '</h2>';
                 // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
                 // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
+                echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
                 echo '</div>';
             }
         } else {
@@ -164,7 +164,7 @@ echo '<div class="container-milieu-bottom">';
     echo '</div>';
 
     // carousel pour les contenus 'concu pour toi'
-    echo '<div class="carousel-container">'; 
+    echo '<div class="carousel-container">';
         echo '<h2 class="titre-carousel">Ecoutés récemment</h2>';
         echo '<div class="carousel-wrapper">';
 
@@ -179,11 +179,11 @@ echo '<div class="container-milieu-bottom">';
                     $entry[3] = "images/default.jpg";
                 }
                 echo '<div class="carousel-slide">';
-                // echo '<h2>' . htmlspecialchars($entry[6]) . '</h2>';
                 // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
                 // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
+                echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
                 echo '</div>';
             }
         } else {
@@ -196,7 +196,7 @@ echo '<div class="container-milieu-bottom">';
     echo '</div>';
 
     // carousel pour les contenus 'concu pour toi'
-    echo '<div class="carousel-container">'; 
+    echo '<div class="carousel-container">';
     echo '<h2 class="titre-carousel">Vos favoris</h2>';
         echo '<div class="carousel-wrapper">';
 
@@ -211,11 +211,11 @@ echo '<div class="container-milieu-bottom">';
                     $entry[3] = "images/default.jpg";
                 }
                 echo '<div class="carousel-slide">';
-                // echo '<h2>' . htmlspecialchars($entry[6]) . '</h2>';
                 // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
                 // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
+                echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
                 echo '</div>';
             }
         } else {

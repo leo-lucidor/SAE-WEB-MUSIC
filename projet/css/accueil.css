@@ -238,6 +238,14 @@ body {
     transition: transform .7s ease-in-out;
 } 
 
+.carousel-wrapper p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 220px;
+    font-size: 0.7em;
+}
+
 .carousel-slide {
     box-sizing: border-box;
     text-align: center;
@@ -257,12 +265,12 @@ body {
 }
 
 .left-btn {
-    transform: translate(0, -130px);
+    transform: translate(0, -160px);
     margin-right: 30px;
 }
 
 .right-btn {
-    transform: translate(66em, -130px);
+    transform: translate(66em, -160px);
 }
 
 /* Ajouter la classe "hidden" pour masquer les éléments */
@@ -271,7 +279,7 @@ body {
 }
 
 .titre-carousel {
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: 500;
     margin-bottom: 1em;
 }
