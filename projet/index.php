@@ -42,9 +42,9 @@ echo '<aside class="container-left">';
 echo '<div class="container-left-top">';
 
 echo '<ul class="menu">';
-    echo '<li><a href="index.php">Accueil</a></li>';
-    echo '<li><a href="index.php">Explorer</a></li>';
-    echo '<li><a href="index.php">Bibliothèque</a></li>';
+    echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><img class="img-hidden" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><button id="btn-accueil" class="btn-accueil" href="#">Accueil</button></li>';
+    echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><img class="img-hidden" id="img-explorer-plein" src="./images/explorerPlein.png" alt=""><button id="btn-explorer" class="btn-explorer" href="#">Explorer</button></li>';
+    echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><img class="img-hidden" id="img-biblio-plein" src="./images/bibliothequePlein.png" alt=""><button id="btn-biblio" class="btn-biblio" href="#">Bibliothèque</button></li>';
 echo '</ul>';
 
 echo '</div>';
@@ -77,6 +77,6 @@ if (!empty($data)) {
 echo '</div>';
 echo '</div>';
 ?>
-
+<script src="./js/menu.js"></script>
 </body>
 </html>
