@@ -9,6 +9,10 @@ a {
     color: #fff;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 button {
     cursor: pointer;
     background-color: transparent;
@@ -51,6 +55,18 @@ body {
     flex-basis: 100%;
     margin-top: 2em;
     margin-bottom: 2em;
+    margin: 1em;
+}
+
+.container-milieu-top-left {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1em;
+}
+
+.rechercher {
+    padding: 0.7em;
 }
 
 .container-milieu-top-right {
@@ -74,6 +90,15 @@ body {
 .container-milieu img {
     width: 220px;
     height: 220px;
+    border-radius: 10px;
+}
+
+.container-milieu-bottom{
+    display: flex;
+    flex-wrap: wrap;
+    flex-basis: 100%;
+    margin: 1em;
+    padding-left: 6em;
 }
 
 .album {
@@ -101,7 +126,9 @@ body {
     align-items: center;
     gap: 0.5em;
     margin-top: 2em;
-    margin-left: 1em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #3d3c3c;
 }
 
 .menu li {
@@ -132,3 +159,41 @@ body {
 }
 
 
+/* playlist */
+
+.container-playlist-top {
+    color: #fff;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+    flex-basis: 100%;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin: 1em;
+}
+
+.titre-playlist {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.btn-creer-playlist {
+    font-size: 1.5em;
+}
+
+.playlist {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1em;
+    flex-basis: 10%;
+    margin: 1em;
+    color: #fff;
+}
+
+.playlist img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+}

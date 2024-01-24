@@ -47,6 +47,29 @@ echo '<ul class="menu">';
     echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><img class="img-hidden" id="img-biblio-plein" src="./images/bibliothequePlein.png" alt=""><button id="btn-biblio" class="btn-biblio" href="#">Bibliothèque</button></li>';
 echo '</ul>';
 
+echo '<div class="container-playlist">';
+    echo '<div class="container-playlist-top">';
+        echo '<h2 class="titre-playlist">Playlists</h2>';
+        echo '<button class="btn-creer-playlist">+</button>';
+    echo '</div>';
+
+    echo '<ul class="container-playlist-bottom">';
+        echo '<a class="playlist">';
+            echo '<img src="./images/default.jpg" alt="">';
+            echo '<p>Playlist 1</p>';
+        echo '</a>';
+        echo '<a class="playlist">';
+            echo '<img src="./images/default.jpg" alt="">';
+            echo '<p>Playlist 2</p>';
+        echo '</a>';
+        echo '<a class="playlist">';
+            echo '<img src="./images/default.jpg" alt="">';
+            echo '<p>Playlist 3</p>';
+        echo '</a>';
+    echo '</ul>';
+echo '</div>';
+
+
 echo '</div>';
 
 echo '</aside>';
@@ -57,6 +80,7 @@ echo '<div class="container-milieu-top">';
 
 echo '<div class="container-milieu-top-left">';
     echo '<h1>Spotiut\'O</h1>';
+    echo '<input class="rechercher" type="text" placeholder="🔍 Rechercher">';
 echo '</div>';
 
 echo '<div class="container-milieu-top-right">';
@@ -65,6 +89,8 @@ echo '<div class="container-milieu-top-right">';
 echo '</div>';
 
 echo '</div>';
+
+echo '<div class="container-milieu-bottom">';
 
 // Vérifier si des données existent
 if (!empty($data)) {
@@ -87,6 +113,7 @@ if (!empty($data)) {
 } else {
     echo '<p>Aucune donnée trouvée.</p>';
 }
+echo '</div>';
 echo '</div>';
 echo '</div>';
 ?>
