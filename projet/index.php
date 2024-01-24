@@ -53,6 +53,19 @@ echo '</aside>';
 
 
 echo '<div class="container-milieu">';
+echo '<div class="container-milieu-top">';
+
+echo '<div class="container-milieu-top-left">';
+    echo '<h1>Spotiut\'O</h1>';
+echo '</div>';
+
+echo '<div class="container-milieu-top-right">';
+    echo '<a href="#"><img class="img-active" src="./images/notificationVide.png" alt=""><img class="img-hidden" src="./images/notificationPlein.png" alt=""></a>';
+    echo '<img src="./images/profil.webp" alt="">';
+echo '</div>';
+
+echo '</div>';
+
 // Vérifier si des données existent
 if (!empty($data)) {
     // Parcourir chaque entrée musicale
