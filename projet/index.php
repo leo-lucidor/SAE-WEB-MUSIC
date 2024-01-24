@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotiut'O</title>
+    <link rel="stylesheet" href="./css/accueil.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&family=Hind+Siliguri:wght@300;400;500;600&family=Lexend:wght@200;300;400;500;600;700;800;900&family=M+PLUS+Rounded+1c:wght@100;300;400;500;700&family=Montserrat:wght@400;700&family=Noto+Sans:ital,wght@0,100;0,300;0,400;0,600;1,500&display=swap" rel="stylesheet">
+</head>
+<body>
+
 <?php
 
 require 'vendor/autoload.php';
@@ -7,80 +20,53 @@ require 'src/Autoloader.php';
 Autoloader::register();
 
 $file = fopen('extrait.yml', 'r');
-
-// Initialiser un tableau pour stocker les données
 $data = [];
-
 $dico = [];
 
 // Lire le fichier ligne par ligne
 while (($line = fgets($file)) !== false) {
     $elem = explode(':', $line, 2);
     if ($elem[0] == '- by'){
-        $data[] = $dico;
-        $dico = [];
+        if (!empty($dico)){
+            $data[] = $dico;
+            $dico = [];
+        }
     }
     $dico[] = $elem[1];
 }
-
 fclose($file);
 
+echo '<div class="container-all">';
+echo '<aside class="container-left">';
+
+echo '</aside>';
+
+
+echo '<div class="container-milieu">';
 // Vérifier si des données existent
 if (!empty($data)) {
     // Parcourir chaque entrée musicale
     foreach ($data as $entry) {
         $lien_img = explode(' ', $entry[3]);
-        $entry[3] = "images/".$lien_img[1];
-        echo '<div>';
-        echo '<h2>' . htmlspecialchars($entry[6]) . '</h2>';
-        echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
-        echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
-        echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
-        if ($entry[3] != null){
-            echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
+        if (!str_starts_with($lien_img[1], 'null')){
+            $entry[3] = "images/".$lien_img[1];
         } else {
-            echo '<img src="images/default.png" alt="Image de la pochette">';
+            $entry[3] = "images/default.jpg";
         }
+        echo '<div class="album">';
+        echo '<h2>' . htmlspecialchars($entry[6]) . '</h2>';
+        // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
+        // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
+        // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
+        echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
         echo '</div>';
-        // $music = new Music($entry);
-        // echo '<div>';
-        // echo '<h2>' . htmlspecialchars($music->getTitle()) . '</h2>';
-        // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($music->getArtist()) . '</p>';
-        // echo '<p><strong>Genre:</strong> ' . implode(', ', $music->getGenre()) . '</p>';
-        // echo '<p><strong>Année de sortie:</strong> ' . $music->getReleaseYear() . '</p>';
-        // echo '<img src="' . htmlspecialchars($music->getImage()) . '" alt="Image de la pochette">';
-        // echo '</div>';
-        // echo '<hr>';
     }
 } else {
     echo '<p>Aucune donnée trouvée.</p>';
 }
+echo '</div>';
+echo '</div>';
+?>
 
-function parseMusicBlock($block)
-{
-    $lines = explode("\n", $block);
-    $entry = [];
-
-    foreach ($lines as $line) {
-        // Supprimer les espaces en début et fin de ligne
-        $line = trim($line);
-
-        // Ignorer les lignes vides ou celles commençant par '#'
-        if ($line !== '' && strpos($line, '#') !== 0) {
-            // Diviser la ligne en clé et valeur
-            $parts = explode(':', $line, 2);
-
-            // Vérifier si la ligne contient une clé et une valeur
-            if (count($parts) === 2) {
-                // Supprimer les espaces en début et fin de clé et valeur
-                $key = trim($parts[0]);
-                $value = trim($parts[1]);
-
-                // Ajouter au tableau associatif
-                $entry[$key] = $value;
-            }
-        }
-    }
-
-    return $entry;
-}
+</body>
+</html>
