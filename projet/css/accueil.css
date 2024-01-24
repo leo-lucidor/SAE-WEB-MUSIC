@@ -22,10 +22,10 @@ body {
     color: #fff;
     flex-basis: 85%;
     margin: 5em;
+    padding-left: 5em;
     /* container */
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
     align-items: center;
     align-content: center;
 }
@@ -41,6 +41,13 @@ body {
     align-items: center;
     justify-content: center;
     gap: 1em;
-    flex-basis: 20%;
+    flex-basis: 10%;
     margin: 1em;
+}
+
+.album h2 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    max-width: 220px; 
 }

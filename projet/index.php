@@ -37,7 +37,17 @@ while (($line = fgets($file)) !== false) {
 fclose($file);
 
 echo '<div class="container-all">';
+
 echo '<aside class="container-left">';
+echo '<div class="container-left-top">';
+
+echo '<ul class="menu">';
+    echo '<li><a href="index.php">Accueil</a></li>';
+    echo '<li><a href="index.php">Explorer</a></li>';
+    echo '<li><a href="index.php">Bibliothèque</a></li>';
+echo '</ul>';
+
+echo '</div>';
 
 echo '</aside>';
 
