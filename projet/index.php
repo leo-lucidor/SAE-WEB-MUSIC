@@ -19,6 +19,8 @@ require 'src/autoloader.php';
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
 
+
+
 $file = fopen('extrait.yml', 'r');
 $data = [];
 $dico = [];
