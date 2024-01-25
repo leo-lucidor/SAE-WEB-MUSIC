@@ -1,67 +1,72 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const wrappers = document.querySelectorAll('.carousel-wrapper');
+    const containers = document.querySelectorAll('.carousel-container');
 
-    wrappers.forEach(function (wrapper) {
-    
-        const leftBtn = document.querySelector('.left-btn');
-        const rightBtn = document.querySelector('.right-btn');
+    containers.forEach(function (container) {
+        const wrapper = container.querySelectorAll('.carousel-wrapper');
+        const leftBtn = container.querySelector('.left-btn');
+        const rightBtn = container.querySelector('.right-btn');
+
+        const carouselItems = container.querySelectorAll('.carousel-slide');
+        
         let currentIndex = 0;
-
-        for (let i = 0; i < wrapper.children.length; i++) {
-            if (i > 3){
-                wrapper.children[i].style.opacity = '0';
+        carouselItems.forEach(function (item) {
+            if (currentIndex > 3){
+                item.style.opacity = '0';
             }
-        }   
+            currentIndex++;
+        });
+        currentIndex = 0;
+
             
         function fadeOutCurrentSlide(index) {
-        const currentSlide = wrapper.children[index];
+        const currentSlide = carouselItems[index];
         currentSlide.style.transition = 'opacity 1s';
         currentSlide.style.opacity = '0';
         }
 
         function fadeInCurrentSlide(index) {
-        const currentSlide = wrapper.children[index];
+        const currentSlide = carouselItems[index];
         currentSlide.style.transition = 'opacity 1s';
         currentSlide.style.opacity = '1';
         }
     
         function fadeInNextSlide() {
-        const nextIndex = (currentIndex + 1) % wrapper.children.length;
-        const nextSlide = wrapper.children[nextIndex];
+        const nextIndex = (currentIndex + 1) % carouselItems.length;
+        const nextSlide = carouselItems[nextIndex];
         nextSlide.style.transition = 'opacity 1s';
         nextSlide.style.opacity = '1';
         }
     
         function fadeOutLastSlide() {
-        const lastIndex = (currentIndex + 3 + wrapper.children.length) % wrapper.children.length;
-        const lastSlide = wrapper.children[lastIndex];
+        const lastIndex = (currentIndex + 3 + carouselItems.length) % carouselItems.length;
+        const lastSlide = carouselItems[lastIndex];
         lastSlide.style.transition = 'opacity 1s';
         lastSlide.style.opacity = '0';
         }
     
         function nextSlide() {
             fadeOutCurrentSlide(currentIndex);
-            if (currentIndex == wrapper.children.length - 4){
+            if (currentIndex == carouselItems.length - 4){
                 currentIndex = 0;
 
                 // mettre tout pour l'annimation
-                for (let i = 0; i < wrapper.children.length; i++) {
-                    wrapper.children[i].style.opacity = '1';
+                for (let i = 0; i < carouselItems.length; i++) {
+                    carouselItems[i].style.opacity = '1';
                 }
 
                 setTimeout(() => {
                     updateCarousel();
                 }, 500);
                 
-                for (let i = 0; i < wrapper.children.length; i++) {
-                    if (i > 4){
-                        wrapper.children[i].style.opacity = '0';
+                for (let i = 0; i < carouselItems.length; i++) {
+                    if (i > 3){
+                        carouselItems[i].style.opacity = '0';
                     } else {
-                        wrapper.children[i].style.opacity = '1';
+                        carouselItems[i].style.opacity = '1';
                     }
                 }
             } else {
-                currentIndex = (currentIndex + 1) % wrapper.children.length;
+                currentIndex = (currentIndex + 1) % carouselItems.length;
             }
             updateCarousel();
             fadeInCurrentSlide(currentIndex+3);
@@ -70,11 +75,11 @@ document.addEventListener('DOMContentLoaded', function () {
         function prevSlide() {
             fadeOutLastSlide();
             if (currentIndex == 0){
-                currentIndex = wrapper.children.length - 4;
+                currentIndex = carouselItems.length - 4;
 
                 // mettre tout pour l'annimation
-                for (let i = 0; i < wrapper.children.length; i++) {
-                    wrapper.children[i].style.opacity = '1';
+                for (let i = 0; i < carouselItems.length; i++) {
+                    carouselItems[i].style.opacity = '1';
                 }
 
                 setTimeout(() => {
@@ -82,24 +87,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 500);
                 
                 // mettre les bonnes images en opacité 1
-                for (let i = 0; i < wrapper.children.length; i++) {
-                    if (i < wrapper.children.length - 4){
-                        wrapper.children[i].style.opacity = '0';
+                for (let i = 0; i < carouselItems.length; i++) {
+                    if (i < carouselItems.length - 4){
+                        carouselItems[i].style.opacity = '0';
                     } else {
-                        wrapper.children[i].style.opacity = '1';
+                        carouselItems[i].style.opacity = '1';
                     }
                 }
             } else {
-                currentIndex = (currentIndex - 1 + wrapper.children.length) % wrapper.children.length;
+                currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
                 updateCarousel();
                 fadeInCurrentSlide(currentIndex);
             }
         }
     
         function updateCarousel() {
-            const translateValue = -currentIndex * 235 + 'px';
-            wrapper.style.transform = 'translateX(' + translateValue + ')';
+            const wrapper = container.querySelector('.carousel-wrapper');
+        
+            if (wrapper) {
+                const translateValue = -currentIndex * 235 + 'px';
+                wrapper.style.transform = 'translateX(' + translateValue + ')';
+            } else {
+                console.error("Carousel wrapper not found");
+            }
         }
+        
     
         // Change slide on button click
         leftBtn.addEventListener('click', prevSlide);
