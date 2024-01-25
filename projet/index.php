@@ -62,11 +62,6 @@ echo '<ul class="menu">';
         echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer">Explorer</a></li>';
         echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><a id="btn-biblio" class="btn-biblio" href="index.php?action=bibliotheque">Bibliothèque</a></li>';
         echo '<li><img class="img-active" id="img-coeur-plein" src="./images/coeurPlein.png" alt=""><a id="btn-favoris" class="btn-favoris" href="#">Favoris</a></li>';
-    } else if ($_REQUEST['action'] == 'compte'){
-        echo '<li><img class="img-active" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><a id="btn-accueil" class="btn-accueil" href="index.php?action">Accueil</a></li>';
-        echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer">Explorer</a></li>';
-        echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><a id="btn-biblio" class="btn-biblio" href="index.php?action=bibliotheque">Bibliothèque</a></li>';
-        echo '<li><img class="img-active" id="img-coeur-vide" src="./images/coeurVide.png" alt=""><a id="btn-favoris" class="btn-favoris" href="index.php?action=favoris">Favoris</a></li>';
     } else {
         echo '<li><img class="img-active" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><a id="btn-accueil" class="btn-accueil" href="index.php?action">Accueil</a></li>';
         echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer">Explorer</a></li>';
@@ -83,20 +78,20 @@ echo '<div class="container-playlist">';
     echo '</div>';
 
     echo '<ul class="container-playlist-bottom">';
-        echo '<a class="playlist">';
+        echo '<a class="playlist" href="index.php?action=playlist">';
             echo '<img src="./images/default.jpg" alt="">';
             echo '<div class="container-playlist-bottom-text">';
                 echo '<p>Playlist 1</p>';
                 echo '<p>par Irvyn</p>';
             echo '</div>';
         echo '</a>';
-        echo '<a class="playlist">';
+        echo '<a class="playlist" href="index.php?action=playlist">';
             echo '<img src="./images/default.jpg" alt="">';
             echo '<div class="container-playlist-bottom-text">';
                 echo '<p>Playlist 2</p>';
             echo '</div>';
         echo '</a>';
-        echo '<a class="playlist">';
+        echo '<a class="playlist" href="index.php?action=playlist">';
             echo '<img src="./images/default.jpg" alt="">';
             echo '<div class="container-playlist-bottom-text">';
                 echo '<p>Playlist 3</p>';
@@ -154,7 +149,7 @@ echo '<div class="container-milieu-bottom">';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
                 echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
-                echo '<a href="#"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
+                echo '<a href="index.php?action=album"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                 echo '</div>';
             }
         } else {
@@ -273,6 +268,10 @@ echo '</div>';
     require 'src/explorer.php';
 } else if ($_REQUEST['action'] == 'favoris') {
     require 'src/favoris.php';
+} else if ($_REQUEST['action'] == 'album') {
+    require 'src/album.php';
+} else if ($_REQUEST['action'] == 'playlist') {
+    require 'src/playlist.php';
 } else {
     require 'src/404.php';
 }
