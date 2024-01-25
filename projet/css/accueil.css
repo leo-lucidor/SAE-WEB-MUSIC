@@ -167,14 +167,14 @@ body {
 }
 
 .menu li button {
-    font-size: 1.2em;
+    font-size: 1.4em;
 }
 
 /* images menu */
 
 .menu img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }
 
 .img-active {
@@ -236,7 +236,7 @@ body {
 .carousel-container {
     /* max-width: 61vw; */
     flex-basis: 73%;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -280,11 +280,11 @@ body {
 }
 
 .left-btn {
-    left: 10px;
+    left: -70px;
 } 
 
 .right-btn {
-    right: 10px;
+    right: -70px;
 } 
 
 /* Ajouter la classe "hidden" pour masquer les éléments */

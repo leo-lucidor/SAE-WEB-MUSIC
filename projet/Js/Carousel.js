@@ -1,25 +1,94 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const wrapper = document.querySelector('.carousel-wrapper');
-  const leftBtn = document.querySelector('.left-btn');
-  const rightBtn = document.querySelector('.right-btn');
-  let currentIndex = 0;
+    const wrapper = document.querySelector('.carousel-wrapper');
+    const leftBtn = document.querySelector('.left-btn');
+    const rightBtn = document.querySelector('.right-btn');
+    let currentIndex = 0;
 
-  function nextSlide() {
-      currentIndex = (currentIndex + 1) % wrapper.children.length;
-      updateCarousel();
-  }
+    for (let i = 0; i < wrapper.children.length; i++) {
+        if (i > 4){
+            wrapper.children[i].style.opacity = '0';
+        }
+    }   
+        
+    function fadeOutCurrentSlide(index) {
+      const currentSlide = wrapper.children[index];
+      currentSlide.style.transition = 'opacity 1s';
+      currentSlide.style.opacity = '0';
+    }
 
-  function prevSlide() {
-      currentIndex = (currentIndex - 1 + wrapper.children.length) % wrapper.children.length;
-      updateCarousel();
-  }
+    function fadeInCurrentSlide(index) {
+      const currentSlide = wrapper.children[index];
+      currentSlide.style.transition = 'opacity 1s';
+      currentSlide.style.opacity = '1';
+    }
+  
+    function fadeInNextSlide() {
+      const nextIndex = (currentIndex + 1) % wrapper.children.length;
+      const nextSlide = wrapper.children[nextIndex];
+      nextSlide.style.transition = 'opacity 1s';
+      nextSlide.style.opacity = '1';
+    }
+  
+    function fadeOutLastSlide() {
+      const lastIndex = (currentIndex + 4 + wrapper.children.length) % wrapper.children.length;
+      const lastSlide = wrapper.children[lastIndex];
+      lastSlide.style.transition = 'opacity 1s';
+      lastSlide.style.opacity = '0';
+    }
+  
+    function nextSlide() {
+        fadeOutCurrentSlide(currentIndex);
+        if (currentIndex == wrapper.children.length - 5){
+            currentIndex = 0;
+            for (let i = 0; i < wrapper.children.length; i++) {
+                if (i > 4){
+                    wrapper.children[i].style.opacity = '0';
+                } else {
+                    wrapper.children[i].style.opacity = '1';
+                }
+            }
+        } else {
+            currentIndex = (currentIndex + 1) % wrapper.children.length;
+        }
+        updateCarousel();
+        fadeInCurrentSlide(currentIndex+4);
+    }
+  
+    function prevSlide() {
+        fadeOutLastSlide();
+        if (currentIndex == 0){
+            currentIndex = wrapper.children.length - 5;
+            // mettre tout pour l'annimation
+            for (let i = 0; i < wrapper.children.length; i++) {
+                wrapper.children[i].style.opacity = '1';
+            }
 
-  function updateCarousel() {
-      const translateValue = -currentIndex * 235 + 'px';
-      wrapper.style.transform = 'translateX(' + translateValue + ')';
-  }
-
-  // Change slide on button click
-  leftBtn.addEventListener('click', prevSlide);
-  rightBtn.addEventListener('click', nextSlide);
-});
+            setTimeout(() => {
+                updateCarousel();
+            }, 1000);
+            
+            // mettre les bonnes images en opacité 1
+            for (let i = 0; i < wrapper.children.length; i++) {
+                if (i < wrapper.children.length - 5){
+                    wrapper.children[i].style.opacity = '0';
+                } else {
+                    wrapper.children[i].style.opacity = '1';
+                }
+            }
+        } else {
+            currentIndex = (currentIndex - 1 + wrapper.children.length) % wrapper.children.length;
+            updateCarousel();
+            fadeInCurrentSlide(currentIndex);
+        }
+    }
+  
+    function updateCarousel() {
+        const translateValue = -currentIndex * 235 + 'px';
+        wrapper.style.transform = 'translateX(' + translateValue + ')';
+    }
+  
+    // Change slide on button click
+    leftBtn.addEventListener('click', prevSlide);
+    rightBtn.addEventListener('click', nextSlide);
+  });
+  
