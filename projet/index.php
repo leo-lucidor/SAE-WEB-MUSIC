@@ -120,7 +120,7 @@ echo '<div class="container-milieu-bottom">';
                 // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
-                echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
+                echo '<a href="#"><img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                 echo '</div>';
             }
         } else {
@@ -152,7 +152,7 @@ echo '<div class="container-milieu-bottom">';
                     // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                     // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                     echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
-                    echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
+                    echo '<a href="#"><img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                     echo '</div>';
                 }
             } else {
@@ -184,7 +184,7 @@ echo '<div class="container-milieu-bottom">';
                 // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
-                echo '<<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
+                echo '<a href="#"><img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                 echo '</div>';
             }
         } else {
