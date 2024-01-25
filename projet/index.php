@@ -45,6 +45,7 @@ echo '<ul class="menu">';
     echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><img class="img-hidden" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><button id="btn-accueil" class="btn-accueil" href="#">Accueil</button></li>';
     echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><img class="img-hidden" id="img-explorer-plein" src="./images/explorerPlein.png" alt=""><button id="btn-explorer" class="btn-explorer" href="#">Explorer</button></li>';
     echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><img class="img-hidden" id="img-biblio-plein" src="./images/bibliothequePlein.png" alt=""><button id="btn-biblio" class="btn-biblio" href="#">Bibliothèque</button></li>';
+    echo '<li><img class="img-active" id="img-coeur-vide" src="./images/coeurVide.png" alt=""><img class="img-hidden" id="img-coeur-plein" src="./images/coeurPlein.png" alt=""><button id="btn-favoris" class="btn-favoris" href="#">Favoris</button></li>';
 echo '</ul>';
 
 echo '<div class="container-playlist">';
