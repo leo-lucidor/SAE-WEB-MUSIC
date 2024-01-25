@@ -15,7 +15,8 @@ echo '</div>';
 
 echo '</div>';
 
-
+require 'src/fonctionsExterne.php';
+$fonctions = new Fonctions($data);
 
 if ($_REQUEST['action'] == '') {     
     require 'src/accueil.php';
@@ -31,7 +32,13 @@ if ($_REQUEST['action'] == '') {
 } else if ($_REQUEST['action'] == 'favoris') {
     require 'src/favoris.php';
 } else if ($_REQUEST['action'] == 'album') {
+    $idAlbum = $_REQUEST['id'];
+    $preAlbum = $fonctions->getAlbumFromData($idAlbum);
+    // print_r($preAlbum);
     require 'src/album.php';
+    $album = new Album($preAlbum[1], $preAlbum[6], $preAlbum[0], $preAlbum[5], $preAlbum[2], $preAlbum[3], $preAlbum[4]);
+    $album->afficher();
+    
 } else if ($_REQUEST['action'] == 'playlist') {
     require 'src/playlist.php';
 } else {
