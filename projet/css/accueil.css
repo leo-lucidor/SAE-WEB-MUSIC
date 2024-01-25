@@ -288,6 +288,36 @@ body {
     right: -70px;
 } 
 
+@media screen and (max-width: 1000px) {
+    .left-btn {
+        left: -50px;
+    }
+
+    .right-btn {
+        right: -10px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .left-btn {
+        left: -50px;
+    }
+
+    .right-btn {
+        right: -90px;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .left-btn {
+        left: -70px;
+    }
+
+    .right-btn {
+        right: 130px;
+    }
+}
+
 /* Ajouter la classe "hidden" pour masquer les éléments */
 .carousel-slide.hidden {
     display: none;
