@@ -121,7 +121,7 @@ echo '</div>';
 
 echo '<div class="container-milieu-top-right">';
     echo '<a href="#"><img class="img-active" src="./images/notificationVide.png" alt=""><img class="img-hidden" src="./images/notificationPlein.png" alt=""></a>';
-    echo '<img src="./images/profil.webp" alt="">';
+    echo '<a href="index.php?action=compte"><img src="./images/profil.webp" alt=""></a>';
 echo '</div>';
 
 echo '</div>';
@@ -266,13 +266,13 @@ echo '<div class="container-milieu-bottom">';
 
 echo '</div>';
 } else if ($_REQUEST['action'] == 'compte') {
-    echo 'compte';
+    require 'src/compte.php';
 } else if ($_REQUEST['action'] == 'bibliotheque') {
-    echo 'bibliotheque';
+    require 'src/bibliotheque.php';
 } else if ($_REQUEST['action'] == 'explorer') {
-    echo 'explorer';
+    require 'src/explorer.php';
 } else if ($_REQUEST['action'] == 'favoris') {
-    echo 'favoris';
+    require 'src/favoris.php';
 } else {
     require 'src/404.php';
 }
