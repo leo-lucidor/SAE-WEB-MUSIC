@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function () {
         NbAlbum = 1;
     } else if (largeurEcran > 1000 && largeurEcran < 1500) {
         NbAlbum = 2;
-    } else if (largeurEcran > 1500 && largeurEcran < 1900) {
+    } else if (largeurEcran > 1500 && largeurEcran < 1850) {
         NbAlbum = 3;
-    } else if (largeurEcran > 1900 && largeurEcran < 2500) {
+    } else if (largeurEcran > 1850 && largeurEcran < 2500) {
         NbAlbum = 4;
     } else if (largeurEcran > 2500) {
         NbAlbum = 5;
