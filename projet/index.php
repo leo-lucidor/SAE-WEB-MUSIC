@@ -14,7 +14,7 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'src/Autoloader.php';
+require 'src/autoloader.php';
 
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
@@ -38,85 +38,12 @@ fclose($file);
 
 echo '<div class="container-all">';
 
-echo '<aside class="container-left">';
-echo '<div class="container-left-top">';
+require 'src/aside.php';
+require 'src/base.php';
 
-echo '<ul class="menu">';
-    echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><img class="img-hidden" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><button id="btn-accueil" class="btn-accueil" href="#">Accueil</button></li>';
-    echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><img class="img-hidden" id="img-explorer-plein" src="./images/explorerPlein.png" alt=""><button id="btn-explorer" class="btn-explorer" href="#">Explorer</button></li>';
-    echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><img class="img-hidden" id="img-biblio-plein" src="./images/bibliothequePlein.png" alt=""><button id="btn-biblio" class="btn-biblio" href="#">Bibliothèque</button></li>';
-echo '</ul>';
-
-echo '<div class="container-playlist">';
-    echo '<div class="container-playlist-top">';
-        echo '<h2 class="titre-playlist">Playlists</h2>';
-        echo '<button class="btn-creer-playlist">+</button>';
-    echo '</div>';
-
-    echo '<ul class="container-playlist-bottom">';
-        echo '<a class="playlist">';
-            echo '<img src="./images/default.jpg" alt="">';
-            echo '<p>Playlist 1</p>';
-        echo '</a>';
-        echo '<a class="playlist">';
-            echo '<img src="./images/default.jpg" alt="">';
-            echo '<p>Playlist 2</p>';
-        echo '</a>';
-        echo '<a class="playlist">';
-            echo '<img src="./images/default.jpg" alt="">';
-            echo '<p>Playlist 3</p>';
-        echo '</a>';
-    echo '</ul>';
-echo '</div>';
-
-
-echo '</div>';
-
-echo '</aside>';
-
-
-echo '<div class="container-milieu">';
-echo '<div class="container-milieu-top">';
-
-echo '<div class="container-milieu-top-left">';
-    echo '<h1>Spotiut\'O</h1>';
-    echo '<input class="rechercher" type="text" placeholder="🔍 Rechercher">';
-echo '</div>';
-
-echo '<div class="container-milieu-top-right">';
-    echo '<a href="#"><img class="img-active" src="./images/notificationVide.png" alt=""><img class="img-hidden" src="./images/notificationPlein.png" alt=""></a>';
-    echo '<img src="./images/profil.webp" alt="">';
-echo '</div>';
-
-echo '</div>';
-
-echo '<div class="container-milieu-bottom">';
-
-// Vérifier si des données existent
-if (!empty($data)) {
-    // Parcourir chaque entrée musicale
-    foreach ($data as $entry) {
-        $lien_img = explode(' ', $entry[3]);
-        if (!str_starts_with($lien_img[1], 'null')){
-            $entry[3] = "images/".$lien_img[1];
-        } else {
-            $entry[3] = "images/default.jpg";
-        }
-        echo '<div class="album">';
-        echo '<h2>' . htmlspecialchars($entry[6]) . '</h2>';
-        // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
-        // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
-        // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
-        echo '<img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette">';
-        echo '</div>';
-    }
-} else {
-    echo '<p>Aucune donnée trouvée.</p>';
-}
-echo '</div>';
-echo '</div>';
 echo '</div>';
 ?>
-<script src="./js/menu.js"></script>
+<!-- <script src="./js/menu.js"></script> -->
+<script src="./js/Carousel.js"></script>
 </body>
 </html>
