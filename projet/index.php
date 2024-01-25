@@ -187,7 +187,7 @@ echo '<div class="container-milieu-bottom">';
                     // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                     echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
                     echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
-                    echo '<a href="#"><img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
+                    echo '<a href="#"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                     echo '</div>';
                 }
             } else {
@@ -220,7 +220,7 @@ echo '<div class="container-milieu-bottom">';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
                 echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
-                echo '<a href="#"><img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
+                echo '<a href="#"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                 echo '</div>';
             }
         } else {
@@ -253,7 +253,7 @@ echo '<div class="container-milieu-bottom">';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
                 echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
-                echo '<a href="#"><img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
+                echo '<a href="#"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                 echo '</div>';
             }
         } else {
