@@ -153,7 +153,7 @@ body {
     flex-wrap: wrap;
     align-items: center;
     gap: 0.5em;
-    margin-top: 2em;
+    margin-top: 1em;
     padding-left: 1em;
     padding-bottom: 1em;
     border-bottom: 1px solid #3d3c3c;
@@ -201,9 +201,15 @@ body {
     margin: 1em;
 }
 
-.titre-playlist {
+.titre-playlist, .titre-menu {
     font-size: 1.2em;
     font-weight: 500;
+    color: #fff;
+}
+
+.titre-menu {
+    margin-left: 0.5em;
+    margin-top: 1em;
 }
 
 .btn-creer-playlist {
