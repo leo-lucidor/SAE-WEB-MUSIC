@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentIndex = 0;
 
     for (let i = 0; i < wrapper.children.length; i++) {
-        if (i > 4){
+        if (i > 3){
             wrapper.children[i].style.opacity = '0';
         }
     }   
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   
     function fadeOutLastSlide() {
-      const lastIndex = (currentIndex + 4 + wrapper.children.length) % wrapper.children.length;
+      const lastIndex = (currentIndex + 3 + wrapper.children.length) % wrapper.children.length;
       const lastSlide = wrapper.children[lastIndex];
       lastSlide.style.transition = 'opacity 1s';
       lastSlide.style.opacity = '0';
@@ -38,8 +38,18 @@ document.addEventListener('DOMContentLoaded', function () {
   
     function nextSlide() {
         fadeOutCurrentSlide(currentIndex);
-        if (currentIndex == wrapper.children.length - 5){
+        if (currentIndex == wrapper.children.length - 4){
             currentIndex = 0;
+
+            // mettre tout pour l'annimation
+            for (let i = 0; i < wrapper.children.length; i++) {
+                wrapper.children[i].style.opacity = '1';
+            }
+
+            setTimeout(() => {
+                updateCarousel();
+            }, 500);
+            
             for (let i = 0; i < wrapper.children.length; i++) {
                 if (i > 4){
                     wrapper.children[i].style.opacity = '0';
@@ -51,13 +61,14 @@ document.addEventListener('DOMContentLoaded', function () {
             currentIndex = (currentIndex + 1) % wrapper.children.length;
         }
         updateCarousel();
-        fadeInCurrentSlide(currentIndex+4);
+        fadeInCurrentSlide(currentIndex+3);
     }
   
     function prevSlide() {
         fadeOutLastSlide();
         if (currentIndex == 0){
-            currentIndex = wrapper.children.length - 5;
+            currentIndex = wrapper.children.length - 4;
+
             // mettre tout pour l'annimation
             for (let i = 0; i < wrapper.children.length; i++) {
                 wrapper.children[i].style.opacity = '1';
@@ -65,11 +76,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             setTimeout(() => {
                 updateCarousel();
-            }, 1000);
+            }, 500);
             
             // mettre les bonnes images en opacité 1
             for (let i = 0; i < wrapper.children.length; i++) {
-                if (i < wrapper.children.length - 5){
+                if (i < wrapper.children.length - 4){
                     wrapper.children[i].style.opacity = '0';
                 } else {
                     wrapper.children[i].style.opacity = '1';
