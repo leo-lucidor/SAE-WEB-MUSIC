@@ -42,8 +42,8 @@ echo '<aside class="container-left">';
 echo '<div class="container-left-top">';
 
 echo '<ul class="menu">';
-    echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><img class="img-hidden" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><button id="btn-accueil" class="btn-accueil" href="#">Accueil</button></li>';
-    echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><img class="img-hidden" id="img-explorer-plein" src="./images/explorerPlein.png" alt=""><button id="btn-explorer" class="btn-explorer" href="#">Explorer</button></li>';
+    echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><img class="img-hidden" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><a id="btn-accueil" class="btn-accueil" href="index.php?action">Accueil</a></li>';
+    echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><img class="img-hidden" id="img-explorer-plein" src="./images/explorerPlein.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer">Explorer</a></li>';
     echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><img class="img-hidden" id="img-biblio-plein" src="./images/bibliothequePlein.png" alt=""><button id="btn-biblio" class="btn-biblio" href="#">Bibliothèque</button></li>';
     echo '<li><img class="img-active" id="img-coeur-vide" src="./images/coeurVide.png" alt=""><img class="img-hidden" id="img-coeur-plein" src="./images/coeurPlein.png" alt=""><button id="btn-favoris" class="btn-favoris" href="#">Favoris</button></li>';
 echo '</ul>';
@@ -98,6 +98,10 @@ echo '</div>';
 
 echo '</div>';
 
+
+
+if ($_REQUEST['action'] == '') {     
+
 echo '<div class="container-milieu-bottom">';
 
     // carousel pour les contenus 'concu pour toi'
@@ -121,7 +125,8 @@ echo '<div class="container-milieu-bottom">';
                 // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                 // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                 echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
-                echo '<a href="#"><img src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
+                echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
+                echo '<a href="#"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                 echo '</div>';
             }
         } else {
@@ -229,10 +234,23 @@ echo '<div class="container-milieu-bottom">';
     echo '</div>';
 
 echo '</div>';
+} else if ($_REQUEST['action'] == 'compte') {
+    echo 'compte';
+} else if ($_REQUEST['action'] == 'bibliotheque') {
+    echo 'bibliotheque';
+} else if ($_REQUEST['action'] == 'explorer') {
+    echo 'explorer';
+} else if ($_REQUEST['action'] == 'favoris') {
+    echo 'favoris';
+} else {
+    echo '404';
+}
+
+
 echo '</div>';
 echo '</div>';
 ?>
-<script src="./js/menu.js"></script>
+<!-- <script src="./js/menu.js"></script> -->
 <script src="./js/Carousel.js"></script>
 </body>
 </html>

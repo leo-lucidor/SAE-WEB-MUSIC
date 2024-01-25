@@ -323,22 +323,40 @@ body {
     display: none;
 }
 
-.carousel-slide img {
+.img-album {
     transform: translateY(-30px);
     transition: 0.5s;
 }
 
-.carousel-slide img:hover {
+.img-album:hover {
     cursor: pointer;
     transform: translateY(10px);
     transition: 0.5s;
+}
+
+.img-fav {
+    max-width: 20px;
+}
+
+.img-fav img {
+    width: 30px !important;
+    height: 30px !important;
+    position: absolute; 
+    transform: translate(180px, -90%);
+    z-index: 100;
 }
 
 .carousel-slide p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; 
-    max-width: 220px; 
+    max-width: 180px; 
+    transition: 0.5s;
+}
+
+.carousel-slide p:hover {
+    /* padding-bottom: 40px; */
+    transition: 0.5s;
 }
 
 

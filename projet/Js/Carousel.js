@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const wrapper = container.querySelectorAll('.carousel-wrapper');
         const leftBtn = container.querySelector('.left-btn');
         const rightBtn = container.querySelector('.right-btn');
-
         const carouselItems = container.querySelectorAll('.carousel-slide');
         
         let currentIndex = 0;
