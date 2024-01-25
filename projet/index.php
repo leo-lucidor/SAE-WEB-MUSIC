@@ -14,7 +14,7 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'src/Autoloader.php';
+require 'src/autoloader.php';
 
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
