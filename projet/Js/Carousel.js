@@ -1,5 +1,24 @@
 document.addEventListener('DOMContentLoaded', function () {
     const containers = document.querySelectorAll('.carousel-container');
+    let NbAlbum = 3;
+    // Récupérer la largeur et la hauteur de l'écran
+    let largeurEcran = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    let hauteurEcran = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+    console.log(largeurEcran);
+
+    if (largeurEcran > 500 && largeurEcran < 1000) {
+        NbAlbum = 1;
+    } else if (largeurEcran > 1000 && largeurEcran < 1500) {
+        NbAlbum = 2;
+    } else if (largeurEcran > 1500 && largeurEcran < 1900) {
+        NbAlbum = 3;
+    } else if (largeurEcran > 1900 && largeurEcran < 2500) {
+        NbAlbum = 4;
+    } else if (largeurEcran > 2500) {
+        NbAlbum = 5;
+    }
+
+    console.log(NbAlbum);
 
     containers.forEach(function (container) {
         const wrapper = container.querySelectorAll('.carousel-wrapper');
@@ -10,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         let currentIndex = 0;
         carouselItems.forEach(function (item) {
-            if (currentIndex > 3){
+            if (currentIndex > NbAlbum){
                 item.style.opacity = '0';
             }
             currentIndex++;
@@ -38,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     
         function fadeOutLastSlide() {
-        const lastIndex = (currentIndex + 3 + carouselItems.length) % carouselItems.length;
+        const lastIndex = (currentIndex + NbAlbum + carouselItems.length) % carouselItems.length;
         const lastSlide = carouselItems[lastIndex];
         lastSlide.style.transition = 'opacity 1s';
         lastSlide.style.opacity = '0';
@@ -46,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         function nextSlide() {
             fadeOutCurrentSlide(currentIndex);
-            if (currentIndex == carouselItems.length - 4){
+            if (currentIndex == carouselItems.length - NbAlbum-1){
                 currentIndex = 0;
 
                 // mettre tout pour l'annimation
@@ -59,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }, 500);
                 
                 for (let i = 0; i < carouselItems.length; i++) {
-                    if (i > 3){
+                    if (i > NbAlbum){
                         carouselItems[i].style.opacity = '0';
                     } else {
                         carouselItems[i].style.opacity = '1';
@@ -69,13 +88,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentIndex = (currentIndex + 1) % carouselItems.length;
             }
             updateCarousel();
-            fadeInCurrentSlide(currentIndex+3);
+            fadeInCurrentSlide(currentIndex+NbAlbum);
         }
     
         function prevSlide() {
             fadeOutLastSlide();
             if (currentIndex == 0){
-                currentIndex = carouselItems.length - 4;
+                currentIndex = carouselItems.length - NbAlbum-1;
 
                 // mettre tout pour l'annimation
                 for (let i = 0; i < carouselItems.length; i++) {
@@ -88,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 
                 // mettre les bonnes images en opacité 1
                 for (let i = 0; i < carouselItems.length; i++) {
-                    if (i < carouselItems.length - 4){
+                    if (i < carouselItems.length - NbAlbum-1){
                         carouselItems[i].style.opacity = '0';
                     } else {
                         carouselItems[i].style.opacity = '1';
