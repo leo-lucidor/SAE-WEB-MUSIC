@@ -55,20 +55,20 @@ echo '<div class="container-playlist">';
 
     echo '<ul class="container-playlist-bottom">';
         echo '<a class="playlist">';
-            echo '<img src="./images/default.jpg" alt="">';
+            echo '<img src="./images/ALBUM/default.jpg" alt="">';
             echo '<div class="container-playlist-bottom-text">';
                 echo '<p>Playlist 1</p>';
                 echo '<p>par Irvyn</p>';
             echo '</div>';
         echo '</a>';
         echo '<a class="playlist">';
-            echo '<img src="./images/default.jpg" alt="">';
+            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
             echo '<div class="container-playlist-bottom-text">';
                 echo '<p>Playlist 2</p>';
             echo '</div>';
         echo '</a>';
         echo '<a class="playlist">';
-            echo '<img src="./images/default.jpg" alt="">';
+            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
             echo '<div class="container-playlist-bottom-text">';
                 echo '<p>Playlist 3</p>';
             echo '</div>';
@@ -111,9 +111,9 @@ echo '<div class="container-milieu-bottom">';
             foreach ($data as $entry) {
                 $lien_img = explode(' ', $entry[3]);
                 if (!str_starts_with($lien_img[1], 'null')){
-                    $entry[3] = "images/".$lien_img[1];
+                    $entry[3] = "images/ALBUMS/".$lien_img[1];
                 } else {
-                    $entry[3] = "images/default.jpg";
+                    $entry[3] = "images/ALBUMS/default.jpg";
                 }
                 echo '<div class="carousel-slide">';
                 // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
@@ -143,9 +143,9 @@ echo '<div class="container-milieu-bottom">';
                 foreach ($data as $entry) {
                     $lien_img = explode(' ', $entry[3]);
                     if (!str_starts_with($lien_img[1], 'null')){
-                        $entry[3] = "images/".$lien_img[1];
+                        $entry[3] = "images/ALBUMS/".$lien_img[1];
                     } else {
-                        $entry[3] = "images/default.jpg";
+                        $entry[3] = "images/ALBUMS/default.jpg";
                     }
                     echo '<div class="carousel-slide">';
                     // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
@@ -175,9 +175,9 @@ echo '<div class="container-milieu-bottom">';
             foreach ($data as $entry) {
                 $lien_img = explode(' ', $entry[3]);
                 if (!str_starts_with($lien_img[1], 'null')){
-                    $entry[3] = "images/".$lien_img[1];
+                    $entry[3] = "images/ALBUMS/".$lien_img[1];
                 } else {
-                    $entry[3] = "images/default.jpg";
+                    $entry[3] = "images/ALBUMS/default.jpg";
                 }
                 echo '<div class="carousel-slide">';
                 // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
@@ -207,9 +207,9 @@ echo '<div class="container-milieu-bottom">';
             foreach ($data as $entry) {
                 $lien_img = explode(' ', $entry[3]);
                 if (!str_starts_with($lien_img[1], 'null')){
-                    $entry[3] = "images/".$lien_img[1];
+                    $entry[3] = "images/ALBUMS/".$lien_img[1];
                 } else {
-                    $entry[3] = "images/default.jpg";
+                    $entry[3] = "images/ALBUMS/default.jpg";
                 }
                 echo '<div class="carousel-slide">';
                 // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
