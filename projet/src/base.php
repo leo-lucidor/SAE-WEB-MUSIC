@@ -1,5 +1,8 @@
 <?php
 
+echo '<link rel="stylesheet" href="./css/accueil.css">';
+
+
 echo '<div class="container-milieu">';
 echo '<div class="container-milieu-top">';
 
