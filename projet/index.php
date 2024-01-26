@@ -25,12 +25,15 @@ $data = getdata();
 
 echo '<div class="container-all">';
 
-if ($_REQUEST == null){
+if ($_REQUEST == null ){
     require 'src/login.php';
-} else {
+// } else if ($_REQUEST['erreur'] != null){
+//     require 'src/login.php';
+// } 
+} else if ($_REQUEST['action'] == 'accueil') {
     require 'src/aside.php';
     require 'src/base.php';
-}
+} 
 
 echo '</div>';
 ?>

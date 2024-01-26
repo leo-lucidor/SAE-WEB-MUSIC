@@ -34,6 +34,11 @@
             </div>    
             <button type="submit">Se connecter</button>
         </form>
+        <?php
+        if ($_REQUEST != null){
+            echo '<p class="error-message"> '. $_REQUEST['erreur'] .'</p>';
+        }
+        ?>
     </main>
     <script src="./js/login.js"></script>
     <script src="./js/login.js"></script>
