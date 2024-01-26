@@ -3,6 +3,8 @@
 echo '<aside class="container-left">';
 echo '<div class="container-left-top">';
 
+echo '<h2 class="titre-menu">Menu rapide</h2>';
+
 echo '<ul class="menu">';
     if ($_REQUEST['action'] == ''){
         echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><a id="btn-accueil" class="btn-accueil" href="index.php?action">Accueil</a></li>';
