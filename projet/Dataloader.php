@@ -80,7 +80,7 @@ class Dataloader {
                 FOREIGN KEY (ID_Album) REFERENCES Album(ID_Album)
             )");
 
-            echo "Tables créées avec succès.";
+            // echo "Tables créées avec succès.";
 
         } catch (PDOException $e) {
             echo "Erreur : " . $e->getMessage();

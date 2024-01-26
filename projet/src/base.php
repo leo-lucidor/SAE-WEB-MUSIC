@@ -1,9 +1,13 @@
 <?php
 
+echo '<link rel="stylesheet" href="./css/accueil.css">';
+
+
 echo '<div class="container-milieu">';
 echo '<div class="container-milieu-top">';
 
 echo '<div class="container-milieu-top-left">';
+    echo '<img class="logo" src="images/logo.png" alt="logo">';
     echo '<h1>Spotiut\'O</h1>';
     echo '<input class="rechercher" type="text" placeholder="🔍 Artistes, titres...">';
 echo '</div>';
@@ -18,7 +22,7 @@ echo '</div>';
 require 'src/fonctionsExterne.php';
 $fonctions = new Fonctions($data);
 
-if ($_REQUEST['action'] == '') {     
+if ($_REQUEST['action'] == 'accueil') {     
     require 'src/accueil.php';
     $acceuil = new Accueil($data);
     // print_r($acceuil->getData());

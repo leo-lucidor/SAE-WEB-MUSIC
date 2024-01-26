@@ -25,6 +25,11 @@ body {
     background-color: #0f0d13;
 }
 
+.logo {
+    width: 60px !important;
+    height: 60px !important;
+}
+
 .container-all {
     display: flex;
     flex-wrap: nowrap;
