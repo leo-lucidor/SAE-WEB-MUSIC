@@ -15,26 +15,20 @@
 
 require 'vendor/autoload.php';
 require 'src/autoloader.php';
-
+require 'Dataloader.php';
+  
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
 
-$file = fopen('extrait.yml', 'r');
-$data = [];
-$dico = [];
+$dataload = new Dataloader("database.sqlite3", "chemin yml");
 
-// Lire le fichier ligne par ligne
-while (($line = fgets($file)) !== false) {
-    $elem = explode(':', $line, 2);
-    if ($elem[0] == '- by'){
-        if (!empty($dico)){
-            $data[] = $dico;
-            $dico = [];
-        }
-    }
-    $dico[] = $elem[1];
-}
-fclose($file);
+$dataload->returnToBaseBDD();
+
+echo '<br>';
+echo '<br>';
+
+
+
 
 echo '<div class="container-all">';
 
