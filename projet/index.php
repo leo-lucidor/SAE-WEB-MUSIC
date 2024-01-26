@@ -15,17 +15,11 @@
 
 require 'vendor/autoload.php';
 require 'src/autoloader.php';
-require 'Dataloader.php';
+require 'src/provider/Dataloader_test.php';
   
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
 
-$dataload = new Dataloader("database.sqlite3", "chemin yml");
-
-$dataload->returnToBaseBDD();
-
-echo '<br>';
-echo '<br>';
 
 
 
