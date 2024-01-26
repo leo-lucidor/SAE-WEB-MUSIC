@@ -1,49 +1,69 @@
 <?php
 
-date_default_timezone_set('Europe/Paris');
-try{
-  // le fichier de BD s'appellera contacts.sqlite3
-  $file_db=new PDO('sqlite:contacts.sqlite3');
-  $file_db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+d<?php
 
-  // on supprime les tables si elles existent
-  $file_db->exec("DROP TABLE IF EXISTS quiz");
-  $file_db->exec("DROP TABLE IF EXISTS questions");
-  $file_db->exec("DROP TABLE IF EXISTS contacts");
-  $file_db->exec("DROP TABLE IF EXISTS scores");
+try {
+    $pdo = new PDO('sqlite:your_database_name.sqlite3');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $file_db->exec("CREATE TABLE IF NOT EXISTS quiz (
-    id INTEGER PRIMARY KEY,
-    nomQuiz TEXT,
-    meilleurScore INTEGER,
-    tempsMoyen INTEGER,
-    nbMaxQuesitons INTEGER
-  )");
+    // Table Artiste
+    $pdo->exec("CREATE TABLE IF NOT EXISTS Artiste (
+        ID_Artiste INTEGER PRIMARY KEY,
+        Nom TEXT,
+        Bio TEXT,
+        Date_de_naissance DATE
+    )");
 
-  $file_db->exec("CREATE TABLE IF NOT EXISTS contacts ( 
-    id INTEGER PRIMARY KEY,
-    nom TEXT,
-    prenom TEXT
-  )");
+    // Table Album
+    $pdo->exec("CREATE TABLE IF NOT EXISTS Album (
+        ID_Album INTEGER PRIMARY KEY,
+        Titre TEXT,
+        Date_de_sortie DATE,
+        Genre TEXT, -- ou ID_Genre INTEGER si la table Genre est utilisée
+        Pochette TEXT,
+        ID_Artiste INTEGER,
+        FOREIGN KEY (ID_Artiste) REFERENCES Artiste(ID_Artiste)
+    )");
 
-  $file_db->exec("CREATE TABLE IF NOT EXISTS scores (
-    id INTEGER PRIMARY KEY,
-    score INTEGER,
-    time INTEGER,
-    contact_id INTEGER,
-    quiz_id INTEGER,
-    FOREIGN KEY(contact_id) REFERENCES contacts(id),
-    FOREIGN KEY(quiz_id) REFERENCES quiz(id)
-  )");
+    // Table Utilisateur
+    $pdo->exec("CREATE TABLE IF NOT EXISTS Utilisateur (
+        ID_Utilisateur INTEGER PRIMARY KEY,
+        Nom_utilisateur TEXT,
+        Mot_de_passe TEXT,
+        Email TEXT
+    )");
 
-  //table question
-  $file_db->exec("CREATE TABLE IF NOT EXISTS questions (
-    id INTEGER PRIMARY KEY,
-    question TEXT,
-    reponse INTEGER,
-    quiz_id INTEGER,
-    FOREIGN KEY(quiz_id) REFERENCES quiz(id)
-  )");
+    // Table Playlist
+    $pdo->exec("CREATE TABLE IF NOT EXISTS Playlist (
+        ID_Playlist INTEGER PRIMARY KEY,
+        Nom TEXT,
+        ID_Utilisateur INTEGER,
+        FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur)
+    )");
+
+    // Table Genre
+    $pdo->exec("CREATE TABLE IF NOT EXISTS Genre (
+        ID_Genre INTEGER PRIMARY KEY,
+        Nom_du_genre TEXT
+    )");
+
+    // Table Note
+    $pdo->exec("CREATE TABLE IF NOT EXISTS Note (
+        ID_Note INTEGER PRIMARY KEY,
+        Valeur INTEGER,
+        ID_Utilisateur INTEGER,
+        ID_Album INTEGER,
+        FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur),
+        FOREIGN KEY (ID_Album) REFERENCES Album(ID_Album)
+    )");
+
+    echo "Tables créées avec succès.";
+
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+}
+
+
 
   $quiz=array(
     array('nomQuiz' => 'Quiz1',

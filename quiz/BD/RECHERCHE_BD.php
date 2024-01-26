@@ -1,5 +1,7 @@
 <?php
+
 date_default_timezone_set('Europe/Paris');
+
 try {
   function getUserWithName($nom,$file_db){
     $stmt=$file_db->query("SELECT * from contacts where nom='"
