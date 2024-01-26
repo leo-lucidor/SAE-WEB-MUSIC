@@ -19,31 +19,41 @@ class Dataloader {
 
     public function createTables(): void {
         try {
-            // Table Artiste
-            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Artiste (
+
+              // Table Artiste
+              $this->pdo->exec("CREATE TABLE IF NOT EXISTS Artiste (
                 ID_Artiste INTEGER PRIMARY KEY AUTOINCREMENT,
-                Nom TEXT,
-                Bio TEXT,
-                Date_de_naissance DATE
+                Nom TEXT UNIQUE
             )");
+          
 
             // Table Album
             $this->pdo->exec("CREATE TABLE IF NOT EXISTS Album (
                 ID_Album INTEGER PRIMARY KEY AUTOINCREMENT,
-                Titre TEXT,
-                Date_de_sortie DATE,
+                Titre TEXT UNIQUE,
+                Date_de_sortie INTEGER NOT NULL CHECK (Date_de_sortie <= 2024) ,
                 Genre TEXT,
                 Pochette TEXT,
-                ID_Artiste INTEGER,
-                FOREIGN KEY (ID_Artiste) REFERENCES Artiste(ID_Artiste)
+                ID_Artiste_By INTEGER,
+                ID_Artiste_Parent INTEGER,
+                FOREIGN KEY (ID_Artiste_By) REFERENCES Artiste(ID_Artiste),
+                FOREIGN KEY (ID_Artiste_Parent) REFERENCES Artiste(ID_Artiste)
             )");
 
             // Table Utilisateur
             $this->pdo->exec("CREATE TABLE IF NOT EXISTS Utilisateur (
                 ID_Utilisateur INTEGER PRIMARY KEY AUTOINCREMENT,
-                Nom_utilisateur TEXT,
+                Nom_utilisateur TEXT UNIQUE,
                 Mot_de_passe TEXT,
-                Email TEXT
+                Email TEXT UNIQUE
+            )");
+
+            // Table Album_Playlist
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Album_Playlist (
+                ID_Album INTEGER,
+                ID_Playlist INTEGER,
+                FOREIGN KEY (ID_Album) REFERENCES Album(ID_Album),
+                FOREIGN KEY (ID_Playlist) REFERENCES Playlist(ID_Playlist)
             )");
 
             // Table Playlist
@@ -57,7 +67,7 @@ class Dataloader {
             // Table Genre
             $this->pdo->exec("CREATE TABLE IF NOT EXISTS Genre (
                 ID_Genre INTEGER PRIMARY KEY AUTOINCREMENT,
-                Nom_du_genre TEXT
+                Nom_du_genre TEXT UNIQUE
             )");
 
             // Table Note
@@ -77,58 +87,153 @@ class Dataloader {
         }
     }
 
-    public function insertAlbum(array $albumData): void {
-        try {
-            $stmt = $this->pdo->prepare("INSERT INTO Album (Titre, Date_de_sortie, Genre, Pochette, ID_Artiste) VALUES (?, ?, ?, ?, (SELECT ID_Artiste FROM Artiste WHERE Nom = ?))");
-            $stmt->bindParam(1, $albumData['title']);
-            $stmt->bindParam(2, $albumData['releaseYear']);
-            $stmt->bindParam(3, implode(', ', $albumData['genre']));
-            $stmt->bindParam(4, $albumData['img']);
-            $stmt->bindParam(5, $albumData['parent']);
-            $stmt->execute();
-            echo "Album ajouté avec succès.";
-        } catch (PDOException $e) {
-            echo "Erreur lors de l'ajout de l'album : " . $e->getMessage();
+    function get_All_genre_in_yml(array $data){
+        $genre = [];
+        foreach ($data as $entry) {
+            if (!in_array($entry[2], $genre)) {
+                $list = $entry[2];
+                $list = str_replace(["[", "]"], "", $list);
+                $list = explode(",", $list);
+                foreach ($list as $value) {
+                    if (!in_array($value, $genre)){
+                        array_push($genre, $value);
+                    }
+                }
+            }
+        }
+        return $genre;
+    }
+
+    function get_artist_in_yml(){
+        $data = $this->getdata();
+        $artist = [];
+        $artistBy = [];
+        $artistParent = [];
+        foreach ($data as $entry) {
+            if (!in_array($entry[0], $artistBy)) {
+                array_push($artistBy, $entry[0]);
+            }
+            if (!in_array($entry[4], $artistParent)) {
+                array_push($artistParent, $entry[4]);
+            }
+        }
+        array_push($artist, $artistBy);
+        array_push($artist, $artistParent);
+        return $artist;
+    }
+    
+
+    public function insertGenre(): void {
+        $data = $this->getdata();
+        $genreList = $this->get_All_genre_in_yml($data);
+        foreach ($genreList as $genre) {
+            try {
+                $stmt = $this->pdo->prepare("INSERT INTO Genre (Nom_du_genre) VALUES (:genreName)");
+                $stmt->bindParam(':genreName', $genre);
+                $stmt->execute();
+            } catch (PDOException $e) {
+                echo "Erreur lors de l'insertion du genre : " . $e->getMessage() . "\n";
+            }
         }
     }
 
-    public function insertArtist(array $artistData): void {
+
+    public function insertArtist(): void {
+    
+        $artist = $this->get_artist_in_yml();
+        $artistBy = $artist[0];
+        $artistParent = $artist[1];
+        $allArtist = array_merge($artistBy, $artistParent);
+        $allArtist = array_unique($allArtist);
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO Artiste (Nom, Bio, Date_de_naissance) VALUES (?, ?, ?)");
-            $stmt->bindParam(1, $artistData['name']);
-            $stmt->bindParam(2, $artistData['bio']);
-            $stmt->bindParam(3, $artistData['birth']);
-            $stmt->execute();
-            echo "Artiste ajouté avec succès.";
+            foreach ($allArtist as $nom) {
+                $stmt = $this->pdo->prepare("INSERT INTO Artiste (Nom) VALUES (?)");
+                $stmt->bindParam(1, $nom);                
+                $stmt->execute();
+            }
         } catch (PDOException $e) {
             echo "Erreur lors de l'ajout de l'artiste : " . $e->getMessage();
         }
     }
+    
 
-    public function insertGenre(array $genreData): void {
-        try {
-            $stmt = $this->pdo->prepare("INSERT INTO Genre (Nom_du_genre) VALUES (?)");
-            $stmt->bindParam(1, $genreData['name']);
-            $stmt->execute();
-            echo "Genre ajouté avec succès.";
-        } catch (PDOException $e) {
-            echo "Erreur lors de l'ajout du genre : " . $e->getMessage();
-        }
-    }
-
-    public function insertUser(array $userData): void {
+    public function insertUser(String $userName, String $usePassword, String $userEmail): void {
         try {
             $stmt = $this->pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email) VALUES (?, ?, ?)");
-            $stmt->bindParam(1, $userData['username']);
-            $stmt->bindParam(2, $userData['password']);
-            $stmt->bindParam(3, $userData['email']);
+            $stmt->bindParam(1, $userName);
+            $stmt->bindParam(2, $usePassword);
+            $stmt->bindParam(3, $userEmail);
             $stmt->execute();
             echo "Utilisateur ajouté avec succès.";
         } catch (PDOException $e) {
             echo "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
         }
+    }    
+
+
+
+    public function insertAlbum(String $albumName, int $albumDate, String $albumGenre, String $albumCover, String $ArtistBy, String $albumArtistParent) {
+        try {
+            $stmt = $this->pdo->prepare("INSERT INTO Album (Titre, Date_de_sortie, Genre, Pochette, ID_Artiste_By, ID_Artiste_Parent) VALUES (?, ?, ?, ?, (SELECT ID_Artiste FROM Artiste WHERE Nom = ?), (SELECT ID_Artiste FROM Artiste WHERE Nom = ?))");
+            $stmt->bindParam(1, $albumName);
+            $stmt->bindParam(2, $albumDate);
+            $stmt->bindParam(3, $albumGenre);
+            $stmt->bindParam(4, $albumCover);
+            $stmt->bindParam(5, $albumArtistBy);
+            $stmt->bindParam(6, $albumArtistParent);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de l'album : " . $e->getMessage();
+        }
     }
 
+    public function get_id_genre($genre){
+        $stmt = $this->pdo->prepare("SELECT ID_Genre FROM Genre WHERE Nom_du_genre = ?");
+        $stmt->bindParam(1, $genre);
+        $stmt->execute();
+        $id = $stmt->fetch();
+        return $id;
+    }
+
+    public function separer_genre($genre){
+        $genre = str_replace(["[", "]"], "", $genre);
+        // suppremer les espaces
+        $genre = str_replace(" ", "", $genre);
+        $genre = explode(",", $genre);
+        return $genre;
+    }    
+
+    public function getAllAlbum(){
+        $data = $this->getdata();
+        $album = [];
+        foreach ($data as $entry) {
+            $albumName = $entry[6];
+            $date = $entry[5];            
+            $albumDate = (int)$entry[5];
+            $genre = $this->separer_genre($entry[2]);
+            $res = "";
+
+            for ($i = 0; $i < count($genre); $i++){
+                if ($i != count($genre) - 1){
+                    $res .= $genre[$i];
+                    $res .= ", ";
+                }
+                else {
+                    $res .= $genre[$i];
+                }
+            }
+            $genre = $res;
+
+            $albumGenre = $genre;
+            $albumCover = $entry[3];
+            $albumArtistBy = $entry[0];
+            $albumArtistParent = $entry[4];
+            array_push($album, $entry[4]);
+            $this->insertAlbum($albumName, $albumDate, $albumGenre, $albumCover, $albumArtistBy, $albumArtistParent);
+        }   
+        return $album;
+
+    }
     public function insertPlaylist(array $playlistData): void {
         try {
             $stmt = $this->pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur) VALUES (?, (SELECT ID_Utilisateur FROM Utilisateur WHERE Nom_utilisateur = ?))");
@@ -154,31 +259,6 @@ class Dataloader {
         }
     }
 
-
-    public function insertDataIntoDatabase(Dataloader $dataloader, array $data): void {
-        foreach ($data as $entry) {
-            $albumData = [
-                'title' => $entry['title'],
-                'releaseYear' => $entry['releaseYear'],
-                'genre' => $entry['genre'],
-                'img' => $entry['img'],
-                'parent' => $entry['parent'],
-            ];
-
-            $artistData = [
-                'name' => $entry['parent'],
-                'bio' => '', // Modify this based on your data
-                'birth' => '', // Modify this based on your data
-            ];
-
-            // Insert artist if not already in the database
-            $dataloader->insertArtist($artistData);
-
-            // Insert album
-            $dataloader->insertAlbum($albumData);
-        }
-    }
-
     function getdata() : Array {
         $file = fopen('extrait.yml', 'r');
         $dico = [];
@@ -195,8 +275,18 @@ class Dataloader {
             }
             $dico[] = $elem[1];
         }
+        array_push($data, $dico);
         fclose($file);
         return $data;
     }
+
+    function insertAll() {
+        $this->createTables();
+        $this->insertGenre();
+        $this->insertArtist();
+        $this->insertUser("JohnDoe", "motDePasse123", "john.doe@example.com");
+
+    }
 }
+
 ?>

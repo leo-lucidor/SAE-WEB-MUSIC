@@ -14,27 +14,38 @@
 <?php
 
 require 'vendor/autoload.php';
-require 'src/Autoloader.php';
+require 'src/autoloader.php';
 require 'Dataloader.php';
 
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
 
-$dataload = new Dataloader("database", "root");
+$dataload = new Dataloader("database.sqlite3", "chemin yml");
+$dataload->insertAll();
+$data = $dataload->getData();
+$albums = $dataload->getAllAlbum();
 
-$data = $dataload->getdata();
-var_dump($data);
+echo '<br>';
+echo '<br>';
+
+var_dump($albums);
+
+
+
+
 
 echo '<div class="container-all">';
 
 echo '<aside class="container-left">';
 echo '<div class="container-left-top">';
 
+
 echo '<ul class="menu">';
     echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><img class="img-hidden" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><button id="btn-accueil" class="btn-accueil" href="#">Accueil</button></li>';
     echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><img class="img-hidden" id="img-explorer-plein" src="./images/explorerPlein.png" alt=""><button id="btn-explorer" class="btn-explorer" href="#">Explorer</button></li>';
     echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><img class="img-hidden" id="img-biblio-plein" src="./images/bibliothequePlein.png" alt=""><button id="btn-biblio" class="btn-biblio" href="#">Bibliothèque</button></li>';
 echo '</ul>';
+
 
 echo '<div class="container-playlist">';
     echo '<div class="container-playlist-top">';
