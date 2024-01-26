@@ -59,13 +59,13 @@ class Album
         echo '<link rel="stylesheet" href="./css/album.css">';
 
         echo '<div class="container-btn-album">';
-            echo '<a class="btn-retour" href="index.php?action="><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
+            echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
             echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
         echo '</div>';
 
         echo '<div class="container-milieu-album">';
             echo '<div class="container-milieu-bottom-left">';
-                echo '<img src="images/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
+                echo '<img src="images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
             echo '</div>';
             echo '<div class="container-milieu-bottom-right">';
                 echo '<p>Album : ' . $this->title . '</p>';
