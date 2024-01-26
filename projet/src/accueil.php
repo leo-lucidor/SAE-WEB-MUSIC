@@ -34,9 +34,9 @@ class Accueil
                     foreach ($this->data as $entry) {
                         $lien_img = explode(' ', $entry[3]);
                         if (!str_starts_with($lien_img[1], 'null')){
-                            $entry[3] = "images/".$lien_img[1];
+                            $entry[3] = "images/ALBUMS/".trim($lien_img[1]);
                         } else {
-                            $entry[3] = "images/default.jpg";
+                            $entry[3] = "images/ALBUMS/default.jpg";
                         }
                         echo '<div class="carousel-slide">';
                         // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
@@ -67,9 +67,9 @@ class Accueil
                         foreach ($this->data as $entry) {
                             $lien_img = explode(' ', $entry[3]);
                             if (!str_starts_with($lien_img[1], 'null')){
-                                $entry[3] = "images/".$lien_img[1];
+                                $entry[3] = "images/ALBUMS/".$lien_img[1];
                             } else {
-                                $entry[3] = "images/default.jpg";
+                                $entry[3] = "images/ALBUMS/default.jpg";
                             }
                             echo '<div class="carousel-slide">';
                             // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
@@ -100,9 +100,9 @@ class Accueil
                     foreach ($this->data as $entry) {
                         $lien_img = explode(' ', $entry[3]);
                         if (!str_starts_with($lien_img[1], 'null')){
-                            $entry[3] = "images/".$lien_img[1];
+                            $entry[3] = "images/ALBUMS/".$lien_img[1];
                         } else {
-                            $entry[3] = "images/default.jpg";
+                            $entry[3] = "images/ALBUMS/default.jpg";
                         }
                         echo '<div class="carousel-slide">';
                         // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';
@@ -133,9 +133,9 @@ class Accueil
                     foreach ($this->data as $entry) {
                         $lien_img = explode(' ', $entry[3]);
                         if (!str_starts_with($lien_img[1], 'null')){
-                            $entry[3] = "images/".$lien_img[1];
+                            $entry[3] = "images/ALBUMS/".$lien_img[1];
                         } else {
-                            $entry[3] = "images/default.jpg";
+                            $entry[3] = "images/ALBUMS/default.jpg";
                         }
                         echo '<div class="carousel-slide">';
                         // echo '<p><strong>Artiste:</strong> ' . htmlspecialchars($entry[0]) . '</p>';

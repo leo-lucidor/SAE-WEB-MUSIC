@@ -21,29 +21,12 @@ require 'Dataloader.php';
 Autoloader::register();
 
 $dataload = new Dataloader("database.sqlite3", "chemin yml");
-
 $dataload->returnToBaseBDD();
 
-echo '<br>';
-echo '<br>';
 
+$data = $dataload->getdata();
 
-$file = fopen('extrait.yml', 'r');
-$data = [];
-$dico = [];
-
-// Lire le fichier ligne par ligne
-while (($line = fgets($file)) !== false) {
-    $elem = explode(':', $line, 2);
-    if ($elem[0] == '- by'){
-        if (!empty($dico)){
-            $data[] = $dico;
-            $dico = [];
-        }
-    }
-    $dico[] = $elem[1];
-}
-fclose($file);
+// print_r($data);
 
 echo '<div class="container-all">';
 

@@ -65,7 +65,7 @@ class Album
 
         echo '<div class="container-milieu-album">';
             echo '<div class="container-milieu-bottom-left">';
-                echo '<img src="images/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
+                echo '<img src="images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
             echo '</div>';
             echo '<div class="container-milieu-bottom-right">';
                 echo '<p>Album : ' . $this->title . '</p>';
