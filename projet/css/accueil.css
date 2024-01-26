@@ -22,7 +22,7 @@ button {
 }
 
 body {
-    background-color: #0f0d13;
+    background-color: #ffffff;
 }
 
 .container-all {
@@ -288,27 +288,75 @@ body {
     right: -70px;
 } 
 
+@media screen and (max-width: 1000px) {
+    .left-btn {
+        left: -50px;
+    }
+
+    .right-btn {
+        right: -10px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .left-btn {
+        left: -50px;
+    }
+
+    .right-btn {
+        right: -90px;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .left-btn {
+        left: -70px;
+    }
+
+    .right-btn {
+        right: 130px;
+    }
+}
+
 /* Ajouter la classe "hidden" pour masquer les éléments */
 .carousel-slide.hidden {
     display: none;
 }
 
-.carousel-slide img {
+.img-album {
     transform: translateY(-30px);
     transition: 0.5s;
 }
 
-.carousel-slide img:hover {
+.img-album:hover {
     cursor: pointer;
     transform: translateY(10px);
     transition: 0.5s;
+}
+
+.img-fav {
+    max-width: 20px;
+}
+
+.img-fav img {
+    width: 30px !important;
+    height: 30px !important;
+    position: absolute; 
+    transform: translate(180px, -90%);
+    z-index: 100;
 }
 
 .carousel-slide p {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis; 
-    max-width: 220px; 
+    max-width: 180px; 
+    transition: 0.5s;
+}
+
+.carousel-slide p:hover {
+    /* padding-bottom: 40px; */
+    transition: 0.5s;
 }
 
 
