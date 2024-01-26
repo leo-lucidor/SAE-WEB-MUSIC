@@ -214,7 +214,7 @@ class Dataloader {
         return $genre;
     }    
 
-    public function getAllAlbum(){
+    public function insertAllAlbum(){
         $data = $this->getdata();
         $album = [];
         foreach ($data as $entry) {
@@ -297,7 +297,33 @@ class Dataloader {
         $this->createTables();
         $this->insertGenre();
         $this->insertArtist();
-        $this->insertUser("JohnDoe", "motDePasse123", "john.doe@example.com");
+        $this->insertAllAlbum();
+        $this->insertUser("JohnDoe", "123", "john.doe@example.com");
+        $this->insertUser("JohnDoee", "123", "john.doe@example.co");
     }
+
+
+    function deleteAllInBDD() {
+        $stmt = $this->pdo->prepare("DELETE FROM Note");
+        $stmt->execute();
+        $stmt = $this->pdo->prepare("DELETE FROM Playlist");
+        $stmt->execute();
+        $stmt = $this->pdo->prepare("DELETE FROM Utilisateur");
+        $stmt->execute();
+        $stmt = $this->pdo->prepare("DELETE FROM Album");
+        $stmt->execute();
+        $stmt = $this->pdo->prepare("DELETE FROM Artiste");
+        $stmt->execute();
+        $stmt = $this->pdo->prepare("DELETE FROM Genre");
+        $stmt->execute();
+    }
+
+    function returnToBaseBDD() {
+        $this->deleteAllInBDD();
+        $this->insertAll();
+    }
+
+
+    
 }
 ?>
