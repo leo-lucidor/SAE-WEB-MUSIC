@@ -22,13 +22,14 @@ Autoloader::register();
 
 $dataload = new Dataloader("database.sqlite3", "chemin yml");
 $dataload->insertAll();
+$id = $dataload->insertUser("JohnDoee", "motDePasse123", "john.doe@example.co");
 $data = $dataload->getData();
 $albums = $dataload->getAllAlbum();
 
 echo '<br>';
 echo '<br>';
 
-var_dump($albums);
+var_dump($id);
 
 
 

@@ -92,8 +92,7 @@ class Dataloader {
         foreach ($data as $entry) {
             if (!in_array($entry[2], $genre)) {
                 $list = $entry[2];
-                $list = str_replace(["[", "]"], "", $list);
-                $list = explode(",", $list);
+                $list = $this->separer_genre($list);
                 foreach ($list as $value) {
                     if (!in_array($value, $genre)){
                         array_push($genre, $value);
@@ -156,19 +155,31 @@ class Dataloader {
         }
     }
     
+    public function get_id_utlisateur(String $email) {
+        $stmt = $this->pdo->prepare("SELECT ID_Utilisateur FROM Utilisateur WHERE Email = ?");
+        $stmt->bindParam(1, $email);
+        $stmt->execute();
+        $id = $stmt->fetch();
+        return $id["ID_Utilisateur"];
+    }
 
-    public function insertUser(String $userName, String $usePassword, String $userEmail): void {
+    public function insertUser(String $userName, String $usePassword, String $userEmail) {
         try {
             $stmt = $this->pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email) VALUES (?, ?, ?)");
             $stmt->bindParam(1, $userName);
             $stmt->bindParam(2, $usePassword);
             $stmt->bindParam(3, $userEmail);
             $stmt->execute();
-            echo "Utilisateur ajouté avec succès.";
+
+            $idUt = $this->get_id_utlisateur($userEmail);
+            $this->insertPlaylist("Titres Likés", $idUt);
+
+            return $idUt;
         } catch (PDOException $e) {
             echo "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
         }
     }    
+
 
 
 
@@ -179,7 +190,7 @@ class Dataloader {
             $stmt->bindParam(2, $albumDate);
             $stmt->bindParam(3, $albumGenre);
             $stmt->bindParam(4, $albumCover);
-            $stmt->bindParam(5, $albumArtistBy);
+            $stmt->bindParam(5, $ArtistBy);
             $stmt->bindParam(6, $albumArtistParent);
             $stmt->execute();
         } catch (PDOException $e) {
@@ -234,15 +245,15 @@ class Dataloader {
         return $album;
 
     }
-    public function insertPlaylist(array $playlistData): void {
+    public function insertPlaylist(String $nom, int $utilisateur): void {
         try {
-            $stmt = $this->pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur) VALUES (?, (SELECT ID_Utilisateur FROM Utilisateur WHERE Nom_utilisateur = ?))");
-            $stmt->bindParam(1, $playlistData['name']);
-            $stmt->bindParam(2, $playlistData['parent']);
+            $stmt = $this->pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur) VALUES (?, ?)");
+            $stmt->bindParam(1, $nom);
+            $stmt->bindParam(2, $utilisateur);
             $stmt->execute();
-            echo "Playlist ajoutée avec succès.";
+
         } catch (PDOException $e) {
-            echo "Erreur lors de l'ajout de la playlist : " . $e->getMessage();
+            echo "Erreur lors de l'ajout de la playlist : ". $e->getMessage();
         }
     }
 
@@ -259,23 +270,25 @@ class Dataloader {
         }
     }
 
-    function getdata() : Array {
+    function getdata(): array {
         $file = fopen('extrait.yml', 'r');
         $dico = [];
         $data = [];
-    
-         // Lire le fichier ligne par ligne
-         while (($line = fgets($file)) !== false) {
+        while (($line = fgets($file)) !== false) {
             $elem = explode(':', $line, 2);
-            if ($elem[0] == '- by'){
-                if (!empty($dico)){
+            if ($elem[0] == '- by') {
+                if (!empty($dico)) {
                     $data[] = $dico;
                     $dico = [];
                 }
             }
-            $dico[] = $elem[1];
+            if (count($elem) >= 2) {
+                $dico[] = $elem[1];
+            }
         }
-        array_push($data, $dico);
+        if (!empty($dico)) {
+            $data[] = $dico;
+        }
         fclose($file);
         return $data;
     }
@@ -285,8 +298,6 @@ class Dataloader {
         $this->insertGenre();
         $this->insertArtist();
         $this->insertUser("JohnDoe", "motDePasse123", "john.doe@example.com");
-
     }
 }
-
 ?>
