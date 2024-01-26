@@ -17,7 +17,7 @@
     <main class="main-container">
         <h1 class="text-center">Inscris-toi gratuitement</h1>
         <p class="subtitle">Déjà inscrit·e sur Spotiut'o ?<a href="">Connexion</a></p>
-        <form action="" method="POST" class="form">
+        <form action="index.php?action=accueil" method="POST" class="form">
             <div class="form-group">
                 <label for="email">Adresse e-mail</label>
                 <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail">
