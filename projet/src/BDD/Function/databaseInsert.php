@@ -1,15 +1,19 @@
 <?php
-class UtilisateurInsert {
-    public function insertUser(PDO $pdo, String $mail, String $pseudo, String $password){
-        try{
-            $stmt = $pdo->prepare("INSERT INTO Utilisateur (Email, Nom_utilisateur, Mot_de_passe) VALUES (:Email, :Nom_utilisateur, :Mot_de_passe)");
-            $stmt->bindParam(':Email', $mail);
-            $stmt->bindParam(':Nom_utilisateur', $pseudo);
-            $stmt->bindParam(':Mot_de_passe', $password);
+
+function insertUser(PDO $pdo,String $userName, String $usePassword, String $userEmail) {
+        try {
+            $stmt = $pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email) VALUES (?, ?, ?)");
+            $stmt->bindParam(1, $userName);
+            $stmt->bindParam(2, $usePassword);
+            $stmt->bindParam(3, $userEmail);
             $stmt->execute();
-        } catch (PDOException $e){
-            echo $e->getMessage();
-        }
+
+            $idUt = get_id_utlisateur($pdo, $userEmail);
+            insertPlaylist($pdo,"Titres Likés", $idUt);
+
+            return $idUt;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de l'utilisateur : " . $e->getMessage();
     }
-}
+}  
 
