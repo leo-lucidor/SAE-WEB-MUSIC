@@ -14,19 +14,33 @@
 
 require 'vendor/autoload.php';
 require 'src/autoloader.php';
-require 'src/provider/Dataloader_test.php';
+require 'src/provider/Dataloader.php';
+require 'src/provider/Dataloader_function.php';
   
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
 
+session_start();
+$dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
+$pdo = $dataloader->getPdo();
 $data = getdata();
+$_SESSION['dataloader'] = $dataloader;
+
+// inserer un user
+require 'src/BDD/Function/databaseInsert.php';
+$user = new UtilisateurInsert();
+$user->insertUser($pdo, 'erwan.blandeau@gmail.com', 'erwan', 'test');
 
 // print_r($data);
 
 echo '<div class="container-all">';
 
-if ($_REQUEST == null){
+if ($_REQUEST == null) {
+    require 'src/login.php';  
+} else if ($_REQUEST['erreur'] != null) {
     require 'src/login.php';
+} else if ($_REQUEST['action'] == 'login') {
+    require 'src/verifConnexion.php';
 } else {
     require 'src/aside.php';
     require 'src/base.php';

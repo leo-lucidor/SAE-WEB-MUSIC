@@ -3,11 +3,15 @@
 class Utilisateur{
 
     public function get_password_with_email(PDO $pdo, String $mail){
-        $stmt = $pdo->prepare("SELECT password FROM utilisateur WHERE mail = :mail");
-        $stmt->bindParam(':mail', $mail);
-        $stmt->execute();
-        $result = $stmt->fetch();
-        return $result['password'];
+        try{
+            $stmt = $pdo->prepare("SELECT Mot_de_passe FROM Utilisateur WHERE Email = :Email");
+            $stmt->bindParam(':Email', $mail);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result['Mot_de_passe'];
+        } catch (PDOException $e){
+            echo $e->getMessage();
+        }
     }
 
     public function get_password_with_pseudo(PDO $pdo, String $pseudo){

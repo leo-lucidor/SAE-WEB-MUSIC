@@ -17,7 +17,7 @@
     <main class="main-container">
         <h1 class="text-center">Connecte-toi</h1>
         <p class="subtitle">Tu n'as pas encore de compte sur Spotiut'o ?<a href="">Inscription</a></p>
-        <form action="index.php?action=accueil" method="POST" class="form">
+        <form action="index.php?action=login" method="POST" class="form">
             <div class="form-group">
                 <label for="email">Adresse e-mail</label>
                 <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail">
@@ -34,6 +34,11 @@
             </div>    
             <button type="submit">Se connecter</button>
         </form>
+        <?php
+        if ($_REQUEST != null){
+            echo '<p class="erreur">'. $_REQUEST['erreur'] .'</p>';
+        }
+        ?>
     </main>
     <script src="./js/login.js"></script>
     <script src="./js/login.js"></script>
