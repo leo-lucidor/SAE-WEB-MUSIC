@@ -153,10 +153,10 @@ button:hover {
     margin-top: 20px;
 }
 
-#btn-connexion {
+#inscription-form {
     display: none;
 }
 
-#inscription-form {
+#subtitle-inscription {
     display: none;
 }

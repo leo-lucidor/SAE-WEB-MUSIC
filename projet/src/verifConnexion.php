@@ -1,19 +1,15 @@
 <?php
 require 'src/BDD/Function/databaseGet.php';
-
-$ligne1 = $_SESSION['pdo']["ligne1"];
-$ligne2 = $_SESSION['pdo']["ligne2"];
-$ligne3 = $_SESSION['pdo']["ligne3"];
-$pdo = new PDO($ligne1);
-$pdo->setAttribute($ligne2, $ligne3);
+require 'src/provider/pdo.php';
 
 
 $nom = $_POST['email'];
 $mdp = $_POST['password'];
 
+$pdo = getPdo();
+$mdpVerif = get_password_with_email($pdo, $nom);
 
-$user = new Utilisateur();
-$mdpVerif = $user->get_password_with_email($pdo, $nom);
+echo "test : ".$mdpVerif;
 
 
 if ($mdpVerif != $mdp){

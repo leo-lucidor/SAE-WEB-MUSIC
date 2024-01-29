@@ -9,6 +9,7 @@
             return $result['Mot_de_passe'];
         } catch (PDOException $e){
             echo $e->getMessage();
+            return null;
         }
     }
 

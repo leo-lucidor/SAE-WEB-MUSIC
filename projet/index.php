@@ -25,11 +25,10 @@ Autoloader::register();
 session_start();
 $dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
 // $dataloader->createTables();
-returnToBaseBDD($dataloader->getPdo());
+// returnToBaseBDD($dataloader->getPdo());
 
 $pdo = $dataloader->getPdo();
 $data = getdata();
-// $_SESSION['dataloader'] = $dataloader;
 
 
 // print_r($data);
@@ -42,6 +41,8 @@ if ($_REQUEST == null) {
     require 'src/login.php';
 } else if ($_REQUEST['action'] == 'login') {
     require 'src/verifConnexion.php';
+} else if ($_REQUEST['action'] == 'inscription') {
+    require 'src/inscription.php';
 } else {
     require 'src/aside.php';
     require 'src/base.php';
@@ -49,7 +50,6 @@ if ($_REQUEST == null) {
 
 echo '</div>';
 ?>
-<!-- <script src="./js/menu.js"></script> -->
 <script src="./js/Carousel.js"></script>
 </body>
 </html>

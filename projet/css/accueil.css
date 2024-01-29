@@ -33,7 +33,6 @@ body {
 .container-all {
     display: flex;
     flex-wrap: nowrap;
-    max-height: 100vh;
 }
 
 .container-left {

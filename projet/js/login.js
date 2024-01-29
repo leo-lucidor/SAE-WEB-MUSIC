@@ -4,19 +4,21 @@ const btnInscription = document.getElementById('btn-inscription');
 const btnConnexion = document.getElementById('btn-connexion');
 const inscriptionForm = document.getElementById('inscription-form');
 const connexionForm = document.getElementById('connexion-form');
+const subtitleConnexion = document.getElementById('subtitle-connexion');
+const subtitleInscription = document.getElementById('subtitle-inscription');
 
 function affichageInscription() {
-    btnInscription.style.display = 'block';
-    btnConnexion.style.display = 'none';
     inscriptionForm.style.display = 'flex';
     connexionForm.style.display = 'none';
+    subtitleConnexion.style.display = 'none';
+    subtitleInscription.style.display = 'flex';
 }
 
 function affichageConnexion() {
-    btnInscription.style.display = 'none';
-    btnConnexion.style.display = 'block';
     inscriptionForm.style.display = 'none';
     connexionForm.style.display = 'flex';
+    subtitleConnexion.style.display = 'flex';
+    subtitleInscription.style.display = 'none';
 }
 
 btnInscription.addEventListener('click', affichageInscription);
