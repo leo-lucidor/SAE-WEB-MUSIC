@@ -1,7 +1,6 @@
 <?php
-$pdo = $_SESSION['dataloader']->getPdo();
 class UtilisateurInsert {
-    public function insertUser($pdo, String $mail, String $pseudo, String $password){
+    public function insertUser(PDO $pdo, String $mail, String $pseudo, String $password){
         try{
             $stmt = $pdo->prepare("INSERT INTO Utilisateur (Email, Nom_utilisateur, Mot_de_passe) VALUES (:Email, :Nom_utilisateur, :Mot_de_passe)");
             $stmt->bindParam(':Email', $mail);
@@ -14,5 +13,3 @@ class UtilisateurInsert {
     }
 }
 
-$user = new UtilisateurInsert();
-$user->insertUser($pdo, 'erwan.blandeau@gmail.com', 'erwan', 'erwan');

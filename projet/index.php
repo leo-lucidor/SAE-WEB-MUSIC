@@ -12,10 +12,13 @@
 
 <?php
 
+error_reporting(E_ERROR | E_PARSE);
+
 require 'vendor/autoload.php';
 require 'src/autoloader.php';
 require 'src/provider/Dataloader.php';
 require 'src/provider/Dataloader_function.php';
+require 'src/BDD/Function/databaseInsert.php';
   
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
@@ -23,11 +26,12 @@ Autoloader::register();
 session_start();
 $dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
 // $dataloader->createTables();
-// returnToBaseBDD($dataloader->getPdo());
+returnToBaseBDD($dataloader->getPdo());
 
 $pdo = $dataloader->getPdo();
 $data = getdata();
-$_SESSION['dataloader'] = $dataloader;
+// $_SESSION['dataloader'] = $dataloader;
+
 
 // print_r($data);
 
