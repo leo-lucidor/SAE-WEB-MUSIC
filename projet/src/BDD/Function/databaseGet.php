@@ -67,15 +67,8 @@
         return $result;
     }
 
-    function get_all_artiste(PDO $pdo){
-        $stmt = $pdo->prepare("SELECT * FROM artiste");
-        $stmt->execute();
-        $result = $stmt->fetchAll();
-        return $result;
-    }
-
     function get_artiste_with_id(PDO $pdo, int $id){
-        $stmt = $pdo->prepare("SELECT * FROM artiste WHERE id = :id");
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetch();
