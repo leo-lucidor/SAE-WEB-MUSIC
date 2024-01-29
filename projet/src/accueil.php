@@ -142,7 +142,7 @@ class Accueil
                         // echo '<p><strong>Genre:</strong> ' . htmlspecialchars($entry[2]) . '</p>';
                         // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                         echo '<p>' . htmlspecialchars($entry[6]) . '</p>';
-                        echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
+                        echo '<a class="img-fav" href="#"><img src="images/coeurPlein.png" alt="Image favoris"></a>';
                         echo '<a href="index.php?action=album&id='. trim($entry[1]) .'"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                         echo '</div>';
                     }
