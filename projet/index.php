@@ -29,7 +29,7 @@ $_SESSION['dataloader'] = $dataloader;
 // inserer un user
 require 'src/BDD/Function/databaseInsert.php';
 $user = new UtilisateurInsert();
-$user->insertUser($pdo, 'erwan.blandeau@gmail.com', 'erwan', 'test');
+// $user->insertUser($pdo, 'erwan.blandeau@gmail.com', 'erwan', 'test');
 
 // print_r($data);
 
