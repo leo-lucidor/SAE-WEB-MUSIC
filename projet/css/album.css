@@ -18,8 +18,6 @@
 }
 
 .container-milieu-bottom-right {
-    width: 25vw;
-    height: 60vh;
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
