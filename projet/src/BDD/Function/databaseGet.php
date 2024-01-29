@@ -59,3 +59,28 @@
         $result = $stmt->fetch();
         return $result['id'];
     }
+
+    function get_all_album(PDO $pdo){
+        $stmt = $pdo->prepare("SELECT * FROM Album");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function get_all_artiste(PDO $pdo){
+        $stmt = $pdo->prepare("SELECT * FROM artiste");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function get_artiste_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT * FROM artiste WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+    
+
+
