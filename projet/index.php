@@ -18,7 +18,6 @@ require 'vendor/autoload.php';
 require 'src/autoloader.php';
 require 'src/provider/Dataloader.php';
 require 'src/provider/Dataloader_function.php';
-require 'src/BDD/Function/databaseInsert.php';
   
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();

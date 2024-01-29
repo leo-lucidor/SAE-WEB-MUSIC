@@ -152,3 +152,11 @@ button:hover {
     color: red;
     margin-top: 20px;
 }
+
+#btn-connexion {
+    display: none;
+}
+
+#inscription-form {
+    display: none;
+}

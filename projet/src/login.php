@@ -16,8 +16,8 @@
     </nav>
     <main class="main-container">
         <h1 class="text-center">Connecte-toi</h1>
-        <p class="subtitle">Tu n'as pas encore de compte sur Spotiut'o ?<a href="">Inscription</a></p>
-        <form action="index.php?action=login" method="POST" class="form">
+        <p class="subtitle">Tu n'as pas encore de compte sur Spotiut'o ?<a id="btn-inscription">Inscription</a><a id="btn-connexion">Connexion</a></p>
+        <form id="connexion-form" action="index.php?action=login" method="POST" class="form">
             <div class="form-group">
                 <label for="email">Adresse e-mail</label>
                 <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail">
@@ -33,6 +33,23 @@
                 <div class="password-hint">8 caractères min.</div>
             </div>    
             <button type="submit">Se connecter</button>
+        </form>
+        <form id="inscription-form" action="" method="POST" class="form">
+            <div class="form-group">
+                <label for="email">Adresse e-mail</label>
+                <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <div class="password-container">
+                    <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe">
+                    <span id="toggle-password" onclick="togglePasswordVisibility()">
+                        👁️
+                    </span>
+                </div>
+                <div class="password-hint">8 caractères min.</div>
+            </div>    
+            <button type="submit">S'inscrire</button>
         </form>
         <?php
         if ($_REQUEST != null){
