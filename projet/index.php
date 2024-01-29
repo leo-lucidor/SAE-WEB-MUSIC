@@ -22,14 +22,12 @@ Autoloader::register();
 
 session_start();
 $dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
+// $dataloader->createTables();
+// returnToBaseBDD($dataloader->getPdo());
+
 $pdo = $dataloader->getPdo();
 $data = getdata();
 $_SESSION['dataloader'] = $dataloader;
-
-// inserer un user
-require 'src/BDD/Function/databaseInsert.php';
-$user = new UtilisateurInsert();
-$user->insertUser($pdo, 'erwan.blandeau@gmail.com', 'erwan', 'test');
 
 // print_r($data);
 

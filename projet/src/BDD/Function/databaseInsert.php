@@ -13,3 +13,6 @@ class UtilisateurInsert {
         }
     }
 }
+
+$user = new UtilisateurInsert();
+$user->insertUser($pdo, 'erwan.blandeau@gmail.com', 'erwan', 'erwan');
