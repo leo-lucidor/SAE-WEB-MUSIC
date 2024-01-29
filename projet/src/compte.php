@@ -1,6 +1,5 @@
 <?php
 
-echo 'compte';
-
+echo '<a href="/">Déconnexion</a>';
 
 ?>

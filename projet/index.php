@@ -30,7 +30,7 @@ if ($_REQUEST == null ){
 // } else if ($_REQUEST['erreur'] != null){
 //     require 'src/login.php';
 // } 
-} else if ($_REQUEST['action'] == 'accueil') {
+} else if ($_REQUEST['action'] != '') {
     require 'src/aside.php';
     require 'src/base.php';
 } 

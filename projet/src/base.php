@@ -25,7 +25,6 @@ $fonctions = new Fonctions($data);
 if ($_REQUEST['action'] == 'accueil') {     
     require 'src/accueil.php';
     $acceuil = new Accueil($data);
-    // print_r($acceuil->getData());
     $acceuil->afficher();
 } else if ($_REQUEST['action'] == 'compte') {
     require 'src/compte.php';
