@@ -213,7 +213,7 @@ function insertNote(PDO $pdo,array $noteData): void {
         insertArtist($pdo);
         insertAllAlbum($pdo);
         insertUser($pdo,"JohnDoe", "123", "john.doe@example.com");
-        insertUser($pdo,"JohnDoee", "123", "john.doe@example.co");
+        insertUser($pdo, 'erwan', 'erwan', 'erwan.blandeau@gmail.com');
     }
 
 

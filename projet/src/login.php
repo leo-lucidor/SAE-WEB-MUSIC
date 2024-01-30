@@ -16,11 +16,33 @@
     </nav>
     <main class="main-container">
         <h1 class="text-center">Connecte-toi</h1>
-        <p class="subtitle">Tu n'as pas encore de compte sur Spotiut'o ?<a href="">Inscription</a></p>
-        <form action="index.php?action=accueil" method="POST" class="form">
+        <p id="subtitle-connexion" class="subtitle">Tu n'as pas encore de compte sur Spotiut'o ?<a id="btn-inscription">Inscription</a></p>
+        <p id="subtitle-inscription" class="subtitle">Tu as déjà un compte sur Spotiut'o ?<a id="btn-connexion">Connexion</a></p>
+        <form id="connexion-form" action="index.php?action=login" method="POST" class="form">
             <div class="form-group">
                 <label for="email">Adresse e-mail</label>
                 <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <div class="password-container">
+                    <input type="password" name="password" id="password-connexion" placeholder="Entrez votre mot de passe">
+                    <span id="toggle-password-connexion" onclick="">
+                        👁️
+                    </span>
+                </div>
+                <div class="password-hint">8 caractères min.</div>
+            </div>    
+            <button type="submit">Se connecter</button>
+        </form>
+        <form id="inscription-form" action="index.php?action=inscription" method="POST" class="form">
+            <div class="form-group">
+                <label for="email">Adresse e-mail</label>
+                <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail">
+            </div>
+            <div class="form-group">
+                <label for="name">Pseudo</label>
+                <input type="name" name="name" id="name" placeholder="Entrez votre pseudo">
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
@@ -32,11 +54,11 @@
                 </div>
                 <div class="password-hint">8 caractères min.</div>
             </div>    
-            <button type="submit">Se connecter</button>
+            <button type="submit">S'inscrire</button>
         </form>
         <?php
         if ($_REQUEST != null){
-            echo '<p class="error-message"> '. $_REQUEST['erreur'] .'</p>';
+            echo '<p class="erreur">'. $_REQUEST['erreur'] .'</p>';
         }
         ?>
     </main>

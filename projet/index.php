@@ -12,32 +12,44 @@
 
 <?php
 
+error_reporting(E_ERROR | E_PARSE);
+
 require 'vendor/autoload.php';
 require 'src/autoloader.php';
-require 'src/provider/Dataloader_test.php';
+require 'src/provider/Dataloader.php';
+require 'src/provider/Dataloader_function.php';
   
 // Utiliser l'autoloader pour charger automatiquement les classes
 Autoloader::register();
 
+session_start();
+$dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
+// $dataloader->createTables();
+// returnToBaseBDD($dataloader->getPdo());
+
+$pdo = $dataloader->getPdo();
 $data = getdata();
+
 
 // print_r($data);
 
 echo '<div class="container-all">';
 
-if ($_REQUEST == null ){
+if ($_REQUEST == null) {
+    require 'src/login.php';  
+} else if ($_REQUEST['erreur'] != null) {
     require 'src/login.php';
-// } else if ($_REQUEST['erreur'] != null){
-//     require 'src/login.php';
-// } 
-} else if ($_REQUEST['action'] != '') {
+} else if ($_REQUEST['action'] == 'login') {
+    require 'src/verifConnexion.php';
+} else if ($_REQUEST['action'] == 'inscription') {
+    require 'src/inscription.php';
+} else {
     require 'src/aside.php';
     require 'src/base.php';
 } 
 
 echo '</div>';
 ?>
-<!-- <script src="./js/menu.js"></script> -->
 <script src="./js/Carousel.js"></script>
 </body>
 </html>

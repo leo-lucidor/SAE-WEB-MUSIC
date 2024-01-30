@@ -10,6 +10,9 @@ class Dataloader {
             $this->pdo = new PDO('sqlite:' . "src/BDD/".$databaseName);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->file = $file;
+            $_SESSION['pdo']["ligne1"] = "sqlite:" . "src/BDD/".$databaseName;
+            $_SESSION['pdo']["ligne2"] = PDO::ATTR_ERRMODE;
+            $_SESSION['pdo']["ligne3"] = PDO::ERRMODE_EXCEPTION;
 
         } catch (PDOException $e) {
             echo "Erreur de connexion à la base de données : " . $e->getMessage();
