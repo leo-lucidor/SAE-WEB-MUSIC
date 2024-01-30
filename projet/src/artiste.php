@@ -61,6 +61,7 @@ class Artiste {
                         echo '<a class="container-album-unique-artiste" href="index.php?action=album&idAlbum='. trim($album['ID_Album']) .'">';
                             $numero = $i+1;
                             echo '<p class="numero-album">'.$numero .'</p>';
+                            echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
                             if ($imgAlbumCondition){
                                 echo '<img src="./images/ALBUMS/'. trim($imgAlbum).'" alt="">';
                             }
@@ -82,6 +83,6 @@ class Artiste {
                 echo '</div>';
             echo '</div>';
         echo '</div>';
-
+        echo '<script src="js/lancementMusicPageArtiste.js"></script>';
     }
 }

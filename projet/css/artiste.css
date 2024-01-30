@@ -106,4 +106,16 @@
     /* flex-grow: 1; */
 }
 
+/* lancer la musique */
 
+.lancer-music {
+    display: none;
+    margin-left: 1.53vw;
+    margin-right: 1.53vw;
+    z-index: 100;
+}
+
+.lancer-music img {
+    width: 1.5vw;
+    height: 1.5vw;
+}
