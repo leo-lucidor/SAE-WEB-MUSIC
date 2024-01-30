@@ -47,13 +47,26 @@ if ($_REQUEST['action'] == 'accueil') {
 } else if ($_REQUEST['action'] == 'favoris') {
     require 'src/favoris.php';
 } else if ($_REQUEST['action'] == 'album') {
+    require 'src/BDD/Function/databaseGet.php';
+    require 'src/provider/pdo.php';
+    $pdo = getPdo();
+    
     $idAlbum = $_REQUEST['id'];
     $preAlbum = $fonctions->getAlbumFromData($idAlbum);
     // print_r($preAlbum);
     require 'src/album.php';
     $album = new Album($preAlbum[1], $preAlbum[6], $preAlbum[0], $preAlbum[5], $preAlbum[2], $preAlbum[3], $preAlbum[4]);
     $album->afficher();
-    
+} else if ($_REQUEST['action'] == 'artiste') {
+    require 'src/BDD/Function/databaseGet.php';
+    require 'src/provider/pdo.php';
+    $pdo = getPdo();
+
+    $idArtiste = $_REQUEST['id'];
+    $nomArtiste = get_artiste_with_id($pdo, $idArtiste);
+    require 'src/artiste.php';
+    $artiste = new Artiste($idArtiste, $nomArtiste[0]);
+    $artiste->afficher();
 } else if ($_REQUEST['action'] == 'playlist') {
     require 'src/playlist.php';
 } else {
