@@ -1,4 +1,4 @@
-.container-compte {
+.container-artiste {
     display: flex;
     flex-wrap: wrap; 
     justify-content: center;
@@ -39,7 +39,7 @@
     border: 2px solid #840c96;
 }
 
-.container-compte a, .container-info input[type="submit"] {
+.container-artiste a, .container-info input[type="submit"] {
     font-size: 1.2rem;
     font-weight: 400;
     margin-bottom: 2rem;
@@ -49,7 +49,7 @@
     color: #fff;
 }
 
-.container-compte a:hover, .container-info input[type="submit"]:hover, .container-info input[type="submit"]:focus{
+.container-artiste a:hover, .container-info input[type="submit"]:hover, .container-info input[type="submit"]:focus{
     color: #840c96;
     text-decoration: underline;
     transition: 0.3s;

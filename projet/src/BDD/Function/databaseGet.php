@@ -22,11 +22,11 @@
     }
 
     function get_id_with_email(PDO $pdo, String $mail){
-        $stmt = $pdo->prepare("SELECT id FROM utilisateur WHERE mail = :mail");
-        $stmt->bindParam(':mail', $mail);
+        $stmt = $pdo->prepare("SELECT ID_Utilisateur FROM Utilisateur WHERE Email = :Email");
+        $stmt->bindParam(':Email', $mail);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['id'];
+        return $result['ID_Utilisateur'];
     }
 
     function get_mail_with_id(PDO $pdo, int $id){
@@ -68,6 +68,14 @@
         return $result;
     }
 
+    function get_albums_artiste(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent, ID_Album FROM Album WHERE ID_Artiste_By = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
     function get_artiste_with_id(PDO $pdo, int $id){
         $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :id");
         $stmt->bindParam(':id', $id);
@@ -87,13 +95,36 @@
         $stmt = $pdo->prepare("SELECT Pochette FROM Album WHERE ID_Artiste_By = (SELECT ID_Artiste FROM Artiste WHERE Nom = :name)");
         $stmt->bindParam(':name', $name);
         $stmt->execute();
-        $result = $stmt->fetchAll();
-        if ($result == null){
-            return null;
-        } else {
-            return $result;
-        }
+        $result = $stmt->fetch();
+        return $result['Pochette'];
     }
+
+    function get_nom_with_mail(PDO $pdo, String $mail){
+        $stmt = $pdo->prepare("SELECT Nom_utilisateur FROM utilisateur WHERE Email = :Email");
+        $stmt->bindParam(':Email', $mail);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom_utilisateur'];
+    }
+
+    function get_id_with_artist_name(PDO $pdo, String $name){
+        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = :name");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_Artiste'];
+    }
+
+    function get_name_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+
+
+
     
 
 

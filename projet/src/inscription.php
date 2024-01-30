@@ -15,7 +15,8 @@ echo $email;
 
 insertUser($pdo, $nom, $mdp, $email);
 
-$_SESSION['nom'] = $email;
+$_SESSION['nom'] = $nom;
+$_SESSION['mail'] = $email;
 $_SESSION['mdp'] = $mdp;
 
 header('Location: index.php?action=accueil');
