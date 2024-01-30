@@ -46,7 +46,7 @@ if ($_REQUEST == null) {
 } else {
     require 'src/aside.php';
     require 'src/base.php';
-}
+} 
 
 echo '</div>';
 ?>
