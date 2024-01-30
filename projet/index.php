@@ -30,7 +30,6 @@ $dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
 $pdo = $dataloader->getPdo();
 $data = getdata();
 
-
 // print_r($data);
 
 echo '<div class="container-all">';

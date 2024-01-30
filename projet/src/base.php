@@ -1,27 +1,25 @@
+<link rel="stylesheet" href="./css/accueil.css">
+<script src="./js/search.js"></script>
+
+<div class="container-milieu">
+<div class="container-milieu-top">
+
+<div class="container-milieu-top-left">
+    <img class="logo" src="images/logo.png" alt="logo">
+    <h1>Spotiut'O</h1>
+    <div class="rechercher">
+        <img class="search_icon" src="./images/search.svg" alt="">
+        <input class="input_search" type="text" placeholder="Artistes, titres...">
+        <img class="cross_icon" src="./images/cross.svg" alt="">
+    </div>
+</div>
+
+<div class="container-milieu-top-right">
+    <a href="#"><img class="img-active" src="./images/notificationVide.png" alt=""><img class="img-hidden" src="./images/notificationPlein.png" alt=""></a>
+    <a href="index.php?action=compte"><img src="./images/profil.webp" alt=""></a>
+</div>
+
 <?php
-
-echo '<link rel="stylesheet" href="./css/accueil.css">';
-
-
-echo '<div class="container-milieu">';
-echo '<div class="container-milieu-top">';
-
-echo '<div class="container-milieu-top-left">';
-    echo '<img class="logo" src="images/logo.png" alt="logo">';
-    echo '<h1>Spotiut\'O</h1>';
-    echo '<input class="rechercher" type="text" placeholder="🔍 Artistes, titres...">';
-echo '</div>';
-
-echo '<div class="container-milieu-top-right">';
-    echo '<a href="#"><img class="img-active" src="./images/notificationVide.png" alt=""><img class="img-hidden" src="./images/notificationPlein.png" alt=""></a>';
-    if ($_REQUEST['action'] == 'compte')
-        echo '<a class="btn-compte" href="index.php?action=accueil"><img src="./images/userPlein.png" alt=""></a>';
-    else
-        echo '<a class="btn-compte" href="index.php?action=compte"><img src="./images/userVide.png" alt=""></a>';
-
-echo '</div>';
-
-echo '</div>';
 
 require 'src/fonctionsExterne.php';
 $fonctions = new Fonctions($data);
@@ -35,7 +33,9 @@ if ($_REQUEST['action'] == 'accueil') {
 } else if ($_REQUEST['action'] == 'bibliotheque') {
     require 'src/bibliotheque.php';
 } else if ($_REQUEST['action'] == 'explorer') {
-    require 'src/explorer.php';
+    require 'src/search.php';
+    $search = new Recherche($data);
+    $search->afficher();
 } else if ($_REQUEST['action'] == 'favoris') {
     require 'src/favoris.php';
 } else if ($_REQUEST['action'] == 'album') {
@@ -52,8 +52,6 @@ if ($_REQUEST['action'] == 'accueil') {
     require 'src/404.php';
 }
 
-
-
-echo '</div>';
-
 ?>
+</div>
+
