@@ -11,6 +11,7 @@ class Artiste {
 
     public function afficher(){
         require 'src/provider/checkFichierDansDossier.php';
+
         echo '<link rel="stylesheet" href="./css/artiste.css">';
 
         echo '<div class="container-btn-album">';
@@ -44,7 +45,41 @@ class Artiste {
                 }
             echo '</div>';
             echo '<div class="container-milieu-bottom-right">';
-                echo '<p>artiste : '.$this->nom.'</p>';
+                echo '<p>'.$this->nom.'</p>';
+                echo '<div class="container-album-artiste">';
+                $albums = get_albums_artiste(getPdo(), $this->id);
+                if (count($albums) == 0){
+                    echo '<p class="aucun-album">Aucun album</p>';
+                } else {
+                    for ($i=0; $i < count($albums); $i++) { 
+                        $album = $albums[$i];
+    
+                        $pathAlbum = './images/ALBUMS/';
+                        $imgAlbum = $album['Pochette'];
+                        $imgAlbumCondition = checkFileNameExists($pathAlbum, trim($imgAlbum));
+    
+                        echo '<a class="container-album-unique-artiste" href="index.php?action=album&idAlbum='. trim($album['ID_Album']) .'">';
+                            $numero = $i+1;
+                            echo '<p class="numero-album">'.$numero .'</p>';
+                            if ($imgAlbumCondition){
+                                echo '<img src="./images/ALBUMS/'. trim($imgAlbum).'" alt="">';
+                            }
+                            else {
+                                echo '<img src="./images/ALBUMS/default.jpg" alt="">';
+                            }
+                            echo '<div class="contenu-album">';
+                                echo '<p class="titre-album">'.$album['Titre'].'</p>';
+                                echo '<div class="container-contenu-album-bottom">';  
+                                    echo '<span class="genre-album">'.$album['Genre'].'</span>';
+                                    if ($album['Date_de_sortie'] != null && $album['Date_de_sortie'] != 0){
+                                        echo '<span class="date-album">'.$album['Date_de_sortie'].'</span>';
+                                    }
+                                echo '</div>';
+                            echo '</div>';
+                        echo '</a>';
+                    }   
+                }
+                echo '</div>';
             echo '</div>';
         echo '</div>';
 

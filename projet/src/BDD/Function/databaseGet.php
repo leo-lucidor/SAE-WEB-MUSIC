@@ -68,6 +68,14 @@
         return $result;
     }
 
+    function get_albums_artiste(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent, ID_Album FROM Album WHERE ID_Artiste_By = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
     function get_artiste_with_id(PDO $pdo, int $id){
         $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :id");
         $stmt->bindParam(':id', $id);
