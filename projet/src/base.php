@@ -67,6 +67,16 @@ if ($_REQUEST['action'] == 'accueil') {
     require 'src/artiste.php';
     $artiste = new Artiste($idArtiste, $nomArtiste[0]);
     $artiste->afficher();
+} else if ($_REQUEST['action'] == 'editerArtiste') {
+    require 'src/BDD/Function/databaseGet.php';
+    require 'src/provider/pdo.php';
+    $pdo = getPdo();
+
+    $idArtiste = $_REQUEST['idArtiste'];
+    $nomArtiste = get_artiste_with_id($pdo, $idArtiste);
+    require 'src/editerArtiste.php';
+    $editerArtiste = new editerArtiste($idArtiste, $nomArtiste[0]);
+    $editerArtiste->afficher();
 } else if ($_REQUEST['action'] == 'playlist') {
     require 'src/playlist.php';
 } else {

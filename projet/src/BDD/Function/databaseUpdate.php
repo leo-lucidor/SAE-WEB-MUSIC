@@ -13,4 +13,17 @@
             echo 'erreur update user';
             header('Location: index.php?action=compte&erreur=Erreur lors de la modification de l\'utilisateur');
         }
-    }   
+    }
+    
+    function update_artiste($pdo, $nom, $id_artiste){
+        try {
+            $smtp = $pdo->prepare("UPDATE Artiste SET Nom = :Nom WHERE ID_Artiste = :ID_Artiste");
+            $smtp->bindParam(':Nom', $nom);
+            $smtp->bindParam(':ID_Artiste', $id_artiste);
+            $smtp->execute();
+            echo 'modif artiste';
+        } catch (PDOException $e) {
+            echo 'erreur update artiste';
+            header('Location: index.php?action=editerArtiste&idArtiste='. $id_artiste .'&erreur=Erreur lors de la modification de l\'artiste');
+        }
+    }

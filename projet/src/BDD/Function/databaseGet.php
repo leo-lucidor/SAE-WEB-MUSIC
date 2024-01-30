@@ -99,6 +99,22 @@
         return $result['Nom_utilisateur'];
     }
 
+    function get_id_with_artist_name(PDO $pdo, String $name){
+        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = :name");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_Artiste'];
+    }
+
+    function get_name_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+
 
 
     
