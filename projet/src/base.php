@@ -16,7 +16,15 @@
 
 <div class="container-milieu-top-right">
     <a href="#"><img class="img-active" src="./images/notificationVide.png" alt=""><img class="img-hidden" src="./images/notificationPlein.png" alt=""></a>
-    <a href="index.php?action=compte"><img src="./images/profil.webp" alt=""></a>
+    <?php
+    if ($_REQUEST['action'] == 'compte'){
+        echo '<a class="btn-compte" href="#"><img src="./images/userPlein.png" alt=""></a>';
+    } else {
+        echo '<a class="btn-compte" href="index.php?action=compte"><img src="./images/userVide.png" alt=""></a>';
+    }
+    ?>
+</div>
+
 </div>
 
 <?php

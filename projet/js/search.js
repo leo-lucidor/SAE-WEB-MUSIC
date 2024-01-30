@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', function () {
             // Sauvegarder la valeur du champ de recherche dans le localStorage
             localStorage.setItem('searchValue', search);
             window.location.href = 'index.php?action=explorer';
-        } else if (search.trim() === '' && window.location.href.includes('explorer')) {
-            window.location.href = 'index.php?action=accueil';
         }
     });
 
