@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     var inputSearch = document.querySelector('.input_search');
     var crossIcon = document.querySelector('.cross_icon');
-    var navBar = document.querySelector('.nav_bar'); // Remplacez '.nav_bar' par la classe réelle de votre barre de navigation
 
     // Restaurer la valeur précédente du champ de recherche depuis le localStorage
     var search = localStorage.getItem('searchValue') || '';
@@ -35,7 +34,22 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    
+    // pour chaque .search-result si dans le content de .search_result p 
+    // il y a la valeur de inputSearch alors on affiche le .search_result
+    // sinon on le cache
+    inputSearch.addEventListener('input', function() {
+        var searchValue = inputSearch.value.toLowerCase();
+        var searchResults = document.querySelectorAll('.search-result');
+
+        searchResults.forEach(function(result) {
+            var resultText = result.querySelector('p').textContent.toLowerCase();
+            if (resultText.includes(searchValue)) {
+                result.style.display = '';
+            } else {
+                result.style.display = 'none';
+            }
+        });
+    });
 
 });
 
