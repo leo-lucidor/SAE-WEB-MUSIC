@@ -36,12 +36,16 @@ echo '<div class="container-all">';
 
 if ($_REQUEST == null) {
     require 'src/login.php';  
-} else if ($_REQUEST['erreur'] != null) {
+} else if ($_REQUEST['erreur'] != null && $_REQUEST['action'] == 'login') {
     require 'src/login.php';
 } else if ($_REQUEST['action'] == 'login') {
     require 'src/verifConnexion.php';
 } else if ($_REQUEST['action'] == 'inscription') {
     require 'src/inscription.php';
+} else if ($_REQUEST['action'] == 'deconnexion') {
+    require 'src/provider/deconnexion.php';
+}  else if ($_REQUEST['action'] == 'modifierUser') {
+    require 'src/updateUser.php'; 
 } else {
     require 'src/aside.php';
     require 'src/base.php';

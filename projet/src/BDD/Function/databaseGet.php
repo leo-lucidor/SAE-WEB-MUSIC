@@ -22,11 +22,11 @@
     }
 
     function get_id_with_email(PDO $pdo, String $mail){
-        $stmt = $pdo->prepare("SELECT id FROM utilisateur WHERE mail = :mail");
-        $stmt->bindParam(':mail', $mail);
+        $stmt = $pdo->prepare("SELECT ID_Utilisateur FROM Utilisateur WHERE Email = :Email");
+        $stmt->bindParam(':Email', $mail);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['id'];
+        return $result['ID_Utilisateur'];
     }
 
     function get_mail_with_id(PDO $pdo, int $id){
@@ -94,6 +94,15 @@
             return $result;
         }
     }
+
+    function get_nom_with_mail(PDO $pdo, String $mail){
+        $stmt = $pdo->prepare("SELECT Nom_utilisateur FROM utilisateur WHERE Email = :Email");
+        $stmt->bindParam(':Email', $mail);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom_utilisateur'];
+    }
+
     
 
 
