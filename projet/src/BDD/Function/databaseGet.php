@@ -82,6 +82,18 @@
         $result = $stmt->fetchAll();
         return $result;
     }
+
+    function get_img_album_with_artist_name(PDO $pdo, String $name){
+        $stmt = $pdo->prepare("SELECT Pochette FROM Album WHERE ID_Artiste_By = (SELECT ID_Artiste FROM Artiste WHERE Nom = :name)");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if ($result == null){
+            return null;
+        } else {
+            return $result;
+        }
+    }
     
 
 

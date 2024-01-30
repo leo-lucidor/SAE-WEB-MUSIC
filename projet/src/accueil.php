@@ -39,7 +39,12 @@ class Accueil
                     // Parcourir chaque entrée musicale
                     foreach ($artistes as $entry) {
                         echo '<div class="carousel-slide">';
-                        echo '<a href="index.php?action=artiste&id='. trim($entry[1]) .'"><img class="img-artiste" src="./images/ARTISTES/' . trim($entry[0]) . '.jpg" alt="Image de la pochette"></a>';
+                        $lien_img = explode(' ', $entry[0]);
+                        if (get_img_album_with_artist_name($pdo, $lien_img[1]) == null){
+                            echo '<a href="index.php?action=artiste&id='. trim($entry[1]) .'"><img class="img-artiste" src="./images/ARTISTES/' . trim($entry[0]) . '.jpg" alt="Image de la pochette"></a>';
+                        } else {
+                            echo '<a href="index.php?action=artiste&id='. trim($entry[1]) .'"><img class="img-artiste" src="./images/ALBUMS/default.jpg" alt="Image de la pochette"></a>';
+                        }
                         echo '<p>' . htmlspecialchars($entry[0]) . '</p>';
                         echo '</div>';
                     }
