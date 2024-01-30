@@ -62,7 +62,7 @@
     }
 
     function get_all_album(PDO $pdo){
-        $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent FROM Album");
+        $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent, ID_Album FROM Album");
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;

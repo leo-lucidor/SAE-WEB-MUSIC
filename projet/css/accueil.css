@@ -296,8 +296,11 @@ h2{
 
 .carousel-slide {
     box-sizing: border-box;
-    text-align: center;
     font-size: 2em;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }  
 
 .carousel-btn {
@@ -403,4 +406,8 @@ h2{
 
 .btn-compte img {
     border-radius: 0;
+}
+
+.img-artiste {
+    clip-path: circle();
 }

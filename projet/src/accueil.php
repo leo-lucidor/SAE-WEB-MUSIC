@@ -39,9 +39,8 @@ class Accueil
                     // Parcourir chaque entrée musicale
                     foreach ($artistes as $entry) {
                         echo '<div class="carousel-slide">';
+                        echo '<a href="index.php?action=artiste&id='. trim($entry[1]) .'"><img class="img-artiste" src="./images/ARTISTES/' . trim($entry[0]) . '.jpg" alt="Image de la pochette"></a>';
                         echo '<p>' . htmlspecialchars($entry[0]) . '</p>';
-                        echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
-                        echo '<a href="index.php?action=artiste&id='. trim($entry[1]) .'"><img class="img-album" src="./images/ARTISTES/' . trim($entry[0]) . '.jpg" alt="Image de la pochette"></a>';
                         echo '</div>';
                     }
                 } else {
@@ -75,7 +74,7 @@ class Accueil
                         // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                         echo '<p>' . htmlspecialchars($entry[0]) . '</p>';
                         echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
-                        echo '<a href="index.php?action=album&id='. trim($entry[5]) .'"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
+                        echo '<a href="index.php?action=album&id='. trim($entry[7]) .'"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                         echo '</div>';
                     }
                 } else {
