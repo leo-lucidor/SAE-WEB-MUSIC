@@ -87,12 +87,8 @@
         $stmt = $pdo->prepare("SELECT Pochette FROM Album WHERE ID_Artiste_By = (SELECT ID_Artiste FROM Artiste WHERE Nom = :name)");
         $stmt->bindParam(':name', $name);
         $stmt->execute();
-        $result = $stmt->fetchAll();
-        if ($result == null){
-            return null;
-        } else {
-            return $result;
-        }
+        $result = $stmt->fetch();
+        return $result['Pochette'];
     }
 
     function get_nom_with_mail(PDO $pdo, String $mail){
@@ -102,6 +98,8 @@
         $result = $stmt->fetch();
         return $result['Nom_utilisateur'];
     }
+
+
 
     
 

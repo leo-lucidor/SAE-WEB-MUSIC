@@ -20,6 +20,7 @@ class Accueil
 
     public function afficher()
     {
+        require 'src/provider/checkFichierDansDossier.php';
         require 'src/BDD/Function/databaseGet.php';
         require 'src/provider/pdo.php';
         $pdo = getPdo();
@@ -40,8 +41,17 @@ class Accueil
                     foreach ($artistes as $entry) {
                         echo '<div class="carousel-slide">';
                         $lien_img = explode(' ', $entry[0]);
-                        if (get_img_album_with_artist_name($pdo, $lien_img[1]) == null){
+
+                        $imgVerif = get_img_album_with_artist_name(getPdo(), $entry[0]);
+
+                        $path = './images/ARTISTES/';
+                        $imgArtiste = trim($entry[0]).'.jpg';
+                        $imgArtisteCondition = checkFileNameExists($path, $imgArtiste);
+
+                        if ($imgArtisteCondition){
                             echo '<a href="index.php?action=artiste&id='. trim($entry[1]) .'"><img class="img-artiste" src="./images/ARTISTES/' . trim($entry[0]) . '.jpg" alt="Image de la pochette"></a>';
+                        } else if ($imgVerif != null && !$imgArtisteCondition){
+                            echo '<a href="index.php?action=artiste&id='. trim($entry[1]) .'"><img class="img-artiste" src="./images/ALBUMS/' . trim($imgVerif) . '" alt="Image de la pochette"></a>';
                         } else {
                             echo '<a href="index.php?action=artiste&id='. trim($entry[1]) .'"><img class="img-artiste" src="./images/ALBUMS/default.jpg" alt="Image de la pochette"></a>';
                         }

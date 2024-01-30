@@ -24,8 +24,6 @@ Autoloader::register();
 
 session_start();
 $dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
-// $dataloader->createTables();
-// returnToBaseBDD($dataloader->getPdo());
 
 $pdo = $dataloader->getPdo();
 $data = getdata();
