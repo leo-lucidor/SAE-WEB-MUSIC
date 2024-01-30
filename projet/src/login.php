@@ -26,8 +26,8 @@
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <div class="password-container">
-                    <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe">
-                    <span id="toggle-password" onclick="togglePasswordVisibility()">
+                    <input type="password" name="password" id="password-connexion" placeholder="Entrez votre mot de passe">
+                    <span id="toggle-password-connexion" onclick="">
                         👁️
                     </span>
                 </div>

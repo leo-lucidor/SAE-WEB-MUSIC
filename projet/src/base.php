@@ -14,7 +14,11 @@ echo '</div>';
 
 echo '<div class="container-milieu-top-right">';
     echo '<a href="#"><img class="img-active" src="./images/notificationVide.png" alt=""><img class="img-hidden" src="./images/notificationPlein.png" alt=""></a>';
-    echo '<a href="index.php?action=compte"><img src="./images/profil.webp" alt=""></a>';
+    if ($_REQUEST['action'] == 'compte')
+        echo '<a class="btn-compte" href="index.php?action=accueil"><img src="./images/userPlein.png" alt=""></a>';
+    else
+        echo '<a class="btn-compte" href="index.php?action=compte"><img src="./images/userVide.png" alt=""></a>';
+
 echo '</div>';
 
 echo '</div>';

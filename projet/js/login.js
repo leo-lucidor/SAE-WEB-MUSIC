@@ -24,18 +24,22 @@ function affichageConnexion() {
 btnInscription.addEventListener('click', affichageInscription);
 btnConnexion.addEventListener('click', affichageConnexion);
 
+let passwordInput = document.getElementById('password-connexion');
+let toggleIcon = document.getElementById('toggle-password-connexion');
 
-function togglePasswordVisibility() {
-    var passwordInput = document.getElementById('password');
-    var toggleIcon = document.getElementById('toggle-password');
+
+function togglePasswordVisibilityConnexion() {
     if (passwordInput.type === 'password') {
+        console.log('togglePasswordVisibilityConnexion: password');
         passwordInput.type = 'text';
         toggleIcon.textContent = '🙈'; // Change icon or text accordingly
     } else {
+        console.log('togglePasswordVisibilityConnexion: text');
         passwordInput.type = 'password';
         toggleIcon.textContent = '👁️'; // Change icon or text accordingly
     }
 }
 
+toggleIcon.addEventListener('click', togglePasswordVisibilityConnexion);
 
 });

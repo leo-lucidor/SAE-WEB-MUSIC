@@ -377,3 +377,7 @@ body {
     font-weight: 500;
     margin-left: 7.5em;
 }
+
+.btn-compte img {
+    border-radius: 0;
+}
