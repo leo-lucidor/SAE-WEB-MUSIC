@@ -60,8 +60,8 @@ body {
 }
 
 .logo {
-    width: 60px !important;
-    height: 60px !important;
+    width: 40px !important;
+    height: 40% !important;
 }
 
 .container-all {
@@ -392,4 +392,8 @@ h2{
     font-size: 1.8em;
     font-weight: 500;
     margin-left: 7.5em;
+}
+
+.btn-compte img {
+    border-radius: 0;
 }

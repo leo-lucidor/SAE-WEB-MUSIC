@@ -1,8 +1,6 @@
 <?php
 
-class Utilisateur{
-
-    public function get_password_with_email(PDO $pdo, String $mail){
+    function get_password_with_email(PDO $pdo, String $mail){
         try{
             $stmt = $pdo->prepare("SELECT Mot_de_passe FROM Utilisateur WHERE Email = :Email");
             $stmt->bindParam(':Email', $mail);
@@ -11,10 +9,11 @@ class Utilisateur{
             return $result['Mot_de_passe'];
         } catch (PDOException $e){
             echo $e->getMessage();
+            return null;
         }
     }
 
-    public function get_password_with_pseudo(PDO $pdo, String $pseudo){
+    function get_password_with_pseudo(PDO $pdo, String $pseudo){
         $stmt = $pdo->prepare("SELECT password FROM utilisateur WHERE pseudo = :pseudo");
         $stmt->bindParam(':pseudo', $pseudo);
         $stmt->execute();
@@ -22,7 +21,7 @@ class Utilisateur{
         return $result['password'];
     }
 
-    public function get_id_with_email(PDO $pdo, String $mail){
+    function get_id_with_email(PDO $pdo, String $mail){
         $stmt = $pdo->prepare("SELECT id FROM utilisateur WHERE mail = :mail");
         $stmt->bindParam(':mail', $mail);
         $stmt->execute();
@@ -30,7 +29,7 @@ class Utilisateur{
         return $result['id'];
     }
 
-    public function get_mail_with_id(PDO $pdo, int $id){
+    function get_mail_with_id(PDO $pdo, int $id){
         $stmt = $pdo->prepare("SELECT mail FROM utilisateur WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -38,7 +37,7 @@ class Utilisateur{
         return $result['mail'];
     }
 
-    public function get_pseudo_with_id(PDO $pdo, int $id){
+    function get_pseudo_with_id(PDO $pdo, int $id){
         $stmt = $pdo->prepare("SELECT pseudo FROM utilisateur WHERE id = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -46,7 +45,7 @@ class Utilisateur{
         return $result['pseudo'];
     }
 
-    public function get_pseudo_with_mail(PDO $pdo, String $mail){
+    function get_pseudo_with_mail(PDO $pdo, String $mail){
         $stmt = $pdo->prepare("SELECT pseudo FROM utilisateur WHERE mail = :mail");
         $stmt->bindParam(':mail', $mail);
         $stmt->execute();
@@ -54,7 +53,7 @@ class Utilisateur{
         return $result['pseudo'];
     }
 
-    public function get_id_with_pseudo(PDO $pdo, String $pseudo){
+    function get_id_with_pseudo(PDO $pdo, String $pseudo){
         $stmt = $pdo->prepare("SELECT id FROM utilisateur WHERE pseudo = :pseudo");
         $stmt->bindParam(':pseudo', $pseudo);
         $stmt->execute();
@@ -62,5 +61,20 @@ class Utilisateur{
         return $result['id'];
     }
 
+    function get_all_album(PDO $pdo){
+        $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent FROM Album");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 
-}
+    function get_artiste_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+    
+
+

@@ -6,7 +6,7 @@ echo '<div class="container-left-top">';
 echo '<h2 class="titre-menu">Menu rapide</h2>';
 
 echo '<ul class="menu">';
-    if ($_REQUEST['action'] == ''){
+    if ($_REQUEST['action'] == 'accueil'){
         echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><a id="btn-accueil" class="btn-accueil" href="#">Accueil</a></li>';
         echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer">Explorer</a></li>';
         echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><a id="btn-biblio" class="btn-biblio" href="index.php?action=bibliotheque">Bibliothèque</a></li>';

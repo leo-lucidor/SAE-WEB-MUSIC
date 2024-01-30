@@ -19,8 +19,6 @@
     <a href="index.php?action=compte"><img src="./images/profil.webp" alt=""></a>
 </div>
 
-</div>
-
 <?php
 
 require 'src/fonctionsExterne.php';
@@ -29,7 +27,6 @@ $fonctions = new Fonctions($data);
 if ($_REQUEST['action'] == 'accueil') {     
     require 'src/accueil.php';
     $acceuil = new Accueil($data);
-    // print_r($acceuil->getData());
     $acceuil->afficher();
 } else if ($_REQUEST['action'] == 'compte') {
     require 'src/compte.php';
@@ -57,3 +54,4 @@ if ($_REQUEST['action'] == 'accueil') {
 
 ?>
 </div>
+
