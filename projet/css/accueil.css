@@ -301,6 +301,7 @@ h2{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    max-width: 230px;
 }  
 
 .carousel-btn {

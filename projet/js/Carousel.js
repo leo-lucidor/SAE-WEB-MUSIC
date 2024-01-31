@@ -25,6 +25,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const leftBtn = container.querySelector('.left-btn');
         const rightBtn = container.querySelector('.right-btn');
         const carouselItems = container.querySelectorAll('.carousel-slide');
+
+        $nbItems = carouselItems.length;
+        if ($nbItems < NbAlbum){
+            leftBtn.style.display = 'none';
+            rightBtn.style.display = 'none';
+        }
         
         let currentIndex = 0;
         carouselItems.forEach(function (item) {
