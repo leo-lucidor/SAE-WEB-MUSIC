@@ -1,4 +1,5 @@
 <?php
+echo '<link rel="stylesheet" href="./css/popup.css">';
 
 echo '<aside class="container-left">';
 echo '<div class="container-left-top">';
@@ -43,7 +44,12 @@ echo '<div class="container-playlist">';
 
         echo '<div class="container-playlist-top">';
             echo '<h2 class="titre-playlist">Playlists</h2>';
-            echo '<button class="btn-creer-playlist">+</button>';
+            echo '<button id="btnAddPlaylist" class="btn-creer-playlist">+</button>';
+        echo '</div>';
+
+        echo '<div id="playlistPopup" style="display: none;">';
+            echo '<input type="text" id="playlistName" placeholder="Nom de la playlist">';
+            echo '<button id="btnSavePlaylist">Enregistrer</button>';
         echo '</div>';
 
         if ($playlists == null || empty($playlists)){
@@ -67,6 +73,8 @@ echo '<div class="container-playlist">';
                 echo '</a>';
             }
         }
+
+        echo '<script src="./js/AjouterPlaylist.js"></script>';
    
 echo '</div>';
 
@@ -74,4 +82,6 @@ echo '</div>';
 echo '</div>';
 
 echo '</aside>';
+
+
 
