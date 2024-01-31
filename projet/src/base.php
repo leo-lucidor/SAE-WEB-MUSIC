@@ -72,7 +72,14 @@ if ($_REQUEST['action'] == 'accueil') {
     $editerArtiste = new editerArtiste($idArtiste, $nomArtiste[0]);
     $editerArtiste->afficher();
 } else if ($_REQUEST['action'] == 'playlist') {
+    require 'src/provider/pdo.php';
+    $pdo = getPdo();
+
+    $idPlaylist = $_REQUEST['idPlaylist'];
+    $playlist = get_playlist_with_id($pdo, $idPlaylist);
     require 'src/playlist.php';
+    $playlist = new Playlist($idPlaylist, $playlist['ID_Utilisateur'], $playlist['Nom'], []);
+    $playlist->afficher();
 } else {
     require 'src/404.php';
 }

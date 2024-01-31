@@ -28,7 +28,7 @@ class Accueil
 
             // carousel pour les artistes
             echo '<div class="carousel-container">';
-                echo '<h2 class="titre-carousel">Artistes que vous pourrez aimez</h2>';
+                echo '<h2 class="titre-carousel">Artistes que vous pourriez aimez</h2>';
                 echo '<button class="carousel-btn left-btn"><img src="./images/fleche-gauche.png" alt="fleche gauche"></button>';
                 echo '<div class="carousel-wrapper">';
 

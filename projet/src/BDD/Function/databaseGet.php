@@ -38,11 +38,11 @@
     }
 
     function get_pseudo_with_id(PDO $pdo, int $id){
-        $stmt = $pdo->prepare("SELECT pseudo FROM utilisateur WHERE id = :id");
-        $stmt->bindParam(':id', $id);
+        $stmt = $pdo->prepare("SELECT Nom_utilisateur FROM Utilisateur WHERE ID_Utilisateur = :ID_Utilisateur");
+        $stmt->bindParam(':ID_Utilisateur', $id);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['pseudo'];
+        return $result['Nom_utilisateur'];
     }
 
     function get_pseudo_with_mail(PDO $pdo, String $mail){
@@ -179,6 +179,13 @@
         return $result;
     }
 
+    function get_playlist_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist WHERE ID_Playlist = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
 
 
     
