@@ -95,7 +95,7 @@ body {
     justify-content: space-between;
     flex-basis: 100%;
     margin-top: 1em;
-    /* margin-bottom: 2em; */
+    margin-bottom: 2em; 
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 1em;
@@ -411,4 +411,9 @@ h2{
 
 .img-artiste {
     clip-path: circle();
+}
+
+.aucune-playlist {
+    color: #fff;
+    text-align: center;
 }

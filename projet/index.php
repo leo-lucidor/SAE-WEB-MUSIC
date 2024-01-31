@@ -43,14 +43,23 @@ if ($_REQUEST == null) {
     require 'src/verifConnexion.php';
 } else if ($_REQUEST['action'] == 'inscription') {
     require 'src/inscription.php';
+} else if ($_REQUEST['action'] == 'VerifInscription'){
+    require 'src/BDD/Function/databaseGet.php';
+    $idUser = get_id_with_email($pdo, $_SESSION['mail']);
+    $_SESSION['playlistUser'] = get_playlist_utilisateur($pdo, $idUser);
+    header('Location: index.php?action=accueil');
 } else if ($_REQUEST['action'] == 'deconnexion') {
     require 'src/provider/deconnexion.php';
 } else if ($_REQUEST['action'] == 'modifierUser') {
     require 'src/updateUser.php'; 
 } else if ($_REQUEST['action'] == 'modifierArtiste') {
     require 'src/updateArtiste.php';
-}
-else {
+} else if ($_REQUEST['action'] == 'ajouterPlaylist'){
+    require 'src/ajouterPlaylist.php';
+} else {
+    require 'src/BDD/Function/databaseGet.php';
+    $idUser = get_id_with_email($pdo, $_SESSION['mail']);
+    $_SESSION['playlistUser'] = get_playlist_utilisateur($pdo, $idUser);
     require 'src/aside.php';
     require 'src/base.php';
 } 

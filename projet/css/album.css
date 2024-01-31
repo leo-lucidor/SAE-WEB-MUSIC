@@ -1,6 +1,6 @@
 .container-milieu-album {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -9,11 +9,11 @@
     margin-bottom: 14vh;
     margin-left: 10vw;
     margin-right: 10vw;
-    gap: 10vw;
+    gap: 5vw;
 }
 
 .container-milieu-bottom-left img {
-    width: 30vw;
+    width: 27vw;
     height: 60vh;
 }
 
@@ -23,6 +23,11 @@
     flex-direction: column;
     justify-content: center;
     gap: 2vh;
+    flex-basis: 50%;
+}
+
+.container-milieu-bottom-left {
+    flex-basis: 50%;
 }
 
 .container-milieu-bottom-right p {

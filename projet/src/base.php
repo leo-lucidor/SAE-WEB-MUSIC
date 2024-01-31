@@ -29,10 +29,7 @@
 
 <?php
 
-require 'src/fonctionsExterne.php';
-$fonctions = new Fonctions($data);
-
-if ($_REQUEST['action'] == 'accueil') {     
+if ($_REQUEST['action'] == 'accueil') {    
     require 'src/accueil.php';
     $acceuil = new Accueil($data);
     $acceuil->afficher();
@@ -47,17 +44,16 @@ if ($_REQUEST['action'] == 'accueil') {
 } else if ($_REQUEST['action'] == 'favoris') {
     require 'src/favoris.php';
 } else if ($_REQUEST['action'] == 'album') {
-    require 'src/BDD/Function/databaseGet.php';
     require 'src/provider/pdo.php';
     $pdo = getPdo();
     
     $idAlbum = $_REQUEST['id'];
     $preAlbum = get_album_with_id($pdo, $idAlbum);
+    $nomArtiste = get_nom_artiste_with_id($pdo, $preAlbum['ID_Artiste_By']);
     require 'src/album.php';
-    $album = new Album($idAlbum, $preAlbum['Titre'], $preAlbum['ID_Artiste_By'], $preAlbum['Date_de_sortie'], $preAlbum['Genre'], $preAlbum['Pochette'], $preAlbum['ID_Artiste_Parent']);
+    $album = new Album($idAlbum, $preAlbum['Titre'], $nomArtiste, $preAlbum['Date_de_sortie'], $preAlbum['Genre'], $preAlbum['Pochette'], $preAlbum['ID_Artiste_Parent']);
     $album->afficher();
 } else if ($_REQUEST['action'] == 'artiste') {
-    require 'src/BDD/Function/databaseGet.php';
     require 'src/provider/pdo.php';
     $pdo = getPdo();
 
@@ -67,7 +63,6 @@ if ($_REQUEST['action'] == 'accueil') {
     $artiste = new Artiste($idArtiste, $nomArtiste[0]);
     $artiste->afficher();
 } else if ($_REQUEST['action'] == 'editerArtiste') {
-    require 'src/BDD/Function/databaseGet.php';
     require 'src/provider/pdo.php';
     $pdo = getPdo();
 

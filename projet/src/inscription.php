@@ -1,6 +1,5 @@
 <?php
 require 'src/provider/pdo.php';
-
 $pdo = getPdo();
 
 $nom = $_POST['name'];
@@ -19,5 +18,5 @@ $_SESSION['nom'] = $nom;
 $_SESSION['mail'] = $email;
 $_SESSION['mdp'] = $mdp;
 
-header('Location: index.php?action=accueil');
+header('Location: index.php?action=VerifInscription');
 

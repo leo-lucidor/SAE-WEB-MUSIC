@@ -1,4 +1,5 @@
 <?php
+echo '<link rel="stylesheet" href="./css/popup.css">';
 
 echo '<aside class="container-left">';
 echo '<div class="container-left-top">';
@@ -35,33 +36,54 @@ echo '<ul class="menu">';
     
 echo '</ul>';
 
-echo '<div class="container-playlist">';
-    echo '<div class="container-playlist-top">';
-        echo '<h2 class="titre-playlist">Playlists</h2>';
-        echo '<button class="btn-creer-playlist">+</button>';
-    echo '</div>';
 
-    echo '<ul class="container-playlist-bottom">';
-        echo '<a class="playlist" href="index.php?action=playlist">';
-            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
-            echo '<div class="container-playlist-bottom-text">';
-                echo '<p>Playlist 1</p>';
-                echo '<p>par Irvyn</p>';
-            echo '</div>';
-        echo '</a>';
-        echo '<a class="playlist" href="index.php?action=playlist">';
-            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
-            echo '<div class="container-playlist-bottom-text">';
-                echo '<p>Playlist 2</p>';
-            echo '</div>';
-        echo '</a>';
-        echo '<a class="playlist" href="index.php?action=playlist">';
-            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
-            echo '<div class="container-playlist-bottom-text">';
-                echo '<p>Playlist 3</p>';
-            echo '</div>';
-        echo '</a>';
-    echo '</ul>';
+echo '<div class="container-playlist">';
+
+    
+        $playlists = $_SESSION['playlistUser'];
+
+        echo '<div class="container-playlist-top">';
+            echo '<h2 class="titre-playlist">Playlists</h2>';
+            echo '<button id="btnAddPlaylist" class="btn-creer-playlist">+</button>';
+        echo '</div>';
+
+        echo '<div id="playlistPopup" style="display: none;">';
+
+            echo '<button id="btnClosePopup"><img src="./images/croix.png" alt=""></button>';
+            echo '<form id="playlist-form" action="index.php?action=ajouterPlaylist" method="POST" class="form">';
+                echo '<div class="form-group">';
+                    echo '<label for="name">Nom de la playlist</label>';
+                    echo '<input name="nomPlaylist" type="text" id="playlistName" placeholder="Nom de la playlist">';
+                echo '</div>';
+                echo '<button type="submit" id="btnSavePlaylist">Valider</button>';
+            echo '</form>';
+
+        echo '</div>';
+
+        if ($playlists == null || empty($playlists)){
+            echo '<p class="aucune-playlist">Aucune playlist</p>';
+        } else {
+            for ($i = 0; $i < count($playlists); $i++) {
+                echo '<a class="playlist" href="index.php?action=playlist&idPlaylist='. $playlists[$i]['ID_Playlist'] .'">';
+                    if (trim($playlists[$i]['Nom']) == 'Titres Likés'){
+                        echo '<img src="./images/PLAYLIST/coup-coeur.jpg" alt="">';
+                    } else {
+                        echo '<img src="./images/ALBUMS/default.jpg" alt="">';
+                    }
+                    echo '<div class="container-playlist-bottom-text">';
+                        echo '<p>'. $playlists[$i]['Nom'] .'</p>';
+                        if (trim($playlists[$i]['Nom']) == 'Titres Likés'){
+                            echo '<p>par Spotiut\'O</p>';
+                        } else {
+                            echo '<p>par '. trim($_SESSION['nom']) .'</p>';
+                        }
+                    echo '</div>';
+                echo '</a>';
+            }
+        }
+
+        echo '<script src="./js/AjouterPlaylist.js"></script>';
+   
 echo '</div>';
 
 
@@ -69,4 +91,5 @@ echo '</div>';
 
 echo '</aside>';
 
-?>
+
+
