@@ -76,29 +76,35 @@ class Playlist {
             if (count($this->listeMusique) == 0) {
                 echo '<p class="aucune-musique">Aucune musique dans cette playlist</p>';
             } {
+                $numero = 1;
                 foreach ($this->listeMusique as $musique) {
-                    $nomMusique = $musique->getTitle();
-                    $nomArtiste = $musique->getArtist();
-                    $id = $musique->getId();
+                    $nomMusique = $musique['Titre'];
+                    $nomArtiste = $musique['Nom'];
+                    $nomArtiste = "Nom de l'artiste";
+
+                    $id = $musique['ID_Musique'];
                     $chemin = "./MUSIQUES/" .  trim($nomMusique) . ".mp3";
                     $cheminImage = "./images/MUSIQUES" .  trim($nomMusique) . ".jpg";
                     $cheminParDefaut = "./images/ALBUMS/default.jpg";
-                    ?>
-                    <div class="musique">
-                        <div class="container-img-musique">
-                            <img class="img-musique" src="<?php echo trim($cheminParDefaut) ?>" alt="image musique">
-                        </div>
-                        <div class="container-info-musique">
-                            <p class="nom-musique"><?php echo $nomMusique ?></p>
-                            <p class="nom-artiste"><?php echo $nomArtiste ?></p>
-                        </div>
-                    </div>
-                    <?php
+                    echo '<a class="container-album-unique-artiste" href="#">';
+                            echo '<p class="numero-album">'. $numero .'</p>';
+                            echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
+                            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
+    
+                            echo '<div class="contenu-album">';
+                                echo '<p class="titre-album">'. $nomMusique .'</p>';
+                                echo '<div class="container-contenu-album-bottom">';  
+                                    echo '<span class="genre-album">'. $nomArtiste .'</span>';
+                                echo '</div>';
+                            echo '</div>';
+                    echo '</a>';
+                    $numero++;
                 }
             }
             ?>
         </div>
         <?php
+        echo '<script src="js/lancementMusicPageArtiste.js"></script>';
     }
 }
 ?>

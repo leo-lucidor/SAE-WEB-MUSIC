@@ -98,6 +98,14 @@ class Dataloader {
                 ID_Album INTEGER,
                 FOREIGN KEY (ID_Album) REFERENCES Album(ID_Album)
             )");
+
+            // Table Musique_Playlist
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Musique_Playlist (
+                ID_Musique INTEGER,
+                ID_Playlist INTEGER,
+                FOREIGN KEY (ID_Musique) REFERENCES Musique(ID_Musique),
+                FOREIGN KEY (ID_Playlist) REFERENCES Playlist(ID_Playlist)
+            )");
             
             return true;
 

@@ -187,6 +187,15 @@
         return $result;
     }
 
+    function get_musique_with_idPlaylist(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_Musique, ID_Playlist, Titre, Lien, ID_Album FROM Musique_Playlist NATURAL JOIN Musique WHERE ID_Playlist = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+
 
     
 

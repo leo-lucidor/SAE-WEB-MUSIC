@@ -216,6 +216,33 @@ function insertNote(PDO $pdo, array $noteData): void
     }
 }
 
+function insertMusique(PDO $pdo, array $musiqueData): void
+{
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Musique (Titre, Lien, ID_Album) VALUES (?, ?, ?)");
+        $stmt->bindParam(1, $musiqueData['titre']);
+        $stmt->bindParam(2, $musiqueData['lien']);
+        $stmt->bindParam(3, $musiqueData['album']);
+        $stmt->execute();
+        echo "Musique ajoutée avec succès.";
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la musique : " . $e->getMessage();
+    }
+}
+
+function insertMusiqueIntoPlaylist(PDO $pdo, int $idMusique, int $idPlaylist): void
+{
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+        $stmt->bindParam(1, $idMusique);
+        $stmt->bindParam(2, $idPlaylist);
+        $stmt->execute();
+        echo "Musique ajoutée avec succès.";
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la musique : " . $e->getMessage();
+    }
+}
+
 function getdata(): array
 {
     $file = fopen('extrait.yml', 'r');
@@ -247,6 +274,12 @@ function insertAll(PDO $pdo)
     insertAllAlbum($pdo);
     insertUser($pdo, "JohnDoe", "123", "john.doe@example.com");
     insertUser($pdo, 'erwan', 'erwan', 'erwan.blandeau@gmail.com');
+    insertMusique($pdo, ['titre' => 'une musique tah les fous', 'lien' => 'musique', 'album' => 10575]);
+    insertMusique($pdo, ['titre' => 'une musique tah les fous2', 'lien' => 'musique2', 'album' => 10575]);
+    insertMusique($pdo, ['titre' => 'une musique tah les fous3', 'lien' => 'musique3', 'album' => 10575]);
+    insertMusique($pdo, ['titre' => 'une musique tah les fous4', 'lien' => 'musique4', 'album' => 10575]);
+    insertMusique($pdo, ['titre' => 'une musique tah les fous5', 'lien' => 'musique5', 'album' => 10575]);
+    insertMusiqueIntoPlaylist($pdo, 13, 25);
 }
 
 function deleteAllInBDD(PDO $pdo)
