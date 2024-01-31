@@ -52,10 +52,9 @@ if ($_REQUEST['action'] == 'accueil') {
     $pdo = getPdo();
     
     $idAlbum = $_REQUEST['id'];
-    $preAlbum = $fonctions->getAlbumFromData($idAlbum);
-    // print_r($preAlbum);
+    $preAlbum = get_album_with_id($pdo, $idAlbum);
     require 'src/album.php';
-    $album = new Album($preAlbum[1], $preAlbum[6], $preAlbum[0], $preAlbum[5], $preAlbum[2], $preAlbum[3], $preAlbum[4]);
+    $album = new Album($idAlbum, $preAlbum['Titre'], $preAlbum['ID_Artiste_By'], $preAlbum['Date_de_sortie'], $preAlbum['Genre'], $preAlbum['Pochette'], $preAlbum['ID_Artiste_Parent']);
     $album->afficher();
 } else if ($_REQUEST['action'] == 'artiste') {
     require 'src/BDD/Function/databaseGet.php';

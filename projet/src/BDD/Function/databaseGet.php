@@ -93,7 +93,6 @@
 
     function get_all_genre(PDO $pdo){
         $stmt = $pdo->prepare("SELECT Nom_du_genre, ID_Genre FROM Genre NATURAL JOIN listeGenre GROUP BY ID_Genre ORDER BY COUNT(ID_Genre) DESC");
-        // $stmt = $pdo->prepare("SELECT Nom_du_genre FROM Genre");
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
@@ -119,6 +118,14 @@
                 }
             }
         }
+        return $result;
+    }
+
+    function get_album_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent, ID_Album FROM Album WHERE ID_Album = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
         return $result;
     }
 

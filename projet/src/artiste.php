@@ -58,7 +58,7 @@ class Artiste {
                         $imgAlbum = $album['Pochette'];
                         $imgAlbumCondition = checkFileNameExists($pathAlbum, trim($imgAlbum));
     
-                        echo '<a class="container-album-unique-artiste" href="index.php?action=album&idAlbum='. trim($album['ID_Album']) .'">';
+                        echo '<a class="container-album-unique-artiste" href="index.php?action=album&id='. trim($album['ID_Album']) .'">';
                             $numero = $i+1;
                             echo '<p class="numero-album">'.$numero .'</p>';
                             echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
