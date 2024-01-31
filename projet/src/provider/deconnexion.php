@@ -7,6 +7,6 @@ $pdo = getPdo();
 session_destroy();
 
 // reset la bdd
-returnToBaseBDD($pdo);
+//returnToBaseBDD($pdo);
 
 header('Location: index.php');

@@ -3,27 +3,89 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
+    background-color: #1b191f;
     padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    border-radius: 10px;
+    flex-wrap: wrap;
+    justify-content: end;
 }
 
-#playlistPopup input[type="text"] {
-    width: 200px;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-
-#playlistPopup button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+#btnClosePopup img {
+    width: 20px;
+    height: 20px;
     cursor: pointer;
 }
 
-#playlistPopup button:hover {
-    background-color: #45a049;
+#btnClosePopup {
+    transition: all 0.2s ease;
+    transform: rotate(0deg);
+}
+
+#btnClosePopup:hover {
+    transform: rotate(90deg);
+    transition: all 0.2s ease;
+}
+
+/* Style général pour le formulaire */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: white;
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+.form-group input {
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: #29282d;
+    color: white;
+}
+
+.form-group input,
+form button {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #77138f;
+    border: 2px solid #77138f
+}
+
+form button {
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    background-color: #8c1098;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+form p {
+    color: #92929d;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 12px;
+}
+
+form button:hover {
+    background-color: #77138f;
 }

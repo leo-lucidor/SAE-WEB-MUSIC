@@ -48,8 +48,16 @@ echo '<div class="container-playlist">';
         echo '</div>';
 
         echo '<div id="playlistPopup" style="display: none;">';
-            echo '<input type="text" id="playlistName" placeholder="Nom de la playlist">';
-            echo '<button id="btnSavePlaylist">Enregistrer</button>';
+
+            echo '<button id="btnClosePopup"><img src="./images/croix.png" alt=""></button>';
+            echo '<form id="playlist-form" action="index.php?action=ajouterPlaylist" method="POST" class="form">';
+                echo '<div class="form-group">';
+                    echo '<label for="name">Nom de la playlist</label>';
+                    echo '<input name="nomPlaylist" type="text" id="playlistName" placeholder="Nom de la playlist">';
+                echo '</div>';
+                echo '<button type="submit" id="btnSavePlaylist">Valider</button>';
+            echo '</form>';
+
         echo '</div>';
 
         if ($playlists == null || empty($playlists)){
