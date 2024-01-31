@@ -90,7 +90,7 @@ class Accueil
                         // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                         echo '<p>' . htmlspecialchars($entry[0]) . '</p>';
                         // echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
-                        echo '<a href="index.php?action=album&id='. trim($entry[7]) .'"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
+                        echo '<a href="index.php?action=album&id='. trim($entry[6]) .'"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                         echo '</div>';
                     }
                 } else {
@@ -128,7 +128,7 @@ class Accueil
                             // echo '<p><strong>Année de sortie:</strong> ' . htmlspecialchars($entry[5]) . '</p>';
                             echo '<p>' . htmlspecialchars($entry[0]) . '</p>';
                             // echo '<a class="img-fav" href="#"><img src="images/coeurVide.png" alt="Image favoris"></a>';
-                            echo '<a href="index.php?action=album&id='. trim($entry[7]) .'"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
+                            echo '<a href="index.php?action=album&id='. trim($entry[6]) .'"><img class="img-album" src="' . htmlspecialchars($entry[3]) . '" alt="Image de la pochette"></a>';
                             echo '</div>';
                         }
             
