@@ -161,6 +161,24 @@
         return $result['Nom'];
     }
 
+    function get_nom_artiste_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+
+    // playlist
+
+    function get_playlist_utilisateur(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_Playlist, Nom FROM Playlist WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+?>
 
 
     
