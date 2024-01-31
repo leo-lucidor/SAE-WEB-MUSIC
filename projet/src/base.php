@@ -33,22 +33,18 @@ require 'src/fonctionsExterne.php';
 $fonctions = new Fonctions($data);
 
 if ($_REQUEST != null ){
-    // require 'src/BDD/Function/databaseGet.php';
-    // $idUser = get_id_with_email($pdo, $_SESSION['mail']);
-    // $playlists = get_playlist_utilisateur($pdo, $idUser);
-    // $_REQUEST['playlistUser'] = $playlists;
+    require 'src/BDD/Function/databaseGet.php';
+    $idUser = get_id_with_email($pdo, $_SESSION['mail']);
+    $playlists = get_playlist_utilisateur($pdo, $idUser);
+    $_SESSION['playlistUser'] = $playlists; 
 }
 
 
 
-if ($_REQUEST['action'] == 'accueil') {     
+if ($_REQUEST['action'] == 'accueil') {    
     require 'src/accueil.php';
     $acceuil = new Accueil($data);
     $acceuil->afficher();
-    require 'src/BDD/Function/databaseGet.php';
-    $idUser = get_id_with_email($pdo, $_SESSION['mail']);
-    $playlists = get_playlist_utilisateur($pdo, $idUser);
-    $_SESSION['playlistUser'] = $playlists;
 } else if ($_REQUEST['action'] == 'compte') {
     require 'src/compte.php';
 } else if ($_REQUEST['action'] == 'bibliotheque') {
@@ -60,7 +56,6 @@ if ($_REQUEST['action'] == 'accueil') {
 } else if ($_REQUEST['action'] == 'favoris') {
     require 'src/favoris.php';
 } else if ($_REQUEST['action'] == 'album') {
-    require 'src/BDD/Function/databaseGet.php';
     require 'src/provider/pdo.php';
     $pdo = getPdo();
     
@@ -71,7 +66,6 @@ if ($_REQUEST['action'] == 'accueil') {
     $album = new Album($idAlbum, $preAlbum['Titre'], $nomArtiste, $preAlbum['Date_de_sortie'], $preAlbum['Genre'], $preAlbum['Pochette'], $preAlbum['ID_Artiste_Parent']);
     $album->afficher();
 } else if ($_REQUEST['action'] == 'artiste') {
-    require 'src/BDD/Function/databaseGet.php';
     require 'src/provider/pdo.php';
     $pdo = getPdo();
 
@@ -81,7 +75,6 @@ if ($_REQUEST['action'] == 'accueil') {
     $artiste = new Artiste($idArtiste, $nomArtiste[0]);
     $artiste->afficher();
 } else if ($_REQUEST['action'] == 'editerArtiste') {
-    require 'src/BDD/Function/databaseGet.php';
     require 'src/provider/pdo.php';
     $pdo = getPdo();
 

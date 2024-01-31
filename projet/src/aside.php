@@ -41,37 +41,28 @@ echo '<div class="container-playlist">';
     
         $playlists = $_SESSION['playlistUser'];
 
-        print_r("les playlists : ".$playlists);
-
         echo '<div class="container-playlist-top">';
             echo '<h2 class="titre-playlist">Playlists</h2>';
             echo '<button class="btn-creer-playlist">+</button>';
         echo '</div>';
 
-
-        echo '<ul class="container-playlist-bottom">';
-            echo '<a class="playlist" href="index.php?action=playlist">';
-                echo '<img src="./images/PLAYLIST/coup-coeur.jpg" alt="">';
+        for ($i = 0; $i < count($playlists); $i++) {
+            echo '<a class="playlist" href="index.php?action=playlist&idPlaylist='. $playlists[$i]['ID_Playlist'] .'">';
+                if (trim($playlists[$i]['Nom']) == 'Titres Likés'){
+                    echo '<img src="./images/PLAYLIST/coup-coeur.jpg" alt="">';
+                } else {
+                    echo '<img src="./images/ALBUMS/default.jpg" alt="">';
+                }
                 echo '<div class="container-playlist-bottom-text">';
-                    echo '<p>Coup de coeur</p>';
-                    echo '<p>par Spotiut\'O</p>';
+                    echo '<p>'. $playlists[$i]['Nom'] .'</p>';
+                    if (trim($playlists[$i]['Nom']) == 'Titres Likés'){
+                        echo '<p>par Spotiut\'O</p>';
+                    } else {
+                        echo '<p>par '. trim($_SESSION['nom']) .'</p>';
+                    }
                 echo '</div>';
             echo '</a>';
-            echo '<a class="playlist" href="index.php?action=playlist">';
-                echo '<img src="./images/ALBUMS/default.jpg" alt="">';
-                echo '<div class="container-playlist-bottom-text">';
-                    echo '<p>Playlist 2</p>';
-                    echo '<p>par '. trim($_SESSION['nom']) .'</p>';
-                echo '</div>';
-            echo '</a>';
-            echo '<a class="playlist" href="index.php?action=playlist">';
-                echo '<img src="./images/ALBUMS/default.jpg" alt="">';
-                echo '<div class="container-playlist-bottom-text">';
-                    echo '<p>Playlist 3</p>';
-                    echo '<p>par '. trim($_SESSION['nom']) .'</p>';
-                echo '</div>';
-            echo '</a>';
-        echo '</ul>';
+        }
    
 echo '</div>';
 

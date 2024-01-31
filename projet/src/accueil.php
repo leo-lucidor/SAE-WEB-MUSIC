@@ -21,7 +21,6 @@ class Accueil
     public function afficher()
     {
         require 'src/provider/checkFichierDansDossier.php';
-        require 'src/BDD/Function/databaseGet.php';
         require 'src/provider/pdo.php';
         $pdo = getPdo();
 
