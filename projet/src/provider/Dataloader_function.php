@@ -101,7 +101,7 @@ function insertUser(PDO $pdo,String $userName, String $usePassword, String $user
 function insertAlbum(PDO $pdo,int $idAlbum, String $albumName, int $albumDate, String $albumGenre, String $albumCover, String $ArtistBy, String $albumArtistParent) {
         try {
             $stmt = $pdo->prepare("INSERT INTO Album (ID_Album, Titre, Date_de_sortie, Genre, Pochette, ID_Artiste_By, ID_Artiste_Parent) VALUES (?, ?, ?, ?, ?, (SELECT ID_Artiste FROM Artiste WHERE Nom = ?), (SELECT ID_Artiste FROM Artiste WHERE Nom = ?))");
-            $stmt->bindParam(2, $idAlbum);
+            $stmt->bindParam(1, $idAlbum);
             $stmt->bindParam(2, $albumName);
             $stmt->bindParam(3, $albumDate);
             $stmt->bindParam(4, $albumGenre);
