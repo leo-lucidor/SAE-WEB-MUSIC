@@ -28,8 +28,8 @@ class Accueil
         echo '<div class="container-milieu-bottom">';
 
             // carousel pour les artistes
-            echo '<h2 class="titre-carousel">Artistes que vous pourrez aimez</h2>';
             echo '<div class="carousel-container">';
+                echo '<h2 class="titre-carousel">Artistes que vous pourrez aimez</h2>';
                 echo '<button class="carousel-btn left-btn"><img src="./images/fleche-gauche.png" alt="fleche gauche"></button>';
                 echo '<div class="carousel-wrapper">';
 
@@ -68,8 +68,8 @@ class Accueil
         
 
             // carousel pour les contenus 'concu pour toi'
-            echo '<h2 class="titre-carousel">Conçu pour toi</h2>';
             echo '<div class="carousel-container">';
+                echo '<h2 class="titre-carousel">Conçu pour toi</h2>';
                 echo '<button class="carousel-btn left-btn"><img src="./images/fleche-gauche.png" alt="fleche gauche"></button>';
                 echo '<div class="carousel-wrapper">';
 
@@ -109,9 +109,8 @@ class Accueil
 
                 // Vérifier si des données existent
                 if (!empty($albums)) {
-
-                echo '<h2 class="titre-carousel">Du genre '. trim($genre[0]) .'</h2>';
                 echo '<div class="carousel-container">';
+                    echo '<h2 class="titre-carousel">Du genre '. trim($genre[0]) .'</h2>';
                     echo '<button class="carousel-btn left-btn"><img src="./images/fleche-gauche.png" alt="fleche gauche"></button>';
                     echo '<div class="carousel-wrapper">';
 

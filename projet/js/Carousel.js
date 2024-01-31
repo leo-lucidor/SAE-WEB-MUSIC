@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if ($nbItems < NbAlbum){
             leftBtn.style.display = 'none';
             rightBtn.style.display = 'none';
+            container.style.flexBasis = '20%';
+            container.style.width = 220*$nbItems+'px';
         }
         
         let currentIndex = 0;
