@@ -412,3 +412,8 @@ h2{
 .img-artiste {
     clip-path: circle();
 }
+
+.aucune-playlist {
+    color: #fff;
+    text-align: center;
+}

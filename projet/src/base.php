@@ -29,18 +29,6 @@
 
 <?php
 
-require 'src/fonctionsExterne.php';
-$fonctions = new Fonctions($data);
-
-if ($_REQUEST != null ){
-    require 'src/BDD/Function/databaseGet.php';
-    $idUser = get_id_with_email($pdo, $_SESSION['mail']);
-    $playlists = get_playlist_utilisateur($pdo, $idUser);
-    $_SESSION['playlistUser'] = $playlists; 
-}
-
-
-
 if ($_REQUEST['action'] == 'accueil') {    
     require 'src/accueil.php';
     $acceuil = new Accueil($data);

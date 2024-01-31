@@ -17,6 +17,21 @@ function insertUser(PDO $pdo,String $userName, String $usePassword, String $user
     }
 }  
 
+function insertPlaylistCoupCoeur(PDO $pdo, int $idUt) {
+    try {
+        $titre = "Titres Likés";
+        $stmt = $pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur) VALUES (?, ?)");
+        $stmt->bindParam(1, $titre);
+        $stmt->bindParam(2, $idUt);
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la playlist : " . $e->getMessage();
+        return false;
+    }
+}
+
 
 
 function insertAlbumIntoFavori(PDO $pdo, int $idAlbum, int $idUt) {
