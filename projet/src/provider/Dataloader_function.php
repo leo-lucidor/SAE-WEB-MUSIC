@@ -246,6 +246,8 @@ function insertNote(PDO $pdo,array $noteData): void {
         $stmt->execute();
         $stmt = $pdo->prepare("DELETE FROM Utilisateur");
         $stmt->execute();
+        $stmt = $pdo->prepare("DELETE FROM Musique");
+        $stmt->execute();
         $stmt = $pdo->prepare("DELETE FROM Album");
         $stmt->execute();
         $stmt = $pdo->prepare("DELETE FROM Artiste");
