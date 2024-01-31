@@ -165,6 +165,7 @@ function insertAllAlbum(PDO $pdo){
                     $res .= ", ";
                 }
                 else {
+                    insert_into_listGenre($pdo, $entry[1], get_id_genre($pdo, $genre[$i])["ID_Genre"]);
                     $res .= $genre[$i];
                 }
             }
