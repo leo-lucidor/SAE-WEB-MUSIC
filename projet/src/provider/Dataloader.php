@@ -72,6 +72,14 @@ class Dataloader {
                 Nom_du_genre TEXT UNIQUE
             )");
 
+            // Table listeGenre
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS listeGenre (
+                ID_Genre INTEGER,
+                ID_Album INTEGER,
+                FOREIGN KEY (ID_Genre) REFERENCES Genre(ID_Genre),
+                FOREIGN KEY (ID_Album) REFERENCES Album(ID_Album)
+            )");
+
             // Table Note
             $this->pdo->exec("CREATE TABLE IF NOT EXISTS Note (
                 ID_Note INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -84,8 +92,8 @@ class Dataloader {
             return true;
 
         } catch (PDOException $e) {
-            return false;
             echo "Erreur : " . $e->getMessage();
+            return false;
         }
     }
 
@@ -94,4 +102,3 @@ class Dataloader {
     }
     
 }
-?>

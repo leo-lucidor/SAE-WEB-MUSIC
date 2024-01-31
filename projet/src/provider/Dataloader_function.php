@@ -70,6 +70,14 @@ function insertArtist(PDO $pdo): void {
     }
 }
 
+function get_idGenre_with_nom(PDO $pdo, String $nom): int {
+    $stmt = $pdo->prepare("SELECT ID_Genre FROM Genre WHERE Nom_du_genre =?");
+    $stmt->bindParam(1, $nom);
+    $stmt->execute();
+    $id = $stmt->fetch();
+    return $id["ID_Genre"];
+}
+
 function get_id_utlisateur(PDO $pdo,String $email) {
         $stmt = $pdo->prepare("SELECT ID_Utilisateur FROM Utilisateur WHERE Email = ?");
         $stmt->bindParam(1, $email);
@@ -95,7 +103,17 @@ function insertUser(PDO $pdo,String $userName, String $usePassword, String $user
         }
     }    
 
-
+function insert_into_listGenre(PDO $pdo, int $idAlbum, int $idGenre) {
+        try {
+            $stmt = $pdo->prepare("INSERT INTO listeGenre (ID_Genre,ID_Album) VALUES (?,?)");
+            $stmt->bindParam(1, $idGenre);
+            $stmt->bindParam(2, $idAlbum);
+            $stmt->execute();
+        }
+        catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de la liste de genre : ". $e->getMessage();
+        }
+    }
 
 
 function insertAlbum(PDO $pdo,int $idAlbum, String $albumName, int $albumDate, String $albumGenre, String $albumCover, String $ArtistBy, String $albumArtistParent) {
@@ -143,6 +161,7 @@ function insertAllAlbum(PDO $pdo){
             for ($i = 0; $i < count($genre); $i++){
                 if ($i != count($genre) - 1){
                     $res .= $genre[$i];
+                    insert_into_listGenre($pdo, $entry[1], get_id_genre($pdo, $genre[$i])["ID_Genre"]);
                     $res .= ", ";
                 }
                 else {
@@ -232,10 +251,11 @@ function insertNote(PDO $pdo,array $noteData): void {
         $stmt->execute();
         $stmt = $pdo->prepare("DELETE FROM Genre");
         $stmt->execute();
+        $stmt = $pdo->prepare("DELETE FROM listeGenre");
+        $stmt->execute();
     }
 
     function returnToBaseBDD(PDO $pdo) {
         deleteAllInBDD($pdo);
         insertAll($pdo);
     }
-?>
