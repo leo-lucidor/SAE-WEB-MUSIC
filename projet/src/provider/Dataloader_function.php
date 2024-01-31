@@ -98,15 +98,16 @@ function insertUser(PDO $pdo,String $userName, String $usePassword, String $user
 
 
 
-function insertAlbum(PDO $pdo,String $albumName, int $albumDate, String $albumGenre, String $albumCover, String $ArtistBy, String $albumArtistParent) {
+function insertAlbum(PDO $pdo,int $idAlbum, String $albumName, int $albumDate, String $albumGenre, String $albumCover, String $ArtistBy, String $albumArtistParent) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO Album (Titre, Date_de_sortie, Genre, Pochette, ID_Artiste_By, ID_Artiste_Parent) VALUES (?, ?, ?, ?, (SELECT ID_Artiste FROM Artiste WHERE Nom = ?), (SELECT ID_Artiste FROM Artiste WHERE Nom = ?))");
-            $stmt->bindParam(1, $albumName);
-            $stmt->bindParam(2, $albumDate);
-            $stmt->bindParam(3, $albumGenre);
-            $stmt->bindParam(4, $albumCover);
-            $stmt->bindParam(5, $ArtistBy);
-            $stmt->bindParam(6, $albumArtistParent);
+            $stmt = $pdo->prepare("INSERT INTO Album (ID_Album, Titre, Date_de_sortie, Genre, Pochette, ID_Artiste_By, ID_Artiste_Parent) VALUES (?, ?, ?, ?, ?, (SELECT ID_Artiste FROM Artiste WHERE Nom = ?), (SELECT ID_Artiste FROM Artiste WHERE Nom = ?))");
+            $stmt->bindParam(2, $idAlbum);
+            $stmt->bindParam(2, $albumName);
+            $stmt->bindParam(3, $albumDate);
+            $stmt->bindParam(4, $albumGenre);
+            $stmt->bindParam(5, $albumCover);
+            $stmt->bindParam(6, $ArtistBy);
+            $stmt->bindParam(7, $albumArtistParent);
             $stmt->execute();
         } catch (PDOException $e) {
             echo "Erreur lors de l'ajout de l'album : " . $e->getMessage();
@@ -151,11 +152,12 @@ function insertAllAlbum(PDO $pdo){
             $genre = $res;
 
             $albumGenre = $genre;
+            $albumId = $entry[1];
             $albumCover = $entry[3];
             $albumArtistBy = $entry[0];
             $albumArtistParent = $entry[4];
             array_push($album, $entry[4]);
-            insertAlbum($pdo,$albumName, $albumDate, $albumGenre, $albumCover, $albumArtistBy, $albumArtistParent);
+            insertAlbum($pdo,$albumId, $albumName, $albumDate, $albumGenre, $albumCover, $albumArtistBy, $albumArtistParent);
         }   
         return $album;
 
