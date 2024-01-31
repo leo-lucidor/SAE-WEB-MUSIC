@@ -92,8 +92,8 @@
     }
 
     function get_all_genre(PDO $pdo){
-        // $stmt = $pdo->prepare("SELECT Nom_du_genre FROM Genre WHERE Nom_du_genre IN (SELECT Genre FROM Album GROUP BY Genre ORDER BY COUNT(Genre))");
-        $stmt = $pdo->prepare("SELECT Nom_du_genre FROM Genre");
+        $stmt = $pdo->prepare("SELECT Nom_du_genre, ID_Genre FROM Genre NATURAL JOIN listeGenre GROUP BY ID_Genre ORDER BY COUNT(ID_Genre) DESC");
+        // $stmt = $pdo->prepare("SELECT Nom_du_genre FROM Genre");
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
