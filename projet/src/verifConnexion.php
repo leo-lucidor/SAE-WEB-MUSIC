@@ -14,7 +14,7 @@ echo "test : ".$mdpVerif;
 
 
 if ($mdpVerif != $mdp){
-    header('Location: index.php?erreur=identifiants ou mot de passe incorrect');
+    header('Location: index.php?action=login&erreur=identifiants ou mot de passe incorrect');
 } else {
     $_SESSION['mail'] = $mail;
     $_SESSION['mdp'] = $mdp;
