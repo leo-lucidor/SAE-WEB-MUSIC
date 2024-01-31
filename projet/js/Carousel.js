@@ -25,13 +25,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const leftBtn = container.querySelector('.left-btn');
         const rightBtn = container.querySelector('.right-btn');
         const carouselItems = container.querySelectorAll('.carousel-slide');
+        const title = container.querySelector('.titre-carousel');
 
         $nbItems = carouselItems.length;
         if ($nbItems < NbAlbum){
             leftBtn.style.display = 'none';
             rightBtn.style.display = 'none';
             container.style.flexBasis = '20%';
-            container.style.width = 220*$nbItems+'px';
+            if ($nbItems >= 2){
+                title.style.textAlign = 'center';
+            }
         }
         
         let currentIndex = 0;
