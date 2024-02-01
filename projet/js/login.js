@@ -42,4 +42,21 @@ function togglePasswordVisibilityConnexion() {
 
 toggleIcon.addEventListener('click', togglePasswordVisibilityConnexion);
 
+let passwordInput2 = document.getElementById('password-inscription');
+let toggleIcon2 = document.getElementById('toggle-password-inscription');
+
+function togglePasswordVisibilityInscription() {
+    if (passwordInput2.type === 'password') {
+        console.log('togglePasswordVisibilityInscription: password');
+        passwordInput2.type = 'text';
+        toggleIcon2.textContent = '🙈'; // Change icon or text accordingly
+    } else {
+        console.log('togglePasswordVisibilityInscription: text');
+        passwordInput2.type = 'password';
+        toggleIcon2.textContent = '👁️'; // Change icon or text accordingly
+    }
+}
+
+toggleIcon2.addEventListener('click', togglePasswordVisibilityInscription);
+
 });

@@ -20,8 +20,8 @@
         <p id="subtitle-inscription" class="subtitle">Tu as déjà un compte sur Spotiut'o ?<a id="btn-connexion">Connexion</a></p>
         <form id="connexion-form" action="index.php?action=login" method="POST" class="form">
             <div class="form-group">
-                <label for="email">Adresse e-mail</label>
-                <input type="email" name="email" id="email" placeholder="Entrez votre adresse e-mail">
+                <label for="email_username">Adresse e-mail ou Username</label>
+                <input type="text" name="email_username" id="email_username" placeholder="Entrez votre adresse e-mail ou username">
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
@@ -47,8 +47,8 @@
             <div class="form-group">
                 <label for="password">Mot de passe</label>
                 <div class="password-container">
-                    <input type="password" name="password" id="password" placeholder="Entrez votre mot de passe">
-                    <span id="toggle-password" onclick="togglePasswordVisibility()">
+                    <input type="password" name="password" id="password-inscription" placeholder="Entrez votre mot de passe">
+                    <span id="toggle-password-inscription" onclick="">
                         👁️
                     </span>
                 </div>
@@ -62,6 +62,5 @@
         }
         ?>
     </main>
-    <script src="./js/login.js"></script>
     <script src="./js/login.js"></script>
 </body>
