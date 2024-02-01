@@ -235,18 +235,4 @@
         }
     }
 
-    function deleteMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
-        try {
-            $stmt = $pdo->prepare("DELETE FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
-            $stmt->bindParam(1, $idMusique);
-            $stmt->bindParam(2, $idPlaylist);
-            $stmt->execute();
-
-            return true;
-        } catch (PDOException $e) {
-            echo "Erreur lors de la suppression de la musique dans la playlist : " . $e->getMessage();
-            return false;
-        }
-    }
-
 // execption

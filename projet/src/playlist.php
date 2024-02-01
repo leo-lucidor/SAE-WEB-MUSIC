@@ -68,8 +68,8 @@ class Playlist {
                 } else {
                     echo '<p class="titre-playlist">'. trim($this->nom) .'<span class="nom-user">Par '. trim($nomUser) .'</span></p>';
                 }
+            echo '<a class="btn-supprimer-top" href="index.php?action=deletePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une playlist"></a>';
             ?>
-            <a class="btn-ajouter" href="#"><img src="./images/ajouter.png" alt="ajouter une musique a la playlist"></a>
         </div>
         <div class="container-musique">
             <?php
@@ -82,7 +82,7 @@ class Playlist {
                     $nomArtiste = $musique['Nom'];
                     $nomArtiste = "Nom de l'artiste";
 
-                    $id = $musique['ID_Musique'];
+                    $idMusique = $musique['ID_Musique'];
                     $chemin = "./MUSIQUES/" .  trim($nomMusique) . ".mp3";
                     $cheminImage = "./images/MUSIQUES" .  trim($nomMusique) . ".jpg";
                     $cheminParDefaut = "./images/ALBUMS/default.jpg";
@@ -97,7 +97,7 @@ class Playlist {
                                     echo '<span class="genre-album">'. $nomArtiste .'</span>';
                                 echo '</div>';
                             echo '</div>';
-                            echo '<a class="btn-supprimer" href="#"><img src="./images/croix.png" alt="supprimer une musique de la playlist"></a>';
+                            echo '<a class="btn-supprimer" href="index.php?action=deleteMusiquePlaylist&idMusique='. trim($idMusique) .'&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une musique de la playlist"></a>';
                     echo '</div>';
                     $numero++;
                 }
