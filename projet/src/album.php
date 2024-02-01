@@ -76,10 +76,10 @@ class Album
                     echo '<p class="aucun-album">Aucune musique</p>';
                 } else {
                     for ($i=0; $i < count($musiques); $i++) { 
-                        $album = $musiques[$i];
+                        $musique = $musiques[$i];
     
                         $pathAlbum = './images/musiques/';
-                        $imgAlbum = $album['Pochette'];
+                        $imgAlbum = $musique['Pochette'];
     
                         echo '<div class="container-album-unique-artiste">';
                             $numero = $i+1;
@@ -87,16 +87,17 @@ class Album
                             echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
                             echo '<img src="./images/ALBUMS/default.jpg" alt="">';
                             echo '<div class="contenu-album">';
-                                echo '<p class="titre-album">'.$album['Titre'].'</p>';
+                                echo '<p class="titre-album">'.$musique['Titre'].'</p>';
                             echo '</div>';
                             echo '<button id="btn-ajouter-a-playlist" class="btn-ajouter-a-playlist"><img class="ajouter-music" src="./images/ajouter.png" alt="ajouter"></button>';
                             echo '<div class="container-ajouter">';
-                                echo '<p>Ajouter à une playlist</p>';
+                                echo '<button class="btn-close"><img src="./images/croix.png" alt="close"></button>';
                                 echo '<div class="container-ajouter-playlist">';
+                                echo '<p>Ajouter à une playlist</p>';
                                     $playlists = get_playlist_with_id_utilisateur(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']));
                                     for ($j=0; $j < count($playlists); $j++) { 
                                         $playlist = $playlists[$j];
-                                        echo '<a href="#">'. $playlist['Nom'] .'</a>';
+                                        echo '<a class="lien-playlist" href="index.php?action=ajouterMusicPlaylist&idMusique='. trim($musique['ID_Musique']) .'&idPlaylist='. trim($playlist['ID_Playlist']) .'&idAlbum='. trim($this->id) .'">'. $playlist['Nom'] .'</a>';
                                     }
                                 echo '</div>';
                             echo '</div>';

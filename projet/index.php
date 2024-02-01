@@ -56,6 +56,8 @@ if ($_REQUEST == null) {
     require 'src/updateArtiste.php';
 } else if ($_REQUEST['action'] == 'ajouterPlaylist'){
     require 'src/ajouterPlaylist.php';
+} else if ($_REQUEST['action'] == 'ajouterMusicPlaylist') {
+    require 'src/insertMusiquePlaylist.php';
 } else {
     require 'src/BDD/Function/databaseGet.php';
     $idUser = get_id_with_email($pdo, $_SESSION['mail']);
