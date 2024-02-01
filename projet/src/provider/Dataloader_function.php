@@ -8,7 +8,7 @@ function get_All_genre_in_yml(array $data)
     foreach ($data as $entry) {
         if (!in_array($entry[2], $genre)) {
             $list = $entry[2];
-            $list = separer_genre($list);
+            $list = separer($list);
             foreach ($list as $value) {
                 if (!in_array($value, $genre)) {
                     array_push($genre, $value);
@@ -146,13 +146,13 @@ function get_id_genre(PDO $pdo, $genre)
     return $id;
 }
 
-function separer_genre($genre)
+function separer($string)
 {
-    $genre = str_replace(["[", "]"], "", $genre);
+    $string = str_replace(["[", "]"], "", $string);
     // suppremer les espaces
-    $genre = str_replace(" ", "", $genre);
-    $genre = explode(",", $genre);
-    return $genre;
+    $string = str_replace(" ", "", $string);
+    $string = explode(",", $string);
+    return $string;
 }
 
 function insertAllAlbum(PDO $pdo)
@@ -160,10 +160,10 @@ function insertAllAlbum(PDO $pdo)
     $data = getdata();
     $album = [];
     foreach ($data as $entry) {
-        $albumName = $entry[6];
+        $albumName = str_replace(" ", "", $entry[6]);
         $date = $entry[5];
         $albumDate = (int) $entry[5];
-        $genre = separer_genre($entry[2]);
+        $genre = separer($entry[2]);
         $res = "";
 
         for ($i = 0; $i < count($genre); $i++) {
@@ -280,6 +280,7 @@ function insertAll(PDO $pdo)
     insertMusique($pdo, ['titre' => 'une musique tah les fous4', 'lien' => 'musique4', 'album' => 10575]);
     insertMusique($pdo, ['titre' => 'une musique tah les fous5', 'lien' => 'musique5', 'album' => 10575]);
     insertMusiqueIntoPlaylist($pdo, 13, 25);
+    insertMusique1($pdo);
 }
 
 function deleteAllInBDD(PDO $pdo)
@@ -307,3 +308,77 @@ function returnToBaseBDD(PDO $pdo)
     deleteAllInBDD($pdo);
     insertAll($pdo);
 }
+
+function parcourirDossierMusique(){
+    $chemin_dossier = 'MUSIQUES';
+    $res = [];
+
+    // Obtenez la liste des dossiers dans le dossier 'MUSIQUES'
+    $dossiers = array_filter(scandir($chemin_dossier), 'is_dir');
+
+    foreach ($dossiers as $dossier) {
+        // Excluez les entrées spéciales '.' et '..'
+        if ($dossier == '.' && $dossier != '..') {
+            $listMusiqueInDossier = [];
+
+            // Obtenez la liste des fichiers dans chaque dossier
+            $elements = scandir($chemin_dossier . '/' . $dossier);
+            foreach ($elements as $element) {
+                if ($element != '.' && $element != '..') {
+                    $chemin_element = $chemin_dossier . '/' . $dossier . '/' . $element;
+
+                    if (is_dir($chemin_element)) {
+                        // Si c'est un dossier, parcourez ses fichiers
+                        $listSousDossier = [];
+                        foreach (scandir($chemin_element) as $fichier) {
+                            if ($fichier != '.' && $fichier != '..') {
+                                $nomFichier = $fichier;
+                                array_push($listSousDossier, $nomFichier);
+                            }
+                        }
+                        // Ajoutez la liste des fichiers dans le tableau de résultat
+                        $listMusiqueInDossier[$element] = $listSousDossier;
+                    } else {
+                        // Si c'est un fichier, ajoutez-le directement à la liste
+                        $listMusiqueInDossier[] = $element;
+                    }
+                }
+            }
+            // Ajoutez la liste des fichiers/dossiers dans le tableau de résultat
+            $res[$dossier] = $listMusiqueInDossier;
+        }
+    }
+
+    return $res;
+}
+
+function get_idAlbum_with_titre($pdo, $titre){
+    $titre = str_replace(" ", "", $titre);
+    $titre = $titre."\n";
+    $stmt = $pdo->prepare("SELECT ID_Album FROM Album WHERE Titre = ?");
+    $stmt->bindParam(1, $titre);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result['ID_Album'];
+}
+
+function insertMusique1 ($pdo){
+
+    $liste = parcourirDossierMusique();
+
+    foreach ($liste["."] as $nomDossier => $contenuDossier){
+
+        $idAlbum = get_idAlbum_with_titre($pdo,$nomDossier);
+
+        foreach ($contenuDossier as $musique){
+            $chemin = "MUSIQUES/".$nomDossier."/".$musique;
+            $stmt = $pdo->prepare("INSERT INTO Musique (Titre, Lien, ID_Album) VALUES (?, ?, ?)");
+            $musique = str_replace(".mp3", "", $musique);
+            $stmt->bindParam(1, $musique);
+            $stmt->bindParam(2, $chemin);
+            $stmt->bindParam(3, $idAlbum);
+            $stmt->execute();
+        }
+    }
+}
+
