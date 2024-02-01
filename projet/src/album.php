@@ -60,20 +60,54 @@ class Album
 
         echo '<div class="container-btn-album">';
             echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
+            echo '<p>' . trim($this->title) . ', de '. trim($this->artiste) . ', '. $this->year .' <span>'. $this->genre .'</span></p>';
             echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
         echo '</div>';
 
         echo '<div class="container-milieu-album">';
-            echo '<div class="container-milieu-bottom-left">';
-                echo '<img src="images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
+            echo '<div class="container-milieu-bottom-left">';                
+                echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
             echo '</div>';
             echo '<div class="container-milieu-bottom-right">';
-                echo '<p>Album : ' . $this->title . '</p>';
-                echo '<p>Artiste : '. $this->artiste . '</p>';
-                echo '<p>Année : '. $this->year . '</p>';
-                echo '<p>Genre : '. $this->genre. '</p>';
+                echo '<p>Les musiques de cet album</p>';
+                echo '<div class="container-album-artiste">';
+                $musiques = get_musique_in_album(getPdo(), $this->id);
+                if (count($musiques) == 0){
+                    echo '<p class="aucun-album">Aucune musique</p>';
+                } else {
+                    for ($i=0; $i < count($musiques); $i++) { 
+                        $album = $musiques[$i];
+    
+                        $pathAlbum = './images/musiques/';
+                        $imgAlbum = $album['Pochette'];
+    
+                        echo '<div class="container-album-unique-artiste">';
+                            $numero = $i+1;
+                            echo '<p class="numero-album">'.$numero .'</p>';
+                            echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
+                            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
+                            echo '<div class="contenu-album">';
+                                echo '<p class="titre-album">'.$album['Titre'].'</p>';
+                            echo '</div>';
+                            echo '<button id="btn-ajouter-a-playlist" class="btn-ajouter-a-playlist"><img class="ajouter-music" src="./images/ajouter.png" alt="ajouter"></button>';
+                            echo '<div class="container-ajouter">';
+                                echo '<p>Ajouter à une playlist</p>';
+                                echo '<div class="container-ajouter-playlist">';
+                                    $playlists = get_playlist_with_id_utilisateur(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']));
+                                    for ($j=0; $j < count($playlists); $j++) { 
+                                        $playlist = $playlists[$j];
+                                        echo '<a href="#">'. $playlist['Nom'] .'</a>';
+                                    }
+                                echo '</div>';
+                            echo '</div>';
+                        echo '</div>';
+                    }   
+                }
+                echo '</div>';
             echo '</div>';
         echo '</div>';
+        echo '<script src="js/lancementMusicPageArtiste.js"></script>';
+        echo '<script src="js/AjouterMusiqueDansPlaylist.js"></script>';
     }
 }
 ?>

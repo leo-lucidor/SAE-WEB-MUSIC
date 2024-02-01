@@ -20,8 +20,7 @@
 .container-milieu-bottom-right {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: justify;
     gap: 2vh;
     flex-basis: 50%;
 }
@@ -49,9 +48,105 @@
     width: 100%;
 }
 
+.container-btn-album p {
+    font-size: 1.7vw;
+    color: #fff;
+    font-weight: bold;
+}
+
+.container-btn-album span {
+    font-size: 1.1vw;
+    font-weight: 300;
+    color: #6b6b6b;
+
+}
+
 .btn-retour img, .btn-editer img {
     width: 2vw;
     height: 2vw;
     border-radius: 0;
 }
 
+/* musiques */
+.container-album-artiste {
+    background-color: #1b191f;
+    padding: 10px;
+    border-radius: 10px;
+    overflow-y: auto;
+    max-height: 50vh;
+    max-width: 30vw;
+}
+
+.container-album-unique-artiste {
+    margin: 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    background-color: #0f0d13;
+    padding: 10px;
+    border-radius: 10px;
+    transition: 0.1s;
+}
+
+.container-album-unique-artiste:hover {
+    background-color: #0a090f;
+    transition: 0.1s;
+}
+
+.container-album-unique-artiste img {
+    width: 50px;
+    height: 50px;
+}
+
+.container-album-unique-artiste p {
+    font-size: 1vw;
+    color: #fff;
+    margin-left: 2vw;
+    margin-right: 2vw;
+}
+
+.container-contenu-album-bottom {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.genre-album {
+    margin-left: 2vw;
+}
+
+.date-album, .genre-album {
+    font-size: 0.8vw !important;
+    color: #6b6b6b !important;
+    flex-basis: 40%;
+    /* flex-grow: 1; */
+}
+
+/* lancer la musique */
+
+.lancer-music {
+    display: none;
+    margin-left: 1.53vw;
+    margin-right: 1.53vw;
+    z-index: 100;
+}
+
+.lancer-music img {
+    width: 1.5vw;
+    height: 1.5vw;
+}
+
+.ajouter-music {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+.btn-ajouter-a-playlist {
+    z-index: 100;
+}
+
+.container-ajouter {
+    display: none;
+}
