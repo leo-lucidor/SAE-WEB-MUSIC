@@ -245,6 +245,13 @@ h2{
     color: #fff;
 }
 
+.playlist p {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 7.5vw;
+    text-overflow: ellipsis;
+}
+
 .playlist img {
     width: 60px;
     height: 60px;

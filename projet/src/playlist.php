@@ -86,7 +86,7 @@ class Playlist {
                     $chemin = "./MUSIQUES/" .  trim($nomMusique) . ".mp3";
                     $cheminImage = "./images/MUSIQUES" .  trim($nomMusique) . ".jpg";
                     $cheminParDefaut = "./images/ALBUMS/default.jpg";
-                    echo '<a class="container-album-unique-artiste" href="#">';
+                    echo '<div class="container-album-unique-artiste">';
                             echo '<p class="numero-album">'. $numero .'</p>';
                             echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
                             echo '<img src="./images/ALBUMS/default.jpg" alt="">';
@@ -97,7 +97,8 @@ class Playlist {
                                     echo '<span class="genre-album">'. $nomArtiste .'</span>';
                                 echo '</div>';
                             echo '</div>';
-                    echo '</a>';
+                            echo '<a class="btn-supprimer" href="#"><img src="./images/croix.png" alt="supprimer une musique de la playlist"></a>';
+                    echo '</div>';
                     $numero++;
                 }
             }

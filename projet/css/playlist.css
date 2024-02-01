@@ -120,3 +120,15 @@
     width: 1.5vw;
     height: 1.5vw;
 }
+
+.btn-supprimer {
+    flex-grow: 1;
+    text-align: end;
+    margin-right: 20px;
+}
+
+.btn-supprimer img {
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+}
