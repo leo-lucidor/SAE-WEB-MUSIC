@@ -160,7 +160,9 @@ function insertAllAlbum(PDO $pdo)
     $data = getdata();
     $album = [];
     foreach ($data as $entry) {
-        $albumName = str_replace(" ", "", $entry[6]);
+
+        // enleve le premier caractere de AlbumName
+        $albumName = substr($entry[6], 1);
         $date = $entry[5];
         $albumDate = (int) $entry[5];
         $genre = separer($entry[2]);
@@ -274,11 +276,6 @@ function insertAll(PDO $pdo)
     insertAllAlbum($pdo);
     insertUser($pdo, "JohnDoe", "123", "john.doe@example.com");
     insertUser($pdo, 'erwan', 'erwan', 'erwan.blandeau@gmail.com');
-    insertMusique($pdo, ['titre' => 'une musique tah les fous', 'lien' => 'musique', 'album' => 10575]);
-    insertMusique($pdo, ['titre' => 'une musique tah les fous2', 'lien' => 'musique2', 'album' => 10575]);
-    insertMusique($pdo, ['titre' => 'une musique tah les fous3', 'lien' => 'musique3', 'album' => 10575]);
-    insertMusique($pdo, ['titre' => 'une musique tah les fous4', 'lien' => 'musique4', 'album' => 10575]);
-    insertMusique($pdo, ['titre' => 'une musique tah les fous5', 'lien' => 'musique5', 'album' => 10575]);
     insertMusiqueIntoPlaylist($pdo, 13, 25);
     insertMusique1($pdo);
 }
@@ -353,8 +350,7 @@ function parcourirDossierMusique(){
 }
 
 function get_idAlbum_with_titre($pdo, $titre){
-    $titre = str_replace(" ", "", $titre);
-    $titre = $titre."\n";
+    $titre = $titre."\r\n";
     $stmt = $pdo->prepare("SELECT ID_Album FROM Album WHERE Titre = ?");
     $stmt->bindParam(1, $titre);
     $stmt->execute();
@@ -367,9 +363,7 @@ function insertMusique1 ($pdo){
     $liste = parcourirDossierMusique();
 
     foreach ($liste["."] as $nomDossier => $contenuDossier){
-
         $idAlbum = get_idAlbum_with_titre($pdo,$nomDossier);
-
         foreach ($contenuDossier as $musique){
             $chemin = "MUSIQUES/".$nomDossier."/".$musique;
             $stmt = $pdo->prepare("INSERT INTO Musique (Titre, Lien, ID_Album) VALUES (?, ?, ?)");
@@ -381,4 +375,3 @@ function insertMusique1 ($pdo){
         }
     }
 }
-
