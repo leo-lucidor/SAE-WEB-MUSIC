@@ -90,13 +90,14 @@ function get_id_utlisateur(PDO $pdo, String $email)
     return $id["ID_Utilisateur"];
 }
 
-function insertUser(PDO $pdo, String $userName, String $usePassword, String $userEmail)
+function insertUser(PDO $pdo, String $userName, String $usePassword, String $userEmail, int $idType)
 {
     try {
-        $stmt = $pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email) VALUES (?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email, ID_types) VALUES (?, ?, ?, ?)");
         $stmt->bindParam(1, $userName);
         $stmt->bindParam(2, $usePassword);
         $stmt->bindParam(3, $userEmail);
+        $stmt->bindParam(4, $idType);
         $stmt->execute();
 
         $idUt = get_id_utlisateur($pdo, $userEmail);
@@ -191,6 +192,18 @@ function insertAllAlbum(PDO $pdo)
     return $album;
 
 }
+
+function insertTypesUtilisateur( PDO $pdo, String $typeUtilisateur): void
+{
+    try {
+        $stmt = $pdo->prepare("INSERT INTO typesUtilisateur (Nom_du_type) VALUES (?)");
+        $stmt->bindParam(1, $typeUtilisateur);
+        $stmt->execute();
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout du type d'utilisateur : " . $e->getMessage();
+    }
+}
+
 function insertPlaylist(PDO $pdo, String $nom, int $utilisateur): void
 {
     try {
@@ -274,8 +287,10 @@ function insertAll(PDO $pdo)
     insertGenre($pdo);
     insertArtist($pdo);
     insertAllAlbum($pdo);
-    insertUser($pdo, "JohnDoe", "123", "john.doe@example.com");
-    insertUser($pdo, 'erwan', 'erwan', 'erwan.blandeau@gmail.com');
+    insertTypesUtilisateur($pdo, "Admin");
+    insertTypesUtilisateur($pdo, "Utilisateur");
+    insertUser($pdo, "JohnDoe", "123", "admin@gmail.com", 1);
+    insertUser($pdo, 'erwan', 'erwan', 'erwan.blandeau@gmail.com',2);
     insertMusiqueIntoPlaylist($pdo, 13, 25);
     insertMusique1($pdo);
 }
@@ -285,6 +300,8 @@ function deleteAllInBDD(PDO $pdo)
     $stmt = $pdo->prepare("DELETE FROM Note");
     $stmt->execute();
     $stmt = $pdo->prepare("DELETE FROM Playlist");
+    $stmt->execute();
+    $stmt = $pdo->prepare("DELETE FROM typesUtilisateur");
     $stmt->execute();
     $stmt = $pdo->prepare("DELETE FROM Utilisateur");
     $stmt->execute();
