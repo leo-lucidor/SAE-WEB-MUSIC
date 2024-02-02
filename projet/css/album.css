@@ -82,12 +82,14 @@
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     background-color: #0f0d13;
     padding: 10px;
     border-radius: 10px;
     transition: 0.1s;
 }
+
 
 .container-album-unique-artiste:hover {
     background-color: #0a090f;
@@ -111,6 +113,11 @@
     flex-wrap: nowrap;
     align-items: center;
     gap: 10px;
+}
+
+.contenu-album {
+    flex-basis: 80%;
+    flex-grow: 1;
 }
 
 .genre-album {
