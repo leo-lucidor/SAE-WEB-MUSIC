@@ -156,11 +156,11 @@
 
 .container-ajouter {
     display: none;
-    position: absolute;
+    /* position: absolute; */
     background-color: #1b191f;
     border-radius: 10px;
     padding: 10px;
-    transform: translate(100%, -10%);
+    /* transform: translate(100%, -10%); */
     z-index: 1000;
     flex-wrap: wrap;
     justify-content: center;
