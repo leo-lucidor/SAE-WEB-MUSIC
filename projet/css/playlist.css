@@ -11,6 +11,20 @@
     margin-right: 5vw;
 }
 
+.container-btn-playlist-spotiuto {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    /* placement */
+    flex-basis: 100%;
+    margin-top: 2vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    gap: 25vw;
+}
+
 .btn-retour img {
     width: 2vw;
     height: 2vw;
@@ -32,7 +46,7 @@
     transition: 0.3s;
 }
 
-.container-btn-playlist > .titre-playlist {
+.container-btn-playlist > .titre-playlist, .container-btn-playlist-spotiuto > .titre-playlist {
     font-size: 2vw;
     font-weight: bold;
     color: #fff;
@@ -89,7 +103,7 @@
     height: 70px;
 }
 
-.container-album-unique-artiste p {
+.container-album-unique-artiste p{
     font-size: 0.9vw;
     color: #fff;
     margin-left: 2vw;

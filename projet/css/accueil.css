@@ -241,14 +241,29 @@ h2{
     align-items: center;
     gap: 1em;
     flex-basis: 10%;
-    margin: 1em;
+    margin: 10px;
+    padding: 10px;
     color: #fff;
+    transition: .2s;
+}
+
+.playlist:hover {
+    cursor: pointer;
+    background-color: #0f0d13;
+    border-radius: 10px;
+    transition: .2s;
+}
+
+.playlist-actif {
+    background-color: #0f0d13;
+    border-radius: 10px;
+    /* cursor: not-allowed; */
 }
 
 .playlist p {
     white-space: nowrap;
     overflow: hidden;
-    max-width: 7.5vw;
+    max-width: 7vw;
     text-overflow: ellipsis;
 }
 

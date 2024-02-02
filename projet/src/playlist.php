@@ -59,18 +59,23 @@ class Playlist {
         $pdo = getPdo();
         ?>
         <link rel="stylesheet" href="./css/playlist.css">
-        <div class="container-btn-playlist">
-            <a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>
-            <?php
-                $nomUser = get_pseudo_with_id($pdo, $this->idUtilisateur);
-                if (trim($this->nom) == "Titres Likés") {
+       
+        <?php
+            $nomUser = get_pseudo_with_id($pdo, $this->idUtilisateur);
+            if (trim($this->nom) == "Titres Likés") {
+                echo '<div class="container-btn-playlist-spotiuto">';
+                    echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
                     echo '<p class="titre-playlist">'. trim($this->nom) .'<span class="nom-user">Par Spotiut\'O</span></p>';
-                } else {
+                echo '</div>';
+            } else {
+                echo '<div class="container-btn-playlist">';
+                    echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
                     echo '<p class="titre-playlist">'. trim($this->nom) .'<span class="nom-user">Par '. trim($nomUser) .'</span></p>';
-                }
-            echo '<a class="btn-supprimer-top" href="index.php?action=deletePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une playlist"></a>';
-            ?>
-        </div>
+                    echo '<a class="btn-supprimer-top" href="index.php?action=deletePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une playlist"></a>';
+                echo '</div>';
+            }
+        ?>
+
         <div class="container-musique">
             <?php
             if (count($this->listeMusique) == 0) {
