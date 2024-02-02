@@ -97,7 +97,9 @@ class Album
                                     $playlists = get_playlist_with_id_utilisateur(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']));
                                     for ($j=0; $j < count($playlists); $j++) { 
                                         $playlist = $playlists[$j];
-                                        echo '<a class="lien-playlist" href="index.php?action=ajouterMusicPlaylist&idMusique='. trim($musique['ID_Musique']) .'&idPlaylist='. trim($playlist['ID_Playlist']) .'&idAlbum='. trim($this->id) .'">'. $playlist['Nom'] .'</a>';
+                                        if ($playlist['Nom'] != "Titres Likés") {
+                                            echo '<a class="lien-playlist" href="index.php?action=ajouterMusicPlaylist&idMusique='. trim($musique['ID_Musique']) .'&idPlaylist='. trim($playlist['ID_Playlist']) .'&idAlbum='. trim($this->id) .'">'. $playlist['Nom'] .'</a>';
+                                        }
                                     }
                                 echo '</div>';
                             echo '</div>';
