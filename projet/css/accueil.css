@@ -73,6 +73,7 @@ body {
 .container-left {
     background-color: #1b191f;
     flex-basis: 15%;
+    height: 100vh;
 }
 
 .container-milieu {
@@ -82,7 +83,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    align-content: center;
+    align-content: start;
 }
 
 /* top */
@@ -95,7 +96,6 @@ body {
     justify-content: space-between;
     flex-basis: 100%;
     margin-top: 1em;
-    margin-bottom: 2em; 
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 1em;
@@ -241,8 +241,8 @@ h2{
     align-items: center;
     gap: 1em;
     flex-basis: 10%;
-    margin: 10px;
-    padding: 10px;
+    margin: 5px;
+    padding: 5px;
     color: #fff;
     transition: .2s;
 }
@@ -271,6 +271,11 @@ h2{
     width: 60px;
     height: 60px;
     border-radius: 10px;
+}
+
+.container-playlist {
+    max-height: 75vh;
+    overflow-y: auto;
 }
 
 .container-playlist-bottom-text p:nth-child(2) {
