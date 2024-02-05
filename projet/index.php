@@ -56,7 +56,14 @@ if ($_REQUEST == null) {
     require 'src/updateArtiste.php';
 } else if ($_REQUEST['action'] == 'ajouterPlaylist'){
     require 'src/ajouterPlaylist.php';
-} else {
+} else if ($_REQUEST['action'] == 'ajouterMusicPlaylist') {
+    require 'src/insertMusiquePlaylist.php';
+} else if ($_REQUEST['action'] == 'deleteMusiquePlaylist') {
+    require 'src/deleteMusiquePlaylist.php';
+} else if ($_REQUEST['action'] == 'deletePlaylist') {
+    require 'src/deletePlaylist.php';
+}
+else {
     require 'src/BDD/Function/databaseGet.php';
     $idUser = get_id_with_email($pdo, $_SESSION['mail']);
     $_SESSION['playlistUser'] = get_playlist_utilisateur($pdo, $idUser);

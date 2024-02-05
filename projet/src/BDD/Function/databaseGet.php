@@ -195,7 +195,52 @@
         return $result;
     }
 
+    function get_musique_with_idPlaylist(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_Musique, ID_Playlist, Titre, Lien, ID_Album FROM Musique_Playlist NATURAL JOIN Musique WHERE ID_Playlist = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 
-    
+    function get_musique_in_album(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique WHERE ID_Album = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function get_playlist(PDO $pdo){
+        $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function get_playlist_with_id_utilisateur(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
 
 
+// execption
+
+    function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
+        try {
+            $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+            $stmt->bindParam(1, $idMusique);
+            $stmt->bindParam(2, $idPlaylist);
+            $stmt->execute();
+
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
+            return false;
+        }
+    }
+
+// execption

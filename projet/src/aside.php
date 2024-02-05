@@ -64,7 +64,11 @@ echo '<div class="container-playlist">';
             echo '<p class="aucune-playlist">Aucune playlist</p>';
         } else {
             for ($i = 0; $i < count($playlists); $i++) {
-                echo '<a class="playlist" href="index.php?action=playlist&idPlaylist='. $playlists[$i]['ID_Playlist'] .'">';
+                if ($_REQUEST['idPlaylist'] == $playlists[$i]['ID_Playlist']){
+                    echo '<a class="playlist playlist-actif" href="#">';
+                } else {
+                    echo '<a class="playlist" href="index.php?action=playlist&idPlaylist='. $playlists[$i]['ID_Playlist'] .'">';
+                }
                     if (trim($playlists[$i]['Nom']) == 'Titres Likés'){
                         echo '<img src="./images/PLAYLIST/coup-coeur.jpg" alt="">';
                     } else {

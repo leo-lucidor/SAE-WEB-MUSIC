@@ -77,8 +77,9 @@ if ($_REQUEST['action'] == 'accueil') {
 
     $idPlaylist = $_REQUEST['idPlaylist'];
     $playlist = get_playlist_with_id($pdo, $idPlaylist);
+    $listeMusique = get_musique_with_idPlaylist($pdo, $idPlaylist);
     require 'src/playlist.php';
-    $playlist = new Playlist($idPlaylist, $playlist['ID_Utilisateur'], $playlist['Nom'], []);
+    $playlist = new Playlist($idPlaylist, $playlist['ID_Utilisateur'], $playlist['Nom'], $listeMusique);
     $playlist->afficher();
 } else {
     require 'src/404.php';

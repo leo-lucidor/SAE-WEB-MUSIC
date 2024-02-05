@@ -32,4 +32,37 @@ function deleteArtiste(PDO $pdo, int $idArtiste) {
         return false;
     }
 }
+
+function deletePlaylist(PDO $pdo, int $idPlaylist) {
+    try {
+        // delete dans Musique_Playlist
+        $stmt = $pdo->prepare("DELETE FROM Musique_Playlist WHERE ID_Playlist = ?");
+        $stmt->bindParam(1, $idPlaylist);
+        $stmt->execute();
+
+        $stmt = $pdo->prepare("DELETE FROM Playlist WHERE ID_Playlist = ?");
+        $stmt->bindParam(1, $idPlaylist);
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de la suppression de la playlist : " . $e->getMessage();
+        return false;
+    }
+}
+
+function deleteMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
+    try {
+        $stmt = $pdo->prepare("DELETE FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
+        $stmt->bindParam(1, $idMusique);
+        $stmt->bindParam(2, $idPlaylist);
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de la suppression de la musique dans la playlist : " . $e->getMessage();
+        return false;
+    }
+}
+
 ?>

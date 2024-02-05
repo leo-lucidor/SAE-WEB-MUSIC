@@ -42,12 +42,21 @@ class Dataloader {
                 FOREIGN KEY (ID_Artiste_Parent) REFERENCES Artiste(ID_Artiste)
             )");
 
+            // Table typesUtilisateur
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS typesUtilisateur (
+                ID_typesUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT,
+                Nom_du_type TEXT UNIQUE
+            )");
+
+
             // Table Utilisateur
             $this->pdo->exec("CREATE TABLE IF NOT EXISTS Utilisateur (
                 ID_Utilisateur INTEGER PRIMARY KEY AUTOINCREMENT,
                 Nom_utilisateur TEXT UNIQUE,
                 Mot_de_passe TEXT,
-                Email TEXT UNIQUE
+                Email TEXT UNIQUE, 
+                ID_types INTEGER,
+                FOREIGN KEY (ID_types) REFERENCES typesUtilisateur(ID_typesUtilisateur)
             )");
 
             // Table Album_Playlist
@@ -97,6 +106,14 @@ class Dataloader {
                 Lien Text,
                 ID_Album INTEGER,
                 FOREIGN KEY (ID_Album) REFERENCES Album(ID_Album)
+            )");
+
+            // Table Musique_Playlist
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Musique_Playlist (
+                ID_Musique INTEGER,
+                ID_Playlist INTEGER,
+                FOREIGN KEY (ID_Musique) REFERENCES Musique(ID_Musique),
+                FOREIGN KEY (ID_Playlist) REFERENCES Playlist(ID_Playlist)
             )");
             
             return true;
