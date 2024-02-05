@@ -160,4 +160,6 @@ function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
         echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
         return false;
     }
+
+    
 }

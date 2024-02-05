@@ -11,7 +11,6 @@
             echo 'modif user';
         } catch (PDOException $e) {
             echo 'erreur update user';
-            header('Location: index.php?action=compte&erreur=Erreur lors de la modification de l\'utilisateur');
         }
     }
     
@@ -24,6 +23,19 @@
             echo 'modif artiste';
         } catch (PDOException $e) {
             echo 'erreur update artiste';
-            header('Location: index.php?action=editerArtiste&idArtiste='. $id_artiste .'&erreur=Erreur lors de la modification de l\'artiste');
         }
+    }
+
+    function update_note($pdo, $note, $id_utilisateur, $id_album){
+        try {
+        
+            $smtp = $pdo->prepare("UPDATE Note SET Note = :Note WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Album = :ID_Album");
+            $smtp->bindParam(':Note', $note); 
+            $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
+            $smtp->bindParam(':ID_Album', $id_album);
+            $smtp->execute();
+        }
+        catch (PDOException $e) {
+            echo 'erreur update note';
+        }               
     }
