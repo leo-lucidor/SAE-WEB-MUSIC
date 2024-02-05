@@ -218,6 +218,14 @@
         return $result;
     }
 
+    function get_playlist_visible(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist WHERE ID_Utilisateur != :id AND Nom != 'Titres Likés'");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
     function get_playlist_with_id_utilisateur(PDO $pdo, int $id){
         $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist WHERE ID_Utilisateur = :id");
         $stmt->bindParam(':id', $id);
