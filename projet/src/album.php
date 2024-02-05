@@ -61,15 +61,23 @@ class Album
         echo '<div class="container-btn-album">';
             echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
             echo '<p>' . trim($this->title) . ', de '. trim($this->artiste) . ', '. $this->year .' <span>'. $this->genre .'</span></p>';
-            echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
+            // echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
+            echo '<a class="btn-editer" href="#"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
         echo '</div>';
 
         echo '<div class="container-milieu-album">';
-            echo '<div class="container-milieu-bottom-left">';                
+            echo '<div class="container-milieu-bottom-left">';  
+                echo '<div class="container-rating">';
+                    echo '<a class="etoile1" href="#"><img src="./images/starVide.png" alt="etoile"></a>';      
+                    echo '<a class="etoile2" href="#"><img src="./images/starVide.png" alt="etoile"></a>';
+                    echo '<a class="etoile3" href="#"><img src="./images/starVide.png" alt="etoile"></a>';
+                    echo '<a class="etoile4" href="#"><img src="./images/starVide.png" alt="etoile"></a>';
+                    echo '<a class="etoile5" href="#"><img src="./images/starVide.png" alt="etoile"></a>';
+                echo '</div>';       
                 echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
             echo '</div>';
             echo '<div class="container-milieu-bottom-right">';
-                echo '<p>Les musiques de cet album</p>';
+                echo '<p class="titre-right">Les musiques de cet album</p>';
                 echo '<div class="container-album-artiste">';
                 $musiques = get_musique_in_album(getPdo(), $this->id);
                 if (count($musiques) == 0){

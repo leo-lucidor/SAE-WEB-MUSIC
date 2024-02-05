@@ -135,11 +135,11 @@ body {
 .container-milieu-bottom{
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 85vh;
+    max-height: 90vh;
     display: flex;
     flex-wrap: wrap;
     flex-basis: 100%;
-    margin: 1em;
+    margin-top: 1em;
     justify-content: center;
     gap: 1em;
 }
