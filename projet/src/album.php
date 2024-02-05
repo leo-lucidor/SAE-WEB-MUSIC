@@ -56,13 +56,19 @@ class Album
     }
 
     public function afficher(){
+        require 'BDD/Function/databaseUpdate.php';
+
         echo '<link rel="stylesheet" href="./css/album.css">';
 
         echo '<div class="container-btn-album">';
             echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
             echo '<p>' . trim($this->title) . ', de '. trim($this->artiste) . ', '. $this->year .' <span>'. $this->genre .'</span></p>';
             // echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
-            echo '<a class="btn-editer" href="#"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
+            if (favorisAlbumExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id)) {
+                echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
+            } else {
+                echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
+            }
         echo '</div>';
 
         echo '<div class="container-milieu-album">';
@@ -114,9 +120,6 @@ class Album
                         echo '<a class="etoile4" id="etoile4" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=4"><img class="etoile-hidden" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
                         echo '<a class="etoile5" id="etoile5" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=5"><img class="etoile-hidden" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
                     }
-
-
-
                 echo '</div>';       
                 echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
             echo '</div>';

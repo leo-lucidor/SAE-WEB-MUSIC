@@ -64,6 +64,8 @@ if ($_REQUEST == null) {
     require 'src/deletePlaylist.php';
 } else if ($_REQUEST['action'] == 'noterAlbum'){
     require 'src/noterAlbum.php';
+} else if ($_REQUEST['action'] == 'favorisAlbum'){
+    require 'src/favorisAlbum.php';
 }
 else {
     require 'src/BDD/Function/databaseGet.php';
