@@ -68,11 +68,11 @@ class Album
         echo '<div class="container-milieu-album">';
             echo '<div class="container-milieu-bottom-left">';  
                 echo '<div class="container-rating">';
-                    echo '<a class="etoile1" href="#"><img src="./images/starVide.png" alt="etoile"></a>';      
-                    echo '<a class="etoile2" href="#"><img src="./images/starVide.png" alt="etoile"></a>';
-                    echo '<a class="etoile3" href="#"><img src="./images/starVide.png" alt="etoile"></a>';
-                    echo '<a class="etoile4" href="#"><img src="./images/starVide.png" alt="etoile"></a>';
-                    echo '<a class="etoile5" href="#"><img src="./images/starVide.png" alt="etoile"></a>';
+                    echo '<a class="etoile1" id="etoile1" href="#"><img class="etoile-actif" id="imgVideEtoile1" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile1" src="./images/starPlein.png" alt="etoile"></a>';      
+                    echo '<a class="etoile2" id="etoile2" href="#"><img class="etoile-actif" id="imgVideEtoile2" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile2" src="./images/starPlein.png" alt="etoile"></a>';
+                    echo '<a class="etoile3" id="etoile3" href="#"><img class="etoile-actif" id="imgVideEtoile3" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile3" src="./images/starPlein.png" alt="etoile"></a>';
+                    echo '<a class="etoile4" id="etoile4" href="#"><img class="etoile-actif" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
+                    echo '<a class="etoile5" id="etoile5" href="#"><img class="etoile-actif" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
                 echo '</div>';       
                 echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
             echo '</div>';
@@ -119,6 +119,7 @@ class Album
         echo '</div>';
         echo '<script src="js/lancementMusicPageArtiste.js"></script>';
         echo '<script src="js/AjouterMusiqueDansPlaylist.js"></script>';
+        echo '<script src="js/ratingAlbum.js"></script>';
     }
 }
 ?>
