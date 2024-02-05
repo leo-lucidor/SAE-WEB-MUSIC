@@ -234,8 +234,6 @@
         }
         return $result['Valeur'];
     }
-
-
 // execption
 
     function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
