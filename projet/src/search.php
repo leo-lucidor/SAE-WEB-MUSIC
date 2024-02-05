@@ -23,15 +23,35 @@ class Recherche
         require 'src/provider/checkFichierDansDossier.php';
         require 'src/provider/pdo.php';
         $pdo = getPdo();
-
-        echo '<div class="container-milieu-bottom">';
-        echo '<h2>Résultats de la recherche</h2>';
-        
         $playlists = get_playlist_visible($pdo, $_SESSION['idUser']);
         $artistes = get_all_artiste($pdo);
         $this->$data = $data;
+?>
+        <link rel="stylesheet" href="./css/search.css">
 
-        echo '</div>';
+        <div class="container-milieu-bottom">
+            <div class="div-navbar">
+                <nav class="navbar">
+                    <ul class="liste">
+                        <?php
+                        if ($_REQUEST['search'] == 'Tout') {
+                            require 'src/search_filters/tout.php';    
+                        } else if ($_REQUEST['search'] == 'Titres') {
+                            require 'src/search_filters/titres.php'; 
+                        } else if ($_REQUEST['search'] == 'Artistes') {
+                            require 'src/search_filters/artistes.php'; 
+                        } else if ($_REQUEST['search'] == 'Albums') {
+                            require 'src/search_filters/albums.php'; 
+                        } else if ($_REQUEST['search'] == 'Playlists') {
+                            require 'src/search_filters/playlists.php'; 
+                        }
+                        ?>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+<?php
     }
 }
 ?>
