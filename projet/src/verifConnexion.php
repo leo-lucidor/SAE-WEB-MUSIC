@@ -2,23 +2,29 @@
 require 'src/BDD/Function/databaseGet.php';
 require 'src/provider/pdo.php';
 
-
-$mail = $_POST['email'];
-$mdp = $_POST['password'];
-$nom = get_nom_with_mail(getPdo(), $mail);
-
 $pdo = getPdo();
-$mdpVerif = get_password_with_email($pdo, $mail);
-
+$mail_username = $_POST['email_username'];
+if (filter_var($mail_username, FILTER_VALIDATE_EMAIL)) {
+    $mail = $mail_username;
+    $username = get_nom_with_mail($pdo, $mail);
+    $id = get_id_with_email($pdo, $mail);
+} else {
+    $username = $mail_username;
+    $mail = get_mail_with_username($pdo, $username);
+    $id = get_id_with_pseudo($pdo, $username);
+}
+$mdp = $_POST['password'];
+$mdpVerif = get_password_with_email($pdo, $mail) || get_password_with_username($pdo, $username);
 echo "test : ".$mdpVerif;
 
 
 if ($mdpVerif != $mdp){
     header('Location: index.php?action=login&erreur=identifiants ou mot de passe incorrect');
 } else {
+    $_SESSION['idUser'] = $id;
     $_SESSION['mail'] = $mail;
     $_SESSION['mdp'] = $mdp;
-    $_SESSION['nom'] = $nom;
+    $_SESSION['nom'] = $username;
     header('Location: index.php?action=accueil');
 }
 

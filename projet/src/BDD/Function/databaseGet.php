@@ -14,11 +14,11 @@
     }
 
     function get_password_with_pseudo(PDO $pdo, String $pseudo){
-        $stmt = $pdo->prepare("SELECT password FROM utilisateur WHERE pseudo = :pseudo");
-        $stmt->bindParam(':pseudo', $pseudo);
+        $stmt = $pdo->prepare("SELECT Mot_de_passe FROM Utilisateur WHERE Nom_utilisateur = :Nom_utilisateur");
+        $stmt->bindParam(':Nom_utilisateur', $pseudo);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['password'];
+        return $result['Mot_de_passe'];
     }
 
     function get_id_with_email(PDO $pdo, String $mail){
@@ -30,11 +30,19 @@
     }
 
     function get_mail_with_id(PDO $pdo, int $id){
-        $stmt = $pdo->prepare("SELECT mail FROM utilisateur WHERE id = :id");
-        $stmt->bindParam(':id', $id);
+        $stmt = $pdo->prepare("SELECT Email FROM Utilisateur WHERE ID_Utilisateur = :ID_Utilisateur");
+        $stmt->bindParam(':ID_Utilisateur', $id);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['mail'];
+        return $result['Email'];
+    }
+
+    function get_mail_with_username(PDO $pdo, String $username){
+        $stmt = $pdo->prepare("SELECT Email FROM Utilisateur WHERE Nom_utilisateur = :Nom_utilisateur");
+        $stmt->bindParam(':Nom_utilisateur', $username);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Email'];
     }
 
     function get_pseudo_with_id(PDO $pdo, int $id){
@@ -46,19 +54,19 @@
     }
 
     function get_pseudo_with_mail(PDO $pdo, String $mail){
-        $stmt = $pdo->prepare("SELECT pseudo FROM utilisateur WHERE mail = :mail");
-        $stmt->bindParam(':mail', $mail);
+        $stmt = $pdo->prepare("SELECT Nom_utilisateur FROM Utilisateur WHERE Email = :Email");
+        $stmt->bindParam(':Email', $mail);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['pseudo'];
+        return $result['Nom_utilisateur'];
     }
 
     function get_id_with_pseudo(PDO $pdo, String $pseudo){
-        $stmt = $pdo->prepare("SELECT id FROM utilisateur WHERE pseudo = :pseudo");
-        $stmt->bindParam(':pseudo', $pseudo);
+        $stmt = $pdo->prepare("SELECT ID_Utilisateur FROM Utilisateur WHERE Nom_utilisateur = :Nom_utilisateur");
+        $stmt->bindParam(':Nom_utilisateur', $pseudo);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['id'];
+        return $result['ID_Utilisateur'];
     }
 
     function get_all_album(PDO $pdo){
@@ -138,7 +146,7 @@
     }
 
     function get_nom_with_mail(PDO $pdo, String $mail){
-        $stmt = $pdo->prepare("SELECT Nom_utilisateur FROM utilisateur WHERE Email = :Email");
+        $stmt = $pdo->prepare("SELECT Nom_utilisateur FROM Utilisateur WHERE Email = :Email");
         $stmt->bindParam(':Email', $mail);
         $stmt->execute();
         $result = $stmt->fetch();
@@ -210,6 +218,14 @@
         return $result;
     }
 
+    function get_playlist_visible(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist WHERE ID_Utilisateur != :id AND Nom != 'Titres Likés'");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
     function get_playlist_with_id_utilisateur(PDO $pdo, int $id){
         $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist WHERE ID_Utilisateur = :id");
         $stmt->bindParam(':id', $id);
@@ -251,3 +267,17 @@
     }
 
 // execption
+
+function getMusiqueWithIdArtiste(PDO $pdo, TEXT $nomArtiste){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique NATURAL JOIN Album WHERE ID_Artiste_By = (SELECT ID_Artiste FROM Artiste WHERE Nom = :nom ) OR ID_Artiste_Parent = (SELECT ID_Artiste FROM Artiste WHERE Nom = :nom )");
+        $stmt->bindParam(':nom', $nomArtiste);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des musiques de l'artiste : ". $e->getMessage();
+        return false;
+    }
+}
