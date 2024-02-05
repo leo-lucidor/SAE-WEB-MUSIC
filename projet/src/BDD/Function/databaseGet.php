@@ -244,3 +244,16 @@
     }
 
 // execption
+
+function getMusiqueWithIdArtiste(PDO $pdo, int $idArtiste){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique NATURAL JOIN Album WHERE ID_Artiste_By = :idArtiste OR ID_Artiste_Parent = :idArtiste");
+        $stmt->bindParam(':idArtiste', $idArtiste);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    } catch (PDOException $e) {
+        echo "Erreur lors de la récupération des musiques : ". $e->getMessage();
+        return false;
+    }
+}
