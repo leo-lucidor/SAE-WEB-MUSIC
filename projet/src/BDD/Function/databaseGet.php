@@ -218,6 +218,19 @@
         return $result;
     }
 
+    function getNote(PDO $pdo, int $valeur , int $idUt, int $idAlbum) {
+        try {
+            $stmt = $pdo->prepare(" SELECT ID_Note FROM Note WHERE  ID_Utilisateur = :idUt AND ID_Album = :idAlbum");
+            $stmt->bindParam(':idUt', $idUt);
+            $stmt->bindParam(':idAlbum', $idAlbum);
+            $stmt->execute();
+            $result = $stmt->fetch();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération de la note : " . $e->getMessage();
+        }
+        return $result['ID_Note'];
+    }
+
 
 // execption
 
