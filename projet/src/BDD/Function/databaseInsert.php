@@ -55,7 +55,7 @@ function insertAlbumIntoFavori(PDO $pdo, int $idAlbum, int $idUt) {
     }
 }
 
-function insertNote(PDO $pdo, int $valeur , int $idUt, int $idAlbum) {
+function insertNote(PDO $pdo, int $valeur, int $idUt, int $idAlbum) {
     try {
         $stmt = $pdo->prepare("INSERT INTO Note (Valeur, ID_Utilisateur, ID_Album) VALUES (?, ?, ?)");
         $stmt->bindParam(1, $valeur);

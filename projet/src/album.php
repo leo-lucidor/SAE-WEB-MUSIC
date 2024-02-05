@@ -68,11 +68,55 @@ class Album
         echo '<div class="container-milieu-album">';
             echo '<div class="container-milieu-bottom-left">';  
                 echo '<div class="container-rating">';
-                    echo '<a class="etoile1" id="etoile1" href="#"><img class="etoile-actif" id="imgVideEtoile1" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile1" src="./images/starPlein.png" alt="etoile"></a>';      
-                    echo '<a class="etoile2" id="etoile2" href="#"><img class="etoile-actif" id="imgVideEtoile2" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile2" src="./images/starPlein.png" alt="etoile"></a>';
-                    echo '<a class="etoile3" id="etoile3" href="#"><img class="etoile-actif" id="imgVideEtoile3" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile3" src="./images/starPlein.png" alt="etoile"></a>';
-                    echo '<a class="etoile4" id="etoile4" href="#"><img class="etoile-actif" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
-                    echo '<a class="etoile5" id="etoile5" href="#"><img class="etoile-actif" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
+                $idUser = get_id_with_email(getPdo(), $_SESSION['mail']);
+                    $note = getNote(getPdo(), $idUser, $this->id);
+                    //print_r($note);
+                    ?>
+                    <script>
+                        var note = <?php echo $note; ?>;
+                    </script>
+                    <?php
+                    
+                    if ($note == 0){
+                        echo '<a class="etoile1" id="etoile1" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=1"><img class="etoile-actif" id="imgVideEtoile1" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile1" src="./images/starPlein.png" alt="etoile"></a>';      
+                        echo '<a class="etoile2" id="etoile2" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=2"><img class="etoile-actif" id="imgVideEtoile2" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile2" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile3" id="etoile3" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=3"><img class="etoile-actif" id="imgVideEtoile3" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile3" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile4" id="etoile4" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=4"><img class="etoile-actif" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile5" id="etoile5" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=5"><img class="etoile-actif" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
+                    } elseif ($note == 1) {
+                        echo '<a class="etoile1" id="etoile1" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=1"><img class="etoile-hidden" id="imgVideEtoile1" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile1" src="./images/starPlein.png" alt="etoile"></a>';      
+                        echo '<a class="etoile2" id="etoile2" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=2"><img class="etoile-actif" id="imgVideEtoile2" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile2" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile3" id="etoile3" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=3"><img class="etoile-actif" id="imgVideEtoile3" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile3" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile4" id="etoile4" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=4"><img class="etoile-actif" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile5" id="etoile5" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=5"><img class="etoile-actif" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
+                    } elseif ($note == 2) {
+                        echo '<a class="etoile1" id="etoile1" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=1"><img class="etoile-hidden" id="imgVideEtoile1" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile1" src="./images/starPlein.png" alt="etoile"></a>';      
+                        echo '<a class="etoile2" id="etoile2" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=2"><img class="etoile-hidden" id="imgVideEtoile2" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile2" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile3" id="etoile3" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=3"><img class="etoile-actif" id="imgVideEtoile3" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile3" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile4" id="etoile4" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=4"><img class="etoile-actif" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile5" id="etoile5" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=5"><img class="etoile-actif" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
+                    } elseif ($note == 3) {
+                        echo '<a class="etoile1" id="etoile1" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=1"><img class="etoile-hidden" id="imgVideEtoile1" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile1" src="./images/starPlein.png" alt="etoile"></a>';      
+                        echo '<a class="etoile2" id="etoile2" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=2"><img class="etoile-hidden" id="imgVideEtoile2" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile2" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile3" id="etoile3" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=3"><img class="etoile-hidden" id="imgVideEtoile3" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile3" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile4" id="etoile4" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=4"><img class="etoile-actif" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile5" id="etoile5" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=5"><img class="etoile-actif" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
+                    } elseif ($note == 4) {
+                        echo '<a class="etoile1" id="etoile1" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=1"><img class="etoile-hidden" id="imgVideEtoile1" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile1" src="./images/starPlein.png" alt="etoile"></a>';      
+                        echo '<a class="etoile2" id="etoile2" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=2"><img class="etoile-hidden" id="imgVideEtoile2" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile2" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile3" id="etoile3" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=3"><img class="etoile-hidden" id="imgVideEtoile3" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile3" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile4" id="etoile4" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=4"><img class="etoile-hidden" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile5" id="etoile5" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=5"><img class="etoile-actif" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-hidden" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
+                    } else {
+                        echo '<a class="etoile1" id="etoile1" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=1"><img class="etoile-hidden" id="imgVideEtoile1" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile1" src="./images/starPlein.png" alt="etoile"></a>';      
+                        echo '<a class="etoile2" id="etoile2" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=2"><img class="etoile-hidden" id="imgVideEtoile2" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile2" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile3" id="etoile3" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=3"><img class="etoile-hidden" id="imgVideEtoile3" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile3" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile4" id="etoile4" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=4"><img class="etoile-hidden" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
+                        echo '<a class="etoile5" id="etoile5" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=5"><img class="etoile-hidden" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
+                    }
+
+
+
                 echo '</div>';       
                 echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
             echo '</div>';
