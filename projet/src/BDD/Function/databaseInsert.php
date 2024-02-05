@@ -55,7 +55,7 @@ function insertAlbumIntoFavori(PDO $pdo, int $idAlbum, int $idUt) {
     }
 }
 
-function insertNote(PDO $pdo, int $valeur , int $idUt, int $idAlbum) {
+function insertNote(PDO $pdo, int $valeur, int $idUt, int $idAlbum) {
     try {
         $stmt = $pdo->prepare("INSERT INTO Note (Valeur, ID_Utilisateur, ID_Album) VALUES (?, ?, ?)");
         $stmt->bindParam(1, $valeur);
@@ -146,6 +146,47 @@ function insertArtisteAlbum(PDO $pdo, int $idArtiste, int $idAlbum) {
 }
 
 
+function insertFavorisMusique(PDO $pdo, int $idMusique, int $idUt) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO  Favoris_Musique (ID_Musique, ID_Utilisateur) VALUES (?,?)");
+        $stmt->bindParam(1, $idMusique);
+        $stmt->bindParam(2, $idUt);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la musique dans les favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+function insertFavorisArtiste(PDO $pdo, int $idArtiste, int $idUt) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Favoris_Artiste (ID_Artiste, ID_Utilisateur) VALUES (?,?)");
+        $stmt->bindParam(1, $idUt);
+        $stmt->bindParam(2, $idArtiste);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de l'artiste dans les favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+function insertFavorisAlbum(PDO $pdo, int $idAlbum, int $idUt) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Favoris_Album (ID_Album, ID_Utilisateur) VALUES (?,?)");
+        $stmt->bindParam(1, $idUt);
+        $stmt->bindParam(2, $idAlbum);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de l'album dans les favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+
+
 // playlist
 
 function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
@@ -160,4 +201,6 @@ function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
         echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
         return false;
     }
+
+    
 }

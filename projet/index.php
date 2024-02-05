@@ -25,8 +25,8 @@ Autoloader::register();
 session_start();
 $dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
 
-//$dataloader->createTables();
-//returnToBaseBDD($dataloader->getPdo());
+// $dataloader->createTables();
+// returnToBaseBDD($dataloader->getPdo());
 
 $pdo = $dataloader->getPdo();
 $data = getdata();
@@ -62,6 +62,10 @@ if ($_REQUEST == null) {
     require 'src/deleteMusiquePlaylist.php';
 } else if ($_REQUEST['action'] == 'deletePlaylist') {
     require 'src/deletePlaylist.php';
+} else if ($_REQUEST['action'] == 'noterAlbum'){
+    require 'src/noterAlbum.php';
+} else if ($_REQUEST['action'] == 'favorisAlbum'){
+    require 'src/favorisAlbum.php';
 }
 else {
     require 'src/BDD/Function/databaseGet.php';

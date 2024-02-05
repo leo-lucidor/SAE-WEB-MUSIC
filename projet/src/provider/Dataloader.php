@@ -115,6 +115,40 @@ class Dataloader {
                 FOREIGN KEY (ID_Musique) REFERENCES Musique(ID_Musique),
                 FOREIGN KEY (ID_Playlist) REFERENCES Playlist(ID_Playlist)
             )");
+
+            // Table favoris Artiste 
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Favoris_Artiste (
+                ID_Utilisateur INTEGER,
+                ID_Artiste INTEGER,
+                FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur),
+                FOREIGN KEY (ID_Artiste) REFERENCES Artiste(ID_Artiste)
+            )");
+
+            // Table favoris Album
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Favoris_Album (
+                ID_Utilisateur INTEGER,
+                ID_Album INTEGER,
+                FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur),
+                FOREIGN KEY (ID_Album) REFERENCES Album(ID_Album)
+            )");
+
+            // Table favoris Musique
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Favoris_Musique (
+                ID_Utilisateur INTEGER,
+                ID_Musique INTEGER,
+                FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur),
+                FOREIGN KEY (ID_Musique) REFERENCES Musique(ID_Musique)
+            )");
+
+            // Table Historique
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Historique (
+                ID_Utilisateur INTEGER,
+                recherche TEXT,
+                FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur)
+            )");
+
+
+
             
             return true;
 

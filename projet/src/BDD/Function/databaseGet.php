@@ -234,7 +234,22 @@
         return $result;
     }
 
+    function getNote(PDO $pdo, int $idUt, int $idAlbum) {
+        try {
+            $stmt = $pdo->prepare(" SELECT Valeur, ID_Note FROM Note WHERE ID_Utilisateur = :idUt AND ID_Album = :idAlbum");
+            $stmt->bindParam(':idUt', $idUt);
+            $stmt->bindParam(':idAlbum', $idAlbum);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            if ($result == null) {
+                return 0;
+            }
 
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération de la note : " . $e->getMessage();
+        }
+        return $result['Valeur'];
+    }
 // execption
 
     function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
