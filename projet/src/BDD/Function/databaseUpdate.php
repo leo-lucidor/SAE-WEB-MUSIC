@@ -26,14 +26,43 @@
         }
     }
 
-    function update_note($pdo, $note, $id_utilisateur, $id_album){
+    function note_Existe($pdo, $id_utilisateur, $id_album){
         try {
-        
-            $smtp = $pdo->prepare("UPDATE Note SET Note = :Note WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Album = :ID_Album");
-            $smtp->bindParam(':Note', $note); 
+            $smtp = $pdo->prepare("SELECT * FROM Note WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Album = :ID_Album");
             $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
             $smtp->bindParam(':ID_Album', $id_album);
             $smtp->execute();
+            $result = $smtp->fetchAll();
+            if(count($result) == 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        catch (PDOException $e) {
+            echo 'erreur note existe';
+        }
+    }
+
+
+    function update_note($pdo, $note, $id_utilisateur, $id_album){
+        try {
+            $verif_note = note_Existe($pdo, $id_utilisateur, $id_album);
+            if($verif_note == false){
+                $smtp = $pdo->prepare("INSERT INTO Note (Valeur, ID_Utilisateur, ID_Album) VALUES (:Valeur, :ID_Utilisateur, :ID_Album)");
+                $smtp->bindParam(':Valeur', $note);
+                $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
+                $smtp->bindParam(':ID_Album', $id_album);
+                $smtp->execute();
+            }
+            else{
+                $smtp = $pdo->prepare("UPDATE Note SET Valeur = :Valeur WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Album = :ID_Album");
+                $smtp->bindParam(':Valeur', $note);
+                $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
+                $smtp->bindParam(':ID_Album', $id_album);
+                $smtp->execute();
+            }
         }
         catch (PDOException $e) {
             echo 'erreur update note';
