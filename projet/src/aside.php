@@ -60,6 +60,9 @@ echo '<div class="container-playlist">';
 
         echo '</div>';
 
+        // erreur ajout playlist
+        echo '<p class="erreur-ajout-playlist">'. $_REQUEST['erreurAjoutPlaylist'] .'</p>';
+
         if ($playlists == null || empty($playlists)){
             echo '<p class="aucune-playlist">Aucune playlist</p>';
         } else {

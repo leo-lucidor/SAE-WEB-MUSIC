@@ -440,3 +440,9 @@ body {
     color: #fff;
     text-align: center;
 }
+
+.erreur-ajout-playlist {
+    color: red;
+    text-align: center;
+    
+}
