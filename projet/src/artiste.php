@@ -18,6 +18,7 @@ class Artiste {
         echo '<div class="container-btn-album">';
             echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
             // echo '<a class="btn-editer" href="index.php?action=editerArtiste&idArtiste='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
+            echo '<p class="titre-artiste">'.$this->nom.'</p>';
             if (favorisArtisteExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id))
                 echo '<a class="btn-editer" href="index.php?action=favorisArtiste&idArtiste='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="liker l\'artiste"></a>';
             else
@@ -50,7 +51,7 @@ class Artiste {
                 }
             echo '</div>';
             echo '<div class="container-milieu-bottom-right">';
-                echo '<p>'.$this->nom.'</p>';
+                echo '<p class="titre-container-album">Les albums de cet artiste</p>';
                 echo '<div class="container-album-artiste">';
                 $albums = get_albums_artiste(getPdo(), $this->id);
                 if (count($albums) == 0){

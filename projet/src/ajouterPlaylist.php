@@ -2,8 +2,6 @@
 
 require 'src/provider/pdo.php';
 $pdo = getPdo();
-
-// require 'src/BDD/Function/databaseInsert.php';
 require 'src/BDD/Function/databaseGet.php';
 
 $mailUser = $_SESSION['mail'];
@@ -16,7 +14,8 @@ echo $nomPlaylist;
 echo $mailUser;
 echo $idUser;
 
+if (trim($nomPlaylist) != "Titres Likés"){
+    insertPlaylist($pdo, $nomPlaylist, $idUser);
+}
 
-
-insertPlaylist($pdo, $nomPlaylist, $idUser);
 header('Location: index.php?action=accueil');

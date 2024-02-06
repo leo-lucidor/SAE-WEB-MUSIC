@@ -124,3 +124,13 @@
     width: 1.5vw;
     height: 1.5vw;
 }
+
+.titre-artiste {
+    font-size: 2vw;
+    font-weight: bold;
+    color: #fff;
+}
+
+.titre-container-album {
+    text-align: center !important;
+}
