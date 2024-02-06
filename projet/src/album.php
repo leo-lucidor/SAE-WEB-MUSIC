@@ -57,6 +57,7 @@ class Album
 
     public function afficher(){
         require 'BDD/Function/databaseUpdate.php';
+        require 'src/provider/checkFichierDansDossier.php';
 
         echo '<link rel="stylesheet" href="./css/album.css">';
 
@@ -120,8 +121,16 @@ class Album
                         echo '<a class="etoile4" id="etoile4" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=4"><img class="etoile-hidden" id="imgVideEtoile4" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile4" src="./images/starPlein.png" alt="etoile"></a>';
                         echo '<a class="etoile5" id="etoile5" href="index.php?action=noterAlbum&idAlbum='. trim($this->id) .'&note=5"><img class="etoile-hidden" id="imgVideEtoile5" src="./images/starVide.png" alt="etoile"><img class="etoile-actif" id="imgPleineEtoile5" src="./images/starPlein.png" alt="etoile"></a>';
                     }
-                echo '</div>';       
-                echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
+                echo '</div>';
+
+                $path = './images/ALBUMS/';
+                $imgAlbumCondition = checkFileNameExists($path, trim($this->cover));
+                
+                if ($imgAlbumCondition == true){
+                    echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
+                } else {
+                    echo '<img src="./images/ALBUMS/default.jpg" alt="'. trim($this->title) . '">';
+                }
             echo '</div>';
             echo '<div class="container-milieu-bottom-right">';
                 echo '<p class="titre-right">Les musiques de cet album</p>';
