@@ -291,7 +291,6 @@ function insertAll(PDO $pdo)
     insertTypesUtilisateur($pdo, "Utilisateur");
     insertUser($pdo, "JohnDoe", "123", "admin@gmail.com", 1);
     insertUser($pdo, 'erwan', 'erwan', 'erwan.blandeau@gmail.com',2);
-    insertMusiqueIntoPlaylist($pdo, 13, 25);
     insertMusique1($pdo);
 }
 

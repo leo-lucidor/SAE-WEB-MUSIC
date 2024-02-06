@@ -152,6 +152,9 @@ function insertFavorisMusique(PDO $pdo, int $idMusique, int $idUt) {
         $stmt->bindParam(1, $idMusique);
         $stmt->bindParam(2, $idUt);
         $stmt->execute();
+        $stmt-> $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+        $stmt->bindParam(1, $idMusique);
+        
         return true;
     } catch (PDOException $e) {
         echo "Erreur lors de l'ajout de la musique dans les favoris : ". $e->getMessage();

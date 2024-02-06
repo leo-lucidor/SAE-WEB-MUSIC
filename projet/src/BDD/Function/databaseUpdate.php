@@ -105,24 +105,55 @@
 
     function getPlaylistTitreLikeUser($pdo, $id_utilisateur) {
         try {
-            $stmt = $pdo->prepare("SELECT ID_Playlist FROM Playlist WHERE ID_Utilisateur = ? AND Nom = Titres Likés");
+            $NomPlaylist = "Titres Likés";
+            $stmt = $pdo->prepare("SELECT ID_Playlist FROM Playlist WHERE ID_Utilisateur = ? AND Nom = ?");
             $stmt->bindParam(1, $id_utilisateur);
+            $stmt->bindParam(2, $NomPlaylist);
             $stmt->execute();
             $result = $stmt->fetchAll();
-            return $result;
+
+            return $result[0]['ID_Playlist'];
         } catch (PDOException $e) {
             echo "Erreur lors de la récupération de la playlist Titres Likés : " . $e->getMessage();
             return false;
         }
     }
 
-    function insertMusicPlaylistFavoris(PDO $pdo, int $idMusique, int $idPlaylist) {
+    function verifMusicInPlaylist($pdo, $idMusique, $idPlaylist) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+            $stmt = $pdo->prepare("SELECT * FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
             $stmt->bindParam(1, $idMusique);
             $stmt->bindParam(2, $idPlaylist);
             $stmt->execute();
-    
+            $result = $stmt->fetchAll();
+
+            if(count($result) == 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        } catch (PDOException $e) {
+            echo "Erreur lors de la vérification de la musique dans la playlist : " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function insertMusicPlaylistFavoris(PDO $pdo, int $idMusique, int $idPlaylist) {
+        try {
+            $verifMusicInPlaylist = verifMusicInPlaylist($pdo, $idMusique, $idPlaylist);
+            if($verifMusicInPlaylist == false){
+                $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+                $stmt->bindParam(1, $idMusique);
+                $stmt->bindParam(2, $idPlaylist);
+                $stmt->execute();
+            }
+            else{
+                $stmt = $pdo->prepare("DELETE FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
+                $stmt->bindParam(1, $idMusique);
+                $stmt->bindParam(2, $idPlaylist);
+                $stmt->execute();
+            }
             return true;
         } catch (PDOException $e) {
             echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
@@ -177,13 +208,14 @@
                 $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
                 $smtp->bindParam(':ID_Musique', $id_musique);
                 $smtp->execute();
+                insertMusicPlaylistFavoris($pdo, $id_musique, $idPlaylist);
             }
             else{
                 $smtp = $pdo->prepare("DELETE FROM Favoris_Musique WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Musique = :ID_Musique");
                 $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
                 $smtp->bindParam(':ID_Musique', $id_musique);
                 $smtp->execute();
-                insertMusicPlaylistFavoris($pdo, $id_musique, $idPlaylist);
+                deleteMusicPlaylistFavoris($pdo, $id_musique, $idPlaylist);
             }
         }
         catch (PDOException $e) {
