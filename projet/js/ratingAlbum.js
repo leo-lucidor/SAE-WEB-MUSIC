@@ -170,6 +170,18 @@ document.addEventListener("DOMContentLoaded", function() {
             imgPleineEtoile3.style.display = "block";
             imgPleineEtoile4.style.display = "block";
             imgPleineEtoile5.style.display = "block";
+        } else {
+            imgVideEtoile1.style.display = "block";
+            imgVideEtoile2.style.display = "block";
+            imgVideEtoile3.style.display = "block";
+            imgVideEtoile4.style.display = "block";
+            imgVideEtoile5.style.display = "block";
+
+            imgPleineEtoile1.style.display = "none";
+            imgPleineEtoile2.style.display = "none";
+            imgPleineEtoile3.style.display = "none";
+            imgPleineEtoile4.style.display = "none";
+            imgPleineEtoile5.style.display = "none";
         }
     }
 

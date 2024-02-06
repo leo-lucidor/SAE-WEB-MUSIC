@@ -66,6 +66,8 @@ if ($_REQUEST == null) {
     require 'src/noterAlbum.php';
 } else if ($_REQUEST['action'] == 'favorisAlbum'){
     require 'src/favorisAlbum.php';
+} else if ($_REQUEST['action'] == 'favorisArtiste'){
+    require 'src/favorisArtiste.php';
 }
 else {
     require 'src/BDD/Function/databaseGet.php';

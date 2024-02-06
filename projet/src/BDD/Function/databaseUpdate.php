@@ -102,6 +102,51 @@
         } 
     }
 
+
+    function getPlaylistTitreLikeUser($pdo, $id_utilisateur) {
+        try {
+            $stmt = $pdo->prepare("SELECT ID_Playlist FROM Playlist WHERE ID_Utilisateur = ? AND Nom = Titres Likés");
+            $stmt->bindParam(1, $id_utilisateur);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            return $result;
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération de la playlist Titres Likés : " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function insertMusicPlaylistFavoris(PDO $pdo, int $idMusique, int $idPlaylist) {
+        try {
+            $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+            $stmt->bindParam(1, $idMusique);
+            $stmt->bindParam(2, $idPlaylist);
+            $stmt->execute();
+    
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
+            return false;
+        }
+    
+        
+    }
+
+    function deleteMusicPlaylistFavoris(PDO $pdo, int $idMusique, int $idPlaylist) {
+        try {
+            $stmt = $pdo->prepare("DELETE FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
+            $stmt->bindParam(1, $idMusique);
+            $stmt->bindParam(2, $idPlaylist);
+            $stmt->execute();
+    
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de la suppression de la musique dans la playlist : " . $e->getMessage();
+            return false;
+        }
+    }
+    
+
     function update_favoris_album($pdo, $id_utilisateur, $id_album){
         try {
             $verif_favoris = favorisAlbumExiste($pdo, $id_utilisateur, $id_album);
