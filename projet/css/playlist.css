@@ -77,6 +77,7 @@
     border-radius: 10px;
     padding: 10px;
     overflow-y: auto;
+    max-height: 75vh;
 }
 
 
@@ -143,10 +144,19 @@
     transform: rotate(0deg);
 }
 
-.btn-supprimer {
+.container-supprimer-musique {
     flex-grow: 1;
-    text-align: end;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-content: center;
     margin-right: 20px;
+}
+
+.btn-like img {
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
 }
 
 .btn-supprimer img {

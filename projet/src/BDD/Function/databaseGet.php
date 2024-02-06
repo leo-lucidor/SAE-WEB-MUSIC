@@ -268,7 +268,7 @@
 
 // execption
 
-function getMusiqueWithIdArtiste(PDO $pdo, TEXT $nomArtiste){
+function getMusiqueWithIdArtiste(PDO $pdo, $nomArtiste){
     try{
         $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique NATURAL JOIN Album WHERE ID_Artiste_By = (SELECT ID_Artiste FROM Artiste WHERE Nom = :nom ) OR ID_Artiste_Parent = (SELECT ID_Artiste FROM Artiste WHERE Nom = :nom )");
         $stmt->bindParam(':nom', $nomArtiste);

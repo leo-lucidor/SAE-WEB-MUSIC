@@ -102,7 +102,13 @@ class Playlist {
                                     echo '<span class="genre-album">'. $nomArtiste .'</span>';
                                 echo '</div>';
                             echo '</div>';
-                            echo '<a class="btn-supprimer" href="index.php?action=deleteMusiquePlaylist&idMusique='. trim($idMusique) .'&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une musique de la playlist"></a>';
+                            echo '<div class="container-supprimer-musique">';
+                                if (trim($this->nom) == "Titres Likés") {
+                                    echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($musique['ID_Musique']) .'&idPlaylist='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="supprimer une musique de la playlist"></a>';
+                                } else {
+                                    echo '<a class="btn-supprimer" href="index.php?action=deleteMusiquePlaylist&idMusique='. trim($idMusique) .'&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une musique de la playlist"></a>';
+                                }
+                            echo '</div>';
                     echo '</div>';
                     $numero++;
                 }
