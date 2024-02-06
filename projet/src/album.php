@@ -153,6 +153,11 @@ class Album
                             echo '<div class="contenu-album">';
                                 echo '<p class="titre-album">'.$musique['Titre'].'</p>';
                             echo '</div>';
+                            if (favorisMusiqueExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $musique['ID_Musique'])) {
+                                echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($musique['ID_Musique']) .'&idAlbum='. trim($this->id) .'"><img src="images/coeurPlein.png" alt="liker une musique"></a>';
+                            } else {
+                                echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($musique['ID_Musique']) .'&idAlbum='. trim($this->id) .'"><img src="images/coeurVide.png" alt="liker une musique"></a>';
+                            }
                             echo '<button id="btn-ajouter-a-playlist" class="btn-ajouter-a-playlist"><img class="ajouter-music" src="./images/ajouter.png" alt="ajouter"></button>';
                             echo '<div class="container-ajouter">';
                                 echo '<button class="btn-close"><img src="./images/croix.png" alt="close"></button>';

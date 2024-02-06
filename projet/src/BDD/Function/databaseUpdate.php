@@ -171,6 +171,7 @@
     function update_favoris_musique($pdo, $id_utilisateur, $id_musique){
         try {
             $verif_favoris = favorisMusiqueExiste($pdo, $id_utilisateur, $id_musique);
+            $idPlaylist = getPlaylistTitreLikeUser($pdo, $id_utilisateur);
             if($verif_favoris == false){
                 $smtp = $pdo->prepare("INSERT INTO Favoris_Musique (ID_Utilisateur, ID_Musique) VALUES (:ID_Utilisateur, :ID_Musique)");
                 $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
@@ -182,6 +183,7 @@
                 $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
                 $smtp->bindParam(':ID_Musique', $id_musique);
                 $smtp->execute();
+                insertMusicPlaylistFavoris($pdo, $id_musique, $idPlaylist);
             }
         }
         catch (PDOException $e) {

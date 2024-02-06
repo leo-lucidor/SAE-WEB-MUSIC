@@ -94,6 +94,7 @@
     padding: 10px;
     border-radius: 10px;
     transition: 0.1s;
+    gap: 15px;
 }
 
 
@@ -110,8 +111,8 @@
 .container-album-unique-artiste p {
     font-size: 1vw;
     color: #fff;
-    margin-left: 2vw;
-    margin-right: 2vw;
+    /* margin-left: 1vw; */
+    /* margin-right: 1vw; */
     text-align: start;
 }
 
@@ -142,14 +143,24 @@
 
 .lancer-music {
     display: none;
-    margin-left: 1.53vw;
-    margin-right: 1.53vw;
+    margin-left: 20px;
+    margin-right: 10px;
     z-index: 100;
 }
 
 .lancer-music img {
     width: 1.5vw;
     height: 1.5vw;
+}
+
+.btn-like {
+    flex-basis: 10%;
+}
+
+.btn-like img {
+    width: 1.5vw;
+    height: 1.5vw;
+    border-radius: 0%;
 }
 
 .ajouter-music {
@@ -238,4 +249,9 @@
 
 .etoile-actif {
     display: block;
+}
+
+.numero-album {
+    margin-left: 28px;
+    margin-right: 17px;
 }
