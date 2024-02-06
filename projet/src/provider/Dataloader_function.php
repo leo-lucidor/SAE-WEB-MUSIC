@@ -367,8 +367,7 @@ function parcourirDossierMusique(){
 }
 
 function get_idAlbum_with_titre($pdo, $titre){
-    $titre = $titre."\n";
-    $titre = $titre;
+    $titre = $titre."\r\n";
     $stmt = $pdo->prepare("SELECT ID_Album FROM Album WHERE Titre = ?");
     $stmt->bindParam(1, $titre);
     $stmt->execute();
