@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let songs = ['./MUSIQUES/Folklore/Flutter.mp3', 'Song2.mp3', 'Song3.mp3'];
     let currentSongIndex = 0;
     let audio = new Audio(songs[currentSongIndex]);
+    let currentSongTime = 0;
 
     containers.forEach(function (container) {
         let estCliquer = false;
@@ -32,8 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         elementAAfficher.addEventListener('click', function() {
             playSong();
-            pause.style.display = 'block';
+            estCliquer = true;
             elementAAfficher.style.display = 'none';
+            pause.style.display = 'block';
         });
 
         pause.addEventListener('click', function() {
@@ -47,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to play the current song
     function playSong() {
         audio.src = songs[currentSongIndex];
+        audio.currentTime = currentSongTime; 
         audio.play();
     }
     
@@ -54,10 +57,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function playNext() {
         if (currentSongIndex < songs.length - 1) {
             currentSongIndex++;
+            currentSongTime = 0;
             playSong();
         } else {
             // If it's the last song, loop back to the first song
             currentSongIndex = 0;
+            currentSongTime = 0;
             playSong();
         }
     }
@@ -66,10 +71,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function playPrevious() {
         if (currentSongIndex > 0) {
             currentSongIndex--;
+            currentSongTime = 0;
             playSong();
         } else {
             // If it's the first song, loop back to the last song
             currentSongIndex = songs.length - 1;
+            currentSongTime = 0;
             playSong();
         }
     }
