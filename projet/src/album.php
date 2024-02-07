@@ -141,11 +141,19 @@ class Album
                 } else {
                     for ($i=0; $i < count($musiques); $i++) { 
                         $musique = $musiques[$i];
-    
+
                         $pathAlbum = './images/musiques/';
                         $imgAlbum = $musique['Pochette'];
     
                         echo '<div class="container-album-unique-artiste">';
+                            ?>
+                            <script>
+                                var musique = <?php echo json_encode($musique); ?>;
+                            </script>
+                            <?php
+
+                            echo '<p class="info-musique" style="display:none">'. trim(json_encode($musique)) .'</p>';
+
                             $numero = $i+1;
                             echo '<p class="numero-album">'.$numero .'</p>';
                             echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';

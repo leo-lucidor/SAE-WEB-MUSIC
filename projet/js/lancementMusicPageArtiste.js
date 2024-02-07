@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const containers = document.querySelectorAll('.container-album-unique-artiste');
 
     // Array to store the list of songs
+    let listeMusiques = [];
     let songs = ['./MUSIQUES/Folklore/Flutter.mp3', 'Song2.mp3', 'Song3.mp3'];
+    let lienMusiqueActuel = '';
     let currentSongIndex = 0;
     let audio = new Audio(songs[currentSongIndex]);
     let currentSongTime = 0;
@@ -10,15 +12,19 @@ document.addEventListener('DOMContentLoaded', function () {
     containers.forEach(function (container) {
         let estCliquer = false;
         const elementAMasquer = container.querySelector('.numero-album');
-        const elementAAfficher = container.querySelector('.lancer-music');
+        const play = container.querySelector('.lancer-music');
         const pause = container.querySelector('.pause-music');
+        
+        const infoMusique =  JSON.parse(container.querySelector('.info-musique').textContent);
+        listeMusiques.push(infoMusique); 
+        console.log(infoMusique);
 
         // Ajout d'un écouteur d'événement pour le survol
         container.addEventListener('mouseover', function() {
             if (!estCliquer) {
                 // Masquer l'élément lorsque survolé
                 elementAMasquer.style.display = 'none';
-                elementAAfficher.style.display = 'block';
+                play.style.display = 'block';
             }
         });
 
@@ -27,28 +33,29 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!estCliquer) {
                 // Afficher l'élément lorsque la souris n'est plus dessus
                 elementAMasquer.style.display = 'block';
-                elementAAfficher.style.display = 'none';
+                play.style.display = 'none';
             }
         });
 
-        elementAAfficher.addEventListener('click', function() {
+        play.addEventListener('click', function() {
+            lienMusiqueActuel = infoMusique.Lien;
             playSong();
             estCliquer = true;
-            elementAAfficher.style.display = 'none';
+            play.style.display = 'none';
             pause.style.display = 'block';
         });
 
         pause.addEventListener('click', function() {
             pauseSong();
             pause.style.display = 'none';
-            elementAAfficher.style.display = 'block';
+            play.style.display = 'block';
         });
     });
 
     
     // Function to play the current song
     function playSong() {
-        audio.src = songs[currentSongIndex];
+        audio.src = lienMusiqueActuel;
         audio.currentTime = currentSongTime; 
         audio.play();
     }
