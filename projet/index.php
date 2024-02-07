@@ -77,6 +77,7 @@ else {
     $_SESSION['playlistUser'] = get_playlist_utilisateur($pdo, $idUser);
     require 'src/aside.php';
     require 'src/base.php';
+    require 'src/lecteurMusique.php';
 } 
 
 echo '</div>';

@@ -86,5 +86,6 @@ if ($_REQUEST['action'] == 'accueil') {
 }
 
 ?>
+
 </div>
 

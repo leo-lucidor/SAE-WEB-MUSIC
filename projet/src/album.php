@@ -140,7 +140,9 @@ class Album
                     echo '<p class="aucun-album">Aucune musique</p>';
                 } else {
                     for ($i=0; $i < count($musiques); $i++) { 
-                        $musique = $musiques[$i];
+                        $musique = $musiques[$i]; // ID_Album
+                        $album = get_album_with_id(getPdo(), $musique['ID_Album']);
+                        $artiste = get_artiste(getPdo(), intval($musique[$album['ID_Artiste_By']]));
 
                         $pathAlbum = './images/musiques/';
                         $imgAlbum = $musique['Pochette'];
@@ -149,10 +151,14 @@ class Album
                             ?>
                             <script>
                                 var musique = <?php echo json_encode($musique); ?>;
+                                var artiste = <?php echo json_encode($artiste);?>;
+                                var album = <?php echo json_encode($album); ?>;
                             </script>
                             <?php
 
                             echo '<p class="info-musique" style="display:none">'. trim(json_encode($musique)) .'</p>';
+                            echo '<p class="info-artiste" style="display:none">'. trim(json_encode($artiste)) .'</p>';
+                            echo '<p class="info-album" style="display:none">'. trim(json_encode($album)) .'</p>';
 
                             $numero = $i+1;
                             echo '<p class="numero-album">'.$numero .'</p>';

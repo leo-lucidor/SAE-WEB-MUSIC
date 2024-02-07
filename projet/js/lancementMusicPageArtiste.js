@@ -1,50 +1,77 @@
 document.addEventListener('DOMContentLoaded', function () {
     const containers = document.querySelectorAll('.container-album-unique-artiste');
 
-    // Array to store the list of songs
+    let currentSongIndex = 0; // sert a rien
+
+    let titreMusique = document.querySelector('.titre-musique-lecteur');
+    let artisteMusique = document.querySelector('.nom-artiste-lecteur');
+    let imageMusique = document.querySelector('.pochette');
+
     let listeMusiques = [];
     let lienMusiqueActuel = '';
-    let currentSongIndex = 0; // sert a rien
     let audio = new Audio();
     let currentSongTime = 0;
 
+    let listeBtnPlay = [];
+    let listeBtnPause = [];
+    let listeNumeroMusique = [];
+
     containers.forEach(function (container) {
-        let estCliquer = false;
-        const elementAMasquer = container.querySelector('.numero-album');
+        const numeroMusique = container.querySelector('.numero-album');
+        listeNumeroMusique.push(numeroMusique);
         const play = container.querySelector('.lancer-music');
+        listeBtnPlay.push(play);
         const pause = container.querySelector('.pause-music');
+        listeBtnPause.push(pause);
         
         const infoMusique =  JSON.parse(container.querySelector('.info-musique').textContent);
+        const infoAlbum =  JSON.parse(container.querySelector('.info-album').textContent);
+        const infoArtiste =  JSON.parse(container.querySelector('.info-artiste').textContent);
+
         listeMusiques.push(infoMusique); 
-        console.log(infoMusique);
+        // console.log(infoMusique);
 
         // Ajout d'un écouteur d'événement pour le survol
         container.addEventListener('mouseover', function() {
-            if (!estCliquer) {
+            if (lienMusiqueActuel != infoMusique.Lien) {
                 // Masquer l'élément lorsque survolé
-                elementAMasquer.style.display = 'none';
+                numeroMusique.style.display = 'none';
                 play.style.display = 'block';
             }
         });
 
         // Ajout d'un écouteur d'événement pour le passage de la souris hors de l'élément survolé
         container.addEventListener('mouseout', function() {
-            if (!estCliquer) {
+            if (lienMusiqueActuel != infoMusique.Lien) {
                 // Afficher l'élément lorsque la souris n'est plus dessus
-                elementAMasquer.style.display = 'block';
+                numeroMusique.style.display = 'block';
                 play.style.display = 'none';
             }
         });
 
         play.addEventListener('click', function() {
+            console.log(infoMusique);
+            console.log(infoAlbum);
+            console.log(infoArtiste);
+  
             if (lienMusiqueActuel != infoMusique.Lien) {
                 currentSongTime = 0;
                 lienMusiqueActuel = infoMusique.Lien;
             }
+            for (let i = 0; i < listeBtnPlay.length; i++) {
+                listeBtnPlay[i].style.display = 'none';
+                listeBtnPause[i].style.display = 'none';
+                listeNumeroMusique[i].style.display = 'block';
+            }   
             playSong();
-            estCliquer = true;
             play.style.display = 'none';
             pause.style.display = 'block';
+            numeroMusique.style.display = 'none';
+
+            titreMusique.textContent = infoMusique.Titre;
+            let titreAlbum = infoAlbum.Pochette.split(" ")[1];
+            console.log("./images/ALBUMS/"+titreAlbum+".jpg");
+            imageMusique.src = "./images/ALBUMS/"+titreAlbum;
         });
 
         pause.addEventListener('click', function() {
