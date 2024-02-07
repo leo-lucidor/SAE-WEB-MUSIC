@@ -3,10 +3,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Array to store the list of songs
     let listeMusiques = [];
-    let songs = ['./MUSIQUES/Folklore/Flutter.mp3', 'Song2.mp3', 'Song3.mp3'];
     let lienMusiqueActuel = '';
-    let currentSongIndex = 0;
-    let audio = new Audio(songs[currentSongIndex]);
+    let currentSongIndex = 0; // sert a rien
+    let audio = new Audio();
     let currentSongTime = 0;
 
     containers.forEach(function (container) {
@@ -38,7 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         play.addEventListener('click', function() {
-            lienMusiqueActuel = infoMusique.Lien;
+            if (lienMusiqueActuel != infoMusique.Lien) {
+                currentSongTime = 0;
+                lienMusiqueActuel = infoMusique.Lien;
+            }
             playSong();
             estCliquer = true;
             play.style.display = 'none';
@@ -90,6 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to pause the current song
     function pauseSong() {
+        currentSongTime = audio.currentTime;
         audio.pause();
     }
 
