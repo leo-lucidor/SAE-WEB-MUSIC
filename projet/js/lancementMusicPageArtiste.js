@@ -16,6 +16,24 @@ document.addEventListener('DOMContentLoaded', function () {
     let listeBtnPause = [];
     let listeNumeroMusique = [];
 
+    // volume
+    let sliderVolume = document.getElementById("slider-volume");
+
+    // Fonction pour ajuster le volume
+    sliderVolume.oninput = function() {
+        // Obtenir la valeur du sliderVolume
+        var volume = this.value;
+
+        // Mettre à jour le volume dans votre application ou lecteur audio
+        updateVolume(volume);
+    }
+
+    // Fonction pour mettre à jour le volume (à adapter selon votre application)
+    function updateVolume(volume) {
+        audio.volume = volume / 100;
+    }
+
+
     containers.forEach(function (container) {
         const numeroMusique = container.querySelector('.numero-album');
         listeNumeroMusique.push(numeroMusique);

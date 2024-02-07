@@ -19,6 +19,6 @@
         </div>
     </div>
     <div class="container-lecteur-right">
-        <input type="range" min="0" max="100" value="100" class="slider-volume" id="slider-volume">
+        <input type="range" min="0" max="100" value="50" class="slider-volume" id="slider-volume">
     </div>
 </div>
