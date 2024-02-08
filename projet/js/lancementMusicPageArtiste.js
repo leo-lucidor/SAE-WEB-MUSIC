@@ -20,13 +20,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // boutons lecteur
     let btnPlay = document.getElementById('btn-play');
-    // let btnPause = document.querySelector('.btn-pause');
+    let btnPause = document.getElementById('btn-pause');
     let btnPrev = document.getElementById('btn-previous');
     let btnNext = document.getElementById('btn-next');
+
+    // boutons de la musique lancer 
+    let btnPlayCourant = null;
+    let btnPauseCourant = null;
 
     let listeBtnPlay = [];
     let listeBtnPause = [];
     let listeNumeroMusique = [];
+
 
     // volume
     let sliderVolume = document.getElementById("slider-volume");
@@ -139,6 +144,10 @@ document.addEventListener('DOMContentLoaded', function () {
             play.style.display = 'none';
             pause.style.display = 'block';
             numeroMusique.style.display = 'none';
+            btnPlay.style.display = 'none';
+            btnPause.style.display = 'block';
+            btnPlayCourant = play;
+            btnPauseCourant = pause;
 
             titreMusique.textContent = infoMusique.Titre;
             let titreAlbum = infoAlbum.Pochette.split(" ")[1];
@@ -150,17 +159,10 @@ document.addEventListener('DOMContentLoaded', function () {
             pauseSong();
             pause.style.display = 'none';
             play.style.display = 'block';
+            btnPause.style.display = 'none';
+            btnPlay.style.display = 'block';
         });
     });
-
-
-    function togglePlayPause() {
-        if (audio.paused) {
-            playSong();
-        } else {
-            pauseSong();
-        }
-    }
 
     
     // Function to play the current song
@@ -188,10 +190,31 @@ document.addEventListener('DOMContentLoaded', function () {
         sliderLecture.style.background = '#d3d3d3';
     });
 
-    // btnPlay.addEventListener('click', togglePlayPause());
+    btnPause.addEventListener('click', function() {
+        console.log('pause');
+        pauseSong();
+        btnPause.style.display = 'none';
+        btnPlay.style.display = 'block';
+        btnPlayCourant.style.display = 'block';
+        btnPauseCourant.style.display = 'none';
+    });
 
+    btnPlay.addEventListener('click', function() {
+        console.log('play');
+        playSong();
+        btnPlay.style.display = 'none';
+        btnPause.style.display = 'block';
+        btnPlayCourant.style.display = 'none';
+        btnPauseCourant.style.display = 'block';
+    });
 
+    btnNext.addEventListener('click', function() {
+        console.log('next');
+    });
 
+    btnPrev.addEventListener('click', function() {
+        console.log('prev');
+    });
 
 
      // Function to play the next song

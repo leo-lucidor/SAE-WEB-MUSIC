@@ -11,7 +11,8 @@
     <div class="container-lecteur-milieu">
         <div class="container-lecteur-milieu-top">
             <button id="btn-previous"><img class="icon" src="./images/LECTEUR/precedentLecteur.png" alt=""></button>
-            <button id="btn-play"><img class="icon imgPlay" src="./images/LECTEUR/playLecteur.png" alt=""></button>
+            <button id="btn-play" style="display:none"><img class="icon imgPlay" src="./images/LECTEUR/playLecteur.png" alt=""></button>
+            <button id="btn-pause"><img class="icon imgPause" src="./images/LECTEUR/pauseLecteur.png" alt=""></button>
             <button id="btn-next"><img class="icon" src="./images/LECTEUR/suivantLecteur.png" alt=""></button>
         </div>
         <div class="container-lecteur-milieu-bottom">

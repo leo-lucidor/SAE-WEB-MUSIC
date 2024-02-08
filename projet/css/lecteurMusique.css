@@ -51,7 +51,20 @@
     transition: 0.2s;
 }
 
+#btn-play, #btn-pause {
+    background-color: white !important;
+    clip-path: circle();
+    width: 40px !important;
+    height: 40px !important;
+    z-index: 100000;
+}
+
 .imgPlay {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.imgPause {
     width: 40px !important;
     height: 40px !important;
 }
