@@ -1,5 +1,4 @@
 <?php
-require 'src/provider/pdo.php';
 $pdo = getPdo();
 
 $nom = $_POST['name'];

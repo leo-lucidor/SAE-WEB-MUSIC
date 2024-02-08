@@ -1,4 +1,5 @@
 <?php
+
 echo '<link rel="stylesheet" href="./css/popup.css">';
 
 echo '<aside class="container-left">';
@@ -72,9 +73,15 @@ echo '<div class="container-playlist">';
                 } else {
                     echo '<a class="playlist" href="index.php?action=playlist&idPlaylist='. $playlists[$i]['ID_Playlist'] .'">';
                 }
+                    // print_r("tets: ".yaDesMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist']));
                     if (trim($playlists[$i]['Nom']) == 'Titres Likés'){
                         echo '<img src="./images/PLAYLIST/coup-coeur.jpg" alt="">';
-                    } else {
+                    } else if (yaDesMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist'])){
+                        // print_r("eh".getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist']));
+                        // echo '<script>console.log("'. getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist']) .'")</script>';
+                        echo '<img src="'. getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist'])[0]['Pochette'] .'" alt="">';
+                    } 
+                    else {
                         echo '<img src="./images/ALBUMS/default.jpg" alt="">';
                     }
                     echo '<div class="container-playlist-bottom-text">';

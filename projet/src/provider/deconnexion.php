@@ -1,6 +1,5 @@
 <?php
 
-require 'src/provider/pdo.php';
 $pdo = getPdo();
 
 // kill la session

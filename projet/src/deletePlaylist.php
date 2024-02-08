@@ -1,5 +1,4 @@
 <?php
-require 'src/provider/pdo.php';
 $pdo = getPdo();
 require 'src/BDD/Function/databaseDelete.php';
 

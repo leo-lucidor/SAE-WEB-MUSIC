@@ -1,6 +1,5 @@
 <?php
 
-require 'src/provider/pdo.php';
 $pdo = getPdo();
 require 'src/BDD/Function/databaseGet.php';
 
@@ -17,6 +16,6 @@ echo $idUser;
 if (trim($nomPlaylist) != "Titres Likés"){
     insertPlaylist($pdo, $nomPlaylist, $idUser);
     header('Location: index.php?action=accueil');
+} else {
+    header('Location: index.php?action=accueil&erreurAjoutPlaylist=Erreur lors de l\'ajout de la playlist');
 }
-
-header('Location: index.php?action=accueil&erreurAjoutPlaylist=Erreur lors de l\'ajout de la playlist');

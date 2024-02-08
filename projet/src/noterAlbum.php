@@ -2,7 +2,6 @@
 
 require 'src/BDD/Function/databaseGet.php';
 require 'src/BDD/Function/databaseUpdate.php';
-require 'src/provider/pdo.php';
 $pdo = getPdo();
 
 $idAlbum = $_REQUEST['idAlbum'];

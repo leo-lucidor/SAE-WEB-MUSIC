@@ -21,7 +21,6 @@ class Recherche
     public function afficher()
     {
         require 'src/provider/checkFichierDansDossier.php';
-        require 'src/provider/pdo.php';
         $pdo = getPdo();
         $playlists = get_playlist_visible($pdo, $_SESSION['idUser']);
         $artistes = get_all_artiste($pdo);

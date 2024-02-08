@@ -141,16 +141,17 @@
 
 /* lancer la musique */
 
-.lancer-music {
+.lancer-music, .pause-music {
     display: none;
     margin-left: 20px;
     margin-right: 10px;
     z-index: 100;
 }
 
-.lancer-music img {
+.lancer-music img, .pause-music img{
     width: 1.5vw;
     height: 1.5vw;
+    border-radius: 0;
 }
 
 .btn-like {
