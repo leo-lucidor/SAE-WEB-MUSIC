@@ -21,7 +21,6 @@ class Accueil
     public function afficher()
     {
         require 'src/provider/checkFichierDansDossier.php';
-        require 'src/provider/pdo.php';
         $pdo = getPdo();
 
         echo '<div class="container-milieu-bottom">';

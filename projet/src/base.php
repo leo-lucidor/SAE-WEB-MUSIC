@@ -44,7 +44,6 @@ if ($_REQUEST['action'] == 'accueil') {
 } else if ($_REQUEST['action'] == 'favoris') {
     require 'src/favoris.php';
 } else if ($_REQUEST['action'] == 'album') {
-    require 'src/provider/pdo.php';
     $pdo = getPdo();
     
     $idAlbum = $_REQUEST['id'];
@@ -54,7 +53,6 @@ if ($_REQUEST['action'] == 'accueil') {
     $album = new Album($idAlbum, $preAlbum['Titre'], $nomArtiste, $preAlbum['Date_de_sortie'], $preAlbum['Genre'], $preAlbum['Pochette'], $preAlbum['ID_Artiste_Parent']);
     $album->afficher();
 } else if ($_REQUEST['action'] == 'artiste') {
-    require 'src/provider/pdo.php';
     $pdo = getPdo();
 
     $idArtiste = $_REQUEST['id'];
@@ -63,7 +61,6 @@ if ($_REQUEST['action'] == 'accueil') {
     $artiste = new Artiste($idArtiste, $nomArtiste[0]);
     $artiste->afficher();
 } else if ($_REQUEST['action'] == 'editerArtiste') {
-    require 'src/provider/pdo.php';
     $pdo = getPdo();
 
     $idArtiste = $_REQUEST['idArtiste'];
@@ -72,7 +69,6 @@ if ($_REQUEST['action'] == 'accueil') {
     $editerArtiste = new editerArtiste($idArtiste, $nomArtiste[0]);
     $editerArtiste->afficher();
 } else if ($_REQUEST['action'] == 'playlist') {
-    require 'src/provider/pdo.php';
     $pdo = getPdo();
 
     $idPlaylist = $_REQUEST['idPlaylist'];

@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="./css/lecteurMusique.css">
 
-<div class="container-lecteur">
+<div class="container-lecteur" style="display:none">
     <div class="container-lecteur-left">
         <img class="pochette" src="images/ALBUMS/default.jpg" alt="pochette">
         <div class="container-lecteur-bottom-left-bottom">

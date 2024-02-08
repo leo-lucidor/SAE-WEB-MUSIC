@@ -34,6 +34,7 @@ $data = getdata();
 // print_r($data);
 
 echo '<div class="container-all">';
+require 'src/provider/pdo.php';
 
 if ($_REQUEST == null) {
     require 'src/login.php';  
@@ -75,9 +76,9 @@ else {
     require 'src/BDD/Function/databaseGet.php';
     $idUser = get_id_with_email($pdo, $_SESSION['mail']);
     $_SESSION['playlistUser'] = get_playlist_utilisateur($pdo, $idUser);
+    require 'src/lecteurMusique.php';
     require 'src/aside.php';
     require 'src/base.php';
-    require 'src/lecteurMusique.php';
 } 
 
 echo '</div>';

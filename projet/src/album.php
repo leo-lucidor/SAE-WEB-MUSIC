@@ -164,7 +164,12 @@ class Album
                             echo '<p class="numero-album">'.$numero .'</p>';
                             echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
                             echo '<button class="pause-music"><img src="./images/pause.png" alt="logo pause music"></button>';
-                            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
+                            // echo '<img src="./images/ALBUMS/default.jpg" alt="">';
+                            if ($imgAlbumCondition == true){
+                                echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
+                            } else {
+                                echo '<img src="./images/ALBUMS/default.jpg" alt="'. trim($this->title) . '">';
+                            }
                             echo '<div class="contenu-album">';
                                 echo '<p class="titre-album">'.$musique['Titre'].'</p>';
                             echo '</div>';

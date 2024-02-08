@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const lecteur = document.querySelector('.container-lecteur');
     const containers = document.querySelectorAll('.container-album-unique-artiste');
 
     let currentSongIndex = 0; // sert a rien
@@ -164,6 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Function to play the current song
     function playSong() {
+        lecteur.style.display = 'flex';
         audio.src = lienMusiqueActuel;
         audio.currentTime = currentSongTime; 
         audio.play();

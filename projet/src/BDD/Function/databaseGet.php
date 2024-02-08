@@ -289,3 +289,34 @@ function getMusiqueWithIdArtiste(PDO $pdo, $nomArtiste){
         return false;
     }
 }
+
+function getMusiqueDansPlaylist(PDO $pdo, $idPlaylist){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album, Pochette FROM Musique_Playlist NATURAL JOIN Musique NATURAL JOIN Album WHERE ID_Playlist = :idPlaylist");
+        $stmt->bindParam(':idPlaylist', $idPlaylist);
+        $stmt->execute();   
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des musiques de la playlist : ". $e->getMessage();
+        return false;
+    }
+}
+
+function yaDesMusiqueDansPlaylist(PDO $pdo, $idPlaylist){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Musique FROM Musique_Playlist WHERE ID_Playlist = :idPlaylist");
+        $stmt->bindParam(':idPlaylist', $idPlaylist);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        if ($result == null){
+            return false;
+        }
+        return true;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des musiques de la playlist : ". $e->getMessage();
+        return false;
+    }
+}

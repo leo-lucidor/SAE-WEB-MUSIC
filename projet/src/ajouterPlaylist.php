@@ -1,6 +1,5 @@
 <?php
 
-require 'src/provider/pdo.php';
 $pdo = getPdo();
 require 'src/BDD/Function/databaseGet.php';
 

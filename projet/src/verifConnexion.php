@@ -1,6 +1,5 @@
 <?php
 require 'src/BDD/Function/databaseGet.php';
-require 'src/provider/pdo.php';
 
 $pdo = getPdo();
 $mail_username = $_POST['email_username'];
