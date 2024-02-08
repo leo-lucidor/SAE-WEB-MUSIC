@@ -11,6 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
     let lienMusiqueActuel = '';
     let audio = new Audio();
     let currentSongTime = 0;
+    let dureeMusique = "";
+
+    let tempsLecture = document.querySelector('.temps-lecture');
+    let tempsTotal = document.querySelector('.temps-total');
+    let interval;
+
+    // boutons lecteur
+    let btnPlay = document.getElementById('btn-play');
+    // let btnPause = document.querySelector('.btn-pause');
+    let btnPrev = document.getElementById('btn-previous');
+    let btnNext = document.getElementById('btn-next');
 
     let listeBtnPlay = [];
     let listeBtnPause = [];
@@ -18,6 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // volume
     let sliderVolume = document.getElementById("slider-volume");
+    sliderVolume.addEventListener('input', function() {
+        var value = (this.value - this.min) / (this.max - this.min) * 100;
+        this.style.background = 'linear-gradient(to right, #740c96 0%, #840c96 ' + value + '%, #d3d3d3 ' + value + '%, #d3d3d3 100%)';
+    });
 
     // Fonction pour ajuster le volume
     sliderVolume.oninput = function() {
@@ -33,6 +48,44 @@ document.addEventListener('DOMContentLoaded', function () {
         audio.volume = volume / 100;
     }
 
+    let sliderLecture = document.getElementById("slider-lecture");
+    sliderLecture.addEventListener('input', function() {
+        audio.currentTime = this.value;
+        // var value = (this.value - this.min) / (this.max - this.min) * 100;
+        // this.style.background = 'linear-gradient(to right, #740c96 0%, #840c96 ' + value + '%, #d3d3d3 ' + value + '%, #d3d3d3 100%)';
+    });
+
+    function formatDuration(totalSeconds) {
+        var minutes = Math.floor(totalSeconds / 60);
+        var seconds = Math.floor(totalSeconds % 60);
+    
+        // Formater le temps en ajoutant un zéro devant les secondes si elles sont inférieures à 10
+        var formattedSeconds = (seconds < 10) ? "0" + seconds : seconds;
+    
+        var formattedDuration = minutes + ':' + formattedSeconds;
+    
+        return formattedDuration;
+    }
+    
+
+    // update time/progress bar
+    function updateTime() {
+        var minutes = Math.floor(audio.currentTime / 60);
+        var seconds = Math.floor(audio.currentTime % 60);
+        var formattedTime = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        tempsLecture.textContent = formattedTime;
+
+        sliderLecture.value = audio.currentTime;
+        var value = (sliderLecture.value - sliderLecture.min) / (sliderLecture.max - sliderLecture.min) * 100;
+        sliderLecture.style.background = 'linear-gradient(to right, #740c96 0%, #840c96 ' + value + '%, #d3d3d3 ' + value + '%, #d3d3d3 100%)';
+    }
+
+    // permet de mettre à jour le temps de lecture maxi
+    audio.addEventListener('loadedmetadata', function() {
+        sliderLecture.setAttribute('max', audio.duration);
+        dureeMusique = formatDuration(audio.duration);
+        tempsTotal.textContent = dureeMusique;
+    });
 
     containers.forEach(function (container) {
         const numeroMusique = container.querySelector('.numero-album');
@@ -99,16 +152,48 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+
+    function togglePlayPause() {
+        if (audio.paused) {
+            playSong();
+        } else {
+            pauseSong();
+        }
+    }
+
     
     // Function to play the current song
     function playSong() {
         audio.src = lienMusiqueActuel;
         audio.currentTime = currentSongTime; 
         audio.play();
+        interval = setInterval(updateTime, 1000);
+        sliderLecture.setAttribute('max', audio.duration);
     }
     
-    // Function to play the next song
-    function playNext() {
+    // Function to pause the current song
+    function pauseSong() {
+        currentSongTime = audio.currentTime;
+        audio.pause();
+        clearInterval(interval);
+    }
+
+    audio.addEventListener('ended', function() {
+        clearInterval(interval);
+        tempsLecture.textContent = '0:00';
+        tempsTotal.textContent = '0:00';
+        sliderLecture.value = 0;
+        sliderLecture.style.background = '#d3d3d3';
+    });
+
+    // btnPlay.addEventListener('click', togglePlayPause());
+
+
+
+
+
+     // Function to play the next song
+     function playNext() {
         if (currentSongIndex < songs.length - 1) {
             currentSongIndex++;
             currentSongTime = 0;
@@ -133,12 +218,6 @@ document.addEventListener('DOMContentLoaded', function () {
             currentSongTime = 0;
             playSong();
         }
-    }
-
-    // Function to pause the current song
-    function pauseSong() {
-        currentSongTime = audio.currentTime;
-        audio.pause();
     }
 
 });

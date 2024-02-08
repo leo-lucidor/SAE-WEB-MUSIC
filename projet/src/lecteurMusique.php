@@ -15,7 +15,9 @@
             <button id="btn-next"><img class="icon" src="./images/LECTEUR/suivantLecteur.png" alt=""></button>
         </div>
         <div class="container-lecteur-milieu-bottom">
+            <p class="temps-lecture">0:00</p>
             <input type="range" min="0" max="100" value="0" class="slider-lecture" id="slider-lecture">
+            <p class="temps-total">0:00</p>
         </div>
     </div>
     <div class="container-lecteur-right">
