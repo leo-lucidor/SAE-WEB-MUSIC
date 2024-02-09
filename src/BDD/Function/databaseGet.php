@@ -292,10 +292,13 @@ function getMusiqueWithIdArtiste(PDO $pdo, $nomArtiste){
 
 function getMusiqueDansPlaylist(PDO $pdo, $idPlaylist){
     try{
-        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album, Pochette FROM Musique_Playlist NATURAL JOIN Musique NATURAL JOIN Album WHERE ID_Playlist = :idPlaylist");
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique_Playlist NATURAL JOIN Musique WHERE ID_Playlist = :idPlaylist");
         $stmt->bindParam(':idPlaylist', $idPlaylist);
         $stmt->execute();   
         $result = $stmt->fetchAll();
+        if ($result == null) {
+            return null;
+        }
         return $result;
     }
     catch(PDOException $e){
