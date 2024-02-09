@@ -8,7 +8,7 @@
 }
 
 .lancer-music img, .pause-music img{
-    width: 1.5vw;
-    height: 1.5vw;
+    width: 1.5vw !important;
+    height: 1.5vw !important;
     border-radius: 0;
 }

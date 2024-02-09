@@ -171,3 +171,8 @@
     transform: rotate(90deg);
     transition: all 0.2s ease;
 }
+
+.lancer-music, .pause-music {
+    margin-left: 25px;
+    margin-right: 20px;
+}
