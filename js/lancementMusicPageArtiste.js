@@ -2,18 +2,23 @@ document.addEventListener('DOMContentLoaded', function () {
     const lecteur = document.querySelector('.container-lecteur');
     const containers = document.querySelectorAll('.container-album-unique-artiste');
 
-    let currentSongIndex = 0; // sert a rien
-
+    // Elements du lecteur
     let titreMusique = document.querySelector('.titre-musique-lecteur');
     let artisteMusique = document.querySelector('.nom-artiste-lecteur');
     let imageMusique = document.querySelector('.pochette');
 
+    // liste des musiques jouées
+    let listeMusiqueJouer = new Array();
+    let currentSongIndex = 0; 
+
+    // liste des musiques
     let listeMusiques = [];
     let lienMusiqueActuel = '';
     let audio = new Audio();
     let currentSongTime = 0;
     let dureeMusique = "";
 
+    // Elements du lecteur
     let tempsLecture = document.querySelector('.temps-lecture');
     let tempsTotal = document.querySelector('.temps-total');
     let interval;
@@ -47,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
     sliderVolume.oninput = function() {
         // Obtenir la valeur du sliderVolume
         var volume = this.value;
-
         // Mettre à jour le volume dans votre application ou lecteur audio
         updateVolume(volume);
     }
@@ -108,7 +112,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const infoAlbum =  JSON.parse(container.querySelector('.info-album').textContent);
         const infoArtiste =  JSON.parse(container.querySelector('.info-artiste').textContent);
 
-        listeMusiques.push(infoMusique); 
+
+        // listeMusiques.push([infoMusique, infoAlbum, infoArtiste]); 
         // console.log(infoMusique);
 
         // Ajout d'un écouteur d'événement pour le survol
@@ -133,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(infoMusique);
             console.log(infoAlbum);
             console.log(infoArtiste);
-  
+
             if (lienMusiqueActuel != infoMusique.Lien) {
                 currentSongTime = 0;
                 lienMusiqueActuel = infoMusique.Lien;
@@ -157,6 +162,12 @@ document.addEventListener('DOMContentLoaded', function () {
             let titreAlbum = infoAlbum.Pochette.split(" ")[1];
             console.log("./images/ALBUMS/"+titreAlbum+".jpg");
             imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+
+            if (listeMusiqueJouer.length > 0) {
+                currentSongIndex++;
+            }
+            listeMusiqueJouer.push([infoMusique, infoAlbum, infoArtiste, play, pause, numeroMusique, titreMusique, artisteMusique, imageMusique]);
+            console.log(listeMusiqueJouer);
         });
 
         pause.addEventListener('click', function() {
@@ -166,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
             btnPause.style.display = 'none';
             btnPlay.style.display = 'block';
         });
+
     });
 
     
@@ -192,6 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tempsTotal.textContent = '0:00';
         sliderLecture.value = 0;
         sliderLecture.style.background = '#d3d3d3';
+        playNext();
     });
 
     btnPause.addEventListener('click', function() {
@@ -214,24 +227,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
     btnNext.addEventListener('click', function() {
         console.log('next');
+        playNext();
     });
 
     btnPrev.addEventListener('click', function() {
         console.log('prev');
+        playPrevious();
     });
 
 
      // Function to play the next song
      function playNext() {
-        if (currentSongIndex < songs.length - 1) {
-            currentSongIndex++;
-            currentSongTime = 0;
-            playSong();
-        } else {
-            // If it's the last song, loop back to the first song
-            currentSongIndex = 0;
-            currentSongTime = 0;
-            playSong();
+        try {
+            if (currentSongIndex < listeMusiqueJouer.length - 1) {
+                currentSongIndex++;
+                currentSongTime = 0;
+                let musique = listeMusiqueJouer[currentSongIndex];
+                titreMusique.textContent = musique[0].Titre;
+                artisteMusique.textContent = musique[2].Nom;
+                let titreAlbum = musique[1].Pochette.split(" ")[1];
+                imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+                lienMusiqueActuel = musique[0].Lien;
+                playSong();
+            } else {
+                // If it's the last song, loop back to the first song
+                currentSongIndex = 0;
+                currentSongTime = 0;
+                let musique = listeMusiqueJouer[currentSongIndex];
+                titreMusique.textContent = musique[0].Titre;
+                artisteMusique.textContent = musique[2].Nom;
+                let titreAlbum = musique[1].Pochette.split(" ")[1];
+                imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+                lienMusiqueActuel = musique[0].Lien;
+                playSong();
+            }
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -240,11 +271,23 @@ document.addEventListener('DOMContentLoaded', function () {
         if (currentSongIndex > 0) {
             currentSongIndex--;
             currentSongTime = 0;
+            let musique = listeMusiqueJouer[currentSongIndex];
+            titreMusique.textContent = musique[0].Titre;
+            artisteMusique.textContent = musique[2].Nom;
+            let titreAlbum = musique[1].Pochette.split(" ")[1];
+            imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+            lienMusiqueActuel = musique[0].Lien;
             playSong();
         } else {
             // If it's the first song, loop back to the last song
-            currentSongIndex = songs.length - 1;
+            currentSongIndex = listeMusiqueJouer.length - 1;
             currentSongTime = 0;
+            let musique = listeMusiqueJouer[currentSongIndex];
+            titreMusique.textContent = musique[0].Titre;
+            artisteMusique.textContent = musique[2].Nom;
+            let titreAlbum = musique[1].Pochette.split(" ")[1];
+            imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+            lienMusiqueActuel = musique[0].Lien;
             playSong();
         }
     }

@@ -67,7 +67,7 @@ body {
 .container-all {
     display: flex;
     flex-wrap: nowrap;
-    /* height: 100vh; */
+    /* height: 100vh;  */
 }
 
 .container-left {
@@ -95,7 +95,7 @@ body {
     align-items: center;
     justify-content: space-between;
     flex-basis: 100%;
-    margin-top: 1em;
+    padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
     padding-bottom: 1em;
