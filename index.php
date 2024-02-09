@@ -85,5 +85,6 @@ else {
 echo '</div>';
 ?>
 <script src="./js/Carousel.js"></script>
+<script src="./js/Ajax.js" defer></script>
 </body>
 </html>
