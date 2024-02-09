@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
         this.style.background = 'linear-gradient(to right, #740c96 0%, #840c96 ' + value + '%, #d3d3d3 ' + value + '%, #d3d3d3 100%)';
     });
 
+    // Mettre à jour le volume initial
+    audio.volume = sliderVolume.value / 100;
+
     // Fonction pour ajuster le volume
     sliderVolume.oninput = function() {
         // Obtenir la valeur du sliderVolume

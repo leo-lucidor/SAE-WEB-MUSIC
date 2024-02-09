@@ -94,7 +94,25 @@ class Playlist {
                     echo '<div class="container-album-unique-artiste">';
                             echo '<p class="numero-album">'. $numero .'</p>';
                             echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
-                            echo '<img src="./images/ALBUMS/default.jpg" alt="">';
+                            echo '<button class="pause-music"><img src="./images/pause.png" alt="logo pause music"></button>';
+
+                            $path = './images/ALBUMS/';
+                            $pochette = trim(get_album_with_id(getPdo(), $musique['ID_Album'])['Pochette']);
+                            $imgAlbumCondition = checkFileNameExists($path, $pochette);
+
+                            $album = get_album_with_id(getPdo(), $musique['ID_Album']);
+                            $artiste = get_artiste(getPdo(), intval($musique[$album['ID_Artiste_By']]));
+
+                            echo '<p class="info-musique" style="display:none">'. trim(json_encode($musique)) .'</p>';
+                            echo '<p class="info-artiste" style="display:none">'. trim(json_encode($artiste)) .'</p>';
+                            echo '<p class="info-album" style="display:none">'. trim(json_encode($album)) .'</p>';
+                            
+                            if ($imgAlbumCondition == true){
+                                echo '<img src="./images/ALBUMS/'. trim($pochette) . '" alt="'. trim($pochette) . '">';
+                            } else {
+                                echo '<img src="./images/ALBUMS/default.jpg" alt="'. trim($pochette) . '">';
+                            }
+                            // echo '<img src="./images/ALBUMS/default.jpg" alt="">';
     
                             echo '<div class="contenu-album">';
                                 echo '<p class="titre-album">'. $nomMusique .'</p>';
@@ -116,7 +134,7 @@ class Playlist {
             ?>
         </div>
         <?php
-        echo '<script src="js/lancementMusicPageArtiste.js"></script>';
+        // echo '<script src="js/lancementMusicPageArtiste.js"></script>';
     }
 }
 ?>

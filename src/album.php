@@ -164,7 +164,6 @@ class Album
                             echo '<p class="numero-album">'.$numero .'</p>';
                             echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
                             echo '<button class="pause-music"><img src="./images/pause.png" alt="logo pause music"></button>';
-                            // echo '<img src="./images/ALBUMS/default.jpg" alt="">';
                             if ($imgAlbumCondition == true){
                                 echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
                             } else {
@@ -198,7 +197,6 @@ class Album
                 echo '</div>';
             echo '</div>';
         echo '</div>';
-        echo '<script src="js/lancementMusicPageArtiste.js"></script>';
         echo '<script src="js/AjouterMusiqueDansPlaylist.js"></script>';
         echo '<script src="js/ratingAlbum.js"></script>';
     }

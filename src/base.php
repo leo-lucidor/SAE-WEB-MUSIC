@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="./css/accueil.css">
+<link rel="stylesheet" href="./css/lancerMusique.css">
 <script src="./js/search.js"></script>
 
 <div class="container-milieu">
@@ -81,6 +82,8 @@ if ($_REQUEST['action'] == 'accueil') {
     require 'src/404.php';
 }
 
+
+echo '<script src="js/lancementMusicPageArtiste.js"></script>';
 ?>
 
 </div>
