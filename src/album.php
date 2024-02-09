@@ -142,7 +142,7 @@ class Album
                     for ($i=0; $i < count($musiques); $i++) { 
                         $musique = $musiques[$i]; // ID_Album
                         $album = get_album_with_id(getPdo(), $musique['ID_Album']);
-                        $artiste = get_artiste(getPdo(), intval($musique[$album['ID_Artiste_By']]));
+                        $artiste = get_artiste(getPdo(), intval($album['ID_Artiste_By']));
 
                         $pathAlbum = './images/musiques/';
                         $imgAlbum = $musique['Pochette'];

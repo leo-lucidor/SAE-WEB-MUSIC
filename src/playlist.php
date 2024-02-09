@@ -101,7 +101,9 @@ class Playlist {
                             $imgAlbumCondition = checkFileNameExists($path, $pochette);
 
                             $album = get_album_with_id(getPdo(), $musique['ID_Album']);
-                            $artiste = get_artiste(getPdo(), intval($musique[$album['ID_Artiste_By']]));
+                            $artiste = get_artiste(getPdo(), intval($album['ID_Artiste_By']));
+
+                            $nomArtiste = $artiste['Nom'];
 
                             echo '<p class="info-musique" style="display:none">'. trim(json_encode($musique)) .'</p>';
                             echo '<p class="info-artiste" style="display:none">'. trim(json_encode($artiste)) .'</p>';

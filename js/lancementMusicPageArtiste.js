@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
             btnPauseCourant = pause;
 
             titreMusique.textContent = infoMusique.Titre;
+            artisteMusique.textContent = infoArtiste.Nom;
             let titreAlbum = infoAlbum.Pochette.split(" ")[1];
             console.log("./images/ALBUMS/"+titreAlbum+".jpg");
             imageMusique.src = "./images/ALBUMS/"+titreAlbum;
