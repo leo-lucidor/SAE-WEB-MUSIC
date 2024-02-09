@@ -13,7 +13,12 @@ if (filter_var($mail_username, FILTER_VALIDATE_EMAIL)) {
     $id = get_id_with_pseudo($pdo, $username);
 }
 $mdp = $_POST['password'];
-$mdpVerif = get_password_with_email($pdo, $mail) || get_password_with_username($pdo, $username);
+
+if ($mail == null || $mdp == null) {
+    header('Location: index.php?action=login&erreur=identifiants ou mot de passe incorrect');
+}
+
+$mdpVerif = get_password_with_email($pdo, $mail);
 echo "test : ".$mdpVerif;
 
 

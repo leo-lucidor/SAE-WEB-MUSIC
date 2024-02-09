@@ -66,9 +66,9 @@ class Album
             echo '<p>' . trim($this->title) . ', de '. trim($this->artiste) . ', '. $this->year .' <span>'. $this->genre .'</span></p>';
             // echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
             if (favorisAlbumExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id)) {
-                echo '<a class="btn-editer" href="#" data-page="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
+                echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
             } else {
-                echo '<a class="btn-editer" href="#" data-page="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
+                echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
             }
         echo '</div>';
 
