@@ -309,30 +309,12 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Function to play the current song
     function playSong() {
-        if (!modeRandom) {
-            lecteur.style.display = 'flex';
-            audio.src = lienMusiqueActuel;
-            audio.currentTime = currentSongTime; 
-            audio.play();
-            interval = setInterval(updateTime, 1000);
-            sliderLecture.setAttribute('max', audio.duration);
-        } else {
-            let randomIndex = Math.floor(Math.random() * listeMusiqueJouer.length);
-            currentSongIndex = randomIndex;
-            let musique = listeMusiqueJouer[currentSongIndex];
-            titreMusique.textContent = musique[0].Titre;
-            artisteMusique.textContent = musique[2].Nom;
-            let titreAlbum = musique[1].Pochette.split(" ")[1];
-            imageMusique.src = "./images/ALBUMS/"+titreAlbum;
-            lienMusiqueActuel = musique[0].Lien;
-            btnPlayCourant = musique[3];
-            btnPauseCourant = musique[4];
-            numeroMusiqueCourant = musique[5];
-            btnPlayCourant.style.display = 'none';
-            btnPauseCourant.style.display = 'block';
-            numeroMusiqueCourant.style.display = 'none';
-            playSong();
-        }
+        lecteur.style.display = 'flex';
+        audio.src = lienMusiqueActuel;
+        audio.currentTime = currentSongTime; 
+        audio.play();
+        interval = setInterval(updateTime, 1000);
+        sliderLecture.setAttribute('max', audio.duration);
     }
     
     // Function to pause the current song
@@ -390,33 +372,54 @@ document.addEventListener('DOMContentLoaded', function () {
      // Function to play the next song
      function playNext() {
         try {
-            if (currentSongIndex < listeMusiqueJouer.length - 1) {
-                currentSongIndex++;
-                currentSongTime = 0;
+            if (modeRandom) {
+                btnPlayCourant.style.display = 'none';
+                btnPauseCourant.style.display = 'none';
+                numeroMusiqueCourant.style.display = 'block';
+                let randomIndex = Math.floor(Math.random() * listeMusiqueJouer.length);
+                currentSongIndex = randomIndex;
+                let musique = listeMusiqueJouer[currentSongIndex];
+                titreMusique.textContent = musique[0].Titre;
+                artisteMusique.textContent = musique[2].Nom;
+                let titreAlbum = musique[1].Pochette.split(" ")[1];
+                imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+                lienMusiqueActuel = musique[0].Lien;
+                btnPlayCourant = musique[3];
+                btnPauseCourant = musique[4];
+                numeroMusiqueCourant = musique[5];
+                btnPlayCourant.style.display = 'none';
+                btnPauseCourant.style.display = 'block';
+                numeroMusiqueCourant.style.display = 'none';
+                playSong();
             } else {
-                // If it's the last song, loop back to the first song
-                currentSongIndex = 0;
-                currentSongTime = 0;
+                if (currentSongIndex < listeMusiqueJouer.length - 1) {
+                    currentSongIndex++;
+                    currentSongTime = 0;
+                } else {
+                    // If it's the last song, loop back to the first song
+                    currentSongIndex = 0;
+                    currentSongTime = 0;
+                }
+                btnPlay.style.display = 'none';
+                btnPause.style.display = 'block';
+                btnPlayCourant.style.display = 'none';
+                btnPauseCourant.style.display = 'none';
+                numeroMusiqueCourant.style.display = 'block';
+                // remettre les bonnes valeurs
+                let musique = listeMusiqueJouer[currentSongIndex];
+                titreMusique.textContent = musique[0].Titre;
+                artisteMusique.textContent = musique[2].Nom;
+                let titreAlbum = musique[1].Pochette.split(" ")[1];
+                imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+                lienMusiqueActuel = musique[0].Lien;
+                btnPlayCourant = musique[3];
+                btnPauseCourant = musique[4];
+                numeroMusiqueCourant = musique[5];
+                btnPlayCourant.style.display = 'none';
+                btnPauseCourant.style.display = 'block';
+                numeroMusiqueCourant.style.display = 'none';
+                playSong();
             }
-            btnPlay.style.display = 'none';
-            btnPause.style.display = 'block';
-            btnPlayCourant.style.display = 'none';
-            btnPauseCourant.style.display = 'none';
-            numeroMusiqueCourant.style.display = 'block';
-            // remettre les bonnes valeurs
-            let musique = listeMusiqueJouer[currentSongIndex];
-            titreMusique.textContent = musique[0].Titre;
-            artisteMusique.textContent = musique[2].Nom;
-            let titreAlbum = musique[1].Pochette.split(" ")[1];
-            imageMusique.src = "./images/ALBUMS/"+titreAlbum;
-            lienMusiqueActuel = musique[0].Lien;
-            btnPlayCourant = musique[3];
-            btnPauseCourant = musique[4];
-            numeroMusiqueCourant = musique[5];
-            btnPlayCourant.style.display = 'none';
-            btnPauseCourant.style.display = 'block';
-            numeroMusiqueCourant.style.display = 'none';
-            playSong();
         } catch (error) {
             console.log(error);
         }
