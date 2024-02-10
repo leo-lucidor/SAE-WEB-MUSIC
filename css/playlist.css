@@ -11,20 +11,6 @@
     margin-right: 5vw;
 }
 
-.container-btn-playlist-spotiuto {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    /* placement */
-    flex-basis: 100%;
-    margin-top: 2vh;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    gap: 25vw;
-}
-
 .btn-retour img {
     width: 2vw;
     height: 2vw;
@@ -144,6 +130,12 @@
     transform: rotate(0deg);
 }
 
+.jouer-playlist img {
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+}
+
 .container-supprimer-musique {
     flex-grow: 1;
     display: flex;
@@ -182,4 +174,13 @@
     width: 25px;
     height: 25px;
     border-radius: 0;
+}
+
+.container-btn-playlist-right {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
 }
