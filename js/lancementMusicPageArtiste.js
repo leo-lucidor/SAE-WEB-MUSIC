@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let listeBtnPause = [];
     let listeNumeroMusique = [];
 
+    let jouerPlaylist = document.querySelector('.jouer-playlist');
+
 
     // volume
     let sliderVolume = document.getElementById("slider-volume");
@@ -336,5 +338,45 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(error);
         }
     }
+
+
+    jouerPlaylist.addEventListener('click', function() {
+        let ind = 0;
+        containers.forEach(function (container) {
+            const numeroMusique = container.querySelector('.numero-album');
+            const play = container.querySelector('.lancer-music');
+            const pause = container.querySelector('.pause-music');
+                
+            const infoMusique =  JSON.parse(container.querySelector('.info-musique').textContent);
+            const infoAlbum =  JSON.parse(container.querySelector('.info-album').textContent);
+            const infoArtiste =  JSON.parse(container.querySelector('.info-artiste').textContent);
+    
+            if (ind == 0) {
+                if (lienMusiqueActuel != infoMusique.Lien) {
+                    currentSongTime = 0;
+                    lienMusiqueActuel = infoMusique.Lien;
+                }
+                play.style.display = 'none';
+                pause.style.display = 'block';
+                numeroMusique.style.display = 'none';
+                btnPlay.style.display = 'none';
+                btnPause.style.display = 'block';
+                btnPlayCourant = play;
+                btnPauseCourant = pause;
+                numeroMusiqueCourant = numeroMusique;
+
+                titreMusique.textContent = infoMusique.Titre;
+                artisteMusique.textContent = infoArtiste.Nom;
+                let titreAlbum = infoAlbum.Pochette.split(" ")[1];
+                imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+
+                playSong();
+            }
+
+            listeMusiqueJouer.push([infoMusique, infoAlbum, infoArtiste, play, pause, numeroMusique, titreMusique, artisteMusique, imageMusique]);
+            
+            ind++;
+        });
+    });
 
 });
