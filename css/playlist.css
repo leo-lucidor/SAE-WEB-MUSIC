@@ -184,3 +184,18 @@
     align-items: center;
     gap: 20px;
 }
+
+#btn-volume-high img, #btn-volume-low img, #btn-volume-mute img {
+    width: 25px;
+    height: 25px;
+    border-radius: 0;
+}
+
+.container-lecteur-right {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}

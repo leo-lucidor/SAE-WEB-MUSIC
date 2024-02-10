@@ -42,11 +42,68 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // volume
+    let archiveVolume = 0;
+    let btnVolumeHigh = document.getElementById('btn-volume-high');
+    let btnVolumeLow = document.getElementById('btn-volume-low');
+    let btnVolumeMute = document.getElementById('btn-volume-mute');
     let sliderVolume = document.getElementById("slider-volume");
     sliderVolume.addEventListener('input', function() {
         var value = (this.value - this.min) / (this.max - this.min) * 100;
         this.style.background = 'linear-gradient(to right, #740c96 0%, #840c96 ' + value + '%, #d3d3d3 ' + value + '%, #d3d3d3 100%)';
+        if (this.value == 0) {
+            btnVolumeHigh.style.display = 'none';
+            btnVolumeLow.style.display = 'none';
+            btnVolumeMute.style.display = 'block';
+        } else if (this.value > 0 && this.value < 50) {
+            btnVolumeHigh.style.display = 'none';
+            btnVolumeLow.style.display = 'block';
+            btnVolumeMute.style.display = 'none';
+        } else {
+            btnVolumeHigh.style.display = 'block';
+            btnVolumeLow.style.display = 'none';
+            btnVolumeMute.style.display = 'none';
+        }
     });
+
+    btnVolumeHigh.addEventListener('click', function() {
+        archiveVolume = sliderVolume.value;
+        sliderVolume.value = 0;
+        sliderVolume.style.background = '#d3d3d3';
+        audio.volume = 0;
+        btnVolumeHigh.style.display = 'none';
+        btnVolumeLow.style.display = 'none';
+        btnVolumeMute.style.display = 'block';
+    });
+
+    btnVolumeLow.addEventListener('click', function() {
+        archiveVolume = sliderVolume.value;
+        sliderVolume.value = 0;
+        sliderVolume.style.background = '#d3d3d3';
+        audio.volume = 0;
+        btnVolumeHigh.style.display = 'none';
+        btnVolumeLow.style.display = 'none';
+        btnVolumeMute.style.display = 'block';
+    });
+
+    btnVolumeMute.addEventListener('click', function() {
+        sliderVolume.value = archiveVolume;
+        audio.volume = archiveVolume / 100;
+        sliderVolume.style.background = 'linear-gradient(to right, #740c96 0%, #840c96 ' + archiveVolume + '%, #d3d3d3 ' + archiveVolume + '%, #d3d3d3 100%)';
+        if (archiveVolume == 0) {
+            btnVolumeHigh.style.display = 'none';
+            btnVolumeLow.style.display = 'none';
+            btnVolumeMute.style.display = 'block';
+        } else if (archiveVolume > 0 && archiveVolume < 50) {
+            btnVolumeHigh.style.display = 'none';
+            btnVolumeLow.style.display = 'block';
+            btnVolumeMute.style.display = 'none';
+        } else {
+            btnVolumeHigh.style.display = 'block';
+            btnVolumeLow.style.display = 'none';
+            btnVolumeMute.style.display = 'none';
+        }
+    });
+
 
     // Mettre à jour le volume initial
     audio.volume = sliderVolume.value / 100;
