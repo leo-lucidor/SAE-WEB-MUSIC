@@ -124,6 +124,7 @@ class Playlist {
                                 echo '</div>';
                             echo '</div>';
                             echo '<div class="container-supprimer-musique">';
+                                echo '<button class="btn-liste-attente"><img src="./images/ajoutFileAttente.png" alt="ajouter à la liste d\'attente"></button>';
                                 if (trim($this->nom) == "Titres Likés") {
                                     echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($musique['ID_Musique']) .'&idPlaylist='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="supprimer une musique de la playlist"></a>';
                                 } else {

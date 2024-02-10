@@ -108,14 +108,22 @@ document.addEventListener('DOMContentLoaded', function () {
         listeBtnPlay.push(play);
         const pause = container.querySelector('.pause-music');
         listeBtnPause.push(pause);
+
+        const btnListeAttente = container.querySelector('.btn-liste-attente');
         
         const infoMusique =  JSON.parse(container.querySelector('.info-musique').textContent);
         const infoAlbum =  JSON.parse(container.querySelector('.info-album').textContent);
         const infoArtiste =  JSON.parse(container.querySelector('.info-artiste').textContent);
 
 
-        // listeMusiques.push([infoMusique, infoAlbum, infoArtiste]); 
-        // console.log(infoMusique);
+        function dejaJouer(){
+            for (let i = 0; i < listeMusiqueJouer.length; i++) {
+                if (listeMusiqueJouer[i][0].Lien == infoMusique.Lien) {
+                    return i;
+                }
+            }
+            return null;
+        }
 
         // Ajout d'un écouteur d'événement pour le survol
         container.addEventListener('mouseover', function() {
@@ -165,15 +173,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("./images/ALBUMS/"+titreAlbum+".jpg");
             imageMusique.src = "./images/ALBUMS/"+titreAlbum;
 
-            function dejaJouer(){
-                for (let i = 0; i < listeMusiqueJouer.length; i++) {
-                    if (listeMusiqueJouer[i][0].Lien == infoMusique.Lien) {
-                        return i;
-                    }
-                }
-                return null;
-            }
-
             conditionDejaJouer = dejaJouer();
             if (conditionDejaJouer != null) {
                 currentSongIndex = conditionDejaJouer;
@@ -192,6 +191,20 @@ document.addEventListener('DOMContentLoaded', function () {
             play.style.display = 'block';
             btnPause.style.display = 'none';
             btnPlay.style.display = 'block';
+        });
+
+        btnListeAttente.addEventListener('click', function() {
+            console.log('Ajouté à la liste d\'attente');
+
+            conditionDejaJouer = dejaJouer();
+            if (conditionDejaJouer != null) {
+                currentSongIndex = conditionDejaJouer;
+            } else {
+                if (listeMusiqueJouer.length > 0) {
+                    currentSongIndex++;
+                }
+                listeMusiqueJouer.push([infoMusique, infoAlbum, infoArtiste, play, pause, numeroMusique, titreMusique, artisteMusique, imageMusique]);
+            }
         });
 
     });
