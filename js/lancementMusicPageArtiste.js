@@ -3,13 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const containers = document.querySelectorAll('.container-album-unique-artiste');
 
     // Elements du lecteur
+    let lienTitreMusique = document.querySelector('.lien-titre-music-lecteur');
+    let lienNomArtiste = document.querySelector('.lien-nom-artiste-lecteur');
     let titreMusique = document.querySelector('.titre-musique-lecteur');
     let artisteMusique = document.querySelector('.nom-artiste-lecteur');
     let imageMusique = document.querySelector('.pochette');
 
     // Elements du lecteur
     let modeRandom = false;
-    let modeRepeat = false;
+    let modeRepeat = true;
     let btnRandomInactif = document.getElementById('btn-random-inactif');
     let btnRandomActif = document.getElementById('btn-random-actif');
     let btnRepeatInactif = document.getElementById('btn-loop-inactif');
@@ -490,6 +492,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 artisteMusique.textContent = infoArtiste.Nom;
                 let titreAlbum = infoAlbum.Pochette.split(" ")[1];
                 imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+
+                lienTitreMusique.href = infoMusique.Lien;
+                lienNomArtiste.href = infoArtiste.Lien;
 
                 playSong();
             }

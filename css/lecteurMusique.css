@@ -140,3 +140,14 @@
   .slider-volume:hover::-moz-range-thumb, .slider-lecture:hover::-moz-range-thumb {
     opacity: 1; /* Afficher le bouton lorsque le slider est survolé */
   }
+
+.lien-titre-music-lecteur, .lien-nom-artiste-lecteur {
+    color: white;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.lien-titre-music-lecteur:hover, .lien-nom-artiste-lecteur:hover {
+    text-decoration: underline;
+    transition: 0.2s;
+}
