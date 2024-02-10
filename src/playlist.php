@@ -56,6 +56,7 @@ class Playlist {
 
     public function afficher(){
         require 'src/provider/checkFichierDansDossier.php';
+        require 'BDD/Function/databaseUpdate.php';
         $pdo = getPdo();
         ?>
         <link rel="stylesheet" href="./css/playlist.css">
@@ -126,6 +127,11 @@ class Playlist {
                                 if (trim($this->nom) == "Titres Likés") {
                                     echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($musique['ID_Musique']) .'&idPlaylist='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="supprimer une musique de la playlist"></a>';
                                 } else {
+                                    if (favorisMusiqueExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $idMusique)) {
+                                        echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($idMusique) .'&idPlaylist='. trim($this->id) .'"><img src="images/coeurPlein.png" alt="liker une musique"></a>';
+                                    } else {
+                                        echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($idMusique) .'&idPlaylist='. trim($this->id) .'"><img src="images/coeurVide.png" alt="liker une musique"></a>';
+                                    }                                   
                                     echo '<a class="btn-supprimer" href="index.php?action=deleteMusiquePlaylist&idMusique='. trim($idMusique) .'&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une musique de la playlist"></a>';
                                 }
                             echo '</div>';
