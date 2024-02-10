@@ -7,6 +7,44 @@ document.addEventListener('DOMContentLoaded', function () {
     let artisteMusique = document.querySelector('.nom-artiste-lecteur');
     let imageMusique = document.querySelector('.pochette');
 
+    // Elements du lecteur
+    let modeRandom = false;
+    let modeRepeat = false;
+    let btnRandomInactif = document.getElementById('btn-random-inactif');
+    let btnRandomActif = document.getElementById('btn-random-actif');
+    let btnRepeatInactif = document.getElementById('btn-loop-inactif');
+    let btnRepeatActif = document.getElementById('btn-loop-actif');
+
+    btnRandomInactif.addEventListener('click', function() {
+        modeRandom = true;
+        modeRepeat = false;
+        btnRandomInactif.style.display = 'none';
+        btnRandomActif.style.display = 'block';
+        btnRepeatInactif.style.display = 'block';
+        btnRepeatActif.style.display = 'none';
+    });
+
+    btnRandomActif.addEventListener('click', function() {
+        modeRandom = false;
+        btnRandomInactif.style.display = 'block';
+        btnRandomActif.style.display = 'none';
+    });
+
+    btnRepeatInactif.addEventListener('click', function() {
+        modeRepeat = true;
+        modeRandom = false;
+        btnRepeatInactif.style.display = 'none';
+        btnRepeatActif.style.display = 'block';
+        btnRandomInactif.style.display = 'block';
+        btnRandomActif.style.display = 'none';
+    });
+
+    btnRepeatActif.addEventListener('click', function() {
+        modeRepeat = false;
+        btnRepeatInactif.style.display = 'block';
+        btnRepeatActif.style.display = 'none';
+    });
+
     // liste des musiques jouées
     let listeMusiqueJouer = new Array();
     let currentSongIndex = 0; 
@@ -271,12 +309,30 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Function to play the current song
     function playSong() {
-        lecteur.style.display = 'flex';
-        audio.src = lienMusiqueActuel;
-        audio.currentTime = currentSongTime; 
-        audio.play();
-        interval = setInterval(updateTime, 1000);
-        sliderLecture.setAttribute('max', audio.duration);
+        if (!modeRandom) {
+            lecteur.style.display = 'flex';
+            audio.src = lienMusiqueActuel;
+            audio.currentTime = currentSongTime; 
+            audio.play();
+            interval = setInterval(updateTime, 1000);
+            sliderLecture.setAttribute('max', audio.duration);
+        } else {
+            let randomIndex = Math.floor(Math.random() * listeMusiqueJouer.length);
+            currentSongIndex = randomIndex;
+            let musique = listeMusiqueJouer[currentSongIndex];
+            titreMusique.textContent = musique[0].Titre;
+            artisteMusique.textContent = musique[2].Nom;
+            let titreAlbum = musique[1].Pochette.split(" ")[1];
+            imageMusique.src = "./images/ALBUMS/"+titreAlbum;
+            lienMusiqueActuel = musique[0].Lien;
+            btnPlayCourant = musique[3];
+            btnPauseCourant = musique[4];
+            numeroMusiqueCourant = musique[5];
+            btnPlayCourant.style.display = 'none';
+            btnPauseCourant.style.display = 'block';
+            numeroMusiqueCourant.style.display = 'none';
+            playSong();
+        }
     }
     
     // Function to pause the current song
@@ -287,12 +343,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     audio.addEventListener('ended', function() {
-        clearInterval(interval);
-        tempsLecture.textContent = '0:00';
-        tempsTotal.textContent = '0:00';
-        sliderLecture.value = 0;
-        sliderLecture.style.background = '#d3d3d3';
-        playNext();
+        if (!modeRepeat) {
+            clearInterval(interval);
+            tempsLecture.textContent = '0:00';
+            tempsTotal.textContent = '0:00';
+            sliderLecture.value = 0;
+            sliderLecture.style.background = '#d3d3d3';
+            playNext();
+        } else {
+            audio.currentTime = 0;
+            audio.play();
+        }
     });
 
     btnPause.addEventListener('click', function() {
