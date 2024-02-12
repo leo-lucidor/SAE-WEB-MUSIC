@@ -268,6 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             titreMusique.textContent = infoMusique.Titre;
             artisteMusique.textContent = infoArtiste.Nom;
+            lienNomArtiste.href = "index.php?action=artiste&id="+infoArtiste['ID_Artiste'];
             let titreAlbum = infoAlbum.Pochette.split(" ")[1];
             console.log("./images/ALBUMS/"+titreAlbum+".jpg");
             imageMusique.src = "./images/ALBUMS/"+titreAlbum;
@@ -494,7 +495,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 imageMusique.src = "./images/ALBUMS/"+titreAlbum;
 
                 lienTitreMusique.href = infoMusique.Lien;
-                lienNomArtiste.href = infoArtiste.Lien;
+                console.log(infoArtiste);
+                lienNomArtiste.href = "index.php?action=artiste&id="+infoArtiste['ID_Artiste'];
 
                 playSong();
             }

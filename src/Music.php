@@ -55,4 +55,8 @@ class Music
     {
         return $this->lienMusic;
     }
+
+    public function afficher(){
+        echo 'page musique';
+    }
 }
