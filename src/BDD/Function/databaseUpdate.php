@@ -1,6 +1,6 @@
 <?php
 
-    require "database_exist.php";
+    require_once "database_exist.php";
     
     function update_utilisateur($pdo, $nom, $mdp, $email, $id_utilisateur){
         try {
