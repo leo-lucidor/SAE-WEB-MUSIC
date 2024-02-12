@@ -47,6 +47,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 result.style.display = 'none';
             }
         });
+
+        var nbResults = document.querySelectorAll('.search-result:not([style="display: none;"])').length;
+        var nbResultsText = document.querySelector('.nb-results');
+        if (nbResults > 0) {
+            if (nbResults == 1){
+                nbResultsText.textContent = nbResults + ' résultat trouvé';
+            } else { nbResultsText.textContent = nbResults + ' résultats trouvés'; }
+        } else {
+            nbResultsText.textContent = 'Auncun résultat trouvé';
+        }
     });
 
 });

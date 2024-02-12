@@ -25,6 +25,7 @@ class Recherche
         $playlists = get_playlist_visible($pdo, $_SESSION['idUser']);
         $artistes = get_all_artiste($pdo);
         $this->$data = $data;
+        $titres = get_all_musiques($pdo);
 ?>
         <link rel="stylesheet" href="./css/search.css">
 
