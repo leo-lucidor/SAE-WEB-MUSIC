@@ -1,5 +1,7 @@
 <?php
 
+    require "database_exist.php";
+    
     function update_utilisateur($pdo, $nom, $mdp, $email, $id_utilisateur){
         try {
             $smtp = $pdo->prepare("UPDATE Utilisateur SET Nom_utilisateur = :Nom_utilisateur, Mot_de_passe = :Mot_de_passe, Email = :Email WHERE ID_Utilisateur = :ID_Utilisateur");
@@ -25,158 +27,6 @@
             echo 'erreur update artiste';
         }
     }
-
-    function note_Existe($pdo, $id_utilisateur, $id_album){
-        try {
-            $smtp = $pdo->prepare("SELECT * FROM Note WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Album = :ID_Album");
-            $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
-            $smtp->bindParam(':ID_Album', $id_album);
-            $smtp->execute();
-            $result = $smtp->fetchAll();
-            if(count($result) == 0){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-        catch (PDOException $e) {
-            echo 'erreur note existe';
-        }
-    }
-
-    function favorisAlbumExiste($pdo, $id_utilisateur, $id_album){
-        try {
-            $smtp=$pdo->prepare("SELECT * FROM Favoris_Album WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Album = :ID_Album");
-            $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
-            $smtp->bindParam(':ID_Album', $id_album);
-            $smtp->execute();
-            $result = $smtp -> fetchAll();
-            if(count($result) == 0){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-        catch (PDOException $e) {
-            echo 'erreur favoris existe';
-        } 
-    }
-
-    function favorisMusiqueExiste($pdo, $id_utilisateur, $id_Musique){
-        try {
-            $smtp=$pdo->prepare("SELECT * FROM Favoris_Musique WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Musique = :ID_Musique");
-            $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
-            $smtp->bindParam(':ID_Musique', $id_Musique);
-            $smtp->execute();
-            $result = $smtp -> fetchAll();
-            if(count($result) == 0){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-        catch (PDOException $e) {
-            echo 'erreur favoris existe';
-        } 
-    }
-
-    function favorisArtisteExiste($pdo, $id_utilisateur, $id_artiste){
-        try {
-            $smtp=$pdo->prepare("SELECT * FROM Favoris_Artiste WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Artiste = :ID_Artiste");
-            $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
-            $smtp->bindParam(':ID_Artiste', $id_artiste);
-            $smtp->execute();
-            $result = $smtp -> fetchAll();
-            if(count($result) == 0){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-        catch (PDOException $e) {
-            echo 'erreur favoris existe';
-        } 
-    }
-
-
-    function getPlaylistTitreLikeUser($pdo, $id_utilisateur) {
-        try {
-            $NomPlaylist = "Titres Likés";
-            $stmt = $pdo->prepare("SELECT ID_Playlist FROM Playlist WHERE ID_Utilisateur = ? AND Nom = ?");
-            $stmt->bindParam(1, $id_utilisateur);
-            $stmt->bindParam(2, $NomPlaylist);
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-
-            return $result[0]['ID_Playlist'];
-        } catch (PDOException $e) {
-            echo "Erreur lors de la récupération de la playlist Titres Likés : " . $e->getMessage();
-            return false;
-        }
-    }
-
-    function verifMusicInPlaylist($pdo, $idMusique, $idPlaylist) {
-        try {
-            $stmt = $pdo->prepare("SELECT * FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
-            $stmt->bindParam(1, $idMusique);
-            $stmt->bindParam(2, $idPlaylist);
-            $stmt->execute();
-            $result = $stmt->fetchAll();
-
-            if(count($result) == 0){
-                return false;
-            }
-            else{
-                return true;
-            }
-        } catch (PDOException $e) {
-            echo "Erreur lors de la vérification de la musique dans la playlist : " . $e->getMessage();
-            return false;
-        }
-    }
-
-    function insertMusicPlaylistFavoris(PDO $pdo, int $idMusique, int $idPlaylist) {
-        try {
-            $verifMusicInPlaylist = verifMusicInPlaylist($pdo, $idMusique, $idPlaylist);
-            if($verifMusicInPlaylist == false){
-                $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
-                $stmt->bindParam(1, $idMusique);
-                $stmt->bindParam(2, $idPlaylist);
-                $stmt->execute();
-            }
-            else{
-                $stmt = $pdo->prepare("DELETE FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
-                $stmt->bindParam(1, $idMusique);
-                $stmt->bindParam(2, $idPlaylist);
-                $stmt->execute();
-            }
-            return true;
-        } catch (PDOException $e) {
-            echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
-            return false;
-        }
-    
-        
-    }
-
-    function deleteMusicPlaylistFavoris(PDO $pdo, int $idMusique, int $idPlaylist) {
-        try {
-            $stmt = $pdo->prepare("DELETE FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
-            $stmt->bindParam(1, $idMusique);
-            $stmt->bindParam(2, $idPlaylist);
-            $stmt->execute();
-    
-            return true;
-        } catch (PDOException $e) {
-            echo "Erreur lors de la suppression de la musique dans la playlist : " . $e->getMessage();
-            return false;
-        }
-    }
-    
 
     function update_favoris_album($pdo, $id_utilisateur, $id_album){
         try {
@@ -266,4 +116,38 @@
         catch (PDOException $e) {
             echo 'erreur update note';
         }               
+    }
+
+    function update_album(PDO $pdo, String $nom, String $date, String $genre, String $pochette, int $ID_artist_by, int $ID_artist_parent, int $idAlbum){
+        try {
+            $stmt = $pdo->prepare("UPDATE Album SET Nom = :nom, Date_sortie = :dates, Genre = :genre, Pochette = :pochette, ID_Artiste_By = :idBy, ID_Artiste_Parent = :idParent WHERE ID_Album = :idAlbum");
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':dates', $date);
+            $stmt->bindParam(':genre', $genre);
+            $stmt->bindParam(':pochette', $pochette);
+            $stmt->bindParam(':idBy', $ID_Artiste_By);
+            $stmt->bindParam(':idParent', $ID_Artiste_Parent);
+            $stmt->bindParam(':idAlbum', $idAlbum);
+            $stmt->execute();
+    
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de l'album : " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function update_musique(PDO $pdo, String $titre, String $lien, int $idMusique){
+        try {
+            $stmt = $pdo->prepare("UPDATE Musique SET Titre = :titre, Lien = :lien WHERE ID_Musique = :idMusique");
+            $stmt->bindParam(':titre', $titre);
+            $stmt->bindParam(':lien', $lien);
+            $stmt->bindParam(':idMusique', $idMusique);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la modification de la musique : " . $e->getMessage();
+            return false;
+        }
+        
+
     }
