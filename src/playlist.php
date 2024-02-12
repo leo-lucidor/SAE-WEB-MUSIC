@@ -121,12 +121,14 @@ class Playlist {
                             }
                             // echo '<img src="./images/ALBUMS/default.jpg" alt="">';
     
-                            echo '<div class="contenu-album">';
-                                echo '<p class="titre-album">'. $nomMusique .'</p>';
-                                echo '<div class="container-contenu-album-bottom">';  
-                                    echo '<span class="genre-album">'. $nomArtiste .'</span>';
+                            echo '<a href="index.php?action=musique&id='. trim($musique['ID_Musique']) .'">';
+                                echo '<div class="contenu-album">';
+                                    echo '<p class="titre-album">'. $nomMusique .'</p>';
+                                    echo '<div class="container-contenu-album-bottom">';  
+                                        echo '<span class="genre-album">'. $nomArtiste .'</span>';
+                                    echo '</div>';
                                 echo '</div>';
-                            echo '</div>';
+                            echo '</a>';
                             echo '<div class="container-supprimer-musique">';
                                 echo '<button class="btn-liste-attente"><img src="./images/ajoutFileAttente.png" alt="ajouter à la liste d\'attente"></button>';
                                 if (trim($this->nom) == "Titres Likés") {
