@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Elements du lecteur
     let modeRandom = false;
-    let modeRepeat = true;
+    let modeRepeat = false;
     let btnRandomInactif = document.getElementById('btn-random-inactif');
     let btnRandomActif = document.getElementById('btn-random-actif');
     let btnRepeatInactif = document.getElementById('btn-loop-inactif');

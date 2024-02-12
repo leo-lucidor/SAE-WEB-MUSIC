@@ -16,8 +16,8 @@
             <button id="btn-play" style="display:none"><img class="icon imgPlay" src="./images/LECTEUR/playLecteur.png" alt=""></button>
             <button id="btn-pause"><img class="icon imgPause" src="./images/LECTEUR/pauseLecteur.png" alt=""></button>
             <button id="btn-next"><img class="icon" src="./images/LECTEUR/suivantLecteur.png" alt=""></button>
-            <button id="btn-loop-inactif" style="display:none"><img class="icon" src="./images/LECTEUR/repeatInactif.png" alt=""></button>
-            <button id="btn-loop-actif"><img class="icon" src="./images/LECTEUR/repeatActif.png" alt=""></button>
+            <button id="btn-loop-inactif"><img class="icon" src="./images/LECTEUR/repeatInactif.png" alt=""></button>
+            <button id="btn-loop-actif" style="display:none"><img class="icon" src="./images/LECTEUR/repeatActif.png" alt=""></button>
         </div>
         <div class="container-lecteur-milieu-bottom">
             <p class="temps-lecture">0:00</p>

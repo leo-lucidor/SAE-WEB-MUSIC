@@ -64,12 +64,15 @@ class Album
         echo '<div class="container-btn-album">';
             echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
             echo '<p>' . trim($this->title) . ', de '. trim($this->artiste) . ', '. $this->year .' <span>'. $this->genre .'</span></p>';
-            // echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
-            if (favorisAlbumExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id)) {
-                echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
-            } else {
-                echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
-            }
+            echo '<div class="container-btn-playlist-right">';
+                echo '<button class="jouer-playlist"><img src="./images/LECTEUR/playLecteur.png" alt="jouer la playlist"></button>';
+                // echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
+                if (favorisAlbumExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id)) {
+                    echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
+                } else {
+                    echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
+                }
+            echo '</div>';
         echo '</div>';
 
         echo '<div class="container-milieu-album">';
@@ -172,6 +175,7 @@ class Album
                             echo '<div class="contenu-album">';
                                 echo '<p class="titre-album">'.$musique['Titre'].'</p>';
                             echo '</div>';
+                            echo '<button class="btn-liste-attente"><img src="./images/ajoutFileAttente.png" alt="ajouter à la liste d\'attente"></button>';
                             if (favorisMusiqueExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $musique['ID_Musique'])) {
                                 echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($musique['ID_Musique']) .'&idAlbum='. trim($this->id) .'"><img src="images/coeurPlein.png" alt="liker une musique"></a>';
                             } else {
