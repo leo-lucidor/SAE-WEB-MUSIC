@@ -80,17 +80,25 @@ h2{
     width: 80%;
 }
 
+.results img{
+    width: 40px;
+    height: 40px;
+    margin-right: 1em;
+}
+
 .results table {
     margin-top: 2em;
     width: 100%;
     border-collapse: collapse;
 }
 
-.results th {
-    color: #807993;
+.results a {
+    display: flex;
+    align-items: center;
 }
 
 .results th {
+    color: #807993;
     border-bottom: 1px solid #807993;
 }
 
