@@ -173,7 +173,7 @@ class Album
                                 echo '<img src="./images/ALBUMS/default.jpg" alt="'. trim($this->title) . '">';
                             }
                             echo '<div class="contenu-album">';
-                                echo '<p class="titre-album">'.$musique['Titre'].'</p>';
+                                echo '<a href="index.php?action=musique&id='. trim($musique['ID_Musique']) .'"><p class="titre-album">'.$musique['Titre'].'</p></a>';
                             echo '</div>';
                             echo '<button class="btn-liste-attente"><img src="./images/ajoutFileAttente.png" alt="ajouter à la liste d\'attente"></button>';
                             if (favorisMusiqueExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $musique['ID_Musique'])) {

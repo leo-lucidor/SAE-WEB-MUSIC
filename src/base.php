@@ -78,6 +78,16 @@ if ($_REQUEST['action'] == 'accueil') {
     require 'src/playlist.php';
     $playlist = new Playlist($idPlaylist, $playlist['ID_Utilisateur'], $playlist['Nom'], $listeMusique);
     $playlist->afficher();
+} else if ($_REQUEST['action'] == 'musique') {
+    $pdo = getPdo();
+
+    $idMusique = $_REQUEST['id'];
+    $musique = get_music_with_id($pdo, $idMusique);
+    $album = get_album_with_id($pdo, $musique['ID_Album']);
+    $artiste = get_artiste_with_id($pdo, $album['ID_Artiste_By']);
+    require 'src/Music.php';
+    $music = new Music($musique['Titre'], $artiste, $album['Genre'], $album['Date_de_sortie'], $album['Pochette'], $idMusique, $musique['Lien']);
+    $music->afficher();
 } else {
     require 'src/404.php';
 }

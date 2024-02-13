@@ -269,6 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
             titreMusique.textContent = infoMusique.Titre;
             artisteMusique.textContent = infoArtiste.Nom;
             lienNomArtiste.href = "index.php?action=artiste&id="+infoArtiste['ID_Artiste'];
+            lienTitreMusique.href = "index.php?action=musique&id="+infoMusique['ID_Musique'];
             let titreAlbum = infoAlbum.Pochette.split(" ")[1];
             console.log("./images/ALBUMS/"+titreAlbum+".jpg");
             imageMusique.src = "./images/ALBUMS/"+titreAlbum;
@@ -494,9 +495,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 let titreAlbum = infoAlbum.Pochette.split(" ")[1];
                 imageMusique.src = "./images/ALBUMS/"+titreAlbum;
 
-                lienTitreMusique.href = infoMusique.Lien;
+                lienTitreMusique.href = "index.php?action=musique&id="+infoMusique['ID_Musique'];
                 console.log(infoArtiste);
                 lienNomArtiste.href = "index.php?action=artiste&id="+infoArtiste['ID_Artiste'];
+                lienMusiqueActuel = infoMusique.Lien;
 
                 playSong();
             }
