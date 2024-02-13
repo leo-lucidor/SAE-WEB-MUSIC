@@ -32,32 +32,44 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // pour chaque .search-result si dans le content de .search_result p 
-    // il y a la valeur de inputSearch alors on affiche le .search_result
-    // sinon on le cache
-    inputSearch.addEventListener('input', function() {
-        var searchValue = inputSearch.value.toLowerCase();
-        var searchResults = document.querySelectorAll('.search-result');
+    // pour chaque .search-result si dans le contenu de .search-result p 
+// ou dans le texte des cellules de tableau il y a la valeur de inputSearch, alors on affiche le .search-result
+// sinon on le cache
+inputSearch.addEventListener('input', function() {
+    var searchValue = inputSearch.value.toLowerCase();
+    var searchResults = document.querySelectorAll('.search-result');
 
-        searchResults.forEach(function(result) {
-            var resultText = result.querySelector('p').textContent.toLowerCase();
-            if (resultText.includes(searchValue)) {
-                result.style.display = '';
-            } else {
-                result.style.display = 'none';
-            }
-        });
+    searchResults.forEach(function(result) {
+        var resultText = '';
+        var paragraph = result.querySelector('p');
+        var tableCells = result.querySelectorAll('td');
 
-        var nbResults = document.querySelectorAll('.search-result:not([style="display: none;"])').length;
-        var nbResultsText = document.querySelector('.nb-results');
-        if (nbResults > 0) {
-            if (nbResults == 1){
-                nbResultsText.textContent = nbResults + ' résultat trouvé';
-            } else { nbResultsText.textContent = nbResults + ' résultats trouvés'; }
+        if (paragraph) {
+            resultText = paragraph.textContent.toLowerCase();
         } else {
-            nbResultsText.textContent = 'Auncun résultat trouvé';
+            tableCells.forEach(function(cell) {
+                resultText += cell.textContent.toLowerCase() + ' ';
+            });
+        }
+
+        if (resultText.includes(searchValue)) {
+            result.style.display = ''; // Affiche le .search-result
+        } else {
+            result.style.display = 'none'; // Cache le .search-result
         }
     });
+
+    var nbResults = document.querySelectorAll('.search-result:not([style="display: none;"])').length;
+    var nbResultsText = document.querySelector('.nb-results');
+    if (nbResults > 0) {
+        if (nbResults == 1){
+            nbResultsText.textContent = nbResults + ' résultat trouvé';
+        } else { nbResultsText.textContent = nbResults + ' résultats trouvés'; }
+    } else {
+        nbResultsText.textContent = 'Aucun résultat trouvé';
+    }
+});
+
 
 });
 

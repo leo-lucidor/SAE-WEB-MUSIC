@@ -35,7 +35,8 @@
                                 <th>Titre</th>
                                 <th>Artiste</th>
                                 <th>Album</th>
-                                <th>Durée</th>
+                                <th>Année</th>
+                                <th>Genre</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +51,7 @@
                                     } else {
                                         $album[3] = "images/ALBUMS/default.jpg";
                                     }
-                                    echo '<tr>';
+                                    echo '<tr class="search-result">';
                                     echo '<td>';
                                     echo '<a href="index.php?action=album&id='. trim($album[0]) .'"><img class="img-titre" src="' . htmlspecialchars($album[3]) . '" alt="Image de la pochette">' . htmlspecialchars($entry[1]) . '</a>';
                                     echo '<td>' . htmlspecialchars($artiste[0]) . '</td>';
