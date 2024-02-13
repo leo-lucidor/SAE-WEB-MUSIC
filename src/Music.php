@@ -73,13 +73,6 @@ class Music
         </div>
         <div class="container-musique-bottom">
             <img src="images/ALBUMS/<?php echo trim($this->image); ?>" alt="image musique" class="image-musique">
-            <?php $nomParent = getArtisteParentwhithIdMusique($pdo, $this->id);
-            if ($nomParent != null) {
-                echo '<p class="parent-musique">test null : <?php trim($nomParent)?></p>';
-            } else {
-                echo '<p class="parent-musisque">test : <?php trim($nomParent)?></p>';
-            }
-            ?>
         </div>
         <?php
     }

@@ -338,14 +338,14 @@ function getArtisteBywhithIdMusique (PDO $pdo, $idMusique){
     }
 }
 
-function getArtisteParentwhithIdMusique (PDO $pdo, $idMusique){
+function getArtisteParentwhithIdMusique(PDO $pdo, $idMusique){
     try{
         // SELECT Nom FROM Artiste WHERE ID_Artiste = (
-        $stmt = $pdo->prepare("SELECT ID_Artiste_Parent FROM Album WHERE ID_Album = (SELECT ID_Album FROM Musique WHERE ID_Musique = :idMusique))");
+        $stmt = $pdo->prepare("SELECT ID_Artiste_Parent FROM Album WHERE ID_Album = (SELECT ID_Album FROM Musique WHERE ID_Musique = :idMusique)");
         $stmt->bindParam(':idMusique', $idMusique);
         $stmt->execute();
         $result = $stmt->fetch();
-        return $result['ID_Artiste_Parent'];
+        return $result;
     }
     catch(PDOException $e){
         echo "Erreur lors de la récupération de l'artiste de la musique : ". $e->getMessage();
