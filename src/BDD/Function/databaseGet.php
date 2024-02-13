@@ -350,6 +350,7 @@ function getArtisteParentwhithIdMusique (PDO $pdo, $idMusique){
         echo "Erreur lors de la récupération de l'artiste de la musique : ". $e->getMessage();
         return false;
     }
+}
 
 function get_music_with_id(PDO $pdo, int $id){
     $stmt = $pdo->prepare("SELECT ID_Musique, Titre ,Lien, ID_Album  FROM Musique WHERE ID_Musique = :id");
