@@ -323,3 +323,31 @@ function yaDesMusiqueDansPlaylist(PDO $pdo, $idPlaylist){
         return false;
     }
 }
+
+function getArtisteBywhithIdMusique (PDO $pdo, $idMusique){
+    try{
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = (SELECT ID_Artiste_By FROM Album WHERE ID_Album = (SELECT ID_Album FROM Musique WHERE ID_Musique = :idMusique))");
+        $stmt->bindParam(':idMusique', $idMusique);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération de l'artiste de la musique : ". $e->getMessage();
+        return false;
+    }
+}
+
+function getArtisteParentwhithIdMusique (PDO $pdo, $idMusique){
+    try{
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = (SELECT ID_Artiste_Parent FROM Album WHERE ID_Album = (SELECT ID_Album FROM Musique WHERE ID_Musique = :idMusique))");
+        $stmt->bindParam(':idMusique', $idMusique);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération de l'artiste de la musique : ". $e->getMessage();
+        return false;
+    }
+}
