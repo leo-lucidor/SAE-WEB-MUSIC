@@ -57,20 +57,29 @@ class Music
     }
 
     public function afficher(){
+        $pdo = getPdo();
         ?>
         <link rel="stylesheet" href="css/musique.css">
         <div class="container-musique-top">
             <a href="index.php?action=accueil" class="btn-retour"><img src="images/fleche-gauche.png" alt="retour"></a>
             <div class="container-contenu">
                 <p class="titre-musique"><?php echo $this->title; ?></p>
+                <p>|</p>
                 <p class="artiste-musique"><?php echo $this->artist[0]; ?>
-                    <span class="genre-musique"><?php echo $this->genre; ?></span>
                     <span class="annee-musique"><?php echo $this->releaseYear; ?></span>
+                    <span class="genre-musique"><?php echo $this->genre; ?></span>
                 </p>
             </div>
         </div>
         <div class="container-musique-bottom">
             <img src="images/ALBUMS/<?php echo trim($this->image); ?>" alt="image musique" class="image-musique">
+            <?php $nomParent = getArtisteParentwhithIdMusique($pdo, $this->id);
+            if ($nomParent != null) {
+                echo '<p class="parent-musique">test null : <?php trim($nomParent)?></p>';
+            } else {
+                echo '<p class="parent-musisque">test : <?php trim($nomParent)?></p>';
+            }
+            ?>
         </div>
         <?php
     }

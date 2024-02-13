@@ -344,6 +344,9 @@ function getArtisteParentwhithIdMusique (PDO $pdo, $idMusique){
         $stmt->bindParam(':idMusique', $idMusique);
         $stmt->execute();
         $result = $stmt->fetch();
+        if ($result == null){
+            return null;
+        }
         return $result['Nom'];
     }
     catch(PDOException $e){
