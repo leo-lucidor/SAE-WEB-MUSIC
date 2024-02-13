@@ -56,7 +56,7 @@ class Playlist {
 
     public function afficher(){
         require 'src/provider/checkFichierDansDossier.php';
-        require 'BDD/Function/databaseUpdate.php';
+        require 'src/BDD/Function/databaseUpdate.php';
         $pdo = getPdo();
         ?>
         <link rel="stylesheet" href="./css/playlist.css">

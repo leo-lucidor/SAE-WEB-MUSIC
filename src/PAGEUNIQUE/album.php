@@ -56,7 +56,7 @@ class Album
     }
 
     public function afficher(){
-        require 'BDD/Function/databaseUpdate.php';
+        require 'src/BDD/Function/databaseUpdate.php';
         require 'src/provider/checkFichierDansDossier.php';
 
         echo '<link rel="stylesheet" href="./css/album.css">';
