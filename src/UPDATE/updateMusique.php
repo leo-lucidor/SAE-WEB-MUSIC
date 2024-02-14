@@ -36,5 +36,10 @@ if ($newIdAlbum == null) {
 print_r($newIdAlbum);
 print_r($musique['Lien']);
  
-update_musique($pdo, $nomMusique, $musique['Lien'], intval($newIdAlbum));
-header('Location: index.php?action=editerMusique&idMusique='.trim($idMusique));
+if (update_musique($pdo, $nomMusique, $musique['Lien'], intval($newIdAlbum)) == true) {
+    header('Location: index.php?action=editerMusique&idMusique='.trim($idMusique));
+    exit();
+} else {
+    header('Location: index.php?action=editerMusique&idMusique='.trim($idMusique).'&erreur=Erreur lors de la modification');
+    exit();
+}
