@@ -219,6 +219,21 @@
         return $result;
     }
 
+    function get_all_musiques(PDO $pdo){
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function get_musique_by_name(PDO $pdo, String $name){
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique WHERE Titre = :name");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+
     function get_playlist(PDO $pdo){
         $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist");
         $stmt->execute();
