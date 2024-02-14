@@ -23,9 +23,16 @@
         </nav>
     </div>
     <?php
+        $nb_results = count($titres);
+        if ($nb_results > 0) {
+            if ($nb_results == 1){
+                echo '<h2 class="nb-results">' . $nb_results . ' résultat trouvé</h2>';
+            } else { echo '<h2 class="nb-results">' . $nb_results . ' résultats trouvés</h2>';}
+        } else {
+            echo '<h2 class="nb-results">Aucun résultat trouvé</h2>';
+        }
         if (!empty($titres)) {
     ?>
-                <h2>Titres</h2>
                 <div class="results">
                     <table>
                         <thead>
@@ -40,10 +47,17 @@
                             <?php
                                 // Parcourir chaque entrée musicale
                                 foreach ($titres as $entry) {
-                                    echo '<tr>';
-                                    echo '<td>' . htmlspecialchars($entry[1]) . '</td>';
                                     $album = get_album_with_id(getPdo(), $entry[3]);
                                     $artiste = get_artiste_with_id(getPdo(), $album[5]);
+                                    $lien_img = explode(' ', $album[3]);
+                                    if (!str_starts_with($lien_img[1], 'null')){
+                                        $album[3] = "images/ALBUMS/" . trim($lien_img[1]);
+                                    } else {
+                                        $album[3] = "images/ALBUMS/default.jpg";
+                                    }
+                                    echo '<tr class="search-result">';
+                                    echo '<td>';
+                                    echo '<a href="index.php?action=album&id='. trim($album[0]) .'"><img class="img-titre" src="' . htmlspecialchars($album[3]) . '" alt="Image de la pochette">' . htmlspecialchars($entry[1]) . '</a>';
                                     echo '<td>' . htmlspecialchars($artiste[0]) . '</td>';
                                     echo '<td>' . htmlspecialchars($album[0]) . '</td>';
                                     echo '<td> N/A </td>';

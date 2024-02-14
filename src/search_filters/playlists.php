@@ -23,7 +23,7 @@
         </nav>
     </div>
     <?php
-    $nb_results = count($this->data);
+    $nb_results = count($playlists);
     if ($nb_results > 0) {
         if ($nb_results == 1){
             echo '<h2 class="nb-results">' . $nb_results . ' résultat trouvé</h2>';
