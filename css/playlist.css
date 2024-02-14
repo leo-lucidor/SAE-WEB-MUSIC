@@ -11,20 +11,6 @@
     margin-right: 5vw;
 }
 
-.container-btn-playlist-spotiuto {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    /* placement */
-    flex-basis: 100%;
-    margin-top: 2vh;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    gap: 25vw;
-}
-
 .btn-retour img {
     width: 2vw;
     height: 2vw;
@@ -144,18 +130,25 @@
     transform: rotate(0deg);
 }
 
+.jouer-playlist img {
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+}
+
 .container-supprimer-musique {
     flex-grow: 1;
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    align-content: center;
+    align-items: center;
     margin-right: 20px;
+    gap: 20px;
 }
 
 .btn-like img {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border-radius: 0;
 }
 
@@ -170,4 +163,39 @@
 .btn-supprimer img:hover, .btn-supprimer-top img:hover{
     transform: rotate(90deg);
     transition: all 0.2s ease;
+}
+
+.lancer-music, .pause-music {
+    margin-left: 25px;
+    margin-right: 20px;
+}
+
+.btn-liste-attente img {
+    width: 25px;
+    height: 25px;
+    border-radius: 0;
+}
+
+.container-btn-playlist-right {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+#btn-volume-high img, #btn-volume-low img, #btn-volume-mute img {
+    width: 25px;
+    height: 25px;
+    border-radius: 0;
+}
+
+.container-lecteur-right {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
 }

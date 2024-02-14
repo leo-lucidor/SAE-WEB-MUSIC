@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spotiut'O</title>
+    <link rel="shortcut icon" href="images/logo.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700&family=Hind+Siliguri:wght@300;400;500;600&family=Lexend:wght@200;300;400;500;600;700;800;900&family=M+PLUS+Rounded+1c:wght@100;300;400;500;700&family=Montserrat:wght@400;700&family=Noto+Sans:ital,wght@0,100;0,300;0,400;0,600;1,500&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -37,13 +39,13 @@ echo '<div class="container-all">';
 require 'src/provider/pdo.php';
 
 if ($_REQUEST == null) {
-    require 'src/login.php';  
+    require 'src/UTILISATEUR/login.php';  
 } else if ($_REQUEST['erreur'] != null && $_REQUEST['action'] == 'login') {
-    require 'src/login.php';
+    require 'src/UTILISATEUR/login.php';
 } else if ($_REQUEST['action'] == 'login') {
-    require 'src/verifConnexion.php';
+    require 'src/UTILISATEUR/verifConnexion.php';
 } else if ($_REQUEST['action'] == 'inscription') {
-    require 'src/inscription.php';
+    require 'src/UTILISATEUR/inscription.php';
 } else if ($_REQUEST['action'] == 'VerifInscription'){
     require 'src/BDD/Function/databaseGet.php';
     $idUser = get_id_with_email($pdo, $_SESSION['mail']);
@@ -52,37 +54,38 @@ if ($_REQUEST == null) {
 } else if ($_REQUEST['action'] == 'deconnexion') {
     require 'src/provider/deconnexion.php';
 } else if ($_REQUEST['action'] == 'modifierUser') {
-    require 'src/updateUser.php'; 
+    require 'src/UPDATE/updateUser.php'; 
 } else if ($_REQUEST['action'] == 'modifierArtiste') {
-    require 'src/updateArtiste.php';
+    require 'src/UPDATE/updateArtiste.php';
 } else if ($_REQUEST['action'] == 'ajouterPlaylist'){
-    require 'src/ajouterPlaylist.php';
+    require 'src/AJOUT/ajouterPlaylist.php';
 } else if ($_REQUEST['action'] == 'ajouterMusicPlaylist') {
-    require 'src/insertMusiquePlaylist.php';
+    require 'src/AJOUT/insertMusiquePlaylist.php';
 } else if ($_REQUEST['action'] == 'deleteMusiquePlaylist') {
-    require 'src/deleteMusiquePlaylist.php';
+    require 'src/DELETE/deleteMusiquePlaylist.php';
 } else if ($_REQUEST['action'] == 'deletePlaylist') {
-    require 'src/deletePlaylist.php';
+    require 'src/DELETE/deletePlaylist.php';
 } else if ($_REQUEST['action'] == 'noterAlbum'){
-    require 'src/noterAlbum.php';
+    require 'src/UPDATE/noterAlbum.php';
 } else if ($_REQUEST['action'] == 'favorisAlbum'){
-    require 'src/favorisAlbum.php';
+    require 'src/FAVORIS/favorisAlbum.php';
 } else if ($_REQUEST['action'] == 'favorisArtiste'){
-    require 'src/favorisArtiste.php';
+    require 'src/FAVORIS/favorisArtiste.php';
 } else if ($_REQUEST['action'] == 'favorisMusique'){
-    require 'src/favorisMusique.php';
+    require 'src/FAVORIS/favorisMusique.php';
 }
 else {
     require 'src/BDD/Function/databaseGet.php';
     $idUser = get_id_with_email($pdo, $_SESSION['mail']);
     $_SESSION['playlistUser'] = get_playlist_utilisateur($pdo, $idUser);
-    require 'src/lecteurMusique.php';
-    require 'src/aside.php';
-    require 'src/base.php';
+    require 'src/PAGEUNIQUE/lecteurMusique.php';
+    require 'src/MENURAPIDE/aside.php';
+    require 'src/MENURAPIDE/base.php';
 } 
 
 echo '</div>';
 ?>
 <script src="./js/Carousel.js"></script>
+<script src="./js/Ajax.js" defer></script>
 </body>
 </html>

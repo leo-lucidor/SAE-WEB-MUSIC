@@ -1,11 +1,12 @@
 <?php
 
-function insertUser(PDO $pdo,String $userName, String $usePassword, String $userEmail) {
+function insertUser(PDO $pdo,String $userName, String $usePassword, String $userEmail, int $idType) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email) VALUES (?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email, ID_Types) VALUES (?, ?, ?, ?)");
             $stmt->bindParam(1, $userName);
             $stmt->bindParam(2, $usePassword);
             $stmt->bindParam(3, $userEmail);
+            $stmt->bindParam(4, $idType);
             $stmt->execute();
 
             $idUt = get_id_utlisateur($pdo, $userEmail);
