@@ -120,7 +120,7 @@
 
     function update_album(PDO $pdo, String $nom, String $date, String $genre, String $pochette, int $ID_artist_by, int $ID_artist_parent, int $idAlbum){
         try {
-            $stmt = $pdo->prepare("UPDATE Album SET Nom = :nom, Date_sortie = :dates, Genre = :genre, Pochette = :pochette, ID_Artiste_By = :idBy, ID_Artiste_Parent = :idParent WHERE ID_Album = :idAlbum");
+            $stmt = $pdo->prepare("UPDATE Album SET Titre = :nom, Date_de_sortie = :dates, Genre = :genre, Pochette = :pochette, ID_Artiste_By = :idBy, ID_Artiste_Parent = :idParent WHERE ID_Album = :idAlbum");
             $stmt->bindParam(':nom', $nom);
             $stmt->bindParam(':dates', $date);
             $stmt->bindParam(':genre', $genre);

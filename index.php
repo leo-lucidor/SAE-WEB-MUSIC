@@ -58,7 +58,10 @@ if ($_REQUEST == null) {
     require 'src/UPDATE/updateUser.php'; 
 } else if ($_REQUEST['action'] == 'modifierArtiste') {
     require 'src/UPDATE/updateArtiste.php';
-} else if ($_REQUEST['action'] == 'ajouterPlaylist'){
+} else if ($_REQUEST['action'] == 'modifierAlbum'){
+    require 'src/UPDATE/updateAlbum.php';
+} 
+else if ($_REQUEST['action'] == 'ajouterPlaylist'){
     require 'src/AJOUT/ajouterPlaylist.php';
 } else if ($_REQUEST['action'] == 'ajouterMusicPlaylist') {
     require 'src/AJOUT/insertMusiquePlaylist.php';
