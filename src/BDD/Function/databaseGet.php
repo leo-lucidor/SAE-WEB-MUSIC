@@ -273,23 +273,22 @@
         }
         return $result['Valeur'];
     }
-// execption
 
-    function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
+    function getPlaylistTitreLikeUser($pdo, $id_utilisateur) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
-            $stmt->bindParam(1, $idMusique);
-            $stmt->bindParam(2, $idPlaylist);
+            $NomPlaylist = "Titres Likés";
+            $stmt = $pdo->prepare("SELECT ID_Playlist FROM Playlist WHERE ID_Utilisateur = ? AND Nom = ?");
+            $stmt->bindParam(1, $id_utilisateur);
+            $stmt->bindParam(2, $NomPlaylist);
             $stmt->execute();
+            $result = $stmt->fetchAll();
 
-            return true;
+            return $result[0]['ID_Playlist'];
         } catch (PDOException $e) {
-            echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
+            echo "Erreur lors de la récupération de la playlist Titres Likés : " . $e->getMessage();
             return false;
         }
     }
-
-// execption
 
 function getMusiqueWithIdArtiste(PDO $pdo, $nomArtiste){
     try{
