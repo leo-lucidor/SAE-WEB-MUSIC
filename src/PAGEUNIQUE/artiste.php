@@ -21,6 +21,7 @@ class Artiste {
             if ($_SESSION['IdType'] == 1){
                 echo '<div class="editer-artiste-container">';
                 echo '<a class="btn-editer" href="index.php?action=editerArtiste&idArtiste='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
+                echo '<a class="btn-supprimer" href="index.php?action=deleteArtiste&idArtiste='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer album"></a>';
             }
             if (favorisArtisteExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id))
                 echo '<a class="btn-editer" href="index.php?action=favorisArtiste&idArtiste='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="liker l\'artiste"></a>';

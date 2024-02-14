@@ -30,7 +30,6 @@ function deleteArtiste(PDO $pdo, int $idArtiste) {
         $stmt->bindParam(1, $idArtiste);
         $stmt->execute();
 
-
         // delete dans Artiste
         $stmt = $pdo->prepare("DELETE FROM Artiste WHERE ID_Artiste = ?");
         $stmt->bindParam(1, $idArtiste);

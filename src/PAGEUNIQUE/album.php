@@ -67,8 +67,8 @@ class Album
             echo '<div class="container-btn-playlist-right">';
                 echo '<button class="jouer-playlist"><img src="./images/LECTEUR/playLecteur.png" alt="jouer la playlist"></button>';
                 if ($_SESSION['IdType'] == 1){
-                    echo '<a class="btn-supprimer" href="index.php?action=deleteAlbum&idAlbum='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer album"></a>';
                     echo '<a class="btn-editer" href="index.php?action=editerAlbum&idAlbum='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
+                    echo '<a class="btn-supprimer" href="index.php?action=deleteAlbum&idAlbum='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer album"></a>';
                 }
                 if (favorisAlbumExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id)) {
                     echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
