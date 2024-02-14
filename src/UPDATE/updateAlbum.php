@@ -10,24 +10,35 @@ $titre = $_REQUEST['titre'];
 $dateSortie = $_REQUEST['dateSortie'];
 $genre = $_REQUEST['genre'];
 $pochette = $_REQUEST['pochette'];
-$idArtiste = $_REQUEST['idArtiste'];
-$idParent = $_REQUEST['idParent'];
+$nomArtiste = $_REQUEST['nomArtiste'];
+$nomParent = $_REQUEST['nomParent'];
 
 print_r($idAlbum);
 print_r($titre);
 print_r($dateSortie);
 print_r($genre);
 print_r($pochette);
-print_r($idArtiste);
-print_r($idParent);
+print_r($nomArtiste);
+print_r($nomParent);
 
-if (empty($titre) || empty($dateSortie) || empty($genre) || empty($pochette) || empty($idArtiste) || empty($idParent)) {
+if (empty($titre) || empty($dateSortie) || empty($genre) || empty($pochette) || empty($nomArtiste) || empty($nomParent)) {
     header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum.'&erreur=Veuillez remplir tous les champs');
     exit();
 }
 
-update_album($pdo, $titre, $dateSortie, $genre, $pochette, $idArtiste, $idParent, $idAlbum);
-header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum);
+$idArtiste = getIDArtiste($pdo, $nomArtiste);
+$idParent = getIDArtiste($pdo, $nomParent);
+
+print_r($idArtiste);
+print_r($idParent);
+
+if ($idArtiste == false || $idParent == false) {
+    header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum.'&erreur=Artiste ou parent inexistant');
+    exit();
+}
+
+// update_album($pdo, $titre, $dateSortie, $genre, $pochette, $idArtiste, $idParent, $idAlbum);
+// header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum);
 
 
 

@@ -382,3 +382,31 @@ function get_music_with_id(PDO $pdo, int $id){
     $result = $stmt->fetch();
     return $result;
 }
+
+function getNomArtiste(PDO $pdo, $idArtiste){
+    try{
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :idArtiste");
+        $stmt->bindParam(':idArtiste', $idArtiste);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération du nom de l'artiste : ". $e->getMessage();
+        return false;
+    }
+}
+
+function getIDArtiste(PDO $pdo, $nomArtiste){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = :nomArtiste");
+        $stmt->bindParam(':nomArtiste', $nomArtiste);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_Artiste'];
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération de l'ID de l'artiste : ". $e->getMessage();
+        return false;
+    }
+}

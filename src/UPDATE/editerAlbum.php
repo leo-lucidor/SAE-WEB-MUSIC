@@ -39,10 +39,12 @@ class editerAlbum {
                 echo '<input type="text" placeholder="pochette" name="pochette" value="'. trim($this->pochette) .'">';
 
                 echo '<label for="Artiste de l\'album">Artiste de l\'album</label>';
-                echo '<input type="text" placeholder="id de l\'artiste" name="idArtiste" value="'. trim($this->idArtiste) .'">';
+                $nomArtiste = getNomArtiste(getPdo(), $this->idArtiste);
+                echo '<input type="text" placeholder="id de l\'artiste" name="nomArtiste" value="'. trim($nomArtiste) .'">';
 
                 echo '<label for="Parent de l\'ablum">Parent de l\'album</label>';
-                echo '<input type="text" placeholder="id de l\'artiste parent" name="idParent" value="'. trim($this->idParent) .'">';
+                $nomParent = getNomArtiste(getPdo(), $this->idParent);
+                echo '<input type="text" placeholder="id de l\'artiste parent" name="nomParent" value="'. trim($nomParent) .'">';
 
                 if (isset($_REQUEST['erreur'])) {
                     echo '<p class="erreur">'. $_REQUEST['erreur'] .'</p>';
