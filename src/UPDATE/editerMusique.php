@@ -18,7 +18,11 @@ class editerMusique {
         echo '<div class="container-artiste">';
 
             echo '<form action="index.php?action=modifierMusique&idMusique='.trim($this->id).'" method="POST" class="container-info">';
-                echo '<h2>Éditer la musique "'. $this->nom .'"</h2>';
+                echo '<div class="container-top-edit">';
+                    echo '<a class="btn-retour" href="index.php?action=musique&id='. trim($this->id) .'"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
+                    echo '<h2>Éditer la musique "'. $this->nom .'"</h2>';
+                echo '</div>';
+
                 echo '<label for="nom">Nom de la musique</label>';
                 echo '<input type="text" placeholder="Nom de la musique" name="nom" value="'. $this->nom .'">';
 

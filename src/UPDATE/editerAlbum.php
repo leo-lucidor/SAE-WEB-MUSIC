@@ -25,7 +25,11 @@ class editerAlbum {
         echo '<div class="container-artiste">';
 
             echo '<form action="index.php?action=modifierAlbum&idAlbum='. trim($this->id) .'" method="POST" class="container-info">';
-                echo '<h2>Éditer l\'album</h2>';
+                echo '<div class="container-top-edit">';
+                    echo '<a class="btn-retour" href="index.php?action=album&id='. trim($this->id) .'"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
+                    echo '<h2>Éditer l\'album</h2>';
+                echo '</div>';
+
                 echo '<label for="titre">Titre de l\'album</label>';
                 echo '<input type="text" placeholder="titre de l\'album" name="titre" value="'. trim($this->titre) .'">';
 
