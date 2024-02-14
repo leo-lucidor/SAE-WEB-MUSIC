@@ -56,3 +56,10 @@
     height: 40px;
     border-radius: 0;
 }
+
+.container-contenu-musique {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
