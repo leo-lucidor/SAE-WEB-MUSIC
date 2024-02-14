@@ -66,7 +66,9 @@ class Album
             echo '<p>' . trim($this->title) . ', de '. trim($this->artiste) . ', '. $this->year .' <span>'. $this->genre .'</span></p>';
             echo '<div class="container-btn-playlist-right">';
                 echo '<button class="jouer-playlist"><img src="./images/LECTEUR/playLecteur.png" alt="jouer la playlist"></button>';
-                // echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
+                if ($_SESSION['IdType'] == 1){
+                    echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
+                }
                 if (favorisAlbumExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id)) {
                     echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
                 } else {

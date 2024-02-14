@@ -69,6 +69,14 @@
         return $result['ID_Utilisateur'];
     }
 
+    function get_type_compte_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_types FROM Utilisateur WHERE ID_Utilisateur = :ID_Utilisateur");
+        $stmt->bindParam(':ID_Utilisateur', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_types'];
+    }
+
     function get_all_album(PDO $pdo){
         $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent, ID_Album FROM Album");
         $stmt->execute();

@@ -29,6 +29,8 @@ if ($mdpVerif != $mdp){
     $_SESSION['mail'] = $mail;
     $_SESSION['mdp'] = $mdp;
     $_SESSION['nom'] = $username;
+    $_SESSION['IdType'] = get_type_compte_with_id($pdo, $id);
+    print_r($_SESSION);
     header('Location: index.php?action=accueil');
 }
 

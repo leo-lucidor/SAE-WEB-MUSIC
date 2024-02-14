@@ -50,6 +50,7 @@ if ($_REQUEST == null) {
     require 'src/BDD/Function/databaseGet.php';
     $idUser = get_id_with_email($pdo, $_SESSION['mail']);
     $_SESSION['playlistUser'] = get_playlist_utilisateur($pdo, $idUser);
+    $_SESSION['IdType'] = get_type_compte_with_id($pdo, $idUser);
     header('Location: index.php?action=accueil');
 } else if ($_REQUEST['action'] == 'deconnexion') {
     require 'src/provider/deconnexion.php';

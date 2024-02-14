@@ -17,12 +17,18 @@ class Artiste {
 
         echo '<div class="container-btn-album">';
             echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
-            // echo '<a class="btn-editer" href="index.php?action=editerArtiste&idArtiste='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
             echo '<p class="titre-artiste">'.$this->nom.'</p>';
+            if ($_SESSION['IdType'] == 1){
+                echo '<div class="editer-artiste-container">';
+                echo '<a class="btn-editer" href="index.php?action=editerArtiste&idArtiste='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
+            }
             if (favorisArtisteExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id))
                 echo '<a class="btn-editer" href="index.php?action=favorisArtiste&idArtiste='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="liker l\'artiste"></a>';
             else
                 echo '<a class="btn-editer" href="index.php?action=favorisArtiste&idArtiste='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="liker l\'artiste"></a>';
+            if ($_SESSION['IdType'] == 1){
+                echo '</div>';
+            }
         echo '</div>';
 
         echo '<div class="container-milieu-album">';
