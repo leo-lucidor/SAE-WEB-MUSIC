@@ -72,8 +72,11 @@ if ($_REQUEST == null || ($_REQUEST['action'] != 'login' && $_SESSION['mail'] ==
     require 'src/DELETE/deletePlaylist.php';
 } else if ($_REQUEST['action'] == 'deleteMusique'){
     require 'src/DELETE/deleteMusique.php';
-}
-else if ($_REQUEST['action'] == 'noterAlbum'){
+} else if ($_REQUEST['action'] == 'deleteAlbum'){
+    require 'src/DELETE/deleteAlbum.php';
+} else if ($_REQUEST['action'] == 'deleteArtiste'){
+    require 'src/DELETE/deleteArtiste.php';
+} else if ($_REQUEST['action'] == 'noterAlbum'){
     require 'src/UPDATE/noterAlbum.php';
 } else if ($_REQUEST['action'] == 'favorisAlbum'){
     require 'src/FAVORIS/favorisAlbum.php';
