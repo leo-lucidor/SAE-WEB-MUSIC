@@ -11,27 +11,18 @@ echo '<ul class="menu">';
     if ($_REQUEST['action'] == 'accueil'){
         echo '<li><img class="img-active" id="img-accueil-plein" src="./images/maisonPlein.png" alt=""><a id="btn-accueil" class="btn-accueil" href="#">Accueil</a></li>';
         echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer&search=Tout">Explorer</a></li>';
-        echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><a id="btn-biblio" class="btn-biblio" href="index.php?action=bibliotheque">Bibliothèque</a></li>';
-        echo '<li><img class="img-active" id="img-coeur-vide" src="./images/coeurVide.png" alt=""><a id="btn-favoris" class="btn-favoris" href="index.php?action=favoris">Favoris</a></li>';
-    }  else if ($_REQUEST['action'] == 'bibliotheque'){
-        echo '<li><img class="img-active" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><a id="btn-accueil" class="btn-accueil" href="index.php?action=accueil">Accueil</a></li>';
-        echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer&search=Tout">Explorer</a></li>';
-        echo '<li><img class="img-active" id="img-biblio-plein" src="./images/bibliothequePlein.png" alt=""><a id="btn-biblio" class="btn-biblio" href="#">Bibliothèque</a></li>';
         echo '<li><img class="img-active" id="img-coeur-vide" src="./images/coeurVide.png" alt=""><a id="btn-favoris" class="btn-favoris" href="index.php?action=favoris">Favoris</a></li>';
     } else if ($_REQUEST['action'] == 'explorer'){
         echo '<li><img class="img-active" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><a id="btn-accueil" class="btn-accueil" href="index.php?action=accueil">Accueil</a></li>';
         echo '<li><img class="img-active" id="img-explorer-plein" src="./images/explorerPlein.png" alt=""><a id="btn-explorer" class="btn-explorer" href="#">Explorer</a></li>';
-        echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><a id="btn-biblio" class="btn-biblio" href="index.php?action=bibliotheque">Bibliothèque</a></li>';
         echo '<li><img class="img-active" id="img-coeur-vide" src="./images/coeurVide.png" alt=""><a id="btn-favoris" class="btn-favoris" href="index.php?action=favoris">Favoris</a></li>';
     }  else if ($_REQUEST['action'] == 'favoris') {
         echo '<li><img class="img-active" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><a id="btn-accueil" class="btn-accueil" href="index.php?action=accueil">Accueil</a></li>';
         echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer&search=Tout">Explorer</a></li>';
-        echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><a id="btn-biblio" class="btn-biblio" href="index.php?action=bibliotheque">Bibliothèque</a></li>';
         echo '<li><img class="img-active" id="img-coeur-plein" src="./images/coeurPlein.png" alt=""><a id="btn-favoris" class="btn-favoris" href="#">Favoris</a></li>';
     } else {
         echo '<li><img class="img-active" id="img-accueil-vide" src="./images/maisonVide.png" alt=""><a id="btn-accueil" class="btn-accueil" href="index.php?action=accueil">Accueil</a></li>';
         echo '<li><img class="img-active" id="img-explorer-vide" src="./images/explorerVide.png" alt=""><a id="btn-explorer" class="btn-explorer" href="index.php?action=explorer&search=Tout">Explorer</a></li>';
-        echo '<li><img class="img-active" id="img-biblio-vide" src="./images/bibliothequeVide.png" alt=""><a id="btn-biblio" class="btn-biblio" href="index.php?action=bibliotheque">Bibliothèque</a></li>';
         echo '<li><img class="img-active" id="img-coeur-vide" src="./images/coeurVide.png" alt=""><a id="btn-favoris" class="btn-favoris" href="index.php?action=favoris">Favoris</a></li>';
     }
     
@@ -77,9 +68,77 @@ echo '<div class="container-playlist">';
                     if (trim($playlists[$i]['Nom']) == 'Titres Likés'){
                         echo '<img src="./images/PLAYLIST/coup-coeur.jpg" alt="">';
                     } else if (yaDesMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist'])){
-                        // print_r("eh".getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist']));
-                        // echo '<script>console.log("'. getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist']) .'")</script>';
-                        echo '<img src="'. getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist'])[0]['Pochette'] .'" alt="">';
+                        // print_r("eh ".getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist'])[0]['ID_Album']);
+                        $albums = getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist']);
+                        if (count($albums) > 3){
+                            echo '<img id="mergedImage" src="./images/ALBUMS/default.jpg" alt="">';
+                            $imagePlaylist1 = trim('./images/ALBUMS/').trim(get_album_with_id(getPdo(), $albums[0]['ID_Album'])['Pochette']);
+                            $imagePlaylist2 = trim('./images/ALBUMS/').trim(get_album_with_id(getPdo(), $albums[1]['ID_Album'])['Pochette']);
+                            $imagePlaylist3 = trim('./images/ALBUMS/').trim(get_album_with_id(getPdo(), $albums[2]['ID_Album'])['Pochette']);
+                            $imagePlaylist4 = trim('./images/ALBUMS/').trim(get_album_with_id(getPdo(), $albums[3]['ID_Album'])['Pochette']);
+                            ?>
+                            <script>
+                            // Charger les quatre images
+                            var images = [];
+                            var loadedImages = 0;
+
+                            function loadImage(src, index) {
+                                var img = new Image();
+                                img.onload = function() {
+                                    loadedImages++;
+                                    if (loadedImages === 4) {
+                                        mergeImages();
+                                    }
+                                };
+                                img.src = src;
+                                images[index] = img;
+                            }
+
+                            // Charger les images
+                            loadImage('<?php echo $imagePlaylist1; ?>', 0);
+                            loadImage('<?php echo $imagePlaylist2; ?>', 1);
+                            loadImage('<?php echo $imagePlaylist3; ?>', 2);
+                            loadImage('<?php echo $imagePlaylist4; ?>', 3);
+
+                            console.log(images);
+
+                            function mergeImages() {
+                                // Créer un canvas temporaire pour fusionner les images
+                                var canvas = document.createElement('canvas');
+                                var ctx = canvas.getContext('2d');
+
+                                // Taille des images individuelles
+                                var imageWidth = images[0].width;
+                                var imageHeight = images[0].height;
+
+                                // Taille de l'image de sortie
+                                var outputWidth = imageWidth * 2;
+                                var outputHeight = imageHeight * 2;
+
+                                // Définir la taille du canvas
+                                canvas.width = outputWidth;
+                                canvas.height = outputHeight;
+
+                                // Fusionner les images sur le canvas
+                                for (var i = 0; i < 2; i++) {
+                                    for (var j = 0; j < 2; j++) {
+                                        ctx.drawImage(images[i * 2 + j], j * imageWidth, i * imageHeight, imageWidth, imageHeight);
+                                    }
+                                }
+
+                                // Convertir le canvas en URL de données (data URL)
+                                var mergedImageUrl = canvas.toDataURL();
+
+                                // Afficher l'image fusionnée dans la balise <img>
+                                var mergedImageElement = document.getElementById('mergedImage');
+                                mergedImageElement.src = mergedImageUrl;
+                            }
+                            </script>
+                            <?php
+                        } else {
+                            $idAlbum = getMusiqueDansPlaylist(getPdo(), $playlists[$i]['ID_Playlist'])[0]['ID_Album'];
+                            echo '<img src="'. trim('./images/ALBUMS/').trim(get_album_with_id(getPdo(), $idAlbum)['Pochette']) .'" alt="image de la playlist">';
+                        }
                     } 
                     else {
                         echo '<img src="./images/ALBUMS/default.jpg" alt="">';

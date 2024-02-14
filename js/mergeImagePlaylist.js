@@ -1,4 +1,4 @@
- // Charger les quatre images
+  // Charger les quatre images
  var images = [];
  var loadedImages = 0;
 
@@ -15,10 +15,10 @@
  }
 
  // Charger les images
- loadImage('image1.jpg', 0);
- loadImage('image2.jpg', 1);
- loadImage('image3.jpg', 2);
- loadImage('image4.jpg', 3);
+ loadImage('./images/ALBUMS/220px-Alabama.jpg', 0);
+ loadImage('./images/ALBUMS/220px-DarkChords.jpg', 1);
+ loadImage('./images/ALBUMS/220px-Folklore_hp.jpg', 2);
+ loadImage('./images/ALBUMS/220px-Ryan-adams-orion.jpg', 3);
 
  function mergeImages() {
      // Créer un canvas temporaire pour fusionner les images

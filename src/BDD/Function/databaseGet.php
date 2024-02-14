@@ -307,10 +307,13 @@ function getMusiqueWithIdArtiste(PDO $pdo, $nomArtiste){
 
 function getMusiqueDansPlaylist(PDO $pdo, $idPlaylist){
     try{
-        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album, Pochette FROM Musique_Playlist NATURAL JOIN Musique NATURAL JOIN Album WHERE ID_Playlist = :idPlaylist");
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique_Playlist NATURAL JOIN Musique WHERE ID_Playlist = :idPlaylist");
         $stmt->bindParam(':idPlaylist', $idPlaylist);
         $stmt->execute();   
         $result = $stmt->fetchAll();
+        if ($result == null) {
+            return null;
+        }
         return $result;
     }
     catch(PDOException $e){
@@ -334,4 +337,41 @@ function yaDesMusiqueDansPlaylist(PDO $pdo, $idPlaylist){
         echo "Erreur lors de la récupération des musiques de la playlist : ". $e->getMessage();
         return false;
     }
+}
+
+function getArtisteBywhithIdMusique (PDO $pdo, $idMusique){
+    try{
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = (SELECT ID_Artiste_By FROM Album WHERE ID_Album = (SELECT ID_Album FROM Musique WHERE ID_Musique = :idMusique))");
+        $stmt->bindParam(':idMusique', $idMusique);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération de l'artiste de la musique : ". $e->getMessage();
+        return false;
+    }
+}
+
+function getArtisteParentwhithIdMusique(PDO $pdo, $idMusique){
+    try{
+        // SELECT Nom FROM Artiste WHERE ID_Artiste = (
+        $stmt = $pdo->prepare("SELECT ID_Artiste_Parent FROM Album WHERE ID_Album = (SELECT ID_Album FROM Musique WHERE ID_Musique = :idMusique)");
+        $stmt->bindParam(':idMusique', $idMusique);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération de l'artiste de la musique : ". $e->getMessage();
+        return false;
+    }
+}
+
+function get_music_with_id(PDO $pdo, int $id){
+    $stmt = $pdo->prepare("SELECT ID_Musique, Titre ,Lien, ID_Album  FROM Musique WHERE ID_Musique = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result;
 }

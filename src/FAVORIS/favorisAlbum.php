@@ -1,7 +1,7 @@
 <?php
 
-require 'BDD/Function/databaseGet.php';
-require 'BDD/Function/databaseUpdate.php';
+require 'src\BDD\Function\databaseGet.php';
+require 'src\BDD\Function\databaseUpdate.php';
 $pdo = getPdo();
 
 $mailUser = $_SESSION['mail'];
