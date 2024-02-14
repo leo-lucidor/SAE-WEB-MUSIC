@@ -26,11 +26,14 @@ if (empty($titre) || empty($dateSortie) || empty($genre) || empty($pochette) || 
     exit();
 }
 
-$idArtiste = getIDArtiste($pdo, "Ryan Adams");
-$idParent = getIDArtiste($pdo, trim($nomParent));
+$idArtiste = get_id_with_artist_name($pdo, $nomArtiste);
+$idParent = get_id_with_artist_name($pdo, $nomParent);
 
-print_r("test: ".get_id_with_artist_name($pdo, trim($nomArtiste)));
-print_r(getIDArtiste($pdo, trim($nomParent)));
+
+echo '<script>console.log("'.$idArtiste.'")</script>';
+
+print_r($idArtiste);
+print_r($idParent);
 
 // if ($idArtiste == false || $idParent == false) {
 //     header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum.'&erreur=Artiste ou parent inexistant');

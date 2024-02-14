@@ -92,6 +92,14 @@
         return $result;
     }
 
+    function get_id_album_with_name(PDO $pdo, String $name){
+        $stmt = $pdo->prepare("SELECT ID_Album FROM Album WHERE Titre = :name");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_Album'];
+    }
+
     function get_artiste(PDO $pdo, int $id){
         $stmt = $pdo->prepare("SELECT ID_Artiste, Nom FROM Artiste WHERE ID_Artiste = :id");
         $stmt->bindParam(':id', $id);
@@ -174,6 +182,7 @@
         $stmt->bindParam(':name', $name);
         $stmt->execute();
         $result = $stmt->fetch();
+        echo '<script>console.log("'.$result.'")</script>';
         return $result['ID_Artiste'];
     }
 
@@ -393,20 +402,6 @@ function getNomArtiste(PDO $pdo, $idArtiste){
     }
     catch(PDOException $e){
         echo "Erreur lors de la récupération du nom de l'artiste : ". $e->getMessage();
-        return false;
-    }
-}
-
-function getIDArtiste(PDO $pdo, $nomArtiste){
-    try{
-        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = :nomArtiste");
-        $stmt->bindParam(':nomArtiste', $nomArtiste);
-        $stmt->execute();
-        $result = $stmt->fetch();
-        return $result['ID_Artiste'];
-    }
-    catch(PDOException $e){
-        echo "Erreur lors de la récupération de l'ID de l'artiste : ". $e->getMessage();
         return false;
     }
 }

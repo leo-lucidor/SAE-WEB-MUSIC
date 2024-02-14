@@ -60,8 +60,9 @@ if ($_REQUEST == null || ($_REQUEST['action'] != 'login' && $_SESSION['mail'] ==
     require 'src/UPDATE/updateArtiste.php';
 } else if ($_REQUEST['action'] == 'modifierAlbum'){
     require 'src/UPDATE/updateAlbum.php';
-} 
-else if ($_REQUEST['action'] == 'ajouterPlaylist'){
+} else if ($_REQUEST['action'] == 'modifierMusique'){
+    require 'src/UPDATE/updateMusique.php';
+} else if ($_REQUEST['action'] == 'ajouterPlaylist'){
     require 'src/AJOUT/ajouterPlaylist.php';
 } else if ($_REQUEST['action'] == 'ajouterMusicPlaylist') {
     require 'src/AJOUT/insertMusiquePlaylist.php';

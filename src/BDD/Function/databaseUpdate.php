@@ -144,6 +144,7 @@
             $stmt->bindParam(':lien', $lien);
             $stmt->bindParam(':idMusique', $idMusique);
             $stmt->execute();
+            return true;
         } catch (PDOException $e) {
             echo "Erreur lors de la modification de la musique : " . $e->getMessage();
             return false;
