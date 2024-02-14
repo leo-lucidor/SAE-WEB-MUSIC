@@ -70,7 +70,10 @@ if ($_REQUEST == null || ($_REQUEST['action'] != 'login' && $_SESSION['mail'] ==
     require 'src/DELETE/deleteMusiquePlaylist.php';
 } else if ($_REQUEST['action'] == 'deletePlaylist') {
     require 'src/DELETE/deletePlaylist.php';
-} else if ($_REQUEST['action'] == 'noterAlbum'){
+} else if ($_REQUEST['action'] == 'deleteMusique'){
+    require 'src/DELETE/deleteMusique.php';
+}
+else if ($_REQUEST['action'] == 'noterAlbum'){
     require 'src/UPDATE/noterAlbum.php';
 } else if ($_REQUEST['action'] == 'favorisAlbum'){
     require 'src/FAVORIS/favorisAlbum.php';

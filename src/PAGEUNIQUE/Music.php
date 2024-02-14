@@ -73,7 +73,7 @@ class Music
             <?php
                 if ($_SESSION['IdType'] == 1){
                     echo '<div class="container-contenu-musique">';
-                        echo '<a class="btn-editer" href="index.php?action=supprimerMusique&idMusique='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer album"></a>';
+                        echo '<a class="btn-supprimer" href="index.php?action=deleteMusique&idMusique='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer album"></a>';
                         echo '<a class="btn-editer" href="index.php?action=editerMusique&idMusique='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
                     echo '</div>';
                 }
