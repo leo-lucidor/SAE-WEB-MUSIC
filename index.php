@@ -38,7 +38,7 @@ $data = getdata();
 echo '<div class="container-all">';
 require 'src/provider/pdo.php';
 
-if ($_REQUEST == null) {
+if ($_REQUEST == null || ($_REQUEST['action'] != 'login' && $_SESSION['mail'] == null)) {
     require 'src/UTILISATEUR/login.php';  
 } else if ($_REQUEST['erreur'] != null && $_REQUEST['action'] == 'login') {
     require 'src/UTILISATEUR/login.php';
