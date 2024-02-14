@@ -374,3 +374,59 @@ function get_music_with_id(PDO $pdo, int $id){
     $result = $stmt->fetch();
     return $result;
 }
+
+function get_artistes_favoris(PDO $pdo, $id){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Favoris_Artiste WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des artistes favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+function get_albums_favoris(PDO $pdo, $id){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Album FROM Favoris_Album WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des albums favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+function get_musiques_favoris(PDO $pdo, $id){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Musique FROM Favoris_Musique WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des musiques favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+function get_playlist_favoris(PDO $pdo, $id){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Playlist FROM Favoris_Playlist WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des playlists favoris : ". $e->getMessage();
+        return false;
+    }
+}
