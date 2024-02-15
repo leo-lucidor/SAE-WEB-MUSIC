@@ -40,7 +40,8 @@
                                 <th>Titre</th>
                                 <th>Artiste</th>
                                 <th>Album</th>
-                                <th>Durée</th>
+                                <th>Année</th>
+                                <th>Genre</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,10 +58,11 @@
                                     }
                                     echo '<tr class="search-result">';
                                     echo '<td>';
-                                    echo '<a href="index.php?action=album&id='. trim($album[0]) .'"><img class="img-titre" src="' . htmlspecialchars($album[3]) . '" alt="Image de la pochette">' . htmlspecialchars($entry[1]) . '</a>';
+                                    echo '<a href="index.php?action=musique&id='. trim($entry[0]) .'"><img class="img-titre" src="' . htmlspecialchars($album[3]) . '" alt="Image de la pochette">' . htmlspecialchars($entry[1]) . '</a>';
                                     echo '<td>' . htmlspecialchars($artiste[0]) . '</td>';
                                     echo '<td>' . htmlspecialchars($album[0]) . '</td>';
-                                    echo '<td> N/A </td>';
+                                    echo '<td>' . htmlspecialchars($album[1]) . '</td>';
+                                    echo '<td>' . htmlspecialchars($album[2]) . '</td>';
                                     echo '</tr>';
                                 }
                             ?>

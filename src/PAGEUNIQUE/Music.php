@@ -61,7 +61,7 @@ class Music
         ?>
         <link rel="stylesheet" href="css/musique.css">
         <div class="container-musique-top">
-            <a href="index.php?action=accueil" class="btn-retour"><img src="images/fleche-gauche.png" alt="retour"></a>
+            <a href="javascript:history.back()" class="btn-retour"><img src="images/fleche-gauche.png" alt="retour"></a>
             <div class="container-contenu">
                 <p class="titre-musique"><?php echo $this->title; ?></p>
                 <p>|</p>

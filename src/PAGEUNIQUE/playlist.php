@@ -69,13 +69,13 @@ class Playlist {
             $nomUser = get_pseudo_with_id($pdo, $this->idUtilisateur);
             if (trim($this->nom) == "Titres Likés") {
                 echo '<div class="container-btn-playlist">';
-                    echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
+                    echo '<a class="btn-retour" href="javascript:history.back()"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
                     echo '<p class="titre-playlist">'. trim($this->nom) .'<span class="nom-user">Par Spotiut\'O</span></p>';
                     echo '<button class="jouer-playlist"><img src="./images/LECTEUR/playLecteur.png" alt="jouer la playlist"></button>';
                 echo '</div>';
             } else {
                 echo '<div class="container-btn-playlist">';
-                    echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
+                    echo '<a class="btn-retour" href="javascript:history.back()"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
                     echo '<p class="titre-playlist">'. trim($this->nom) .'<span class="nom-user">Par '. trim($nomUser) .'</span></p>';
                     echo '<div class="container-btn-playlist-right">';
                         if (get_playlist_locked($pdo, $this->id) == 0) {
