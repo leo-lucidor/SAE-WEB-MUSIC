@@ -377,7 +377,7 @@ function get_music_with_id(PDO $pdo, int $id){
 
 function get_artistes_favoris(PDO $pdo, $id){
     try{
-        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Favoris_Artiste WHERE ID_Utilisateur = :id");
+        $stmt = $pdo->prepare("SELECT Nom,ID_Artiste FROM Favoris_Artiste NATURAL JOIN ARTISTE WHERE ID_Utilisateur = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -391,7 +391,7 @@ function get_artistes_favoris(PDO $pdo, $id){
 
 function get_albums_favoris(PDO $pdo, $id){
     try{
-        $stmt = $pdo->prepare("SELECT ID_Album FROM Favoris_Album WHERE ID_Utilisateur = :id");
+        $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent, ID_Album FROM Favoris_Album NATURAL JOIN ALBUM WHERE ID_Utilisateur = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -405,7 +405,7 @@ function get_albums_favoris(PDO $pdo, $id){
 
 function get_musiques_favoris(PDO $pdo, $id){
     try{
-        $stmt = $pdo->prepare("SELECT ID_Musique FROM Favoris_Musique WHERE ID_Utilisateur = :id");
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Favoris_Musique NATURAL JOIN Musique WHERE ID_Utilisateur = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -419,7 +419,7 @@ function get_musiques_favoris(PDO $pdo, $id){
 
 function get_playlist_favoris(PDO $pdo, $id){
     try{
-        $stmt = $pdo->prepare("SELECT ID_Playlist FROM Favoris_Playlist WHERE ID_Utilisateur = :id");
+        $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Favoris_Playlist WHERE ID_Utilisateur = :id");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();

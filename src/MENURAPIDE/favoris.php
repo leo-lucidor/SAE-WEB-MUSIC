@@ -25,7 +25,6 @@ class Favoris
         // $playlists = get_playlist_favoris($pdo, $_SESSION['idUser']);
         $playlists = [];
         $artistes = get_artistes_favoris($pdo, $_SESSION['idUser']);
-        $this->$data = $data;
         $titres = get_musiques_favoris($pdo, $_SESSION['idUser']);
         
 ?>
@@ -36,17 +35,7 @@ class Favoris
                 <nav class="navbar">
                     <ul class="liste">
                         <?php
-                        if ($_REQUEST['search'] == 'Tout') {
-                            require 'src/search_filters/tout.php';    
-                        } else if ($_REQUEST['search'] == 'Titres') {
-                            require 'src/search_filters/titres.php'; 
-                        } else if ($_REQUEST['search'] == 'Artistes') {
-                            require 'src/search_filters/artistes.php'; 
-                        } else if ($_REQUEST['search'] == 'Albums') {
-                            require 'src/search_filters/albums.php'; 
-                        } else if ($_REQUEST['search'] == 'Playlists') {
-                            require 'src/search_filters/playlists.php'; 
-                        }
+                            require 'src/search_filters/all_favoris.php';
                         ?>
                     </ul>
                 </nav>

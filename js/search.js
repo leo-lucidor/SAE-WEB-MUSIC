@@ -63,14 +63,37 @@ document.addEventListener('DOMContentLoaded', function () {
         var containersList = document.querySelectorAll('div[class^="container-results-"]:not(.container-results-all)');
         containersList.forEach(function(container) {
             var h2 = container.querySelector('h2');
-            console.log(h2);
+            var table = container.querySelector('table');
             var results = container.querySelectorAll('.search-result:not([style="display: none;"])');
             if (results.length > 0) {
                 h2.style.display = '';
+                if (table) {
+                    table.style.display = '';
+                }
             } else {
                 h2.style.display = 'none';
+                if (table) {
+                    table.style.display = 'none';
+                }
             }
         });
+
+        // afficher "Aucun résultat trouvé" si aucun resultat n'est trouvé
+        var allResults = document.querySelectorAll('.search-result');
+        var allResultsFound = true;
+        allResults.forEach(function(result) {
+            if (result.style.display !== 'none') {
+                allResultsFound = false;
+            }
+        });
+        var noResult = document.querySelector('.no-result');
+        if (noResult) {
+            if (allResultsFound) {
+                noResult.style.display = '';
+            } else {
+                noResult.style.display = 'none';
+            }
+        }
     }
 
     handleSearchChange();

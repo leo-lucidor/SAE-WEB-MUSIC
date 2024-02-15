@@ -44,8 +44,8 @@ if ($_REQUEST['action'] == 'accueil') {
     $search->afficher();
 } else if ($_REQUEST['action'] == 'favoris') {
     require 'src/MENURAPIDE/favoris.php';
-    $albums_favoris = get_albums_favoris($pdo, $_SESSION['idUser']);
-    $favoris = new Favoris($albums_favoris);
+    $alubms_favoris = get_albums_favoris($pdo, $_SESSION['idUser']);
+    $favoris = new Favoris($alubms_favoris);
     $favoris->afficher();
 } else if ($_REQUEST['action'] == 'album') {
     $pdo = getPdo();
