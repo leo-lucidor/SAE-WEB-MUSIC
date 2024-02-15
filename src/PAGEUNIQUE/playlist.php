@@ -58,6 +58,10 @@ class Playlist {
         require 'src/provider/checkFichierDansDossier.php';
         require 'src/BDD/Function/databaseUpdate.php';
         $pdo = getPdo();
+
+        // lock_unlock_playlist($pdo, $this->id, 0);
+
+        // print_r(get_playlist_locked($pdo, $this->id));
         ?>
         <link rel="stylesheet" href="./css/playlist.css">
        
