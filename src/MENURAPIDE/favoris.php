@@ -27,7 +27,7 @@ class Favoris
         $artistes = get_artistes_favoris($pdo, $_SESSION['idUser']);
         $this->$data = $data;
         $titres = get_musiques_favoris($pdo, $_SESSION['idUser']);
-
+        
 ?>
         <link rel="stylesheet" href="./css/search.css">
 
