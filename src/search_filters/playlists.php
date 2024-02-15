@@ -36,7 +36,8 @@
             // Parcourir chaque entrée musicale
             foreach ($playlists as $entry) {
                 echo '<div class="search-result">';
-                echo '<p>Playlist : ' . htmlspecialchars($entry[2]) . '</p>';
+                echo '<p>' . htmlspecialchars($entry[2]) . '</p>';
+                echo '<a href="index.php?action=playlist&idPlaylist='. trim($entry[0]) .'"><img class="img-playlist" src="images/ALBUMS/default.jpg" alt="Image de la pochette"></a>';
                 echo '</div>';
             }
         } else {
