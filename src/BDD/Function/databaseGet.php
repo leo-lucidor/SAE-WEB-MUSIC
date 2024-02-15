@@ -459,11 +459,16 @@ function get_playlist_locked(PDO $pdo, int $id){
 }
 
 function get_playlist_liked_with_id(PDO $pdo, int $id){
-    $stmt = $pdo->prepare("SELECT ID_Playlist FROM Favoris_Playlist WHERE ID_Utilisateur = :id AND Nom != 'Titres Likés'");
+    $liste = array();
+    $stmt = $pdo->prepare("SELECT ID_Playlist FROM Favoris_Playlist WHERE ID_Utilisateur = :id");
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     $result = $stmt->fetchall();
-    return $result[0];
+    for ($i = 0; $i < count($result); $i++){
+        $playlist = get_playlist_with_id($pdo, $result[$i]['ID_Playlist']);
+        array_push($liste, $playlist);
+    }
+    return $liste;
 }
 
 function get_musiques_favoris(PDO $pdo, $id){

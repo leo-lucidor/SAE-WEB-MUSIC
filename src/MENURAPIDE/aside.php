@@ -33,6 +33,11 @@ echo '<div class="container-playlist">';
 
     
         $playlists = $_SESSION['playlistUser'];
+        $playlistsLiked = get_playlist_liked_with_id(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']));
+
+        if ($playlistsLiked != null && !empty($playlistsLiked)){
+            $playlists = array_merge($playlists, $playlistsLiked);
+        }
 
         echo '<div class="container-playlist-top">';
             echo '<h2 class="titre-playlist">Playlists</h2>';
@@ -148,7 +153,8 @@ echo '<div class="container-playlist">';
                         if (trim($playlists[$i]['Nom']) == 'Titres Likés'){
                             echo '<p>par Spotiut\'O</p>';
                         } else {
-                            echo '<p>par '. trim($_SESSION['nom']) .'</p>';
+                            $idUser = get_playlist_with_id(getPdo(), $playlists[$i]['ID_Playlist'])['ID_Utilisateur'];
+                            echo '<p>par '. trim(get_pseudo_with_id(getPdo(), $idUser)) .'</p>';
                         }
                     echo '</div>';
                 echo '</a>';
