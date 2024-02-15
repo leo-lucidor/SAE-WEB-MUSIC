@@ -226,4 +226,15 @@ function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
     }
 }
 
-
+function insertPlaylistFavoris(PDO $pdo, int $idPlaylist, int $idUt) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Favoris_Playlist (ID_Utilisateur, ID_Playlist) VALUES (?, ?)");
+        $stmt->bindParam(1, $idUt);
+        $stmt->bindParam(2, $idPlaylist);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la playlist dans les favoris : " . $e->getMessage();
+        return false;
+    }
+}

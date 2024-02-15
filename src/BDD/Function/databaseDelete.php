@@ -101,4 +101,17 @@ function deleteMusicPlaylistFavoris(PDO $pdo, int $idMusique, int $idPlaylist) {
     }
 }
 
+function deletePlaylistFavoris(PDO $pdo, int $idPlaylist, int $idUt) {
+    try {
+        $stmt = $pdo->prepare("DELETE FROM Favoris_Playlist WHERE ID_Utilisateur = ? AND ID_Playlist = ?");
+        $stmt->bindParam(1, $idUt);
+        $stmt->bindParam(2, $idPlaylist);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de la suppression de la playlist dans les favoris : " . $e->getMessage();
+        return false;
+    }
+}
+
 ?>
