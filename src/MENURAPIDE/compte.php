@@ -58,7 +58,7 @@ echo '<div class="container-compte">';
             <input type="submit" value="Ajouter">
         </form>
 
-        <form id="popupAjoutMusique" action="index.php?action=insertMusique" method="POST" class="container-info" style="display:none">
+        <form id="popupAjoutMusique" action="index.php?action=insertMusique" method="POST" class="container-info" style="display:none" enctype="multipart/form-data">
 
             <label class="label" for="nom">Nom de la musique</label>
             <input type="text" placeholder="Nom de la musique" name="nom">
