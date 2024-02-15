@@ -72,6 +72,7 @@ class Dataloader {
                 ID_Playlist INTEGER PRIMARY KEY AUTOINCREMENT,
                 Nom TEXT,
                 ID_Utilisateur INTEGER,
+                Est_public BOOLEAN,
                 FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur)
             )");
 
@@ -147,11 +148,15 @@ class Dataloader {
                 FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur)
             )");
 
+            // Table favoris Playlist
+            $this->pdo->exec("CREATE TABLE IF NOT EXISTS Favoris_Playlist (
+                ID_Utilisateur INTEGER,
+                ID_Playlist INTEGER,
+                FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur),
+                FOREIGN KEY (ID_Playlist) REFERENCES Playlist(ID_Playlist)
+            )");
 
-
-            
             return true;
-
         } catch (PDOException $e) {
             echo "Erreur : " . $e->getMessage();
             return false;
