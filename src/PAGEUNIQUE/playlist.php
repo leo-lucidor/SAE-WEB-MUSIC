@@ -78,17 +78,21 @@ class Playlist {
                     echo '<a class="btn-retour" href="javascript:history.back()"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
                     echo '<p class="titre-playlist">'. trim($this->nom) .'<span class="nom-user">Par '. trim($nomUser) .'</span></p>';
                     echo '<div class="container-btn-playlist-right">';
-                        if (get_playlist_locked($pdo, $this->id) == 0) {
-                            echo '<a class="btn-lock" href="index.php?action=visibilitePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/lock.png" alt="dévérouiller la playlist"></a>';
-                        } else {
-                            echo '<a class="btn-lock" href="index.php?action=visibilitePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/unlock.png" alt="vérouiller la playlist"></a>';
-                        }
-                        if (favorisPlaylistExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id))
-                            echo '<a class="btn-editer" href="index.php?action=favorisPlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="liker l\'artiste"></a>';
-                        else
-                            echo '<a class="btn-editer" href="index.php?action=favorisPlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="liker l\'artiste"></a>';
                         echo '<button class="jouer-playlist"><img src="./images/LECTEUR/playLecteur.png" alt="jouer la playlist"></button>';
-                        echo '<a class="btn-supprimer-top" href="index.php?action=deletePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une playlist"></a>';
+                        if (get_playlist_with_id($pdo, $this->id)['ID_Utilisateur'] == get_id_with_email($pdo, $_SESSION['mail'])) {
+                            echo '<a class="btn-supprimer-top" href="index.php?action=deletePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une playlist"></a>';
+                            if (get_playlist_locked($pdo, $this->id) == 0) {
+                                echo '<a class="btn-lock" href="index.php?action=visibilitePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/lock.png" alt="dévérouiller la playlist"></a>';
+                            } else {
+                                echo '<a class="btn-lock" href="index.php?action=visibilitePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/unlock.png" alt="vérouiller la playlist"></a>';
+                            }
+                        } else {
+                            if (favorisPlaylistExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id))
+                                echo '<a class="btn-editer" href="index.php?action=favorisPlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="liker l\'artiste"></a>';
+                            else {
+                                echo '<a class="btn-editer" href="index.php?action=favorisPlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="liker l\'artiste"></a>';
+                            }
+                        }
                     echo '</div>';
                 echo '</div>';
             }

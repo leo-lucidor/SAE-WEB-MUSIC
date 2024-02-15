@@ -464,6 +464,7 @@ function get_playlist_liked_with_id(PDO $pdo, int $id){
     $stmt->execute();
     $result = $stmt->fetchall();
     return $result[0];
+}
 
 function get_musiques_favoris(PDO $pdo, $id){
     try{
