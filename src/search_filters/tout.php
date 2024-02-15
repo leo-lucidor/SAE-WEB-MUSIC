@@ -22,8 +22,8 @@
             </ul>
         </nav>
     </div>
-    <main class="container-all-search">
-        <div class="container-titres">
+    <main class="container-results-all">
+        <div class="container-results-titres">
             <?php
             if (!empty($titres)) {
             ?>
@@ -69,7 +69,7 @@
             ?>
         </div>
 
-        <div class="container-albums">
+        <div class="container-results-albums">
             <?php
             if (!empty($this->data)) {
             ?>
@@ -94,7 +94,7 @@
             }
             ?>
         </div>
-        <div class="container-playlists">
+        <div class="container-results-playlists">
             <?php
                 if (!empty($playlists)) {
                     ?>
@@ -103,7 +103,8 @@
                     <?php
                         foreach ($playlists as $entry) {
                             echo '<div class="search-result">';
-                            echo '<p>Playlist : ' . htmlspecialchars($entry[2]) . '</p>';
+                            echo '<p>' . htmlspecialchars($entry[2]) . '</p>';
+                            echo '<a href="index.php?action=playlist&idPlaylist='. trim($entry[0]) .'"><img class="img-playlist" src="images/ALBUMS/default.jpg" alt="Image de la pochette"></a>';
                             echo '</div>';
                         }
                     echo "</div>";
@@ -111,7 +112,7 @@
                 }
                 ?>
         </div>
-        <div class="container-artistes">
+        <div class="container-results-artistes">
             <?php
                 if (!empty($artistes)) {
             ?>

@@ -3,14 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var crossIcon = document.querySelector('.cross_icon');
     var navLinks = document.querySelectorAll('.navbar-item a');
 
-    // Stocker la valeur de la barre de recherche lorsqu'un élément du nav est cliqué
+    // stocker la valeur de la barre de recherche lorsqu'un élément du nav est cliqué
     navLinks.forEach(function(link) {
         link.addEventListener('click', function() {
             localStorage.setItem('searchValue', inputSearch.value);
         });
     });
 
-    // Restaurer la valeur précédente du champ de recherche depuis le localStorage
+    // restaurer la valeur précédente du champ de recherche depuis le localStorage
     var search = localStorage.getItem('searchValue') || '';
     localStorage.removeItem('searchValue');
     inputSearch.value = search || '';
@@ -59,9 +59,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 nbResultsText.textContent = 'Aucun résultat trouvé';
             }
         }
+
+        var containersList = document.querySelectorAll('div[class^="container-results-"]:not(.container-results-all)');
+        containersList.forEach(function(container) {
+            var h2 = container.querySelector('h2');
+            console.log(h2);
+            var results = container.querySelectorAll('.search-result:not([style="display: none;"])');
+            if (results.length > 0) {
+                h2.style.display = '';
+            } else {
+                h2.style.display = 'none';
+            }
+        });
     }
 
-    // érer les changements de la barre de recherche
     handleSearchChange();
 
     // barre de recherche
