@@ -72,6 +72,21 @@ if ($_REQUEST['action'] == 'accueil') {
     require 'src/UPDATE/editerArtiste.php';
     $editerArtiste = new editerArtiste($idArtiste, $nomArtiste[0]);
     $editerArtiste->afficher();
+} else if ($_REQUEST['action'] == 'editerAlbum'){
+    $pdo = getPdo();
+    $idAlbum = $_REQUEST['idAlbum'];
+    $album = get_album_with_id($pdo, $idAlbum);
+    require 'src/UPDATE/editerAlbum.php';
+    $editerAlbum = new editerAlbum($album['ID_Album'], $album['Titre'], $album['Date_de_sortie'], $album['Genre'], $album['Pochette'], $album['ID_Artiste_By'], $album['ID_Artiste_Parent']);
+    $editerAlbum->afficher();
+} else if ($_REQUEST['action'] == 'editerMusique'){
+    $pdo = getPdo();
+    $idMusique = $_REQUEST['idMusique'];
+    $musique = get_music_with_id($pdo, $idMusique);
+    require 'src/UPDATE/editerMusique.php';
+    $Album = get_album_with_id($pdo, $musique['ID_Album']);
+    $editerMusique = new editerMusique($idMusique, $musique['Titre'], $Album['Titre']);
+    $editerMusique->afficher();
 } else if ($_REQUEST['action'] == 'playlist') {
     $pdo = getPdo();
 

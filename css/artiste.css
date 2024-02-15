@@ -134,3 +134,26 @@
 .titre-container-album {
     text-align: center !important;
 }
+
+.editer-artiste-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-supprimer img {
+    width: 30px;
+    height: 30px;
+    border-radius: 0;
+}
+
+.btn-supprimer {
+    transition: 0.2s;
+}
+
+.btn-supprimer:hover {
+    transform: rotate(90deg);
+    transition: 0.2s;
+}

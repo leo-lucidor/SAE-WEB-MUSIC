@@ -94,6 +94,27 @@
         }
     }
 
+    function update_favoris_playlist($pdo, $id_utilisateur, $id_playlist){
+        try {
+            $verif_favoris = favorisPlaylistExiste($pdo, $id_utilisateur, $id_playlist);
+            if($verif_favoris == false){
+                $smtp = $pdo->prepare("INSERT INTO Favoris_Playlist (ID_Utilisateur, ID_Playlist) VALUES (:ID_Utilisateur, :ID_Playlist)");
+                $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
+                $smtp->bindParam(':ID_Playlist', $id_playlist);
+                $smtp->execute();
+            }
+            else{
+                $smtp = $pdo->prepare("DELETE FROM Favoris_Playlist WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Playlist = :ID_Playlist");
+                $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
+                $smtp->bindParam(':ID_Playlist', $id_playlist);
+                $smtp->execute();
+            }
+        }
+        catch (PDOException $e) {
+            echo 'erreur update favoris playlist';
+        }
+    }
+
 
     function update_note($pdo, $note, $id_utilisateur, $id_album){
         try {
@@ -120,7 +141,7 @@
 
     function update_album(PDO $pdo, String $nom, String $date, String $genre, String $pochette, int $ID_artist_by, int $ID_artist_parent, int $idAlbum){
         try {
-            $stmt = $pdo->prepare("UPDATE Album SET Nom = :nom, Date_sortie = :dates, Genre = :genre, Pochette = :pochette, ID_Artiste_By = :idBy, ID_Artiste_Parent = :idParent WHERE ID_Album = :idAlbum");
+            $stmt = $pdo->prepare("UPDATE Album SET Titre = :nom, Date_de_sortie = :dates, Genre = :genre, Pochette = :pochette, ID_Artiste_By = :idBy, ID_Artiste_Parent = :idParent WHERE ID_Album = :idAlbum");
             $stmt->bindParam(':nom', $nom);
             $stmt->bindParam(':dates', $date);
             $stmt->bindParam(':genre', $genre);
@@ -137,17 +158,57 @@
         }
     }
 
-    function update_musique(PDO $pdo, String $titre, String $lien, int $idMusique){
+    function update_musique(PDO $pdo, String $titre, String $lien, int $idAlbum, int $idMusique){
         try {
-            $stmt = $pdo->prepare("UPDATE Musique SET Titre = :titre, Lien = :lien WHERE ID_Musique = :idMusique");
+            $stmt = $pdo->prepare("UPDATE Musique SET Titre = :titre, Lien = :lien, ID_Album = :idAlbum WHERE ID_Musique = :idMusique");
             $stmt->bindParam(':titre', $titre);
             $stmt->bindParam(':lien', $lien);
+            $stmt->bindParam(':idAlbum', $idAlbum);
             $stmt->bindParam(':idMusique', $idMusique);
             $stmt->execute();
+            return true;
         } catch (PDOException $e) {
             echo "Erreur lors de la modification de la musique : " . $e->getMessage();
             return false;
         }
-        
+    }
 
+    function insertArtiste($pdo, $nom){
+        try {
+            $stmt = $pdo->prepare("INSERT INTO Artiste (Nom) VALUES (:nom)");
+            $stmt->bindParam(':nom', $nom);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de l'artiste : " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function insertMusique($pdo, $titre, $lien, $idAlbum){
+        try {
+            $stmt = $pdo->prepare("INSERT INTO Musique (Titre, Lien, ID_Album) VALUES (:titre, :lien, :idAlbum)");
+            $stmt->bindParam(':titre', $titre);
+            $stmt->bindParam(':lien', $lien);
+            $stmt->bindParam(':idAlbum', $idAlbum);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de la musique : " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function lock_unlock_playlist($pdo, $id_playlist, $estVisible){
+        try { 
+            $stmt = $pdo->prepare("UPDATE Playlist SET Est_public = :estVisible WHERE ID_Playlist = :idPlaylist");
+            $stmt->bindParam(':estVisible', $estVisible);
+            $stmt->bindParam(':idPlaylist', $id_playlist);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de la modification de la playlist : " . $e->getMessage();
+            return false;
+        }
+        
     }

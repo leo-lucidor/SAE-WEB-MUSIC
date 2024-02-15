@@ -28,7 +28,7 @@ session_start();
 $dataloader = new Dataloader('database.sqlite3', 'extrait.yml');
 
 // $dataloader->createTables();
-// returnToBaseBDD($dataloader->getPdo());
+//returnToBaseBDD($dataloader->getPdo());
 
 $pdo = $dataloader->getPdo();
 $data = getdata();
@@ -38,7 +38,7 @@ $data = getdata();
 echo '<div class="container-all">';
 require 'src/provider/pdo.php';
 
-if ($_REQUEST == null) {
+if ($_REQUEST == null || ($_REQUEST['action'] != 'login' && $_SESSION['mail'] == null)) {
     require 'src/UTILISATEUR/login.php';  
 } else if ($_REQUEST['erreur'] != null && $_REQUEST['action'] == 'login') {
     require 'src/UTILISATEUR/login.php';
@@ -50,6 +50,7 @@ if ($_REQUEST == null) {
     require 'src/BDD/Function/databaseGet.php';
     $idUser = get_id_with_email($pdo, $_SESSION['mail']);
     $_SESSION['playlistUser'] = get_playlist_utilisateur($pdo, $idUser);
+    $_SESSION['IdType'] = get_type_compte_with_id($pdo, $idUser);
     header('Location: index.php?action=accueil');
 } else if ($_REQUEST['action'] == 'deconnexion') {
     require 'src/provider/deconnexion.php';
@@ -57,6 +58,10 @@ if ($_REQUEST == null) {
     require 'src/UPDATE/updateUser.php'; 
 } else if ($_REQUEST['action'] == 'modifierArtiste') {
     require 'src/UPDATE/updateArtiste.php';
+} else if ($_REQUEST['action'] == 'modifierAlbum'){
+    require 'src/UPDATE/updateAlbum.php';
+} else if ($_REQUEST['action'] == 'modifierMusique'){
+    require 'src/UPDATE/updateMusique.php';
 } else if ($_REQUEST['action'] == 'ajouterPlaylist'){
     require 'src/AJOUT/ajouterPlaylist.php';
 } else if ($_REQUEST['action'] == 'ajouterMusicPlaylist') {
@@ -65,6 +70,12 @@ if ($_REQUEST == null) {
     require 'src/DELETE/deleteMusiquePlaylist.php';
 } else if ($_REQUEST['action'] == 'deletePlaylist') {
     require 'src/DELETE/deletePlaylist.php';
+} else if ($_REQUEST['action'] == 'deleteMusique'){
+    require 'src/DELETE/deleteMusique.php';
+} else if ($_REQUEST['action'] == 'deleteAlbum'){
+    require 'src/DELETE/deleteAlbum.php';
+} else if ($_REQUEST['action'] == 'deleteArtiste'){
+    require 'src/DELETE/deleteArtiste.php';
 } else if ($_REQUEST['action'] == 'noterAlbum'){
     require 'src/UPDATE/noterAlbum.php';
 } else if ($_REQUEST['action'] == 'favorisAlbum'){
@@ -73,6 +84,14 @@ if ($_REQUEST == null) {
     require 'src/FAVORIS/favorisArtiste.php';
 } else if ($_REQUEST['action'] == 'favorisMusique'){
     require 'src/FAVORIS/favorisMusique.php';
+} else if ($_REQUEST['action'] == 'favorisPlaylist'){
+    require 'src/FAVORIS/favorisPlaylist.php';
+} else if ($_REQUEST['action'] == 'insertArtiste'){
+    require 'src/AJOUT/ajouterArtiste.php';
+} else if ($_REQUEST['action'] == 'insertMusique'){
+    require 'src/AJOUT/ajouterMusique.php';
+} else if ($_REQUEST['action'] == 'visibilitePlaylist'){
+    require 'src/UPDATE/visibilitePlaylist.php';
 }
 else {
     require 'src/BDD/Function/databaseGet.php';

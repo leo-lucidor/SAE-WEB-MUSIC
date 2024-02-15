@@ -69,6 +69,14 @@
         return $result['ID_Utilisateur'];
     }
 
+    function get_type_compte_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_types FROM Utilisateur WHERE ID_Utilisateur = :ID_Utilisateur");
+        $stmt->bindParam(':ID_Utilisateur', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_types'];
+    }
+
     function get_all_album(PDO $pdo){
         $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent, ID_Album FROM Album");
         $stmt->execute();
@@ -82,6 +90,14 @@
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
+    }
+
+    function get_id_album_with_name(PDO $pdo, String $name){
+        $stmt = $pdo->prepare("SELECT ID_Album FROM Album WHERE Titre = :name");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_Album'];
     }
 
     function get_artiste(PDO $pdo, int $id){
@@ -166,6 +182,7 @@
         $stmt->bindParam(':name', $name);
         $stmt->execute();
         $result = $stmt->fetch();
+        echo '<script>console.log("'.$result.'")</script>';
         return $result['ID_Artiste'];
     }
 
@@ -375,6 +392,21 @@ function get_music_with_id(PDO $pdo, int $id){
     return $result;
 }
 
+
+function getNomArtiste(PDO $pdo, $idArtiste){
+    try{
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :idArtiste");
+        $stmt->bindParam(':idArtiste', $idArtiste);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération du nom de l'artiste : ". $e->getMessage();
+        return false;
+    }
+}
+
 function get_artistes_favoris(PDO $pdo, $id){
     try{
         $stmt = $pdo->prepare("SELECT ID_Artiste FROM Favoris_Artiste WHERE ID_Utilisateur = :id");
@@ -385,6 +417,21 @@ function get_artistes_favoris(PDO $pdo, $id){
     }
     catch(PDOException $e){
         echo "Erreur lors de la récupération des artistes favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+
+function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+        $stmt->bindParam(1, $idMusique);
+        $stmt->bindParam(2, $idPlaylist);
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
         return false;
     }
 }
@@ -402,6 +449,21 @@ function get_albums_favoris(PDO $pdo, $id){
         return false;
     }
 }
+
+function get_playlist_locked(PDO $pdo, int $id){
+    $stmt = $pdo->prepare("SELECT Est_public FROM Playlist WHERE ID_Playlist = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result[0]['Est_public'];
+}
+
+function get_playlist_liked_with_id(PDO $pdo, int $id){
+    $stmt = $pdo->prepare("SELECT ID_Playlist FROM Favoris_Playlist WHERE ID_Utilisateur = :id AND Nom != 'Titres Likés'");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetchall();
+    return $result[0];
 
 function get_musiques_favoris(PDO $pdo, $id){
     try{
