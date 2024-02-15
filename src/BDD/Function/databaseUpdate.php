@@ -163,3 +163,17 @@
         }
     }
 
+    function insertMusique($pdo, $titre, $lien, $idAlbum){
+        try {
+            $stmt = $pdo->prepare("INSERT INTO Musique (Titre, Lien, ID_Album) VALUES (:titre, :lien, :idAlbum)");
+            $stmt->bindParam(':titre', $titre);
+            $stmt->bindParam(':lien', $lien);
+            $stmt->bindParam(':idAlbum', $idAlbum);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de la musique : " . $e->getMessage();
+            return false;
+        }
+    }
+
