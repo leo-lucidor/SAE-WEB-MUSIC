@@ -5,6 +5,8 @@
     text-align: center;
     flex-basis: 100%;
     max-height: 80vh;
+    margin-top: 30px;
+    overflow-y: auto;
 }
 
 .container-info {
@@ -111,6 +113,18 @@
     background-color: transparent;
     color: #fff;
     background-color: #840c96;
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+
+select {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    margin-left: 20rem;
+    margin-right: 20rem;
+    flex-basis: 20%;
     border: 0;
     border-radius: 5px;
     padding: 0.5rem;

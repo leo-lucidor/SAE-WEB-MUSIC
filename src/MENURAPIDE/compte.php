@@ -19,69 +19,71 @@ echo '<div class="container-compte">';
         echo '<input type="submit" value="Modifier">';
     echo '</form>';
 
-    echo '<div class="container-btn-ajout">';
-        echo '<button id="retour-form" style="display:none">Retour</button>';
+    if ($_SESSION['IdType'] == 1){
+        echo '<div class="container-btn-ajout">';
+            echo '<button id="retour-form" style="display:none">Retour</button>';
 
-        echo '<button id="btnAjoutAlbum">Ajouter un Album</button>';
-        echo '<button id="btnAjoutArtiste">Ajouter un Artiste</button>';
-        echo '<button id="btnAjoutMusique">Ajouter une Musique</button>';
-    echo '</div>';
-
-    ?>
-    <form id="popupAjoutAlbum" action="#" method="POST" class="container-info" style="display:none">
-
-        <label class="label" for="titre">Titre de l'album</label>
-        <input type="text" placeholder="Titre de l'album" name="titre">
-
-        <label class="label" for="dateSortie">Date de sortie</label>
-        <input type="text" name="dateSortie">
-
-        <label class="label" for="genre">Genres de l'album</label>
-        <input type="text" placeholder="Genre" name="genre">
-
-        <label class="label" for="image">Pochette de l'album</label>
-        <input type="text" placeholder="Pochette" name="pochette">
-
-        <label class="label" for="artiste">Artiste de l'album</label>
-        <input type="text" placeholder="Nom de l'artiste" name="nomArtiste">
-
-        <label class="label" for="parentAlbum">Parent de l'album</label>
-        <input type="text" placeholder="Nom de l'artiste parent" name="nomParent">
-
-        <input type="submit" value="Ajouter">
-    </form>
-
-
-    <form id="popupAjoutArtiste" action="#" method="POST" class="container-info" style="display:none">
-        <input type="text" placeholder="Nom de l\'artiste" name="nom">
-        <input type="submit" value="Ajouter">
-    </form>
-
-    <form id="popupAjoutMusique" action="#" method="POST" class="container-info" style="display:none">
-
-        <label class="label" for="nom">Nom de la musique</label>
-        <input type="text" placeholder="Nom de la musique" name="nom">
-
-        <label class="label" for="nomAlbum">Album choisit</label>
-        <?php
-        $Albums = get_all_album($pdo);
-        echo '<select name="nomAlbum">';
-            foreach ($Albums as $Album) {
-                echo '<option value="'. $Album['Titre'] .'">'. $Album['Titre'] .'</option>';
-            }
-            echo '</select>';
+            echo '<button id="btnAjoutAlbum">Ajouter un Album</button>';
+            echo '<button id="btnAjoutArtiste">Ajouter un Artiste</button>';
+            echo '<button id="btnAjoutMusique">Ajouter une Musique</button>';
+        echo '</div>';
 
         ?>
-        <input type="submit" value="Ajouter">
-    </form>
+        <form id="popupAjoutAlbum" action="#" method="POST" class="container-info" style="display:none">
 
-    <?php if (isset($_REQUEST['erreur'])): ?>
-        <p class="erreur"><?= $_REQUEST['erreur'] ?></p>
-        <?php unset($_REQUEST['erreur']); ?>
-    <?php endif; ?>
+            <label class="label" for="titre">Titre de l'album</label>
+            <input type="text" placeholder="Titre de l'album" name="titre">
 
-    <script src="./js/popupAjout.js"></script>
-    <?php
+            <label class="label" for="dateSortie">Date de sortie</label>
+            <input type="text" name="dateSortie">
+
+            <label class="label" for="genre">Genres de l'album</label>
+            <input type="text" placeholder="Genre" name="genre">
+
+            <label class="label" for="image">Pochette de l'album</label>
+            <input type="text" placeholder="Pochette" name="pochette">
+
+            <label class="label" for="artiste">Artiste de l'album</label>
+            <input type="text" placeholder="Nom de l'artiste" name="nomArtiste">
+
+            <label class="label" for="parentAlbum">Parent de l'album</label>
+            <input type="text" placeholder="Nom de l'artiste parent" name="nomParent">
+
+            <input type="submit" value="Ajouter">
+        </form>
+
+
+        <form id="popupAjoutArtiste" action="index.php?action=insertArtiste" method="POST" class="container-info" style="display:none">
+            <input type="text" placeholder="Nom de l'artiste" name="nom">
+            <input type="submit" value="Ajouter">
+        </form>
+
+        <form id="popupAjoutMusique" action="#" method="POST" class="container-info" style="display:none">
+
+            <label class="label" for="nom">Nom de la musique</label>
+            <input type="text" placeholder="Nom de la musique" name="nom">
+
+            <label class="label" for="nomAlbum">Album choisit</label>
+            <?php
+            $Albums = get_all_album($pdo);
+            echo '<select name="nomAlbum">';
+                foreach ($Albums as $Album) {
+                    echo '<option value="'. $Album['Titre'] .'">'. $Album['Titre'] .'</option>';
+                }
+                echo '</select>';
+
+            ?>
+            <input type="submit" value="Ajouter">
+        </form>
+
+        <?php if (isset($_REQUEST['erreur'])): ?>
+            <p class="erreur"><?= $_REQUEST['erreur'] ?></p>
+            <?php unset($_REQUEST['erreur']); ?>
+        <?php endif; ?>
+
+        <script src="./js/popupAjout.js"></script>
+        <?php
+    }
 
     echo '<a href="index.php?action=deconnexion">Déconnexion</a>';
 

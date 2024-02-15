@@ -84,6 +84,8 @@ if ($_REQUEST == null || ($_REQUEST['action'] != 'login' && $_SESSION['mail'] ==
     require 'src/FAVORIS/favorisArtiste.php';
 } else if ($_REQUEST['action'] == 'favorisMusique'){
     require 'src/FAVORIS/favorisMusique.php';
+} else if ($_REQUEST['action'] == 'insertArtiste'){
+    require 'src/AJOUT/ajouterArtiste.php';
 }
 else {
     require 'src/BDD/Function/databaseGet.php';

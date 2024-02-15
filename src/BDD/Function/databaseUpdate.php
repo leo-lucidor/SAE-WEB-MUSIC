@@ -149,6 +149,17 @@
             echo "Erreur lors de la modification de la musique : " . $e->getMessage();
             return false;
         }
-        
-
     }
+
+    function insertArtiste($pdo, $nom){
+        try {
+            $stmt = $pdo->prepare("INSERT INTO Artiste (Nom) VALUES (:nom)");
+            $stmt->bindParam(':nom', $nom);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de l'artiste : " . $e->getMessage();
+            return false;
+        }
+    }
+
