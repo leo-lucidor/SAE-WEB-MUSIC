@@ -44,11 +44,31 @@ class editerAlbum {
 
                 echo '<label for="Artiste de l\'album">Artiste de l\'album</label>';
                 $nomArtiste = getNomArtiste(getPdo(), $this->idArtiste);
-                echo '<input type="text" placeholder="id de l\'artiste" name="nomArtiste" value="'. trim($nomArtiste) .'">';
+                echo '<select name="nomArtiste">';
+                    echo '<option value="'. trim($this->idArtiste) .'">'. trim($nomArtiste) .'</option>';
+                    $listeArtiste = get_all_artiste(getPdo());
+                    foreach ($listeArtiste as $artiste) {
+                        if (trim($artiste['Nom']) == trim($nomArtiste)) {
+                            echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
+                        } else {
+                            echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
+                        }
+                    }
+                echo '</select>';
 
                 echo '<label for="Parent de l\'ablum">Parent de l\'album</label>';
                 $nomParent = getNomArtiste(getPdo(), $this->idParent);
-                echo '<input type="text" placeholder="id de l\'artiste parent" name="nomParent" value="'. trim($nomParent) .'">';
+                echo '<select name="nomParent">';
+                    echo '<option value="'. trim($this->idArtiste) .'">'. trim($nomArtiste) .'</option>';
+                    $listeArtiste = get_all_artiste(getPdo());
+                    foreach ($listeArtiste as $artiste) {
+                        if (trim($artiste['Nom']) == trim($nomArtiste)) {
+                            echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
+                        } else {
+                            echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
+                        }
+                    }
+                echo '</select>';
 
                 if (isset($_REQUEST['erreur'])) {
                     echo '<p class="erreur">'. $_REQUEST['erreur'] .'</p>';

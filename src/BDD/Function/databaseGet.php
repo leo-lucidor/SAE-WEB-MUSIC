@@ -178,11 +178,10 @@
     }
 
     function get_id_with_artist_name(PDO $pdo, String $name){
-        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = :name");
-        $stmt->bindParam(':name', $name);
+        echo 'console.log('.$name.')';
+        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = '".trim($name)."'");
         $stmt->execute();
         $result = $stmt->fetch();
-        echo '<script>console.log("'.$result.'")</script>';
         return $result['ID_Artiste'];
     }
 

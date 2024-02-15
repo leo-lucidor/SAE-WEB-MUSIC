@@ -113,5 +113,3 @@ function deletePlaylistFavoris(PDO $pdo, int $idPlaylist, int $idUt) {
         return false;
     }
 }
-
-?>

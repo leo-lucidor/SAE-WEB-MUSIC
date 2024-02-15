@@ -1,9 +1,9 @@
 <?php
 
-$pdo = getPdo();
-
 require 'src/BDD/Function/databaseGet.php';
-require 'src/BDD/Function/databaseUpdate.php';
+
+$pdo = getPdo();
+// require 'src/BDD/Function/databaseUpdate.php';
 
 $idAlbum = $_REQUEST['idAlbum'];
 $titre = $_REQUEST['titre'];
@@ -30,7 +30,7 @@ $idArtiste = get_id_with_artist_name($pdo, $nomArtiste);
 $idParent = get_id_with_artist_name($pdo, $nomParent);
 
 
-echo '<script>console.log("'.$idArtiste.'")</script>';
+// echo '<script>console.log("'.$idArtiste.'")</script>';
 
 print_r($idArtiste);
 print_r($idParent);
