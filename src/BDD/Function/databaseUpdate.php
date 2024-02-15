@@ -178,15 +178,16 @@
         }
     }
 
-    function update_playlist($pdo, $nom, $id_playlist, $estVisible){
-        try {
-            $smtp = $pdo->prepare("UPDATE Playlist SET Nom = :Nom, Est_public = :Est_publique WHERE ID_Playlist = :ID_Playlist");
-            $smtp->bindParam(':Nom', $nom);
-            $smtp->bindParam(':ID_Playlist', $id_playlist);
-            $smtp->bindParam(':Est_publique', $estVisible);
-            $smtp->execute();
+    function lock_unlock_playlist($pdo, $id_playlist, $estVisible){
+        try { 
+            $stmt = $pdo->prepare("UPDATE Playlist SET Est_public = :estVisible WHERE ID_Playlist = :idPlaylist");
+            $stmt->bindParam(':estVisible', $estVisible);
+            $stmt->bindParam(':idPlaylist', $id_playlist);
+            $stmt->execute();
+            return true;
         } catch (PDOException $e) {
-            echo 'erreur update playlist';
+            echo "Erreur lors de la modification de la playlist : " . $e->getMessage();
+            return false;
         }
+        
     }
-

@@ -420,3 +420,11 @@ function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
         return false;
     }
 }
+
+function get_playlist_locked(PDO $pdo, int $id){
+    $stmt = $pdo->prepare("SELECT Est_public FROM Playlist WHERE ID_Playlist = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result[0]['Est_public'];
+}
