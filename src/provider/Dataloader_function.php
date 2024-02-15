@@ -207,7 +207,7 @@ function insertTypesUtilisateur( PDO $pdo, String $typeUtilisateur): void
 function insertPlaylist(PDO $pdo, String $nom, int $utilisateur): void
 {
     try {
-        $stmt = $pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur) VALUES (?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur, Est_public) VALUES (?, ?, 0)");
         $stmt->bindParam(1, $nom);
         $stmt->bindParam(2, $utilisateur);
         $stmt->execute();

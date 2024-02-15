@@ -177,3 +177,15 @@
         }
     }
 
+    function update_playlist($pdo, $nom, $id_playlist, $estVisible){
+        try {
+            $smtp = $pdo->prepare("UPDATE Playlist SET Nom = :Nom, Est_public = :Est_publique WHERE ID_Playlist = :ID_Playlist");
+            $smtp->bindParam(':Nom', $nom);
+            $smtp->bindParam(':ID_Playlist', $id_playlist);
+            $smtp->bindParam(':Est_publique', $estVisible);
+            $smtp->execute();
+        } catch (PDOException $e) {
+            echo 'erreur update playlist';
+        }
+    }
+

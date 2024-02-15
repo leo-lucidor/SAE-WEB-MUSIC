@@ -73,11 +73,11 @@ function insertNote(PDO $pdo, int $valeur, int $idUt, int $idAlbum) {
 
 function insertPlaylist(PDO $pdo, String $nom, int $idUt) {
     try {
-        $bool = false;
+        $estPublic = 0;
         $stmt = $pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur, Est_public) VALUES (?, ?, ?)");
         $stmt->bindParam(1, $nom);
         $stmt->bindParam(2, $idUt);
-        $stmt->bindParam(3, $bool);
+        $stmt->bindParam(3, $estPublic);
         $stmt->execute();
         return true;
     } catch (PDOException $e) {

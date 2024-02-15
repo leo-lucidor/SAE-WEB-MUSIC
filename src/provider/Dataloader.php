@@ -72,7 +72,7 @@ class Dataloader {
                 ID_Playlist INTEGER PRIMARY KEY AUTOINCREMENT,
                 Nom TEXT,
                 ID_Utilisateur INTEGER,
-                Est_public BOOLEAN,
+                Est_public INTEGER,
                 FOREIGN KEY (ID_Utilisateur) REFERENCES Utilisateur(ID_Utilisateur)
             )");
 
