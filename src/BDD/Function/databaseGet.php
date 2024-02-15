@@ -405,3 +405,18 @@ function getNomArtiste(PDO $pdo, $idArtiste){
         return false;
     }
 }
+
+
+function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+        $stmt->bindParam(1, $idMusique);
+        $stmt->bindParam(2, $idPlaylist);
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
+        return false;
+    }
+}

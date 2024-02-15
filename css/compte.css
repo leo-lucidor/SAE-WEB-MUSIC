@@ -4,7 +4,7 @@
     justify-content: center;
     text-align: center;
     flex-basis: 100%;
-    margin-bottom: 60vh;
+    max-height: 80vh;
 }
 
 .container-info {
@@ -64,4 +64,54 @@
     font-weight: 400;
     margin-bottom: 2rem;
     flex-basis: 100%;
+}
+
+
+.popup {
+    display: none;
+    position: fixed; /* Position fixe pour rester centré sur l'écran */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%; /* Limitez la largeur pour éviter le débordement horizontal */
+    max-height: 90%; /* Limitez la hauteur pour éviter le débordement vertical */
+    overflow: auto; /* Ajoutez un défilement si nécessaire */
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    z-index: 9999;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    flex-basis: 100%;
+}
+
+.label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    flex-basis: 100%;
+}
+
+.container-btn-ajout {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    text-align: center;
+    flex-basis: 100%;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.container-btn-ajout button {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    transition: 0.3s;
+    background-color: transparent;
+    color: #fff;
+    background-color: #840c96;
+    border: 0;
+    border-radius: 5px;
+    padding: 0.5rem;
 }
