@@ -199,3 +199,9 @@
     align-items: center;
     gap: 20px;
 }
+
+.btn-lock img {
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+}
