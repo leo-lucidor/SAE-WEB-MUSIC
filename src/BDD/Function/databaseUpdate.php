@@ -137,11 +137,12 @@
         }
     }
 
-    function update_musique(PDO $pdo, String $titre, String $lien, int $idMusique){
+    function update_musique(PDO $pdo, String $titre, String $lien, int $idAlbum, int $idMusique){
         try {
-            $stmt = $pdo->prepare("UPDATE Musique SET Titre = :titre, Lien = :lien WHERE ID_Musique = :idMusique");
+            $stmt = $pdo->prepare("UPDATE Musique SET Titre = :titre, Lien = :lien, ID_Album = :idAlbum WHERE ID_Musique = :idMusique");
             $stmt->bindParam(':titre', $titre);
             $stmt->bindParam(':lien', $lien);
+            $stmt->bindParam(':idAlbum', $idAlbum);
             $stmt->bindParam(':idMusique', $idMusique);
             $stmt->execute();
             return true;
