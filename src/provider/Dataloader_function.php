@@ -231,7 +231,7 @@ function insertNote(PDO $pdo, array $noteData): void
     }
 }
 
-function insertMusique(PDO $pdo, array $musiqueData): void
+function insertMusiqueBDD(PDO $pdo, array $musiqueData): void
 {
     try {
         $stmt = $pdo->prepare("INSERT INTO Musique (Titre, Lien, ID_Album) VALUES (?, ?, ?)");
@@ -245,7 +245,7 @@ function insertMusique(PDO $pdo, array $musiqueData): void
     }
 }
 
-function insertMusiqueIntoPlaylist(PDO $pdo, int $idMusique, int $idPlaylist): void
+function insertMusiqueBDDIntoPlaylist(PDO $pdo, int $idMusique, int $idPlaylist): void
 {
     try {
         $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
@@ -291,7 +291,7 @@ function insertAll(PDO $pdo)
     insertTypesUtilisateur($pdo, "Utilisateur");
     insertUser($pdo, "JohnDoe", "123", "admin@gmail.com", 1);
     insertUser($pdo, 'erwan', 'erwan', 'erwan.blandeau@gmail.com',2);
-    insertMusique1($pdo);
+    insertMusiqueBDD1($pdo);
 }
 
 function deleteAllInBDD(PDO $pdo)
@@ -374,7 +374,7 @@ function get_idAlbum_with_titre($pdo, $titre){
     return $result['ID_Album'];
 }
 
-function insertMusique1 ($pdo){
+function insertMusiqueBDD1 ($pdo){
 
     $liste = parcourirDossierMusique();
 
