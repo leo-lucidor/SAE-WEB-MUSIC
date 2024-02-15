@@ -428,3 +428,11 @@ function get_playlist_locked(PDO $pdo, int $id){
     $result = $stmt->fetchAll();
     return $result[0]['Est_public'];
 }
+
+function get_playlist_liked_with_id(PDO $pdo, int $id){
+    $stmt = $pdo->prepare("SELECT ID_Playlist FROM Favoris_Playlist WHERE ID_Utilisateur = :id AND Nom != 'Titres Likés'");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetchall();
+    return $result[0];
+}
