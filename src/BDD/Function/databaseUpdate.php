@@ -94,6 +94,27 @@
         }
     }
 
+    function update_favoris_playlist($pdo, $id_utilisateur, $id_playlist){
+        try {
+            $verif_favoris = favorisPlaylistExiste($pdo, $id_utilisateur, $id_playlist);
+            if($verif_favoris == false){
+                $smtp = $pdo->prepare("INSERT INTO Favoris_Playlist (ID_Utilisateur, ID_Playlist) VALUES (:ID_Utilisateur, :ID_Playlist)");
+                $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
+                $smtp->bindParam(':ID_Playlist', $id_playlist);
+                $smtp->execute();
+            }
+            else{
+                $smtp = $pdo->prepare("DELETE FROM Favoris_Playlist WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Playlist = :ID_Playlist");
+                $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
+                $smtp->bindParam(':ID_Playlist', $id_playlist);
+                $smtp->execute();
+            }
+        }
+        catch (PDOException $e) {
+            echo 'erreur update favoris playlist';
+        }
+    }
+
 
     function update_note($pdo, $note, $id_utilisateur, $id_album){
         try {

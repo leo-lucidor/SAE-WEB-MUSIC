@@ -83,6 +83,10 @@ class Playlist {
                         } else {
                             echo '<a class="btn-lock" href="index.php?action=visibilitePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/unlock.png" alt="vérouiller la playlist"></a>';
                         }
+                        if (favorisPlaylistExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id))
+                            echo '<a class="btn-editer" href="index.php?action=favorisPlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="liker l\'artiste"></a>';
+                        else
+                            echo '<a class="btn-editer" href="index.php?action=favorisPlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="liker l\'artiste"></a>';
                         echo '<button class="jouer-playlist"><img src="./images/LECTEUR/playLecteur.png" alt="jouer la playlist"></button>';
                         echo '<a class="btn-supprimer-top" href="index.php?action=deletePlaylist&idPlaylist='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer une playlist"></a>';
                     echo '</div>';

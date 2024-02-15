@@ -75,6 +75,26 @@ function note_Existe($pdo, $id_utilisateur, $id_album){
             echo 'erreur favoris existe';
         } 
     }
+
+    function favorisPlaylistExiste($pdo, $id_utilisateur, $id_playlist){
+        try {
+            $smtp=$pdo->prepare("SELECT * FROM Favoris_Playlist WHERE ID_Utilisateur = :ID_Utilisateur AND ID_Playlist = :ID_Playlist");
+            $smtp->bindParam(':ID_Utilisateur', $id_utilisateur);
+            $smtp->bindParam(':ID_Playlist', $id_playlist);
+            $smtp->execute();
+            $result = $smtp -> fetchAll();
+            if(count($result) == 0){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+        catch (PDOException $e) {
+            echo 'erreur favoris existe';
+        } 
+    }
+
 function verifMusicInPlaylist($pdo, $idMusique, $idPlaylist) {
     try {
         $stmt = $pdo->prepare("SELECT * FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
