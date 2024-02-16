@@ -161,6 +161,14 @@
         return $result;
     }
 
+    function get_idAlbum_with_name($pdo, $titre){
+        $stmt = $pdo->prepare("SELECT ID_Album FROM Album WHERE Titre = ?");
+        $stmt->bindParam(1, $titre);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_Album'];
+    }
+
     function get_img_album_with_artist_name(PDO $pdo, String $name){
         $stmt = $pdo->prepare("SELECT Pochette FROM Album WHERE ID_Artiste_By = (SELECT ID_Artiste FROM Artiste WHERE Nom = :name)");
         $stmt->bindParam(':name', $name);
