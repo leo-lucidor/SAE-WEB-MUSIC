@@ -206,6 +206,10 @@
             $stmt->bindParam(':estVisible', $estVisible);
             $stmt->bindParam(':idPlaylist', $id_playlist);
             $stmt->execute();
+            $stmt = $pdo->prepare("Delete from Favoris_Playlist where ID_Playlist = :idPlaylist");
+            $stmt->bindParam(':idPlaylist', $id_playlist);
+            $stmt->execute();
+            
             return true;
         } catch (PDOException $e) {
             echo "Erreur lors de la modification de la playlist : " . $e->getMessage();
