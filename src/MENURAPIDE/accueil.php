@@ -76,9 +76,9 @@ class Accueil
                 if (!empty($albums)) {
                     // Parcourir chaque entrée musicale
                     foreach ($albums as $entry) {
-                        $lien_img = explode(' ', $entry[3]);
-                        if (!str_starts_with($lien_img[1], 'null')){
-                            $entry[3] = "images/ALBUMS/".trim($lien_img[1]);
+                        $lien_img = $entry[3];
+                        if (!str_starts_with(trim($lien_img), 'null')){
+                            $entry[3] = "images/ALBUMS/".trim($lien_img);
                         } else {
                             $entry[3] = "images/ALBUMS/default.jpg";
                         }
@@ -114,9 +114,9 @@ class Accueil
 
                         // Parcourir chaque entrée musicale
                         foreach ($albums as $entry) {
-                            $lien_img = explode(' ', $entry[3]);
-                            if (!str_starts_with($lien_img[1], 'null')){
-                                $entry[3] = "images/ALBUMS/".trim($lien_img[1]);
+                            $lien_img = $entry[3];
+                            if (!str_starts_with(trim($lien_img), 'null')){
+                                $entry[3] = "images/ALBUMS/".trim($lien_img);
                             } else {
                                 $entry[3] = "images/ALBUMS/default.jpg";
                             }
@@ -139,4 +139,3 @@ class Accueil
             
     }
 }
-?>
