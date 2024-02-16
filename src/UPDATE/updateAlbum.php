@@ -3,7 +3,7 @@
 require 'src/BDD/Function/databaseGet.php';
 
 $pdo = getPdo();
-// require 'src/BDD/Function/databaseUpdate.php';
+require 'src/BDD/Function/databaseUpdate.php';
 
 $idAlbum = $_REQUEST['idAlbum'];
 $titre = $_REQUEST['titre'];
@@ -29,19 +29,13 @@ if (empty($titre) || empty($dateSortie) || empty($genre) || empty($pochette) || 
 $idArtiste = get_id_with_artist_name($pdo, $nomArtiste);
 $idParent = get_id_with_artist_name($pdo, $nomParent);
 
+if (trim($titre) == trim($album['Titre']) && trim($dateSortie) == trim($album['Date_de_sortie']) && trim($genre) == trim($album['Genre']) && trim($pochette) == trim($album['Pochette']) && trim($idArtiste) == trim($album['ID_Artiste_By']) && trim($idParent) == trim($album['ID_Artiste_Parent'])) {
+    header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum.'&erreur=Veuillez modifier au moins un champ');
+    exit();
+}
 
-// echo '<script>console.log("'.$idArtiste.'")</script>';
-
-print_r($idArtiste);
-print_r($idParent);
-
-// if ($idArtiste == false || $idParent == false) {
-//     header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum.'&erreur=Artiste ou parent inexistant');
-//     exit();
-// }
-
-// update_album($pdo, $titre, $dateSortie, $genre, $pochette, $idArtiste, $idParent, $idAlbum);
-// header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum);
+update_album($pdo, $titre, $dateSortie, $genre, $pochette, intval($idArtiste), intval($idParent), intval($idAlbum));
+header('Location: index.php?action=editerAlbum&idAlbum='.$idAlbum);
 
 
 

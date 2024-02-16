@@ -45,28 +45,20 @@ class editerAlbum {
                 echo '<label for="Artiste de l\'album">Artiste de l\'album</label>';
                 $nomArtiste = getNomArtiste(getPdo(), $this->idArtiste);
                 echo '<select name="nomArtiste">';
-                    echo '<option value="'. trim($this->idArtiste) .'">'. trim($nomArtiste) .'</option>';
+                    echo '<option value="'. trim($nomArtiste) .'">'. trim($nomArtiste) .'</option>';
                     $listeArtiste = get_all_artiste(getPdo());
                     foreach ($listeArtiste as $artiste) {
-                        if (trim($artiste['Nom']) == trim($nomArtiste)) {
-                            echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
-                        } else {
-                            echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
-                        }
+                        echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
                     }
                 echo '</select>';
 
                 echo '<label for="Parent de l\'ablum">Parent de l\'album</label>';
                 $nomParent = getNomArtiste(getPdo(), $this->idParent);
                 echo '<select name="nomParent">';
-                    echo '<option value="'. trim($this->idArtiste) .'">'. trim($nomArtiste) .'</option>';
+                    echo '<option value="'. trim($nomParent) .'">'. trim($nomParent) .'</option>';
                     $listeArtiste = get_all_artiste(getPdo());
                     foreach ($listeArtiste as $artiste) {
-                        if (trim($artiste['Nom']) == trim($nomArtiste)) {
-                            echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
-                        } else {
-                            echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
-                        }
+                        echo '<option value="'. trim($artiste['Nom']) .'">'. trim($artiste['Nom']) .'</option>';
                     }
                 echo '</select>';
 

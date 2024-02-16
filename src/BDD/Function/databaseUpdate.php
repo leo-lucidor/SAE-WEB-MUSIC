@@ -139,7 +139,7 @@
         }               
     }
 
-    function update_album(PDO $pdo, String $nom, String $date, String $genre, String $pochette, int $ID_artist_by, int $ID_artist_parent, int $idAlbum){
+    function update_album(PDO $pdo, string $nom, string $date, string $genre, string $pochette, int $ID_Artiste_By, int $ID_Artiste_Parent, int $idAlbum) {
         try {
             $stmt = $pdo->prepare("UPDATE Album SET Titre = :nom, Date_de_sortie = :dates, Genre = :genre, Pochette = :pochette, ID_Artiste_By = :idBy, ID_Artiste_Parent = :idParent WHERE ID_Album = :idAlbum");
             $stmt->bindParam(':nom', $nom);
@@ -153,10 +153,11 @@
     
             return true;
         } catch (PDOException $e) {
-            echo "Erreur lors de l'ajout de l'album : " . $e->getMessage();
+            echo "Erreur lors de la mise à jour de l'album : " . $e->getMessage();
             return false;
         }
     }
+    
 
     function update_musique(PDO $pdo, String $titre, String $lien, int $idAlbum, int $idMusique){
         try {

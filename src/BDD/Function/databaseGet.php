@@ -178,10 +178,13 @@
     }
 
     function get_id_with_artist_name(PDO $pdo, String $name){
-        echo 'console.log('.$name.')';
-        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = '".trim($name)."'");
+        $name = ' '.$name;
+        // echo 'console.log('.$name.')';
+        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom like '".$name."%'");
+        // $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = '".$name."\r\n'");
         $stmt->execute();
         $result = $stmt->fetch();
+        // echo 'console.log('.$result['ID_Artiste'].')';   
         return $result['ID_Artiste'];
     }
 
