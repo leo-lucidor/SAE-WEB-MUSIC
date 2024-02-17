@@ -35,7 +35,7 @@ echo '<div class="container-compte">';
             <input type="text" placeholder="Titre de l'album" name="titre">
 
             <label class="label" for="dateSortie">Date de sortie</label>
-            <input type="text" name="dateSortie">
+            <input type="text" placeholder="Ex : 2016" name="dateSortie">
 
             <label class="label" for="genre">Genres de l'album</label>
             <input type="text" placeholder="Genre" name="genre">
