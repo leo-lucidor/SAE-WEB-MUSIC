@@ -1,11 +1,12 @@
 <?php
 
-function insertUser(PDO $pdo,String $userName, String $usePassword, String $userEmail) {
+function insertUser(PDO $pdo,String $userName, String $usePassword, String $userEmail, int $idType) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email) VALUES (?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO Utilisateur (Nom_utilisateur, Mot_de_passe, Email, ID_Types) VALUES (?, ?, ?, ?)");
             $stmt->bindParam(1, $userName);
             $stmt->bindParam(2, $usePassword);
             $stmt->bindParam(3, $userEmail);
+            $stmt->bindParam(4, $idType);
             $stmt->execute();
 
             $idUt = get_id_utlisateur($pdo, $userEmail);
@@ -72,11 +73,12 @@ function insertNote(PDO $pdo, int $valeur, int $idUt, int $idAlbum) {
 
 function insertPlaylist(PDO $pdo, String $nom, int $idUt) {
     try {
-        $stmt = $pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur) VALUES (?, ?)");
+        $estPublic = 0;
+        $stmt = $pdo->prepare("INSERT INTO Playlist (Nom, ID_Utilisateur, Est_public) VALUES (?, ?, ?)");
         $stmt->bindParam(1, $nom);
         $stmt->bindParam(2, $idUt);
+        $stmt->bindParam(3, $estPublic);
         $stmt->execute();
-
         return true;
     } catch (PDOException $e) {
         echo "Erreur lors de l'ajout de la playlist : " . $e->getMessage();
@@ -188,9 +190,27 @@ function insertFavorisAlbum(PDO $pdo, int $idAlbum, int $idUt) {
     }
 }
 
-
-
-// playlist
+function insertMusicPlaylistFavoris(PDO $pdo, int $idMusique, int $idPlaylist) {
+    try {
+        $verifMusicInPlaylist = verifMusicInPlaylist($pdo, $idMusique, $idPlaylist);
+        if($verifMusicInPlaylist == false){
+            $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+            $stmt->bindParam(1, $idMusique);
+            $stmt->bindParam(2, $idPlaylist);
+            $stmt->execute();
+        }
+        else{
+            $stmt = $pdo->prepare("DELETE FROM Musique_Playlist WHERE ID_Musique = ? AND ID_Playlist = ?");
+            $stmt->bindParam(1, $idMusique);
+            $stmt->bindParam(2, $idPlaylist);
+            $stmt->execute();
+        }
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
+        return false;
+    }   
+}
 
 function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
     try {
@@ -204,6 +224,17 @@ function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
         echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
         return false;
     }
+}
 
-    
+function insertPlaylistFavoris(PDO $pdo, int $idPlaylist, int $idUt) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Favoris_Playlist (ID_Utilisateur, ID_Playlist) VALUES (?, ?)");
+        $stmt->bindParam(1, $idUt);
+        $stmt->bindParam(2, $idPlaylist);
+        $stmt->execute();
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la playlist dans les favoris : " . $e->getMessage();
+        return false;
+    }
 }

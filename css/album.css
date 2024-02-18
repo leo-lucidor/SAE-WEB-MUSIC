@@ -73,6 +73,12 @@
     border-radius: 0;
 }
 
+.btn-liste-attente img {
+    width: 1.5vw !important;
+    height: 1.5vw !important;
+    border-radius: 0;
+}
+
 /* musiques */
 .container-album-artiste {
     background-color: #1b191f;
@@ -255,4 +261,50 @@
 .numero-album {
     margin-left: 28px;
     margin-right: 17px;
+}
+
+
+.container-btn-playlist-right {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+#btn-volume-high img, #btn-volume-low img, #btn-volume-mute img {
+    width: 25px;
+    height: 25px;
+    border-radius: 0;
+}
+
+.container-lecteur-right {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.jouer-playlist img {
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+}
+
+.btn-supprimer img {
+    width: 30px;
+    height: 30px;
+    border-radius: 0;
+}
+
+.btn-supprimer {
+    transition: 0.2s;
+}
+
+.btn-supprimer:hover {
+    transform: rotate(90deg);
+    transition: 0.2s;
 }

@@ -69,6 +69,14 @@
         return $result['ID_Utilisateur'];
     }
 
+    function get_type_compte_with_id(PDO $pdo, int $id){
+        $stmt = $pdo->prepare("SELECT ID_types FROM Utilisateur WHERE ID_Utilisateur = :ID_Utilisateur");
+        $stmt->bindParam(':ID_Utilisateur', $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_types'];
+    }
+
     function get_all_album(PDO $pdo){
         $stmt = $pdo->prepare("SELECT Titre,Date_de_sortie,Genre,Pochette,ID_Artiste_By,ID_Artiste_Parent, ID_Album FROM Album");
         $stmt->execute();
@@ -82,6 +90,14 @@
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
+    }
+
+    function get_id_album_with_name(PDO $pdo, String $name){
+        $stmt = $pdo->prepare("SELECT ID_Album FROM Album WHERE Titre = :name");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_Album'];
     }
 
     function get_artiste(PDO $pdo, int $id){
@@ -145,6 +161,14 @@
         return $result;
     }
 
+    function get_idAlbum_with_name($pdo, $titre){
+        $stmt = $pdo->prepare("SELECT ID_Album FROM Album WHERE Titre = ?");
+        $stmt->bindParam(1, $titre);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['ID_Album'];
+    }
+
     function get_img_album_with_artist_name(PDO $pdo, String $name){
         $stmt = $pdo->prepare("SELECT Pochette FROM Album WHERE ID_Artiste_By = (SELECT ID_Artiste FROM Artiste WHERE Nom = :name)");
         $stmt->bindParam(':name', $name);
@@ -162,10 +186,13 @@
     }
 
     function get_id_with_artist_name(PDO $pdo, String $name){
-        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = :name");
-        $stmt->bindParam(':name', $name);
+        $name = ' '.$name;
+        // echo 'console.log('.$name.')';
+        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom like '".$name."%'");
+        // $stmt = $pdo->prepare("SELECT ID_Artiste FROM Artiste WHERE Nom = '".$name."\r\n'");
         $stmt->execute();
         $result = $stmt->fetch();
+        // echo 'console.log('.$result['ID_Artiste'].')';   
         return $result['ID_Artiste'];
     }
 
@@ -219,6 +246,21 @@
         return $result;
     }
 
+    function get_all_musiques(PDO $pdo){
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    function get_musique_by_name(PDO $pdo, String $name){
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique WHERE Titre = :name");
+        $stmt->bindParam(':name', $name);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+
     function get_playlist(PDO $pdo){
         $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist");
         $stmt->execute();
@@ -227,7 +269,7 @@
     }
 
     function get_playlist_visible(PDO $pdo, int $id){
-        $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist WHERE ID_Utilisateur != :id AND Nom != 'Titres Likés'");
+        $stmt = $pdo->prepare("SELECT ID_Playlist, ID_Utilisateur, Nom FROM Playlist WHERE ID_Utilisateur != :id AND Nom != 'Titres Likés' AND Est_public = 1");
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         $result = $stmt->fetchAll();
@@ -258,23 +300,22 @@
         }
         return $result['Valeur'];
     }
-// execption
 
-    function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
+    function getPlaylistTitreLikeUser($pdo, $id_utilisateur) {
         try {
-            $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
-            $stmt->bindParam(1, $idMusique);
-            $stmt->bindParam(2, $idPlaylist);
+            $NomPlaylist = "Titres Likés";
+            $stmt = $pdo->prepare("SELECT ID_Playlist FROM Playlist WHERE ID_Utilisateur = ? AND Nom = ?");
+            $stmt->bindParam(1, $id_utilisateur);
+            $stmt->bindParam(2, $NomPlaylist);
             $stmt->execute();
+            $result = $stmt->fetchAll();
 
-            return true;
+            return $result[0]['ID_Playlist'];
         } catch (PDOException $e) {
-            echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
+            echo "Erreur lors de la récupération de la playlist Titres Likés : " . $e->getMessage();
             return false;
         }
     }
-
-// execption
 
 function getMusiqueWithIdArtiste(PDO $pdo, $nomArtiste){
     try{
@@ -292,10 +333,13 @@ function getMusiqueWithIdArtiste(PDO $pdo, $nomArtiste){
 
 function getMusiqueDansPlaylist(PDO $pdo, $idPlaylist){
     try{
-        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album, Pochette FROM Musique_Playlist NATURAL JOIN Musique NATURAL JOIN Album WHERE ID_Playlist = :idPlaylist");
+        $stmt = $pdo->prepare("SELECT ID_Musique, Titre, Lien, ID_Album FROM Musique_Playlist NATURAL JOIN Musique WHERE ID_Playlist = :idPlaylist");
         $stmt->bindParam(':idPlaylist', $idPlaylist);
         $stmt->execute();   
         $result = $stmt->fetchAll();
+        if ($result == null) {
+            return null;
+        }
         return $result;
     }
     catch(PDOException $e){
@@ -320,3 +364,148 @@ function yaDesMusiqueDansPlaylist(PDO $pdo, $idPlaylist){
         return false;
     }
 }
+
+function getArtisteBywhithIdMusique (PDO $pdo, $idMusique){
+    try{
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = (SELECT ID_Artiste_By FROM Album WHERE ID_Album = (SELECT ID_Album FROM Musique WHERE ID_Musique = :idMusique))");
+        $stmt->bindParam(':idMusique', $idMusique);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération de l'artiste de la musique : ". $e->getMessage();
+        return false;
+    }
+}
+
+function getArtisteParentwhithIdMusique(PDO $pdo, $idMusique){
+    try{
+        // SELECT Nom FROM Artiste WHERE ID_Artiste = (
+        $stmt = $pdo->prepare("SELECT ID_Artiste_Parent FROM Album WHERE ID_Album = (SELECT ID_Album FROM Musique WHERE ID_Musique = :idMusique)");
+        $stmt->bindParam(':idMusique', $idMusique);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération de l'artiste de la musique : ". $e->getMessage();
+        return false;
+    }
+}
+
+function get_music_with_id(PDO $pdo, int $id){
+    $stmt = $pdo->prepare("SELECT ID_Musique, Titre ,Lien, ID_Album  FROM Musique WHERE ID_Musique = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetch();
+    return $result;
+}
+
+
+function getNomArtiste(PDO $pdo, $idArtiste){
+    try{
+        $stmt = $pdo->prepare("SELECT Nom FROM Artiste WHERE ID_Artiste = :idArtiste");
+        $stmt->bindParam(':idArtiste', $idArtiste);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['Nom'];
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération du nom de l'artiste : ". $e->getMessage();
+        return false;
+    }
+}
+
+function get_artistes_favoris(PDO $pdo, $id){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Artiste FROM Favoris_Artiste WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des artistes favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+
+function insertMusicPlaylist(PDO $pdo, int $idMusique, int $idPlaylist) {
+    try {
+        $stmt = $pdo->prepare("INSERT INTO Musique_Playlist (ID_Musique, ID_Playlist) VALUES (?, ?)");
+        $stmt->bindParam(1, $idMusique);
+        $stmt->bindParam(2, $idPlaylist);
+        $stmt->execute();
+
+        return true;
+    } catch (PDOException $e) {
+        echo "Erreur lors de l'ajout de la musique dans la playlist : " . $e->getMessage();
+        return false;
+    }
+}
+
+function get_albums_favoris(PDO $pdo, $id){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Album FROM Favoris_Album WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des albums favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+function get_playlist_locked(PDO $pdo, int $id){
+    $stmt = $pdo->prepare("SELECT Est_public FROM Playlist WHERE ID_Playlist = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    return $result[0]['Est_public'];
+}
+
+function get_playlist_liked_with_id(PDO $pdo, int $id){
+    $liste = array();
+    $stmt = $pdo->prepare("SELECT ID_Playlist FROM Favoris_Playlist WHERE ID_Utilisateur = :id");
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+    $result = $stmt->fetchall();
+    for ($i = 0; $i < count($result); $i++){
+        $playlist = get_playlist_with_id($pdo, $result[$i]['ID_Playlist']);
+        array_push($liste, $playlist);
+    }
+    return $liste;
+}
+
+function get_musiques_favoris(PDO $pdo, $id){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Musique FROM Favoris_Musique WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des musiques favoris : ". $e->getMessage();
+        return false;
+    }
+}
+
+function get_playlist_favoris(PDO $pdo, $id){
+    try{
+        $stmt = $pdo->prepare("SELECT ID_Playlist FROM Favoris_Playlist WHERE ID_Utilisateur = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    catch(PDOException $e){
+        echo "Erreur lors de la récupération des playlists favoris : ". $e->getMessage();
+        return false;
+    }
+}
+

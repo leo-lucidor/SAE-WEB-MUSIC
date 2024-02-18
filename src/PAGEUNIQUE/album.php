@@ -56,20 +56,26 @@ class Album
     }
 
     public function afficher(){
-        require 'BDD/Function/databaseUpdate.php';
+        require 'src/BDD/Function/databaseUpdate.php';
         require 'src/provider/checkFichierDansDossier.php';
 
         echo '<link rel="stylesheet" href="./css/album.css">';
 
         echo '<div class="container-btn-album">';
-            echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
+            echo '<a class="btn-retour" href="javascript:history.back()"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
             echo '<p>' . trim($this->title) . ', de '. trim($this->artiste) . ', '. $this->year .' <span>'. $this->genre .'</span></p>';
-            // echo '<a class="btn-editer" href="#"><img src="./images/editer.png" alt="Editer album"></a>';
-            if (favorisAlbumExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id)) {
-                echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
-            } else {
-                echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
-            }
+            echo '<div class="container-btn-playlist-right">';
+                echo '<button class="jouer-playlist"><img src="./images/LECTEUR/playLecteur.png" alt="jouer la playlist"></button>';
+                if ($_SESSION['IdType'] == 1){
+                    echo '<a class="btn-editer" href="index.php?action=editerAlbum&idAlbum='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
+                    echo '<a class="btn-supprimer" href="index.php?action=deleteAlbum&idAlbum='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer album"></a>';
+                }
+                if (favorisAlbumExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id)) {
+                    echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="Liker un album"></a>';
+                } else {
+                    echo '<a class="btn-editer" href="index.php?action=favorisAlbum&idAlbum='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="Liker un album"></a>';
+                }
+            echo '</div>';
         echo '</div>';
 
         echo '<div class="container-milieu-album">';
@@ -142,7 +148,7 @@ class Album
                     for ($i=0; $i < count($musiques); $i++) { 
                         $musique = $musiques[$i]; // ID_Album
                         $album = get_album_with_id(getPdo(), $musique['ID_Album']);
-                        $artiste = get_artiste(getPdo(), intval($musique[$album['ID_Artiste_By']]));
+                        $artiste = get_artiste(getPdo(), intval($album['ID_Artiste_By']));
 
                         $pathAlbum = './images/musiques/';
                         $imgAlbum = $musique['Pochette'];
@@ -164,15 +170,15 @@ class Album
                             echo '<p class="numero-album">'.$numero .'</p>';
                             echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
                             echo '<button class="pause-music"><img src="./images/pause.png" alt="logo pause music"></button>';
-                            // echo '<img src="./images/ALBUMS/default.jpg" alt="">';
                             if ($imgAlbumCondition == true){
                                 echo '<img src="./images/ALBUMS/'. trim($this->cover) . '" alt="'. trim($this->title) . '">';
                             } else {
                                 echo '<img src="./images/ALBUMS/default.jpg" alt="'. trim($this->title) . '">';
                             }
                             echo '<div class="contenu-album">';
-                                echo '<p class="titre-album">'.$musique['Titre'].'</p>';
+                                echo '<a href="index.php?action=musique&id='. trim($musique['ID_Musique']) .'"><p class="titre-album">'.$musique['Titre'].'</p></a>';
                             echo '</div>';
+                            echo '<button class="btn-liste-attente"><img src="./images/ajoutFileAttente.png" alt="ajouter à la liste d\'attente"></button>';
                             if (favorisMusiqueExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $musique['ID_Musique'])) {
                                 echo '<a class="btn-like" href="index.php?action=favorisMusique&idMusique='. trim($musique['ID_Musique']) .'&idAlbum='. trim($this->id) .'"><img src="images/coeurPlein.png" alt="liker une musique"></a>';
                             } else {
@@ -198,7 +204,6 @@ class Album
                 echo '</div>';
             echo '</div>';
         echo '</div>';
-        echo '<script src="js/lancementMusicPageArtiste.js"></script>';
         echo '<script src="js/AjouterMusiqueDansPlaylist.js"></script>';
         echo '<script src="js/ratingAlbum.js"></script>';
     }

@@ -16,13 +16,21 @@ class Artiste {
         echo '<link rel="stylesheet" href="./css/artiste.css">';
 
         echo '<div class="container-btn-album">';
-            echo '<a class="btn-retour" href="index.php?action=accueil"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
+            echo '<a class="btn-retour" href="javascript:history.back()"><img src="./images/fleche-gauche.png" alt="fleche gauche"></a>';
             // echo '<a class="btn-editer" href="index.php?action=editerArtiste&idArtiste='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
             echo '<p class="titre-artiste">'.$this->nom.'</p>';
+            if ($_SESSION['IdType'] == 1){
+                echo '<div class="editer-artiste-container">';
+                echo '<a class="btn-editer" href="index.php?action=editerArtiste&idArtiste='. trim($this->id) .'"><img src="./images/editer.png" alt="Editer album"></a>';
+                echo '<a class="btn-supprimer" href="index.php?action=deleteArtiste&idArtiste='. trim($this->id) .'"><img src="./images/croix.png" alt="supprimer album"></a>';
+            }
             if (favorisArtisteExiste(getPdo(), get_id_with_email(getPdo(), $_SESSION['mail']), $this->id))
                 echo '<a class="btn-editer" href="index.php?action=favorisArtiste&idArtiste='. trim($this->id) .'"><img src="./images/coeurPlein.png" alt="liker l\'artiste"></a>';
             else
                 echo '<a class="btn-editer" href="index.php?action=favorisArtiste&idArtiste='. trim($this->id) .'"><img src="./images/coeurVide.png" alt="liker l\'artiste"></a>';
+            if ($_SESSION['IdType'] == 1){
+                echo '</div>';
+            }
         echo '</div>';
 
         echo '<div class="container-milieu-album">';
@@ -63,11 +71,7 @@ class Artiste {
                         $pathAlbum = './images/ALBUMS/';
                         $imgAlbum = $album['Pochette'];
                         $imgAlbumCondition = checkFileNameExists($pathAlbum, trim($imgAlbum));
-    
                         echo '<a class="container-album-unique-artiste" href="index.php?action=album&id='. trim($album['ID_Album']) .'">';
-                            $numero = $i+1;
-                            echo '<p class="numero-album">'.$numero .'</p>';
-                            echo '<button class="lancer-music"><img src="./images/bouton-play.png" alt="logo play music"></button>';
                             if ($imgAlbumCondition){
                                 echo '<img src="./images/ALBUMS/'. trim($imgAlbum).'" alt="">';
                             }
@@ -89,6 +93,5 @@ class Artiste {
                 echo '</div>';
             echo '</div>';
         echo '</div>';
-        echo '<script src="js/lancementMusicPageArtiste.js"></script>';
     }
 }
