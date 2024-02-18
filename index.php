@@ -90,6 +90,8 @@ if ($_REQUEST == null || ($_REQUEST['action'] != 'login' && $_SESSION['mail'] ==
     require 'src/AJOUT/ajouterArtiste.php';
 } else if ($_REQUEST['action'] == 'insertMusique'){
     require 'src/AJOUT/ajouterMusique.php';
+} else if ($_REQUEST['action'] == 'insertAlbum'){
+    require 'src/AJOUT/ajouterAlbum.php';
 } else if ($_REQUEST['action'] == 'visibilitePlaylist'){
     require 'src/UPDATE/visibilitePlaylist.php';
 }

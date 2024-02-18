@@ -200,6 +200,23 @@
         }
     }
 
+    function insert_album($pdo, $titre, $dateSortie, $genre, $pochette, $nomArtiste, $nomParent){
+        try {
+            $stmt = $pdo->prepare("INSERT INTO Album (Titre, Date_de_sortie, Genre, Pochette, ID_Artiste_By, ID_Artiste_Parent) VALUES (:titre, :dateSortie, :genre, :pochette, :nomArtiste, :nomParent)");
+            $stmt->bindParam(':titre', $titre);
+            $stmt->bindParam(':dateSortie', $dateSortie);
+            $stmt->bindParam(':genre', $genre);
+            $stmt->bindParam(':pochette', $pochette);
+            $stmt->bindParam(':nomArtiste', $nomArtiste);
+            $stmt->bindParam(':nomParent', $nomParent);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'ajout de l'album : " . $e->getMessage();
+            return false;
+        }
+    }
+
     function lock_unlock_playlist($pdo, $id_playlist, $estVisible){
         try { 
             $stmt = $pdo->prepare("UPDATE Playlist SET Est_public = :estVisible WHERE ID_Playlist = :idPlaylist");

@@ -508,3 +508,4 @@ function get_playlist_favoris(PDO $pdo, $id){
         return false;
     }
 }
+

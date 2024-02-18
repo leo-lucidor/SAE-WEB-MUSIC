@@ -29,7 +29,7 @@ echo '<div class="container-compte">';
         echo '</div>';
 
         ?>
-        <form id="popupAjoutAlbum" action="#" method="POST" class="container-info" style="display:none">
+        <form id="popupAjoutAlbum" action="index.php?action=insertAlbum" method="POST" class="container-info" style="display:none">
 
             <label class="label" for="titre">Titre de l'album</label>
             <input type="text" placeholder="Titre de l'album" name="titre">
@@ -44,10 +44,26 @@ echo '<div class="container-compte">';
             <input type="text" placeholder="Pochette" name="pochette">
 
             <label class="label" for="artiste">Artiste de l'album</label>
-            <input type="text" placeholder="Nom de l'artiste" name="nomArtiste">
+            <!-- <input type="text" placeholder="Nom de l'artiste" name="nomArtiste"> -->
+            <select name="nomArtiste">
+                <?php
+                $Artistes = get_all_artiste($pdo);
+                foreach ($Artistes as $Artiste) {
+                    echo '<option value="'. $Artiste['Nom'] .'">'. $Artiste['Nom'] .'</option>';
+                }
+                ?>
+            </select>
 
             <label class="label" for="parentAlbum">Parent de l'album</label>
-            <input type="text" placeholder="Nom de l'artiste parent" name="nomParent">
+            <!-- <input type="text" placeholder="Nom de l'artiste parent" name="nomParent"> -->
+            <select name="nomParent">
+                <?php
+                $Artistes = get_all_artiste($pdo);
+                foreach ($Artistes as $Artiste) {
+                    echo '<option value="'. $Artiste['Nom'] .'">'. $Artiste['Nom'] .'</option>';
+                }
+                ?>
+            </select>
 
             <input type="submit" value="Ajouter">
         </form>
