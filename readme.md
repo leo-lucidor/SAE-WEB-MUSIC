@@ -1,5 +1,9 @@
 # SAE 4.01 Web PhP 2023 - 2024 (Spotiut'O)
 
+## Membres du groupe
+
+Léo Lucidor, Erwan Blandeau, Irvyn Coursimault
+
 ## Lien git hub
 
     Lien : https://github.com/leo-lucidor/SAE-WEB-MUSIC
